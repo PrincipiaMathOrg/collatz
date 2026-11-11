@@ -1,0 +1,14 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+43. A topological-entropy gap
+
+**Hybrid · P**
+
+Let X_int be the subshift of valuation words realized by positive integers and X_crit the subshift
+with nonnegative long-term drift. Prove that their finite-word intersection has exponentially
+shrinking branching and no infinite path.
+
+Entropy alone cannot prove emptiness, so this needs a hereditary or compactness property turning
+exponential scarcity into extinction.
+
+Take as long as you need.

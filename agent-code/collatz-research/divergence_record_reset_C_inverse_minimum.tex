@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+
+\title{Same-depth inverse minima across a reset atom followed by $1113$}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+For a positive odd integer $x$, let
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+If $w=(a_1,\ldots,a_L)$ is an exact accelerated exponent word, put
+\[
+ B(w):=\sum_{i=1}^L a_i,
+ \qquad
+ C(w):=\sum_{i=1}^L3^{L-i}2^{a_1+\cdots+a_{i-1}}.
+ \tag{2}
+\]
+Thus
+\[
+ 2^{B(w)}\Up^L(x)=3^Lx+C(w).
+ \tag{3}
+\]
+On an interior deficit-four record tail, write
+\[
+ A:=1,\qquad B:=12,\qquad C:=1113,\qquad D:=1122.
+ \tag{4}
+\]
+
+For a positive odd target $y$, define $\mathcal R_L(y;M)$ to be the set
+of reverse exponent strings $(d_1,\ldots,d_L)$ of total mass at most $M$
+which give a positive odd $L$-step predecessor of $y$.  Explicitly, put
+\[
+ t_0:=y,
+ \qquad
+ t_i:=\frac{2^{d_i}t_{i-1}-1}{3},
+ \tag{5}
+\]
+and require every $t_i$ to be a positive odd integer.  The forward word
+from $t_L$ to $y$ is $(d_L,\ldots,d_1)$.
+
+\begin{lemma}[inverse-mass recursion for the two reset--$C$ blocks]
+Let $r\geq0$.
+\begin{enumerate}
+ \item If $y$ is the endpoint of the exact word
+ \[
+  W_B(r):=12\,1^r1113,
+  \tag{6}
+ \]
+ then
+ \[
+  \boxed{
+  \mathcal R_{r+6}(y;r+9)
+  =\{(3,1^{r+3},2,1)\}.}
+  \tag{7}
+ \]
+ \item If $y$ is the endpoint of the exact word
+ \[
+  W_D(r):=1122\,1^r1113,
+  \tag{8}
+ \]
+ then
+ \[
+  \boxed{
+  \mathcal R_{r+8}(y;r+12)
+  =\{(3,1^{r+3},2,2,1,1)\}.}
+  \tag{9}
+ \]
+\end{enumerate}
+In each case the displayed reverse string is the reversal of the original
+word.  Consequently the original word is the unique same-depth inverse
+word of minimum total exponent.
+\end{lemma}
+
+\begin{proof}
+Let $q$ be the start of the word.  Direct composition of the four atom
+maps gives
+\[
+\begin{aligned}
+ 2^{r+9}y
+ &=3^{r+6}q+13\,3^{r+4}-2^{r+7}
+ &&\text{for }W_B(r),\\
+ 2^{r+12}y
+ &=3^{r+8}q+137\,3^{r+4}-2^{r+10}
+ &&\text{for }W_D(r).
+\end{aligned}
+\tag{10}
+\]
+Hence the residue class of $y$ modulo $3^L$, where $L$ is the relevant
+word length, is independent of $q$.
+
+The reverse sets obey the finite recursion
+\[
+\begin{aligned}
+ \mathcal R_{\ell+1}(t;M)
+ =\bigcup_{\substack{a\geq1,\ a\leq M-\ell\\
+                     3\mid 2^at-1}}
+ \left\{(a,\delta):
+ \delta\in
+ \mathcal R_{\ell}\!\left(\frac{2^at-1}{3};M-a\right)
+ \right\}.
+\end{aligned}
+\tag{11}
+\]
+Only the residue of $t$ modulo $3^{\ell+1}$ is used in this recursion.
+Substitution of the two residue classes from (10), followed by induction
+on $r$, gives the following complete list after the first $r+4$ reverse
+steps.  The last two columns record the residue of the current state and
+the depth/mass still available.
+\[
+\begin{array}{c|c|c|c|c}
+\text{family}&\text{live reverse prefix}&\text{mass}
+ &t_{r+4}\bmod3&\text{remaining depth/mass}\\ \hline
+W_B(r)&1,2,1,1^r,3&r+7&1&2/2\\
+      &3,1^{r+3}&r+6&1&2/3\\ \hline
+W_D(r)&1,2,1,1^r,3&r+7&1&4/5\\
+      &3,1^{r+3}&r+6&1&4/6\\
+      &3,1^{r+2},3&r+8&2&4/4.
+\end{array}
+\tag{12}
+\]
+The base case is obtained by four applications of (11).  In the induction
+step, the only admissible transition which leaves enough mass for the
+remaining depth inserts one exponent $1$ immediately before the final
+entry displayed in each prefix.  This proves (12) for every $r$.
+
+For completeness, the only lower-mass competitor through the terminal
+atom $C$ begins with the reverse string
+\[
+ 1,2,1,1.
+ \tag{13}
+\]
+It is the half-seed branch.  Pulling (13) through the following $r$
+reverse exponent-one steps reaches $(p-1)/2$.  Both reset atoms satisfy
+\[
+ p+1\equiv2\pmod3,
+ \tag{14}
+\]
+so $3\mid(p-1)/2$ and this branch has no further inverse step.
+
+The first row for $W_B(r)$ has current residue $1$, so its next exponent
+is even and at least $2$; no mass then remains for the final inverse step.
+The second row has exactly the mass needed for the forced suffix $(2,1)$.
+
+For $W_D(r)$, the first row takes a forced exponent $2$ to another state
+of residue $1$; a second forced exponent $2$ then leaves only one unit of
+mass for two remaining steps.  The third row takes a forced exponent $1$
+to a multiple of $3$ and stops.  The middle row has the unique forced
+suffix $(2,2,1,1)$.  This proves (7) and (9).
+\end{proof}
+
+\begin{theorem}[reset--$C$ same-depth inverse minimum]
+Let $r\geq0$, let $q$ be the start of one of the exact words
+$W_B(r)$ or $W_D(r)$, and put
+\[
+ L:=|W_B(r)|=r+6
+ \quad\text{or}\quad
+ L:=|W_D(r)|=r+8.
+ \tag{15}
+\]
+If $y=\Up^L(q)$, then
+\[
+ \boxed{
+ q=\min\{z\in2\mathbb Z+1:z>0,\ \Up^L(z)=y\}.}
+ \tag{16}
+\]
+The minimizer is unique.
+\end{theorem}
+
+\begin{proof}
+Let $v=(c_1,\ldots,c_L)$ be any exact word from a positive odd $z$ to
+$y$, and put $B'=B(v)$.  Lemma~1 gives
+\[
+ B'\geq B_0,
+ \qquad
+ B_0=
+ \begin{cases}
+  r+9,&W_B(r),\\
+  r+12,&W_D(r).
+ \end{cases}
+ \tag{17}
+\]
+For $W_B(r)$, the start of the record atom $B$ is congruent to $11$
+modulo $16$.  The value $q=11$ would make its endpoint $13$, whose next
+exponent is $3$, whereas the next atom in $W_B(r)$ starts with exponent
+$1$.  Hence $q\geq27$.  For $W_D(r)$, the exact $D$ congruence is
+$q\equiv71\pmod {128}$, so $q\geq71$.  In particular,
+\[
+ q>2^{B_0+1-L}
+ =\begin{cases}16,&W_B(r),\\32,&W_D(r),\end{cases}
+ \tag{18}
+\]
+and the original affine equation implies $y>(3/2)^L$.
+
+If $B'=B_0$, the same lemma says that $v$ is the original word, so
+$z=q$.
+
+Assume that $B'\geq B_0+1$.  For the partial sums in (2), positivity of
+the exponents gives
+\[
+ c_1+\cdots+c_{i-1}\leq B'-(L-i+1).
+\]
+Consequently
+\[
+\begin{aligned}
+ C(v)
+ &\leq2^{B'-L}
+       \sum_{i=1}^L3^{L-i}2^{i-1}\\
+ &=2^{B'-L}(3^L-2^L)
+ <2^{B'-L}3^L.
+\end{aligned}
+\tag{19}
+\]
+Equations (3) and (19), together with $y>(3/2)^L$, imply
+\[
+ z>
+ \frac{2^{B'}y}{3^L}-2^{B'-L}
+ \geq
+ \frac{2^{B_0+1}y}{3^L}-2^{B_0+1-L}.
+ \tag{20}
+\]
+If $C_0$ is the carry of the original word, then
+$2^{B_0}y=3^Lq+C_0$, and hence
+\[
+ z>2q+\frac{2C_0}{3^L}-2^{B_0+1-L}.
+ \tag{21}
+\]
+Since $C_0>0$, equation (18) makes the right side of (21) strictly larger
+than $q$.  This proves (16) and uniqueness.
+\end{proof}
+
+\begin{corollary}[one-reset cross-block descent is impossible]
+Suppose that an interior record tail contains a block $BA^rC$ or
+$DA^rC$.  No positive odd inverse branch of the same raw depth reaches
+the terminal endpoint from a state smaller than the block's actual start.
+Therefore a descent argument which crosses a reset blocker before a
+$C$ half-coalescence must either change the inverse depth or span at least
+two nontrivial record atoms.
+\end{corollary}
+
+\begin{proof}
+The first assertion is Theorem~2.  An inverse word spanning precisely the
+displayed block has the same raw depth, so the second assertion follows.
+\end{proof}
+
+\end{document}

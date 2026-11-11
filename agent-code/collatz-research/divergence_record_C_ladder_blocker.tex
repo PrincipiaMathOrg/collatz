@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+
+\title{Decoder ladders and predecessor blockers at the record atom $1113$}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+ x_{t+1}=\Up(x_t):=\frac{3x_t+1}{2^{a_t}},
+ \qquad a_t=v_2(3x_t+1),
+ \tag{1}
+\]
+be an accelerated orbit of positive odd integers.  On an interior
+deficit-four record tail, write
+\[
+ A:=1,\qquad B:=12,\qquad C:=1113,\qquad D:=1122
+ \tag{2}
+\]
+for the four record atoms, and put $b(x):=v_3(x+1)$ at a record state.
+Their decoder transport is
+\[
+ A:b\mapsto b+1,
+ \qquad B:b\mapsto0,
+ \qquad C:b\mapsto1,
+ \qquad D:b\mapsto0.
+ \tag{3}
+\]
+For a normalized unbounded ray, let $Q$ denote the coefficient at a
+specified state and let $\mathcal K$ be its stationary height.  The
+synchronized companion satisfies
+\[
+ 2^{a_t}e_{t+1}=3e_t-1,
+ \qquad e_t>1,
+ \qquad x_t+e_t=\mathcal KQ_t.
+ \tag{4}
+\]
+
+\begin{theorem}[the complete decoder ladder below a $C$ atom]
+Suppose that a record transition starts at $x$, has atom $C=1113$, and
+ends at $y$.  Put
+\[
+ b:=v_3(x+1).
+ \tag{5}
+\]
+For every integer $s$ with $0\leq s\leq b$, define
+\[
+ \boxed{
+ z_s+1:=\frac{2^{s-1}(x+1)}{3^s}.}
+ \tag{6}
+\]
+At $s=0$, formula (6) means $z_0=(x-1)/2$.  Every $z_s$ is a positive
+odd integer, its exact accelerated word to $y$ is
+\[
+ \boxed{1^s1121,}
+ \tag{7}
+\]
+and hence
+\[
+ \Up^{s+4}(z_s)=y.
+ \tag{8}
+\]
+
+If $e_x$ is the synchronized companion value at $x$, put
+\[
+ \epsilon_s
+ :=1+\left(\frac23\right)^s\frac{e_x-1}{2}.
+ \tag{9}
+\]
+Then $\epsilon_s>1$, it is transported to the original companion at $y$
+by the word in (7), and
+\[
+ \boxed{
+ z_s+\epsilon_s
+ =\frac{2^{s-1}}{3^s}(x+e_x).}
+ \tag{10}
+\]
+
+If $x$ lies on the orbit of a globally least positive odd unbounded seed
+$n$, then, for every $0\leq s\leq b$,
+\[
+ \boxed{
+ x+1\geq2(n+1)\left(\frac32\right)^s.}
+ \tag{11}
+\]
+If $Q$ is the coefficient at $x$, then
+\[
+ \boxed{
+ Q>\frac{2(n+1)}{\mathcal K}
+       \left(\frac32\right)^s.}
+ \tag{12}
+\]
+In particular, (11)--(12) hold with $s=b$.
+\end{theorem}
+
+\begin{proof}
+The exact $C$ congruence and affine formula are
+\[
+ x\equiv79\pmod {128},
+ \qquad
+ y=\frac{81x+65}{64}.
+ \tag{13}
+\]
+Thus $v_2(x+1)=4$.  The state $z_0=(x-1)/2$ has exact word $1121$ and
+reaches $y$.
+
+For $0\leq s\leq b$, equation (6) gives
+\[
+ z_s+1=\frac{2^s(z_0+1)}{3^s},
+ \qquad
+ v_2(z_s+1)=s+3.
+ \tag{14}
+\]
+Under an exponent-one step, the shifted state $X+1$ is multiplied by
+$3/2$.  Consequently the first $s$ steps from $z_s$ are exact
+exponent-one steps and end at $z_0$.  Appending the exact word $1121$
+proves (7)--(8).
+
+Backward transport of a companion through one exponent-one step is the
+map
+\[
+ E\longmapsto\frac{2E+1}{3},
+ \qquad
+ \frac{2E+1}{3}-1=\frac23(E-1).
+ \tag{15}
+\]
+At $z_0$, the companion value is $(e_x+1)/2$.  Iterating (15) proves
+(9), and addition of the state and companion formulas gives (10).
+
+Every $z_s$ reaches the unbounded tail, so global leastness gives
+$z_s\geq n$.  Equation (6) now proves (11).  Since
+$x+e_x=\mathcal KQ$, equations (10), $z_s\geq n$, and
+$\epsilon_s>1$ give
+\[
+ \frac{2^{s-1}}{3^s}\mathcal KQ
+ =z_s+\epsilon_s>n+1,
+\]
+which is (12).
+\end{proof}
+
+\begin{corollary}[pullback through a one-atom run]
+Suppose that a record state $p$ is followed by the atom block $A^rC$,
+where $r\geq0$, and let $y$ be its terminal state.  Then
+\[
+ \boxed{h:=\frac{p-1}{2}}
+ \tag{16}
+\]
+is a positive odd integer with exact word $1^r1121$ to $y$.  If $e_p$ is
+the synchronized companion at $p$, the alternative companion at $h$ is
+$(e_p+1)/2$, and
+\[
+ h+\frac{e_p+1}{2}=\frac{p+e_p}{2}.
+ \tag{17}
+\]
+On a globally least unbounded ray, $p\geq2n+1$.
+\end{corollary}
+
+\begin{proof}
+Let $x$ be the start of the terminal atom $C$.  The $r$ atoms $A$ give
+\[
+ x+1=\frac{3^r(p+1)}{2^r},
+ \qquad
+ b(x)=b(p)+r\geq r.
+ \tag{18}
+\]
+Taking $s=r$ in (6) gives $z_r=(p-1)/2$.  The assertions now follow
+from Theorem~1: indeed, forward companion transport through $A^r$ gives
+$e_x-1=(3/2)^r(e_p-1)$, so (9) becomes
+$\epsilon_r=(e_p+1)/2$.
+\end{proof}
+
+\begin{lemma}[least four-step predecessor of half a $C$ endpoint]
+Suppose that a $C$ atom starts at $q$ and ends at $p$, and put
+\[
+ h:=\frac{p-1}{2}.
+ \tag{19}
+\]
+If $h$ is odd, then every positive odd $w$ satisfying
+$\Up^4(w)=h$ obeys
+\[
+ \boxed{w\geq4q-1.}
+ \tag{20}
+\]
+Equality holds, and the unique exponent word attaining it is $1215$.
+\end{lemma}
+
+\begin{proof}
+The affine equation for $C$ gives
+\[
+ p=\frac{81q+65}{64},
+ \qquad
+ h=\frac{81q+1}{128},
+ \qquad
+ h\equiv50\pmod {81}.
+ \tag{21}
+\]
+In particular, $q\equiv79\pmod {128}$ and $q\geq79$.
+
+Let $v=(c_1,c_2,c_3,c_4)$ be the exact word from $w$ to $h$, let
+$B=c_1+c_2+c_3+c_4$, and put
+\[
+ C(v)=27+9\,2^{c_1}+3\,2^{c_1+c_2}
+                  +2^{c_1+c_2+c_3}.
+ \tag{22}
+\]
+Then
+\[
+ 81w+C(v)=2^Bh.
+ \tag{23}
+\]
+Writing
+\[
+ s_1=c_1,
+ \qquad s_2=c_1+c_2,
+ \qquad s_3=c_1+c_2+c_3,
+\]
+the integrality condition modulo $81$ is
+\[
+ 27+9\,2^{s_1}+3\,2^{s_2}+2^{s_3}
+ \equiv50\,2^B\pmod {81},
+ \qquad
+ 1\leq s_1<s_2<s_3\leq B-1.
+ \tag{24}
+\]
+Using the residues of $2^j$ modulo $81$, the finite check for
+$4\leq B\leq9$ is
+\[
+\begin{array}{c|rrrrrr}
+B&4&5&6&7&8&9\\ \hline
+50\,2^B\bmod81&71&61&41&1&2&4\\
+\#\text{ solutions of (24)}&0&0&0&0&0&1.
+\end{array}
+\tag{25}
+\]
+For $B=9$, the unique solution is
+$(s_1,s_2,s_3)=(1,3,4)$, hence
+\[
+ v=1215,
+ \qquad C(v)=85.
+ \tag{26}
+\]
+Equations (21), (23), and (26) give
+\[
+ w=\frac{512h-85}{81}=4q-1.
+ \tag{27}
+\]
+The five states for the proposed word are
+\[
+ 4q-1,
+ \quad 6q-1,
+ \quad \frac{9q-1}{2},
+ \quad \frac{27q-1}{4},
+ \quad \frac{81q+1}{128}=h.
+\]
+The congruence $q\equiv79\pmod {128}$, together with the hypothesis that
+$h$ is odd, shows that the extracted powers of two are exactly
+$1,2,1,5$.
+
+It remains to exclude a smaller predecessor with $B\geq10$.  Since every
+$c_i\geq1$, equation (22) gives
+\[
+ C(v)
+ \leq27+9\,2^{B-3}+3\,2^{B-2}+2^{B-1}
+ =27+\frac{19}{8}2^B.
+ \tag{28}
+\]
+As $h\geq50$ and $B\geq10$,
+\[
+\begin{aligned}
+ &(2^B-512)h-(C(v)-85)\\
+ &\quad\geq
+ 50(2^B-512)-\left(\frac{19}{8}2^B-58\right)>0.
+\end{aligned}
+\tag{29}
+\]
+Subtracting (27) from (23) now gives $w>4q-1$.  This proves (20) and the
+equality statement.
+\end{proof}
+
+\begin{theorem}[nontrivial record atoms block the half-seed pullback]
+Suppose that a nontrivial atom $P\in\{B,C,D\}$ ends at a record state
+$p$, and that $p$ is followed by $A^rC$ for some $r\geq0$.  Let
+$h=(p-1)/2$ be the exact coalescing seed from Corollary~2.
+\begin{enumerate}
+ \item If $P=B$ or $P=D$, then $3\mid h$.  Hence $h$ has no accelerated
+ positive odd predecessor.
+ \item If $P=C$ starts at $q$, then every four-step accelerated pullback
+ of $h$ is at least $4q-1>q$.
+\end{enumerate}
+Thus the half-seed construction propagates backward through the complete
+intervening run of atoms $A$, but across the preceding nontrivial atom it
+either terminates or expands beyond that atom's starting state.
+\end{theorem}
+
+\begin{proof}
+Write $Y=p+1$.  If $P=B$, its shifted-state equation has the form
+\[
+ 8Y=9Y_0+4,
+\]
+and if $P=D$, it has the form
+\[
+ 64Y=81Y_0+56.
+\]
+In both cases $Y\equiv2\pmod3$.  Therefore
+\[
+ h=\frac{Y}{2}-1\equiv0\pmod3.
+\]
+A multiple of $3$ has no accelerated odd predecessor, proving the first
+part.  The second part is Lemma~3.
+\end{proof}
+
+\begin{corollary}[localized remaining gate in the infinite-$C$ branch]
+On an interior record tail with infinitely many atoms $C$, every local
+$C$ half-coalescence has the complete ladder (6)--(12).  Pulling it toward
+the fixed initial seed by the preceding atoms $A$ is exact.  Apart from at
+most the first $C$ after the chosen tail origin, the first preceding atom
+in $\{B,C,D\}$ is a blocker in the sense of Theorem~4.
+Consequently, any global descent obtained from infinitely many $C$ atoms
+must use an inverse branch other than the direct half-seed ladder across
+at least one nontrivial record atom.
+\end{corollary}
+
+\begin{proof}
+Apply Corollary~2 to the maximal run $A^r$ preceding each selected atom
+$C$, and then apply Theorem~4 to the preceding nontrivial atom.
+\end{proof}
+
+\end{document}

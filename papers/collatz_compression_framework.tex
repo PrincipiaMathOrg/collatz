@@ -1,0 +1,1303 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools,mathrsfs}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black,
+pdftitle={Affine compression and rational-base traces in the Collatz problem},
+pdfauthor={Anton Shakov}]{hyperref}
+\usepackage[margin=1.05in]{geometry}
+
+\allowdisplaybreaks
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Ztwo}{\mathbb Z_2}
+\newcommand{\vtwo}{\nu_2}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cZ}{\mathcal Z}
+\newcommand{\cW}{\mathscr W}
+\newcommand{\cH}{\mathscr H}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\one}{\mathbf 1}
+
+\title[Compression and rational-base traces]{Affine compression and rational-base traces in the Collatz problem}
+\author{Anton Shakov}
+\address{Principia Math}
+\date{August 2026}
+
+\begin{document}
+
+\begin{abstract}
+We develop an exact compression framework for the Collatz problem.  A least counterexample, if one exists, is minimal not only along its own orbit but throughout the full positive inverse tree of every later orbit point.  Encoding accelerated odd trajectories by their exact $2$-adic valuation words turns this observation into a Bellman optimization problem over affine inverse branches.  We derive the associated $2$-adic and $3$-adic realization classes, exact descending-diamond criteria, a normalized signed-state automaton for endpoint-preserving compressions, and several explicit infinite or aperiodic obstructions showing why naive compactness and pumping arguments fail.
+
+A finite recurrent component of the signed automaton leads to the partial rational-base map
+\[
+ m\longmapsto \frac{81m+\eps}{64},\qquad \eps\in\{0,1\},
+\]
+with admissible residues $m\equiv0,15\pmod{64}$.  For this subsystem we introduce canonical realization representatives, finite-difference order, signed-code separation, cyclic product spacing, and an exact quotient-error renormalization.  The resulting zero-trace graphs $\mathcal Z_k$ have in-degree and out-degree at most one and no nonzero directed cycles.  We isolate the finite combinatorial estimate
+\[
+ \ell_k\le \left\lfloor\frac{k+1}{3}\right\rfloor,
+\]
+where $\ell_k$ is the longest nonzero path in $\mathcal Z_k$.  This estimate implies a uniform signed-code separation, product spacing, finite-difference positivity, and termination of the $81/64$ subsystem.  It is verified in exact arithmetic for $k\le12$; the remaining step is a carry-synchronization theorem for overlapping zero traces.
+
+No proof of the Collatz conjecture is claimed.  The paper records the rigorous reductions, the exact finite results, the sharp counterexamples to several tempting intermediate statements, and the two principal unresolved synchronization problems left by the framework.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+Let
+\[
+T(n)=\begin{cases}
+n/2,&n\text{ even},\\
+3n+1,&n\text{ odd}.
+\end{cases}
+\]
+The Collatz conjecture asserts that every positive integer eventually reaches $1$.  It is convenient to pass to the accelerated odd map
+\begin{equation}\label{eq:Udef}
+ U(x)=\frac{3x+1}{2^{\vtwo(3x+1)}}
+ \qquad(x\text{ positive and odd}).
+\end{equation}
+The original conjecture is equivalent to the assertion that every positive odd integer reaches $1$ under $U$.
+
+The purpose of this paper is not to announce a proof, but to organize a long exact investigation into a coherent mathematical framework.  The main points are as follows.
+
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.3em]
+\item A least counterexample is the least positive ancestor of every later point on its orbit.  This strengthens ordinary non-descent and naturally leads to comparisons between distinct inverse paths ending at the same point.
+\item A finite valuation word determines an exact affine map, one $2$-adic realization class for its starting value, and one $3$-adic endpoint class.  Competing inverse paths yield explicit linear bounds on a least counterexample.
+\item Maximizing the affine slope, and then the affine intercept, defines a finite Bellman problem.  Infinite Bellman-survivor rays live on the $2$-adic boundary; some are negative nonintegral rationals, so boundary compactness alone cannot exclude them.
+\item Endpoint-preserving word replacements are governed by a normalized signed-state automaton.  This automaton admits exact pumping, but bounded recurrent paths need not be periodic and need not visit positive-saving states.
+\item A four-state recurrent component contains two equal-length, equal-cost macrosteps.  Their positive realization problem is conjugate to the partial map
+\begin{equation}\label{eq:8164intro}
+ m\longmapsto \frac{81m+\eps}{64},\qquad \eps\in\{0,1\},
+\end{equation}
+where integrality requires $m\equiv0$ or $15\pmod{64}$.
+\item For this subsystem, a finite-difference order conjecture is reduced to a signed-code separation theorem, then to cyclic product spacing, and finally to a quantitative trace bound in a finite quotient-error graph.
+\end{enumerate}
+
+The last reduction is the cleanest finite target obtained in the investigation.  Let $\ell_k$ be the maximum number of edges in a nonzero directed path of the graph $\mathcal Z_k$ defined in Section~\ref{sec:trace}.  The central finite conjecture is
+\begin{equation}\label{eq:ZTintro}
+ \ell_k\le \left\lfloor\frac{k+1}{3}\right\rfloor.
+\end{equation}
+It is verified exactly for $1\le k\le12$.  The following conditional theorem summarizes the implication chain proved below.
+
+\begin{theorem}[Conditional termination of the recurrent subsystem]\label{thm:intro-chain}
+Assume \eqref{eq:ZTintro} for every $k\ge1$.  Then the partial map \eqref{eq:8164intro} has no positive infinite orbit.  Equivalently, if $M_r$ denotes the least positive integer surviving $r$ steps of \eqref{eq:8164intro}, then $M_r\to\infty$.
+\end{theorem}
+
+The proof is not a black-box appeal to the trace graph.  It factors through the following sequence of exact implications:
+\begin{align*}
+\text{trace bound}
+&\Longrightarrow \text{signed-code separation}
+\Longrightarrow \text{product spacing}\\
+&\Longrightarrow \text{finite-difference order}
+\Longrightarrow M_r\to\infty.
+\end{align*}
+Each arrow is proved in this paper.  The trace bound itself remains open.
+
+There is a second unresolved issue, logically prior to the rational-base subsystem.  The Bellman framework produces a large tree of survivor words.  To deduce the Collatz conjecture one would need a global input-synchronization theorem forcing every positive stationary survivor ray to admit a genuine compression.  Several natural versions of such a theorem are false for general $2$-adic rays, and the finite-state pumping theorem does not supply the missing synchronization.  We state this obstruction precisely in Section~\ref{sec:signedstates}.
+
+All finite computations quoted below used exact integers and rationals; numerical approximation was never used to certify an identity or inequality.
+
+\section{Accelerated valuation words}\label{sec:words}
+
+\subsection{Affine data}
+
+Let
+\[
+ w=(a_0,\ldots,a_{r-1}),\qquad a_i\ge1,
+\]
+be a finite valuation word.  Put
+\[
+ S_0=0,\qquad S_j=\sum_{i=0}^{j-1}a_i,
+\]
+and define
+\begin{equation}\label{eq:Drec}
+ D_0=0,
+ \qquad
+ D_{j+1}=3D_j+2^{S_j}.
+\end{equation}
+Thus
+\begin{equation}\label{eq:Dsum}
+ D_r=\sum_{i=0}^{r-1}3^{r-1-i}2^{S_i}.
+\end{equation}
+
+\begin{lemma}[Affine word formula]\label{lem:affine}
+If the first $r$ accelerated valuations of $x$ are $a_0,\ldots,a_{r-1}$, then
+\begin{equation}\label{eq:affine}
+ U^r(x)=\frac{3^r x+D_r}{2^{S_r}}.
+\end{equation}
+Equivalently,
+\[
+ U^r(x)=\lambda(w)x+\beta(w),
+ \qquad
+ \lambda(w)=\frac{3^r}{2^{S_r}},
+ \quad
+ \beta(w)=\frac{D_r}{2^{S_r}}.
+\]
+\end{lemma}
+
+\begin{proof}
+This is immediate from \eqref{eq:Drec} by induction.
+\end{proof}
+
+\subsection{Exact realization classes}
+
+A valuation word imposes one exact congruence on its starting value and one on its endpoint.
+
+\begin{lemma}[$2$-adic realization class]\label{lem:rho2}
+The word $w$ occurs as the first $r$ accelerated valuations of an odd integer $x$ if and only if
+\begin{equation}\label{eq:rho2}
+ x\equiv \rho_2(w)
+ :=3^{-r}\bigl(2^{S_r}-D_r\bigr)
+ \pmod{2^{S_r+1}}.
+\end{equation}
+In particular, every finite word is realized by infinitely many positive odd integers.
+\end{lemma}
+
+\begin{proof}
+For $r=1$, exact valuation $a_0$ is equivalent to
+\[
+ 3x+1\equiv2^{a_0}\pmod{2^{a_0+1}},
+\]
+which gives \eqref{eq:rho2}.  The induction step follows by substituting the unique realization class for the tail into
+\[
+ 2^{a_0}U(x)=3x+1.
+\]
+The closed formula is obtained from \eqref{eq:affine}.
+\end{proof}
+
+\begin{lemma}[$3$-adic endpoint class]\label{lem:rho3}
+Every endpoint of a path with word $w$ satisfies
+\begin{equation}\label{eq:rho3}
+ U^r(x)\equiv \rho_3(w)
+ :=D_r2^{-S_r}
+ \pmod{3^r}.
+\end{equation}
+Conversely, every positive odd integer in this class has a positive odd inverse ancestor along $w$.
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{eq:affine} gives the congruence.  Conversely, read the word backward using
+\[
+ x_i=\frac{2^{a_i}x_{i+1}-1}{3}.
+\]
+The congruence \eqref{eq:rho3} is exactly the condition that all divisions are integral.  Positivity is preserved.
+\end{proof}
+
+\section{Least counterexamples and descending diamonds}\label{sec:diamonds}
+
+Assume for contradiction that the Collatz conjecture fails, and let $m>1$ be the least positive odd integer whose $U$-orbit does not reach $1$.  Write
+\[
+ x_0=m,
+ \qquad
+ x_{j+1}=U(x_j).
+\]
+
+\begin{lemma}[Coalescence minimality]\label{lem:coalescence}
+If $z$ is a positive odd integer and
+\[
+ U^r(z)=x_j
+\]
+for some $j,r\ge0$, then $z\ge m$.
+\end{lemma}
+
+\begin{proof}
+If $z<m$, minimality of $m$ implies that $z$ reaches $1$.  Since the orbit of $z$ first merges into the nonterminating orbit of $m$, this is impossible.
+\end{proof}
+
+In particular, $x_j\ge m$ for every $j$.  Let $w$ be the actual word from $m$ to $x_j$, and let $v$ be another word from a positive odd integer $z$ to the same endpoint.  Then
+\[
+ \lambda(w)m+\beta(w)=\lambda(v)z+\beta(v),
+\]
+so
+\begin{equation}\label{eq:diamond}
+ z-m=
+ \frac{(\lambda(w)-\lambda(v))m+\beta(w)-\beta(v)}{\lambda(v)}.
+\end{equation}
+
+\begin{proposition}[Descending-diamond criterion]\label{prop:diamond}
+If $\lambda(v)>\lambda(w)$, then $z<m$ whenever
+\begin{equation}\label{eq:diamondthreshold}
+ m>
+ \frac{\beta(w)-\beta(v)}{\lambda(v)-\lambda(w)}.
+\end{equation}
+If $\lambda(v)=\lambda(w)$ and $\beta(v)>\beta(w)$, then $z<m$ for every $m>0$.
+\end{proposition}
+
+This is the basic compression principle: a better inverse path into a later orbit point contradicts least-counterexample minimality.
+
+Two elementary diamonds already give nontrivial congruence restrictions.
+
+\begin{proposition}\label{prop:initialcongruences}
+A least counterexample satisfies
+\[
+ m\equiv3\pmod4,
+ \qquad
+ m\not\equiv2\pmod3,
+ \qquad
+ m\not\equiv4\pmod9.
+\]
+\end{proposition}
+
+\begin{proof}
+Since $x_1\ge m$,
+\[
+ \frac{3m+1}{2^{a_0}}\ge m.
+\]
+For $m>1$ this forces $a_0=1$, hence $m\equiv3\pmod4$.
+
+If $m\equiv2\pmod3$, then
+\[
+ z=\frac{2m-1}{3}
+\]
+is a positive odd integer with $U(z)=m$ and $z<m$, contradicting Lemma~\ref{lem:coalescence}.
+
+If $m\equiv4\pmod9$, then
+\[
+ z=\frac{8m-5}{9}
+\]
+is a positive odd integer and
+\[
+ z\xrightarrow{1}\frac{4m-1}{3}
+ \xrightarrow{2}m
+ \xrightarrow{1}x_1.
+\]
+Again $z<m$.
+\end{proof}
+
+The same comparison gives an exact ordinary-descent bound.  If a prefix $w$ has $\lambda(w)<1$, then $x_j\ge m$ implies
+\begin{equation}\label{eq:ordinarydescent}
+ m\le \frac{\beta(w)}{1-\lambda(w)}.
+\end{equation}
+Thus, after any finite range has been excluded, every surviving prefix must have slope greater than $1$.
+
+\section{Bellman optimization and the $2$-adic boundary}\label{sec:bellman}
+
+For a fixed endpoint, inverse words are ordered lexicographically by
+\[
+ (\lambda,\beta),
+\]
+maximizing the slope first and the intercept second.  This order is exactly the order relevant to Proposition~\ref{prop:diamond}.
+
+The optimization is finite at every depth.  If the endpoint is specified modulo $3^d$, the last exponent $a$ must satisfy
+\[
+ 2^a c\equiv1\pmod3,
+\]
+and the preceding endpoint class is
+\[
+ c'=\frac{2^ac-1}{3}\pmod{3^{d-1}}.
+\]
+If the best pair for $c'$ is $(\lambda',\beta')$, appending $a$ gives
+\begin{equation}\label{eq:bellmanrec}
+ \left(\frac{3\lambda'}{2^a},
+       \frac{3\beta'+1}{2^a}\right).
+\end{equation}
+Any candidate whose slope is at most $1$ cannot beat the empty path.  Hence only finitely many exponents need be considered.
+
+A finite word is called \emph{retained} if it is Bellman-optimal for its endpoint class.  This terminology is used only in this section and in the computational summary.
+
+\subsection{Nested realization representatives}
+
+For a word $w_j$ of length $j$, let
+\[
+ R_j\in[0,2^{S_j+1})
+\]
+be the least nonnegative representative of its class \eqref{eq:rho2}.  Along an infinite word,
+\[
+ R_{j+1}\equiv R_j\pmod{2^{S_j+1}},
+\]
+so
+\begin{equation}\label{eq:Rnest}
+ R_{j+1}=R_j+\ell_j2^{S_j+1},
+ \qquad
+ 0\le\ell_j<2^{a_j}.
+\end{equation}
+In particular, $(R_j)$ is nondecreasing and determines a point of $\Ztwo$.
+
+\begin{proposition}[Ordinary integer criterion]\label{prop:integercriterion}
+Let $\xi\in\Ztwo$ be the $2$-adic point determined by an infinite valuation word.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\xi$ is a nonnegative ordinary integer if and only if $R_j$ is eventually constant.
+\item $\xi$ is a negative ordinary integer if and only if $R_j-2^{S_j+1}$ is eventually constant.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+If $\xi=n\ge0$, then for $2^{S_j+1}>n$ its least residue is $n$.  Conversely, eventual constancy modulo arbitrarily large powers of $2$ forces equality in $\Ztwo$.  The negative case is identical using the signed representative.
+\end{proof}
+
+The first tempting boundary claim would be that every infinite retained ray is a negative integer.  This is false in a strong form.
+
+\begin{proposition}[A nonintegral retained ray]\label{prop:1911}
+The periodic word
+\[
+ (1,1,2)^{\infty}
+\]
+defines the $2$-adic rational
+\[
+ -\frac{19}{11},
+\]
+and every one of its finite prefixes is retained.
+\end{proposition}
+
+The proof is given in Appendix~\ref{app:1911}.  The point is not the particular rational, but the obstruction: an infinite Bellman-survivor ray need not stabilize to an ordinary negative integer.
+
+\subsection{Finite real shadows}
+
+For a prefix of length $j$, put
+\begin{equation}\label{eq:Aj}
+ A_j=\frac{D_j}{3^j}
+ =\sum_{i=0}^{j-1}\frac{2^{S_i}}{3^{i+1}}
+ =\sum_{i=0}^{j-1}\frac{1}{3\lambda_i},
+ \qquad
+ \lambda_i=\frac{3^i}{2^{S_i}}.
+\end{equation}
+Then
+\begin{equation}\label{eq:xjheight}
+ x_j=\lambda_j(n+A_j).
+\end{equation}
+Suppose the real series $A_\infty=\lim A_j$ converges.  Define the real height
+\[
+ \cH(n)=n+A_\infty.
+\]
+This height calibrates the Bellman problem.
+
+\begin{theorem}[Finite-shadow calibration]\label{thm:calibration}
+Assume there exists a positive orbit with finite real shadow.  In its positive coalescence class, choose $m$ lexicographically minimizing
+\[
+ (\cH(z),z).
+\]
+Then every cumulative slope of the orbit of $m$ is greater than $1$, and every valuation prefix of $m$ is retained.
+\end{theorem}
+
+\begin{proof}
+The minimum exists because $\cH(z)>z$.  If $x_j=U^j(m)$, then the common future gives
+\[
+ \cH(x_j)=\lambda_j\cH(m).
+\]
+Minimality implies $\lambda_j\ge1$, and equality is impossible because a positive power of $3$ is not a power of $2$.
+
+Let a competing word $v$ carry $z$ to $x_j$.  Appending the common infinite future gives
+\[
+ \cH(z)=\frac{x_j+\tau_j}{\lambda(v)},
+\]
+where $\tau_j$ is the normalized real tail.  If $\lambda(v)>\lambda_j$, then $\cH(z)<\cH(m)$.  If the slopes agree and $v$ wins the intercept tie, then $\cH(z)=\cH(m)$ and $z<m$.  Both contradict the choice of $m$.
+\end{proof}
+
+Thus Bellman optimization cannot, by itself, exclude every fast divergent orbit: if such an orbit has finite real shadow, height minimization produces a positive ray which is Bellman-optimal at every depth.
+
+For later reference, the finite-shadow condition has an exact dynamical form.  Define
+\[
+ \rho_j=\lambda_j(A_\infty-A_j).
+\]
+Then
+\begin{equation}\label{eq:synchronized}
+ \rho_{j+1}=\frac{3\rho_j-1}{2^{a_j}},
+ \qquad
+ \frac{\rho_j}{x_j}\longrightarrow0.
+\end{equation}
+Conversely, any positive sequence satisfying \eqref{eq:synchronized} along a positive Collatz orbit forces
+\[
+ \sum_j\frac1{x_j}<\infty.
+\]
+Indeed, with $r_j=\rho_j/x_j$,
+\[
+ r_j-r_{j+1}
+ =\frac{x_j+\rho_j}{x_j(3x_j+1)}
+ \ge\frac1{4x_j}.
+\]
+This identifies the real-shadow obstruction with a summably divergent trajectory rather than with a purely formal sign issue.
+
+\section{Endpoint-preserving compression and signed states}\label{sec:signedstates}
+
+\subsection{Compression certificates}
+
+Let $w,v$ be words of the same length $r$.  An endpoint-preserving compression is an identity
+\begin{equation}\label{eq:certificate}
+ S(w)=S(v)+C,
+ \qquad
+ D(w)-2^C D(v)=h3^r,
+ \qquad C\ge1.
+\end{equation}
+If $w$ starts at $x$ and $v$ starts at $z$ and both end at the same point, then
+\begin{equation}\label{eq:center}
+ x+h=2^Cz.
+\end{equation}
+Thus a positive $z<x$ gives a descending diamond.
+
+Appending the same exponent to both words preserves $C$ and $h$.  Consequently, every finite compression excludes every continuation of its actual side.
+
+There are simple infinite families.  For $r\ge2$ and $e\ge1$, let
+\[
+ w=(1^{r-1},e+2),
+ \qquad
+ v=(1^{r-2},2,e).
+\]
+Then
+\begin{equation}\label{eq:onescarry}
+ S(w)=S(v)+1,
+ \qquad
+ D(w)-2D(v)=-3^r.
+\end{equation}
+Two less local length-$16$ certificates are recorded in Appendix~\ref{app:certificates}; they are useful because their exponent saving changes sign at intermediate cuts.
+
+\subsection{The normalized signed-state automaton}
+
+For suffixes $w_i,v_i$ of equal length $L_i$, put
+\[
+ P_i=S(w_i),
+ \qquad
+ Q_i=S(v_i),
+\]
+and
+\begin{equation}\label{eq:Hsigned}
+ H_i=
+ \frac{2^{Q_i}D(w_i)-2^{P_i}D(v_i)}{3^{L_i}}.
+\end{equation}
+For a compatible pair, every $H_i$ is an integer.  Define
+\[
+ c_i=P_i-Q_i,
+ \qquad
+ g_i=\frac{H_i}{2^{\min(P_i,Q_i)}}.
+\]
+The terminal empty suffix has state $(0,0)$.  If the current state is $(c,g)$ and exponents $a,b$ are prepended to the actual and competing suffixes, respectively, then $c'=c+a-b$ and
+\begin{equation}\label{eq:transitionplus}
+ g'=
+ \frac{1-2^{c'}+2^{a+\min(c,0)}g}{3}
+ \qquad(c'\ge0),
+\end{equation}
+while
+\begin{equation}\label{eq:transitionminus}
+ g'=
+ \frac{2^{-c'}-1+2^{b-\max(c,0)}g}{3}
+ \qquad(c'\le0).
+\end{equation}
+A transition is allowed exactly when the displayed quotient is integral.  At the full word, $c>0$ is precisely an exponent-saving compression, and $g$ is the center $h$ in \eqref{eq:certificate}.
+
+\begin{proposition}[Finite-state pumping]\label{prop:pumping}
+If a compatible paired path repeats a normalized state, then the paired block between the two occurrences may be deleted or repeated arbitrarily many times without changing the final normalized state.  The two words in the repeated block have the same exponent sum.
+\end{proposition}
+
+\begin{proof}
+The transition is determined by the current state and the next exponent pair.  A repeated state therefore gives a loop.  Equality of the saving coordinate at the two ends says that the two block sums agree.
+\end{proof}
+
+The conclusion one might hope for is that every bounded recurrent nonpositive path is eventually periodic.  This is false.
+
+\begin{example}[Aperiodic four-state recurrence]\label{ex:fourstate}
+At the state $(-2,15)$ there are two loops.  The first is
+\[
+ (-2,15)\xrightarrow{(2,2)}(-2,21)
+ \xrightarrow{(1,1)}(-2,15),
+\]
+corresponding in forward order to the equal words
+\[
+ A=(1,2),\qquad A'=(1,2).
+\]
+The second is
+\[
+ (-2,15)\xrightarrow{(1,1)}(-2,11)
+ \xrightarrow{(3,2)}(-1,15)
+ \xrightarrow{(1,2)}(-2,21)
+ \xrightarrow{(1,1)}(-2,15),
+\]
+corresponding to
+\[
+ B=(1,1,3,1),
+ \qquad
+ B'=(1,2,2,1).
+\]
+Arbitrary aperiodic concatenations of these loops remain in the four-state set
+\[
+ \{(-2,11),(-2,15),(-2,21),(-1,15)\}
+\]
+and never visit $c>0$.
+\end{example}
+
+This example separates two issues which are often conflated.  A positive-saving state may exist in the ambient component, but the fixed actual input need not force a path to it.  The missing global statement is therefore an input-synchronization theorem for the full terminal-reachable envelope, not a pathwise pumping lemma.
+
+\section{A recurrent $81/64$ subsystem}\label{sec:8164}
+
+The loops in Example~\ref{ex:fourstate} can be grouped into two actual macrosteps
+\[
+ C_0=A^2=(1,2,1,2),
+ \qquad
+ C_1=B=(1,1,3,1).
+\]
+Both have length $4$ and total exponent $6$, while
+\[
+ D(C_0)=85,
+ \qquad
+ D(C_1)=89.
+\]
+Hence
+\begin{equation}\label{eq:Fmacro}
+ F_\eps(x)=\frac{81x+85+4\eps}{64},
+ \qquad \eps\in\{0,1\}.
+\end{equation}
+Writing $x=4m-5$ conjugates \eqref{eq:Fmacro} to
+\begin{equation}\label{eq:mmap}
+ m'=\frac{81m+\eps}{64}.
+\end{equation}
+Integrality is equivalent to
+\begin{equation}\label{eq:residues}
+ m\equiv0\pmod{64}\quad(\eps=0),
+ \qquad
+ m\equiv15\pmod{64}\quad(\eps=1).
+\end{equation}
+
+\subsection{Canonical realization classes}
+
+For a binary word
+\[
+ \eps=(\eps_0,\ldots,\eps_{r-1})\in\{0,1\}^r,
+\]
+iteration of \eqref{eq:mmap} gives
+\begin{equation}\label{eq:binaryunfold}
+ 64^r m_r
+ =81^r m_0+
+ \sum_{j=0}^{r-1}\eps_j81^{r-1-j}64^j.
+\end{equation}
+Thus the word is realized exactly by one residue class
+\begin{equation}\label{eq:Rbinary}
+ R_r(\eps)
+ \equiv-
+ \sum_{j=0}^{r-1}\eps_j64^j81^{-j-1}
+ \pmod{64^r},
+ \qquad 0\le R_r(\eps)<64^r.
+\end{equation}
+Distinct binary words give distinct classes, so precisely $2^r$ classes modulo $64^r$ survive $r$ steps.  Their exact density is $32^{-r}$.
+
+Let
+\begin{equation}\label{eq:Mr}
+ M_r=\min\{R_r(\eps)>0:\eps\in\{0,1\}^r\}.
+\end{equation}
+The sequence $M_r$ is nondecreasing, and
+\begin{equation}\label{eq:Mcriterion}
+ M_r\longrightarrow\infty
+\end{equation}
+is equivalent to termination of every positive orbit of \eqref{eq:mmap}.  Indeed, a bounded nondecreasing integer sequence is eventually constant, and a constant value would survive every depth.
+
+Eventually periodic binary itineraries cannot give positive ordinary integers.  The $2$-adic identity
+\begin{equation}\label{eq:binary2adic}
+ m_0=-\sum_{j=0}^{\infty}
+ \frac{\eps_j64^j}{81^{j+1}}
+ \qquad\text{in }\Ztwo
+\end{equation}
+has the same rational geometric value in $\mathbb R$ and $\Q_2$ for an eventually periodic word.  The real sum is nonnegative, so $m_0$ is nonpositive.
+
+A hypothetical aperiodic itinerary must also have high factor complexity.  If the same length-$\ell$ block begins at positions $i<j$, subtraction of the two orbit segments gives
+\[
+ 64^\ell\mid m_j-m_i.
+\]
+Since $m_j\ll(81/64)^j$, one obtains
+\begin{equation}\label{eq:complexity}
+ \liminf_{\ell\to\infty}
+ \frac{P(\ell)}{\ell}
+ \ge
+ \frac{\log64}{\log(81/64)},
+\end{equation}
+where $P(\ell)$ is the factor complexity of the itinerary.  The constant is approximately $17.6548$.
+
+\section{Finite differences and order}\label{sec:finitediff}
+
+Let $(m_j)$ be the finite integral trajectory associated with a binary word $\eps$ and its canonical start $R_r(\eps)$.  Write $\Delta f_j=f_{j+1}-f_j$ and define
+\begin{equation}\label{eq:Phi}
+ \Phi_r(\eps)=\Delta^r m_0.
+\end{equation}
+Since
+\[
+ 64\Delta m_j=17m_j+\eps_j,
+\]
+iteration gives the exact formula
+\begin{equation}\label{eq:PhiFormula}
+ 64^r\Phi_r(\eps)
+ =17^rR_r(\eps)
+ +\sum_{i=0}^{r-1}
+ 17^{r-1-i}64^i\Delta^i\eps_0.
+\end{equation}
+If another realization of the same word is $R_r(\eps)+t64^r$, then
+\begin{equation}\label{eq:PhiShift}
+ \Delta^r m_0=\Phi_r(\eps)+t17^r.
+\end{equation}
+
+\begin{conjecture}[Finite-difference order]\label{conj:order}
+For binary words $u,v$ of the same length,
+\begin{equation}\label{eq:order}
+ R_r(u)<R_r(v)
+ \quad\Longrightarrow\quad
+ \Phi_r(u)<\Phi_r(v).
+\end{equation}
+\end{conjecture}
+
+This finite statement would terminate the subsystem.
+
+\begin{proposition}[Order implies termination]\label{prop:ordertermination}
+If Conjecture~\ref{conj:order} holds at every depth, then
+\[
+ M_r>
+ \left(\frac{128}{81}\right)^r-\frac1{17},
+\]
+and hence $M_r\to\infty$.
+\end{proposition}
+
+\begin{proof}
+Order preservation and $\Phi_r(0^r)=0$ imply $\Phi_r(\eps)>0$ for every nonzero word.  Equation \eqref{eq:PhiShift} gives $\Delta^j m_0\ge1$ for every prefix length $j\le r$ of any positive $r$-step survivor.  Newton's forward formula gives
+\[
+ m_r=\sum_{j=0}^r\binom rj\Delta^jm_0\ge2^r.
+\]
+On the other hand, \eqref{eq:mmap} and $\eps_j\le1$ give
+\[
+ m_r\le
+ \left(\frac{81}{64}\right)^r
+ \left(m_0+\frac1{17}\right)-\frac1{17}.
+\]
+Combining the two inequalities yields the claim.
+\end{proof}
+
+\subsection{Signed differences}
+
+For two binary trajectories with $R_r(u)<R_r(v)$, put
+\[
+ d_j=m_j(v)-m_j(u),
+ \qquad
+ \delta_j=v_j-u_j\in\{-1,0,1\}.
+\]
+Then
+\begin{equation}\label{eq:signedrec}
+ 64d_{j+1}=81d_j+\delta_j,
+ \qquad d_j>0,
+\end{equation}
+and
+\begin{equation}\label{eq:PhiDifference}
+ \Phi_r(v)-\Phi_r(u)=\Delta^r d_0.
+\end{equation}
+
+Let $\mathscr R_r(\delta)\in[0,64^r)$ be the canonical starting residue of the signed word $\delta$, and define the circular signed-code separation
+\begin{equation}\label{eq:Gr}
+ G_r=
+ \min_{\delta\ne0}
+ \min\bigl(\mathscr R_r(\delta),
+           64^r-\mathscr R_r(\delta)\bigr).
+\end{equation}
+
+The finite-difference error can be bounded sharply.  If $A_r=\Delta^r d_0$, then
+\begin{equation}\label{eq:Qboundformula}
+ 64^rA_r=17^rd_0+Q_r(\delta),
+\end{equation}
+where
+\begin{equation}\label{eq:Qbound}
+ |Q_r(\delta)|
+ \le
+ \frac{128^r-(-17)^r}{145}.
+\end{equation}
+Indeed,
+\[
+ Q_r(\delta)=\sum_{i=0}^{r-1}17^{r-1-i}64^i\Delta^i\delta_0
+ =\sum_{j=0}^{r-1}q_{r,j}\delta_j,
+\]
+with
+\[
+ q_{r,j}=\sum_{i=j}^{r-1}(-1)^{i-j}
+ \binom ij17^{r-1-i}64^i.
+\]
+For fixed $j$, the absolute values of the summands increase strictly, so
+$\operatorname{sgn}(q_{r,j})=(-1)^{r-1-j}$.  The maximum of
+$|Q_r|$ is therefore attained by the alternating signed word, for which
+$\Delta^i\delta_0=\pm(-2)^i$.  Summing the resulting geometric series gives
+\eqref{eq:Qbound}.
+
+\begin{proposition}[Signed separation implies order]\label{prop:Gorder}
+If
+\[
+ G_r\ge8^r,
+\]
+then Conjecture~\ref{conj:order} holds at depth $r$.
+\end{proposition}
+
+\begin{proof}
+For $d_0\ge8^r$, the positive term in \eqref{eq:Qboundformula} is at least $136^r$, which is strictly larger than the right side of \eqref{eq:Qbound}.  Hence $A_r>0$ and \eqref{eq:PhiDifference} gives order preservation.
+\end{proof}
+
+\section{Product spacing and one-step refinement}\label{sec:spacing}
+
+For every binary word $w$ of length $r$, let
+\[
+ (R_r(w),E_r(w))
+\]
+be its canonical starting point and endpoint.  Sort the $2^r$ points by $R_r$.  The endpoint order is the same, because every positive signed difference trajectory \eqref{eq:signedrec} remains positive.  Close both lists cyclically by adding $(64^r,81^r)$ to the first point.
+
+For each cyclic adjacent pair, write
+\[
+ a=R_{i+1}-R_i,
+ \qquad
+ b=E_{i+1}-E_i.
+\]
+
+\begin{conjecture}[Product spacing]\label{conj:PS}
+Every cyclic adjacent depth-$r$ gap satisfies
+\begin{equation}\label{eq:PS}
+ ab\ge81^r.
+\end{equation}
+\end{conjecture}
+
+\begin{proposition}[Product spacing implies signed separation]\label{prop:PSG}
+If \eqref{eq:PS} holds for every adjacent depth-$r$ gap, then
+\[
+ G_r\ge8^r.
+\]
+\end{proposition}
+
+\begin{proof}
+A circular signed gap is a sum of consecutive adjacent gaps.  Cauchy--Schwarz gives
+\[
+ d_0d_r
+ \ge
+ \left(\sum\sqrt{a_ib_i}\right)^2
+ \ge81^r.
+\]
+On the other hand, unfolding \eqref{eq:signedrec} gives
+\[
+ d_r<\left(\frac{81}{64}\right)^r
+ \left(d_0+\frac1{17}\right).
+\]
+If $d_0<8^r$, integrality gives $d_0+1/17<8^r$, and hence $d_0d_r<81^r$, a contradiction.
+\end{proof}
+
+\subsection{Weighted one-step certificates}
+
+A depth-$k$ adjacent gap projects, after deleting the final binary digit, to an interval of consecutive depth-$(k-1)$ gaps
+\[
+ (a_1,b_1),\ldots,(a_m,b_m).
+\]
+Put
+\[
+ A=\sum_i a_i,
+ \qquad
+ B=\sum_i b_i,
+ \qquad
+ F=\sum_i\left\lfloor\sqrt{a_ib_i}\right\rfloor.
+\]
+If $\delta\in\{-1,0,1\}$ is the difference of the final binary digits of the two boundary words, then
+\begin{equation}\label{eq:conservation}
+ a=A,
+ \qquad
+ 64b=81B+\delta,
+\end{equation}
+so
+\begin{equation}\label{eq:decomposition}
+ 64(ab-81^k)
+ =81(AB-F^2)
+ +\bigl(81F^2+\delta a-64\cdot81^k\bigr).
+\end{equation}
+The first term is nonnegative by Cauchy--Schwarz.
+
+\begin{lemma}[Weighted return]\label{lem:weighted}
+If
+\begin{equation}\label{eq:WCERT}
+ 81F^2+\delta a\ge64\cdot81^k,
+\end{equation}
+then the child gap satisfies product spacing.
+\end{lemma}
+
+\begin{proof}
+This is immediate from \eqref{eq:decomposition}.
+\end{proof}
+
+The certificate is automatic for long parent intervals.
+
+\begin{proposition}[Intervals of length at least eight]\label{prop:m8}
+Assume product spacing at depth $n=k-1$.  If the parent interval of a depth-$k$ gap contains at least eight gaps, then \eqref{eq:WCERT} holds.
+\end{proposition}
+
+\begin{proof}
+Put $H=8^n$ and $T=9^n$.  Product spacing gives $a_ib_i\ge T^2$.  The signed endpoint estimate
+\[
+ b_i\le\left(\frac{81}{64}\right)^n
+ \left(a_i+\frac1{17}\right)-\frac1{17}
+\]
+implies $a_i\ge H$.  If $a_i\ge H+1$, the corresponding root weight is at least $T+1$.  Also no two consecutive start gaps can both equal $H$: equal positive signed gaps have the same signed word, and three binary boundary words cannot differ twice by the same nonzero signed word.
+
+Hence every block of eight consecutive parent gaps has total root weight at least $8T+1$, unless the final digit difference is nonnegative, in which case $8T$ suffices.  Finally, every positive signed gap has $b_i>a_i$, so $A\le F$.  Substitution in \eqref{eq:WCERT} proves the result.  For $m\ge9$ the estimate is immediate from $F\ge mT$.
+\end{proof}
+
+Short intervals with large start span are also harmless.
+
+\begin{proposition}[Large short intervals]\label{prop:largeshort}
+Assume product spacing at depth $n\ge3$.  Let a depth-$(n+1)$ gap have a parent interval of at most seven gaps and total start span $A$.  If
+\begin{equation}\label{eq:largespanhyp}
+ A\ge32\cdot8^n,
+\end{equation}
+then the weighted certificate \eqref{eq:WCERT} holds.
+\end{proposition}
+
+\begin{proof}
+For every parent gap,
+\[
+ b_i\ge
+ \left(\frac{81}{64}\right)^n a_i
+ -\frac{(81/64)^n-1}{17}.
+\]
+Since product spacing implies $a_i\ge8^n$, we obtain
+\[
+ \left\lfloor\sqrt{a_ib_i}\right\rfloor
+ >
+ \left(\frac98\right)^n a_i
+ -\frac{(9/8)^n a_i}{17\cdot8^n}-1.
+\]
+Summing and using $m\le7$ gives
+\[
+ F>
+ \left(\frac98\right)^n A
+ -\frac{(9/8)^n A}{17\cdot8^n}-7.
+\]
+At $A=32\cdot8^n$, the right side exceeds $8\cdot9^n+1$ for every $n\ge3$, and the coefficient of $A$ is positive.  Thus $F\ge8\cdot9^n+1$.  If $\delta\ge0$, \eqref{eq:WCERT} follows immediately.  If $\delta=-1$, use $A\le F$ and
+\[
+ 81(8\cdot9^n+1)^2-(8\cdot9^n+1)
+ >64\cdot81^{n+1}.
+\]
+\end{proof}
+
+\begin{theorem}[Signed separation implies product spacing]\label{thm:GtoPS}
+Assume
+\begin{equation}\label{eq:G4}
+ G_r\ge4\cdot8^r
+ \qquad(r\ge4).
+\end{equation}
+Then product spacing holds at every depth.
+\end{theorem}
+
+\begin{proof}
+The first three depths are checked directly.  Proceed by strong induction.  Let a depth-$r=n+1$ gap be given.  If its parent interval has at least eight gaps, apply Proposition~\ref{prop:m8}.  Otherwise, if its start span is at least $32\cdot8^n=4\cdot8^r$, apply Proposition~\ref{prop:largeshort}.  The only remaining possibility is a nonzero signed-code gap smaller than $4\cdot8^r$, contradicting \eqref{eq:G4}.
+\end{proof}
+
+Combining Theorem~\ref{thm:GtoPS}, Proposition~\ref{prop:PSG}, Proposition~\ref{prop:Gorder}, and Proposition~\ref{prop:ordertermination} proves termination of the $81/64$ subsystem from the strengthened signed-code separation \eqref{eq:G4}.
+
+\section{Quotient-error renormalization}\label{sec:trace}
+
+We now reduce \eqref{eq:G4} to a finite trace estimate.
+
+\subsection{The local transform}
+
+Let
+\[
+ \cE=\{-63,-62,\ldots,80\}.
+\]
+For $e\in\cE$, let $\rho(e)\in\{0,\ldots,63\}$ be the unique residue satisfying
+\[
+ 81\rho(e)+e\equiv0\pmod{64},
+\]
+and put
+\[
+ q(e)=\frac{81\rho(e)+e}{64}.
+\]
+Define
+\begin{equation}\label{eq:Ttransform}
+ \cT(e,f)=q(e)-\rho(f).
+\end{equation}
+One checks directly that $\cT(e,f)\in\cE$ for all $e,f\in\cE$.
+
+\begin{lemma}[Quotient-error transform]\label{lem:quotient}
+Suppose
+\[
+ 64x_{j+1}=81x_j+e_j,
+ \qquad e_j\in\cE.
+\]
+Write
+\[
+ x_j=64y_j+\rho(e_j).
+\]
+Then
+\begin{equation}\label{eq:renormrec}
+ 64y_{j+1}=81y_j+\cT(e_j,e_{j+1}),
+\end{equation}
+and
+\begin{equation}\label{eq:flooridentity}
+ y_j=\left\lfloor\frac{x_j}{64}\right\rfloor
+ =\left\lfloor\frac{x_{j+1}}{81}\right\rfloor.
+\end{equation}
+\end{lemma}
+
+Iterating the transform $k$ times gives
+\begin{equation}\label{eq:iterfloor}
+ x_j^{(k)}
+ =\left\lfloor\frac{d_j}{64^k}\right\rfloor
+ =\left\lfloor\frac{d_{j+k}}{81^k}\right\rfloor
+\end{equation}
+for a signed trajectory \eqref{eq:signedrec}.
+
+\subsection{Zero rows}
+
+\begin{lemma}[Zero-row lemma]\label{lem:zerorow}
+Let a row satisfying \eqref{eq:renormrec} start and end at $0$.  Then every value in the row is $0$, and every transformed error is $0$.
+\end{lemma}
+
+\begin{proof}
+If the row first becomes positive, then $64x_{j+1}=e_j$.  The only positive multiple of $64$ in $\cE$ is $64$, so $x_{j+1}=1$.  Once $x_j\ge1$,
+\[
+ 81x_j+e_j\ge18,
+\]
+and this positive multiple of $64$ cannot be $0$.  Hence the row can never return to zero.
+\end{proof}
+
+Suppose a nonzero signed trajectory of length $r$ satisfies
+\begin{equation}\label{eq:smallcode}
+ 0<d_0<4\cdot8^r.
+\end{equation}
+For $r\ge17$, set
+\begin{equation}\label{eq:kchoice}
+ k=\left\lceil\frac{11r}{20}\right\rceil+2.
+\end{equation}
+Then $6k>3r+2$, so $64^k>4\cdot8^r>d_0$.  Moreover,
+\[
+ d_r<\left(\frac{81}{64}\right)^r
+ \left(4\cdot8^r+\frac1{17}\right)
+ <5\left(\frac{81}{8}\right)^r.
+\]
+The elementary inequality $8^{20}>81^9$ gives
+$81^{11/20}>81/8$, and the extra factor $81^2$ in
+\eqref{eq:kchoice} gives $81^k>5(81/8)^r$.  Hence $d_r<81^k$.
+Thus \eqref{eq:iterfloor} and Lemma~\ref{lem:zerorow} produce a zero transformed error row of length $r-k$.
+
+\subsection{The zero-trace graph}
+
+For $k\ge1$, define a directed graph $\cZ_k$ as follows.  Its vertices are words in $\{-1,0,1\}^k$.  There is an edge
+\[
+ (u_0,\ldots,u_{k-1})
+ \longrightarrow
+ (u_1,\ldots,u_k)
+\]
+if
+\begin{equation}\label{eq:edge}
+ \cT^k(u_0,\ldots,u_k)=0.
+\end{equation}
+Here $\cT^k$ denotes $k$ successive local transforms.
+
+\begin{proposition}[Structure of $\cZ_k$]\label{prop:Zstructure}
+For every $k$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item every vertex has in-degree and out-degree at most one;
+\item the zero word is a fixed point with no nonzero exit;
+\item there is no nonzero directed cycle.
+\end{enumerate}
+Consequently the nonzero part of $\cZ_k$ is a disjoint union of finite directed paths.
+\end{proposition}
+
+\begin{proof}
+For out-degree, a length-$k$ signed word determines its canonical start and endpoint; the next error in $\{-1,0,1\}$ is uniquely determined by divisibility modulo $64$.  The inverse argument modulo $81$ gives in-degree at most one.
+
+A block $0^k,a$ with $a\ne0$ has nonzero canonical quotient and cannot have $k$-fold transformed error zero, proving the second claim.
+
+A nonzero directed cycle would give a periodic signed error sequence whose $k$-fold quotient row is identically zero.  Reconstructing downward gives a bounded periodic positive signed trajectory.  If the period is $p$, then
+\[
+ (81^p-64^p)d_0
+ =-\sum_{j=0}^{p-1}\delta_j64^j81^{p-1-j}.
+\]
+The right side has absolute value at most $(81^p-64^p)/17$, so $0\le d_0\le1/17$.  Hence $d_0=0$ and all errors vanish.
+\end{proof}
+
+Let $\ell_k$ be the maximum number of edges in a nonzero path of $\cZ_k$.
+
+\begin{conjecture}[Zero-trace bound]\label{conj:ZT}
+For every $k\ge1$,
+\begin{equation}\label{eq:ZT}
+ \ell_k\le\left\lfloor\frac{k+1}{3}\right\rfloor.
+\end{equation}
+\end{conjecture}
+
+\begin{theorem}[Trace bound implies signed separation]\label{thm:ZTtoG}
+Assume Conjecture~\ref{conj:ZT}.  Then
+\[
+ G_r\ge4\cdot8^r
+\]
+for every $r\ge17$.
+\end{theorem}
+
+\begin{proof}
+Suppose \eqref{eq:smallcode}.  The construction above gives a path of $r-k$ edges in $\cZ_k$.  The initial vertex is nonzero; otherwise the zero word would force the entire signed word to vanish.  If $\ell_k<r-k$, the path reaches the zero vertex, and the no-exit property forces at least $k$ final errors to be zero.  Homogeneous evolution over these final steps implies $d_r\ge81^k$, contradicting the bound used to create the zero row.
+
+It remains to check $r-k>\lfloor(k+1)/3\rfloor$.  From \eqref{eq:kchoice},
+\[
+ k\le\frac{11r}{20}+3,
+\]
+and therefore
+\[
+ r-k-\frac{k+1}{3}
+ \ge\frac{4r}{15}-\frac{13}{3}>0
+ \qquad(r\ge17).
+\]
+This contradicts Conjecture~\ref{conj:ZT}.
+\end{proof}
+
+Together with exact verification of $G_r\ge4\cdot8^r$ for $4\le r\le20$, Theorem~\ref{thm:ZTtoG} proves the strengthened separation at every depth, conditional on Conjecture~\ref{conj:ZT}.  Theorem~\ref{thm:intro-chain} follows.
+
+\section{The remaining carry-synchronization problem}\label{sec:carry}
+
+The coefficient $1/3$ in Conjecture~\ref{conj:ZT} is not merely empirical.  It appears in an exact local injectivity statement.
+
+For $a\in\{-1,0,1\}$,
+\[
+ q(-1)=62,
+ \qquad q(0)=0,
+ \qquad q(1)=19.
+\]
+Define
+\begin{equation}\label{eq:Psi}
+ \Psi(a,b_0,b_1,b_2)
+ \equiv
+ -81^{-4}
+ \bigl(81^3q(a)+81^2b_0+64\cdot81b_1+64^2b_2\bigr)
+ \pmod{64^3}.
+\end{equation}
+
+\begin{proposition}[Four-trit injectivity]\label{prop:Psi}
+The map
+\[
+ \Psi:\{-1,0,1\}^4\longrightarrow\Z/64^3\Z
+\]
+is injective.
+\end{proposition}
+
+\begin{proof}
+Suppose two four-tuples have the same image.  Reducing their difference modulo $64$ gives
+\[
+ 17\Delta q+\Delta b_0\equiv0\pmod{64}.
+\]
+The nonzero differences between $62,0,19$ are $\pm19,\pm43,\pm62$, and multiplication by $17$ gives $\pm3,\pm27,\pm30$ modulo $64$.  None can be canceled by $\Delta b_0\in\{-2,-1,0,1,2\}$.  Hence $\Delta q=\Delta b_0=0$.  Dividing by $64$ and reducing successively modulo $64$ gives $\Delta b_1=\Delta b_2=0$.
+\end{proof}
+
+Let $\cW_{k,L}$ be the set of ternary words of length $k+L$ whose $k$-fold transform is $0^L$ and whose $L+1$ sliding length-$k$ windows are all nonzero.  Then
+\[
+ \ell_k\ge L
+ \quad\Longleftrightarrow\quad
+ \cW_{k,L}\ne\varnothing.
+\]
+The natural strengthening of Conjecture~\ref{conj:ZT} is the fiber estimate
+\begin{equation}\label{eq:fiber}
+ |\cW_{k,L}|
+ \le3^{k+1-3L}
+ \qquad(3L\le k+1),
+\end{equation}
+with $\cW_{k,L}=\varnothing$ when $3L>k+1$.  Proposition~\ref{prop:Psi} gives the required local injectivity for one three-step quotient block.  What remains is to synchronize the carries across overlapping blocks so that these local injections multiply without introducing new choices.
+
+This is the present finite frontier:
+
+\begin{conjecture}[Carry synchronization]\label{conj:carry}
+Every nonzero trace in $\cW_{k,L}$ admits an injective encoding by a ternary word of length $k+1-3L$.
+\end{conjecture}
+
+Conjecture~\ref{conj:carry} implies \eqref{eq:fiber}, hence Conjecture~\ref{conj:ZT}.  No proof is currently known within the framework.
+
+\section{Exact finite verification}\label{sec:computations}
+
+The following statements were verified in exact integer or rational arithmetic.
+
+\subsection{Bellman survivor computations}
+
+At depth $14$, the Bellman recursion retains $23294$ distinct valuation words.  Increasing the initial $3$-adic precision from $q=0$ to $q=1,2,3$ does not change the word set; it changes only the surviving initial residue classes.  The least positive realization representative among retained words is
+\[
+ 3,7,7,27,27,\ldots,27
+\]
+through depths $1,\ldots,14$.  The depth-$14$ minimizer is the actual valuation prefix of $27$.
+
+These computations motivated the stationary-code formulation but are not used as proof of any all-depth statement.
+
+\subsection{The $81/64$ subsystem}
+
+The exact minima \eqref{eq:Mr} include
+\[
+\begin{array}{c|r}
+ r&M_r\\ \hline
+ 1&15\\
+ 4&986895\\
+ 5&986895\\
+ 8&2523881737999\\
+ 12&3930974604702523151\\
+ 16&120266776649642384578496\\
+ 20&507653599225641340828825689871
+\end{array}
+\]
+Thus no positive integer below $M_{20}$ survives twenty macrosteps.
+
+Conjecture~\ref{conj:order} was verified exhaustively for every binary word through depth $20$.  At each depth, $\Phi_r$ was strictly increasing when the words were sorted by $R_r$; no nonpositive value and no adjacent inversion occurred.
+
+The signed-code separation satisfies
+\[
+ G_r\ge4\cdot8^r
+\]
+for every $3\le r\le20$.  The smallest ratio in this range is approximately $15.5293$ at $r=3$.
+
+Product spacing and the weighted certificate \eqref{eq:WCERT} were verified for every cyclic adjacent gap through depth $18$.
+
+\subsection{Zero-trace graphs}
+
+The longest nonzero path lengths in $\cZ_k$ for $1\le k\le12$ are
+\[
+\begin{array}{c|rrrrrrrrrrrr}
+ k&1&2&3&4&5&6&7&8&9&10&11&12\\ \hline
+ \ell_k&0&0&0&1&2&1&2&2&3&3&4&3\\
+ \lfloor(k+1)/3\rfloor&0&1&1&1&2&2&2&3&3&3&4&4
+\end{array}
+\]
+Thus Conjecture~\ref{conj:ZT} holds throughout the computed range.  It is tight at $k=4,5,7,9,10,11$ and is not monotone in $k$.
+
+At every computed depth, in-degree and out-degree are at most one, the zero word has no nonzero exit, and the nonzero part is a disjoint union of finite paths, in agreement with Proposition~\ref{prop:Zstructure}.
+
+\section{What remains for the full Collatz problem}\label{sec:fullcollatz}
+
+The rational-base trace conjecture is a substantial finite target, but it is not the only missing step toward the original Collatz conjecture.
+
+The global Bellman framework would prove Collatz if one could establish the following qualitative synchronization statement: every infinite retained ray whose $2$-adic realization representatives eventually stabilize at one positive integer must admit, at some depth, a positive compatible inverse path which is lexicographically better in $(\lambda,\beta)$.  Equivalently, a positive stationary code cannot remain Bellman-geodesic forever.
+
+Several weaker substitutes are false.
+
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.3em]
+\item Infinite retained rays need not be ordinary negative integers; Proposition~\ref{prop:1911} gives $-19/11$.
+\item Bounded-defect recurrence is false for arbitrary retained rays; the ray $1^\infty$ is globally slope-maximal and has defects tending to infinity.
+\item Bounded normalized-state recurrence does not force eventual periodicity; Example~\ref{ex:fourstate} gives an aperiodic four-state path.
+\item The existence of a positive-saving state in the ambient component does not force the fixed actual input to reach it.
+\end{enumerate}
+
+Thus the full problem requires an infinitary coupling between eventual $2$-adic stabilization at a positive ordinary integer and $3$-adic endpoint compressibility.  The $81/64$ subsystem and Conjecture~\ref{conj:ZT} isolate one recurrent branch of this coupling in a completely finite form.  A proof of the carry-synchronization conjecture would close that branch, but a separate global input-synchronization theorem would still be required to complete the Collatz argument.
+
+\appendix
+
+\section{The retained ray $(1,1,2)^\infty$}\label{app:1911}
+
+Put
+\[
+ \xi_0=-\frac{19}{11},
+ \qquad
+ \xi_1=-\frac{23}{11},
+ \qquad
+ \xi_2=-\frac{29}{11}.
+\]
+Then
+\[
+ \frac{3\xi_0+1}{2}=\xi_1,
+ \qquad
+ \frac{3\xi_1+1}{2}=\xi_2,
+ \qquad
+ \frac{3\xi_2+1}{4}=\xi_0.
+\]
+Hence the exact valuation word is $(1,1,2)^\infty$.
+
+Write a negative endpoint as $-p/11$.  An inverse exponent $a$ sends
+\[
+ p\longmapsto p'=\frac{2^ap+11}{3},
+\]
+when the quotient is integral.  The distinguished inverse cycle is
+\[
+ 19\xrightarrow{2}29\xrightarrow{1}23\xrightarrow{1}19.
+\]
+Define
+\[
+\begin{aligned}
+ \mathcal A_0&=\{p\ge19:p\text{ odd},\ p\equiv2\pmod3\Rightarrow p\ge41\},\\
+ \mathcal A_1&=\{p\ge29:p\text{ odd},\ p\ne65\},\\
+ \mathcal A_2&=\{p\ge23:p\text{ odd},\ p\notin\{29,47\}\}.
+\end{aligned}
+\]
+A direct check shows that admissible inverse steps carry
+\[
+ \mathcal A_0\to\mathcal A_1\to\mathcal A_2\to\mathcal A_0.
+\]
+Now set
+\[
+ H_0(p)=p+\frac16,
+ \qquad
+ H_1(p)=p-\frac14,
+ \qquad
+ H_2(p)=p,
+\]
+and
+\[
+ g_0=\frac98,
+ \qquad
+ g_1=\frac65,
+ \qquad
+ g_2=\frac54.
+\]
+For a transition $p\mapsto p'$ with exponent $a$, the quantities
+\[
+ g_tH_t(p)-\frac3{2^a}H_{t+1}(p')
+\]
+are bounded below by the following expressions, according to $p\bmod3$:
+\[
+\begin{array}{c|c|c|c}
+ t&p\bmod3&\min a&\text{gap}\\ \hline
+ 0&1&2&(p-19)/8\\
+ 0&2&1&(2p-79)/16\\
+ 1&1&2&(4p-61)/20\\
+ 1&2&1&(p-29)/5\\
+ 2&1&2&(2p-23)/8\\
+ 2&2&1&(p-23)/4
+\end{array}
+\]
+Each is nonnegative on the corresponding invariant set, and equality occurs only on the distinguished cycle.  Since larger admissible exponents only decrease the competing term, iteration shows that the cycle segment uniquely maximizes the inverse slope at every fixed length.  Every nonempty prefix of $(1,1,2)^\infty$ has slope greater than $1$, so the full prefix also beats every shorter competitor.  Thus every prefix is retained.
+
+The block $(1,1,2)$ has $S=4$ and $D=19$, so its affine map is
+\[
+ x\longmapsto\frac{27x+19}{16}.
+\]
+Its fixed point is $-19/11$.
+
+\section{Two coupled compression certificates}\label{app:certificates}
+
+For every $e\ge1$, define
+\[
+\begin{aligned}
+ w_A(e)&=(2,1,2,1,2,1,1,2,2,2,2,2,2,2,2,e),\\
+ v_A(e)&=(1,1,1,1,1,1,1,1,2,2,4,1,1,2,3,e+2),
+\end{aligned}
+\]
+and
+\[
+\begin{aligned}
+ w_B(e)&=(2,1,2,1,2,1,2,2,2,2,1,2,1,2,2,e),\\
+ v_B(e)&=(1,1,1,1,1,1,1,1,1,1,2,2,1,4,3,e+2).
+\end{aligned}
+\]
+The final exponent does not enter $D$.  Exact calculation gives
+\[
+ D(w_A)=348053191,
+ \qquad
+ D(v_A)=66409793,
+\]
+\[
+ D(w_B)=314004167,
+ \qquad
+ D(v_B)=49385281,
+\]
+and in both cases
+\[
+ S(w)-S(v)=1,
+ \qquad
+ D(w)-2D(v)=5\cdot3^{16}.
+\]
+These certificates are not generated inside the cone of positive suffix savings: their suffix exponent differences change sign several times.  This is why the signed normalization \eqref{eq:transitionplus}--\eqref{eq:transitionminus} is necessary.
+
+\end{document}

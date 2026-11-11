@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+\newcommand{\car}{\operatorname{C}}
+
+\title{Elimination of the \(q+2\) same-depth suffix channel}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+For a positive odd integer \(x\), put
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+For a positive exponent word \(v=(a_1,\ldots,a_\ell)\), define
+\[
+ \mass(v):=\sum_{i=1}^{\ell}a_i,
+ \qquad
+ \car(v):=\sum_{i=1}^{\ell}
+ 3^{\ell-i}2^{a_1+\cdots+a_{i-1}}.
+ \tag{2}
+\]
+We use the record atoms
+\[
+ B:=12,\qquad C:=1113,\qquad D:=1122.
+ \tag{3}
+\]
+Their lengths, masses, and carries are
+\[
+\begin{array}{c|c|c|c}
+ P&|P|&\mass(P)&\car(P)\\ \hline
+ B&2&3&5\\
+ C&4&6&65\\
+ D&4&6&73.
+\end{array}
+\tag{4}
+\]
+
+\section{The first-atom obstruction}
+
+Let \(W=PU\), where \(P\in\{B,C,D\}\), be an exact record-atom word
+from \(q\) to \(y\).  Compare it with an exact word \(V\) of the same
+raw length from \(z\) to \(y\).  At a common atom boundary write
+\[
+ \Delta:=\mass(V_{\mathrm{rem}})-\mass(W_{\mathrm{rem}}),
+ \qquad
+ z=2^\Delta q+c,
+ \qquad
+ u:=\frac{c}{2^\Delta}.
+ \tag{5}
+\]
+The arbitrary-prefix distortion theorem proves
+\[
+ \Delta\geq-1,\qquad -1\leq u\leq5.
+ \tag{6}
+\]
+The parity lattice gives even \(c\) when \(\Delta=0\) and odd \(c\)
+when \(\Delta\geq1\).  If the remaining suffix is nonempty and
+\(\Delta=-1\), the same theorem gives \(c=-1/2\).
+
+Suppose that the right state after \(P\) is \((d,c)\), and that the
+alternative block aligned with \(P\) is a positive word \(v\) of length
+\(\ell:=|P|\) and mass \(s\).  The distortion transition is
+\[
+ \Delta_{\mathrm{left}}=d+s-\mass(P),
+ \tag{7}
+\]
+\[
+ c_{\mathrm{left}}
+ =\frac{2^{\Delta_{\mathrm{left}}}\car(P)
+       +2^s c-\car(v)}{3^\ell}.
+ \tag{8}
+\]
+
+\begin{theorem}[the \(q+2\) channel is empty]
+There is no exact same-depth word \(V\) from \(q+2\) to \(y\) whose
+mass equals \(\mass(W)\).
+\end{theorem}
+
+\begin{proof}
+Such a word would give the left distortion state
+\[
+ (\Delta_{\mathrm{left}},c_{\mathrm{left}})=(0,2).
+ \tag{9}
+\]
+Equations (7) and (8) would force
+\[
+ s=\mass(P)-d,
+ \qquad
+ \car(v)=\car(P)+2^s c-2\cdot3^\ell.
+ \tag{10}
+\]
+Since \(s\geq\ell\), the right defect satisfies
+\[
+ -1\leq d\leq\mass(P)-\ell.
+ \tag{11}
+\]
+Thus \(d\in\{-1,0,1\}\) for \(P=B\), and
+\(d\in\{-1,0,1,2\}\) for \(P=C,D\).
+
+The strip and parity lattice leave the following offsets:
+\[
+\begin{array}{c|c}
+ d&c\\ \hline
+ -1&-1/2\\
+ 0&0,2,4\\
+ 1&-1,1,3,5,7,9\\
+ 2&-3,-1,1,\ldots,19.
+\end{array}
+\tag{12}
+\]
+For each row, the positive compositions of \(s\) into \(\ell\) parts
+give the following carry sets:
+\[
+\begin{array}{c|c|l}
+P&d&\{\car(v):|v|=\ell,\ \mass(v)=s\}\\ \hline
+B&-1&\{5,7,11\}\\
+B&0&\{5,7\}\\
+B&1&\{5\}\\ \hline
+C,D&-1&\text{positive}\\
+C,D&0&\{65,73,85,89,101,103,119,125,143,179\}\\
+C,D&1&\{65,73,85,103\}\\
+C,D&2&\{65\}.
+\end{array}
+\tag{13}
+\]
+Substitution in the right side of (10) gives no member of the
+corresponding carry set.  For \(d=-1\), the required carry is negative.
+For \(d=0,1\), its possible values are
+\[
+\begin{array}{c|c|l}
+P&d&\text{required values from (10)}\\ \hline
+B&0&-13,3,19\\
+B&1&-17,-9,-1,7,15,23\\
+C&0&-97,31,159\\
+C&1&-129,-65,-1,63,127,191\\
+D&0&-89,39,167\\
+D&1&-121,-57,7,71,135,199.
+\end{array}
+\]
+These sets are disjoint from the corresponding rows of (13).  For
+\(d=2\), the required carry is congruent to \(15\pmod {32}\) when
+\(P=C\), and to \(23\pmod {32}\) when \(P=D\), while
+\(65\equiv1\pmod {32}\).
+
+Hence the first atom cannot enter the state \((0,2)\).  This contradicts
+(9).
+\end{proof}
+
+\begin{corollary}[sharpened same-depth suffix trichotomy]
+Let \(F\) be any exact word of length \(|W|\) from a positive odd
+integer \(r\) to \(y\).  Then exactly one of the following holds:
+\[
+\begin{array}{c|c}
+\text{mass defect}&\text{suffix start}\\ \hline
+-1&r=(q-1)/2,\quad P=C,\\
+0&r=q,\quad F=W,\\
+\delta\geq1&r\geq2^\delta(q-1).
+\end{array}
+\tag{14}
+\]
+In particular, the formerly possible value \(r=q+2\) does not occur.
+\end{corollary}
+
+\begin{proof}
+The arbitrary-prefix theorem gives the three rows in (14), except that
+its zero-defect row also allowed \(q+2\).  Theorem~1 removes that value.
+The uniqueness assertion at \(r=q\) is part of the same theorem.
+\end{proof}
+
+For the variable-depth inverse problem, every longer predecessor still
+splits into an inverse prefix and a same-depth suffix.  Corollary~2
+removes one complete nonminimal suffix channel.  The deep prefix over
+the least suffix start, the actual \(q\)-suffix when it is nonminimal,
+and the positive-defect suffixes remain open.
+
+\end{document}

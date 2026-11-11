@@ -1,0 +1,324 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{The $3$-adic collision law for the Collatz terminal decoder}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  2^{a_t}x_{t+1}=3x_t+1,
+  \qquad
+  a_t=v_2(3x_t+1),
+  \tag{1}
+\]
+where every $x_t$ is a positive odd integer.  Put
+\[
+  Y_t:=x_t+1,
+  \qquad
+  b_t:=v_3(Y_t),
+  \qquad
+  Y_t=3^{b_t}u_t,
+  \qquad
+  3\nmid u_t.
+  \tag{2}
+\]
+For $a\geq1$, define
+\[
+  r(a):=2^a-2,
+  \qquad
+  q(a):=v_3(r(a)),
+  \tag{3}
+\]
+where $q(1):=\infty$.
+
+\begin{lemma}[valuation of the decoder forcing term]
+For every $a\geq1$,
+\[
+  q(a)=
+  \begin{cases}
+    \infty,&a=1,\\
+    0,&a\text{ is even},\\
+    1+v_3\bigl((a-1)/2\bigr),&a>1\text{ is odd}.
+  \end{cases}
+  \tag{4}
+\]
+\end{lemma}
+
+\begin{proof}
+The first two cases follow directly from $r(1)=0$ and
+$2^a\equiv1\pmod3$ when $a$ is even.  Suppose that $a=2n+1>1$.  Then
+\[
+  r(a)=2(4^n-1).
+  \tag{5}
+\]
+Write $n=3^s m$, where $3\nmid m$.  The binomial theorem gives
+\[
+  4^m-1=(1+3)^m-1\equiv3m\pmod9,
+\]
+so $v_3(4^m-1)=1$.  If $X\equiv1\pmod3$, then
+$X^3-1=(X-1)(X^2+X+1)$, while $X^2+X+1\equiv3\pmod9$.  Thus replacing an
+exponent by three times that exponent raises the
+$3$-adic valuation by exactly one.  Repeating this $s$ times gives
+\[
+  v_3(4^n-1)=1+s=1+v_3(n),
+\]
+which proves (4).
+\end{proof}
+
+\begin{theorem}[decoder collision law]
+Fix one step of (1), and abbreviate
+\[
+  a:=a_t,
+  \qquad
+  b:=b_t,
+  \qquad
+  b':=b_{t+1},
+  \qquad
+  u:=u_t.
+\]
+Then
+\[
+\boxed{
+  2^a3^{b'}u_{t+1}=3^{b+1}u+r(a).}
+\tag{6}
+\]
+If $q(a)\neq b+1$, then
+\[
+\boxed{b'=\min\{q(a),b+1\}.}
+\tag{7}
+\]
+If $q(a)=b+1<\infty$, put
+\[
+  \rho_a:=\frac{r(a)}{3^{q(a)}}.
+  \tag{8}
+\]
+Then $3\nmid\rho_a$ and
+\[
+\boxed{
+  b'=b+1+v_3(u+\rho_a).}
+\tag{9}
+\]
+In particular,
+\[
+  a=1\Longrightarrow b'=b+1,
+  \qquad
+  a\equiv0\pmod2\Longrightarrow b'=0.
+  \tag{10}
+\]
+\end{theorem}
+
+\begin{proof}
+Adding $2^a-1$ to both sides of (1) gives
+\[
+  2^a(x_{t+1}+1)=3(x_t+1)+2^a-2.
+\]
+Substitution from (2) proves (6).  Since $2^a$ is a unit modulo $3$, the
+number $b'$ is the valuation of the right side of (6).
+
+The two summands on that side have valuations $b+1$ and $q(a)$.  If these
+valuations are distinct, the valuation of their sum is their minimum.  This
+proves (7).  If they are equal and finite, factoring out $3^{b+1}$ gives
+\[
+  3^{b+1}(u+\rho_a),
+\]
+which proves (9).  The two statements in (10) follow from (4), (7), and
+$q(1)=\infty$.
+\end{proof}
+
+\begin{corollary}[bounded-ceiling exponent sieve]
+Fix $D\geq1$, and suppose that $0\leq b\leq D$.  The condition $b'\leq D$
+is characterized as follows.
+
+\begin{enumerate}
+  \item If $b=D$, then
+  \[
+  \boxed{
+    b'\leq D
+    \quad\Longleftrightarrow\quad
+    a\not\equiv1\pmod{2\cdot3^D}.}
+  \tag{11}
+  \]
+
+  \item If $b<D$ and $q(a)=b+1$, then
+  \[
+  \boxed{
+    b'\leq D
+    \quad\Longleftrightarrow\quad
+    u\not\equiv-\rho_a\pmod{3^{D-b}}.}
+  \tag{12}
+  \]
+
+  \item If $b<D$ and $q(a)\neq b+1$, then $b'\leq D$ automatically.
+\end{enumerate}
+
+Consequently, if $b_t\leq D$ on a tail, then every time with $b_t=D$
+satisfies
+\[
+  a_t\not\equiv1\pmod{2\cdot3^D},
+  \tag{13}
+\]
+and that tail contains no factor $1^{D+1}$.
+\end{corollary}
+
+\begin{proof}
+Suppose first that $b=D$.  If $q(a)\geq D+1$, equations (7) and (9) give
+$b'\geq D+1$.  If $q(a)\leq D$, equation (7) gives $b'=q(a)\leq D$.
+Therefore,
+\[
+  b'\leq D\quad\Longleftrightarrow\quad q(a)\leq D.
+  \tag{14}
+\]
+By (4), the complementary condition $q(a)\geq D+1$ is equivalent to
+\[
+  a\equiv1\pmod{2\cdot3^D},
+\]
+including the case $a=1$.  This proves (11).
+
+Now suppose that $b<D$.  If $q(a)=b+1$, equation (9) gives
+\[
+  b'\leq D
+  \quad\Longleftrightarrow\quad
+  v_3(u+\rho_a)\leq D-b-1.
+\]
+This is exactly (12).  If $q(a)<b+1$, then (7) gives $b'=q(a)\leq b<D$.
+If $q(a)>b+1$, the same equation gives $b'=b+1\leq D$.  This proves the
+third assertion.
+
+Finally, equation (13) is (11) applied along the tail.  Each exponent-one
+step raises the decoder depth by one according to (10).  A factor
+$1^{D+1}$ would therefore raise a nonnegative decoder depth above $D$,
+which is impossible.
+\end{proof}
+
+\begin{theorem}[one-forbidden-class decoder automaton]
+Fix $D\geq0$, and put
+\[
+  M_D:=3^{D+1},
+  \qquad
+  H_D:=2\cdot3^D.
+  \tag{15}
+\]
+For $s\in\mathbb Z/M_D\mathbb Z$ and $a\geq1$, define
+\[
+  F_a(s):=2^{-a}\bigl(3s+2^a-2\bigr)
+  \pmod {M_D}.
+  \tag{16}
+\]
+If $s_t\equiv x_t+1\pmod {M_D}$, then
+\[
+  s_{t+1}=F_{a_t}(s_t).
+  \tag{17}
+\]
+Moreover, for every nonzero state $s$, there is exactly one residue class
+$\chi_D(s)\pmod {H_D}$ such that
+\[
+\boxed{
+  F_a(s)=0
+  \quad\Longleftrightarrow\quad
+  a\equiv\chi_D(s)\pmod {H_D}.}
+\tag{18}
+\]
+Equivalently, at every state with decoder depth at most $D$, exactly one
+exponent class modulo $2\cdot3^D$ raises the next decoder depth above $D$.
+\end{theorem}
+
+\begin{proof}
+Equation (17) is (6) reduced modulo $M_D$.  We next verify that $2$ generates
+the unit group modulo $3^k$ for every $k\geq1$.  The calculation in the proof
+of Lemma~1 gives
+\[
+  v_3(2^{2m}-1)=v_3(4^m-1)=1+v_3(m).
+  \tag{19}
+\]
+An exponent $h$ satisfying $2^h\equiv1\pmod {3^k}$ must be even, say
+$h=2m$, and (19) shows that its least positive value is
+$2\cdot3^{k-1}$.  This equals $\varphi(3^k)$, so $2$ is a generator.
+
+Now $F_a(s)=0$ is equivalent to
+\[
+  2^a\equiv2-3s\pmod {M_D}.
+  \tag{20}
+\]
+The right side is a unit, and the powers of $2$ run once through all units as
+$a$ runs through a complete residue system modulo $H_D$.  Hence (20) selects
+exactly one exponent class, proving (18).
+\end{proof}
+
+\begin{theorem}[exact finite realization of decoder paths]
+Fix $D\geq0$ and a nonzero initial state
+$s_0\in\mathbb Z/M_D\mathbb Z$.  Let
+$(a_0,\ldots,a_{L-1})$ be any positive exponent word, and define
+recursively
+\[
+  s_{t+1}:=F_{a_t}(s_t).
+  \tag{21}
+\]
+If $s_t\neq0$ for $0\leq t\leq L$, then infinitely many positive odd
+integers $n$ have this exact accelerated exponent prefix and satisfy
+\[
+  x_t+1\equiv s_t\pmod {M_D}
+  \qquad(0\leq t\leq L).
+  \tag{22}
+\]
+In particular, their decoder depths obey $v_3(x_t+1)\leq D$ throughout the
+displayed finite orbit segment.
+
+If $D\geq1$ and the exponent alphabet is
+\[
+  \mathcal A_D:=\{1,2,\ldots,H_D\},
+  \tag{23}
+\]
+then exactly $(H_D-1)^L$ words in $\mathcal A_D^L$ generate a nonzero path
+from any prescribed nonzero state $s_0$.  Every one of those words has the
+positive realizations asserted above.
+\end{theorem}
+
+\begin{proof}
+We first recall the finite cylinder fact and include its induction.  A
+positive exponent word of total exponent $A$ is realized exactly by one odd
+residue class modulo $2^{A+1}$.  The empty word gives the unique odd class
+modulo $2$.  Suppose that a prefix of length $t$ and total exponent $A$ has
+representative $\rho$.  Replacing its initial value by
+$\rho+\ell2^{A+1}$ replaces its endpoint by
+\[
+  x_t(\rho)+2\ell3^t.
+  \tag{24}
+\]
+To append the exponent $a$, exactness is equivalent to
+\[
+  3x_t(\rho)+1+6\ell3^t\equiv2^a\pmod {2^{a+1}}.
+  \tag{25}
+\]
+After division by $2$, the coefficient of $\ell$ is the odd number
+$3^{t+1}$.  Thus (25) selects one class $\ell\pmod {2^a}$, completing the
+induction.
+
+Let $\rho$ be the resulting cylinder class for the displayed word and put
+$A:=\sum_{t=0}^{L-1}a_t$.  The simultaneous congruences
+\[
+  n\equiv\rho\pmod {2^{A+1}},
+  \qquad
+  n\equiv s_0-1\pmod {M_D}
+  \tag{26}
+\]
+have one class modulo $2^{A+1}M_D$ by the Chinese remainder theorem.  This
+class contains infinitely many positive odd integers.  Its first congruence
+gives the exact exponent word.  Its second congruence, followed by (17),
+proves (22) by induction.
+
+Finally, the alphabet (23) contains one representative of every exponent
+class modulo $H_D$.  Theorem~4 says that exactly one of these $H_D$ letters
+leaves the nonzero state space at each step.  Hence the rooted path tree has
+exactly $H_D-1$ children at every vertex and exactly $(H_D-1)^L$ paths of
+length $L$.  The first part of the theorem realizes each path.
+\end{proof}
+
+\end{document}

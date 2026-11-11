@@ -1,0 +1,88 @@
+{
+ "mode": "main",
+ "family": "R-d2-K2-plain",
+ "level": "R",
+ "dim": 2,
+ "K": 2,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "UNSAT",
+ "time_s": 62.6,
+ "rounds": 2,
+ "bitwidth": 13,
+ "reason": null,
+ "refuting_instances": [
+  [
+   "0",
+   "2"
+  ],
+  [
+   "1",
+   ""
+  ],
+  [
+   "2",
+   "1"
+  ],
+  [
+   "00",
+   "12"
+  ],
+  [
+   "01",
+   "2"
+  ],
+  [
+   "02",
+   "22"
+  ],
+  [
+   "10",
+   "0"
+  ],
+  [
+   "11",
+   "01"
+  ],
+  [
+   "12",
+   "02"
+  ],
+  [
+   "20",
+   "022"
+  ],
+  [
+   "21",
+   "1"
+  ],
+  [
+   "22",
+   "11"
+  ],
+  [
+   "011",
+   "202"
+  ],
+  [
+   "021",
+   "22"
+  ],
+  [
+   "101",
+   "001"
+  ]
+ ],
+ "n_instances": 15,
+ "max_len": 3,
+ "claim": "no rank rho(w) = alpha^T M_{l1}...M_{lq} beta of this class (dimension 2, coefficients 0..2, letters plain) satisfies rho(w) > rho(w') on all listed instances",
+ "exhaustive_check": "PASS",
+ "surviving_configs": 0,
+ "letters_used": [
+  "1",
+  "0",
+  "2"
+ ],
+ "unused_letters_free": [],
+ "class_size": 43046721
+}

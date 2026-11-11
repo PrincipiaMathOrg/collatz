@@ -1,0 +1,99 @@
+round	approach	front	sha8	chars	sent_utc	status	title
+6	1	proof	33a87655	985	2026-08-13T17:07:32Z	DONE	Adelic two-ended renormalization of valuation words
+7	2	proof	35d7e5d2	794	2026-08-13T17:26:49Z	DONE	Furstenberg-style (x2, x3) measure rigidity
+8	3	proof	f873bc4b	797	2026-08-13T18:25:49Z	DONE	Turn the q-analogue into a polynomialization theorem
+9	4	proof	d52a1467	837	2026-08-13T18:26:52Z	DONE	A Cobham trap for counterexample carry streams
+10	5	proof	3fcd3b26	687	2026-08-13T18:28:12Z	DONE	Prove simplicity or irreducibility of the Collatz C*-algebra
+11	6	proof	7037adca	677	2026-08-13T18:29:32Z	DONE	Sheaf cohomology for gluing modular Lyapunov functions
+12	7	proof	1d093f39	670	2026-08-13T18:30:26Z	DONE	Compute the K-theory of the Collatz orbit groupoid
+13	8	proof	04292b98	669	2026-08-13T18:31:27Z	DONE	Thermodynamic formalism with an arithmetic integrality potential
+14	9	proof	05f1526d	676	2026-08-13T18:40:51Z	DONE	An o-minimal rational-point explosion theorem
+15	10	proof	30cb70d6	669	2026-08-13T18:41:12Z	DONE	A canonical height on a parity orbifold
+16	11	proof	17be451e	547	2026-08-13T18:41:28Z	DONE	Arithmetic Conley index at infinity
+17	12	proof	b364f536	716	2026-08-13T18:42:41Z	DONE	Proof-theoretic ordinal descent
+18	13	proof	7978594d	645	2026-08-13T18:43:08Z	DONE	Exact arithmetic optimal transport extending Tao
+19	14	proof	4c959dca	623	2026-08-13T18:43:24Z	DONE	Mixed 2-adic/3-adic Kakeya or decoupling
+20	15	proof	0496a733	641	2026-08-13T18:43:41Z	DONE	Lee-Yang zeros of a Collatz partition function
+21	16	proof	8aa9e232	615	2026-08-13T18:45:38Z	DONE	A quantum-graph trace formula for cycles and escape
+22	17	proof	f7e65aa6	585	2026-08-13T18:45:57Z	DONE	Tropicalize the cycle and near-cycle equations
+23	18	proof	9d1620c7	667	2026-08-13T18:47:51Z	DONE	A Kolmogorov-complexity contradiction
+24	19	proof	72be4222	743	2026-08-13T18:48:10Z	DONE	Terminal-suffix transducer with a vanishing joint spectral radius
+25	20	proof	c59a01bf	729	2026-08-13T18:48:25Z	DONE	Ultraproduct rigidity of minimal counterexamples
+26	21	proof	f83c29ef	514	2026-08-13T18:48:55Z	DONE	Additive-combinatorial inverse theorem for growth words
+27	22	proof	7ded2648	484	2026-08-13T18:49:11Z	DONE	Entropy decrement plus arithmetic rigidity
+28	23	proof	0eae5af7	411	2026-08-13T18:49:28Z	DONE	A pointwise Bellman function
+29	24	proof	6a525647	448	2026-08-13T18:49:42Z	DONE	Sum-of-squares Lyapunov certificates
+30	25	proof	a037ac4c	594	2026-08-13T18:49:57Z	DONE	Counterexample-guided abstraction refinement
+31	26	proof	09fc0561	479	2026-08-13T18:56:47Z	DONE	A genuinely new reduction order for mixed binary-ternary rewriting
+32	27	proof	e73c355a	386	2026-08-13T18:59:16Z	DONE	Digit-block ordinals below epsilon_0
+33	28	proof	9b54abab	458	2026-08-13T19:14:56Z	DONE	Well-structured transition systems
+34	29	proof	2b9e69fb	458	2026-08-13T23:32:04Z	DONE	Cellular-automaton nilpotency
+35	30	proof	f7434e80	454	2026-08-15T00:06:09Z	DONE	Base-6 carry particles
+36	31	proof	4bed138a	427	2026-08-15T01:02:02Z	DONE	Rotor-router inverse branching
+37	32	proof	4b8779a7	483	2026-08-15T01:50:20Z	DONE	Electrical capacity of infinity
+38	33	proof	06e2d664	367	2026-08-15T02:58:35Z	DONE	Sandpile stabilization
+39	34	proof	3811a478	406	2026-08-15T04:02:40Z	DONE	Directed-polymer free energy
+40	35	proof	9de8fe43	395	2026-08-15T05:11:44Z	DONE	Dependent percolation domination
+41	36	proof	430d5a68	394	2026-08-15T06:11:07Z	DONE	An algorithmic Lovasz local lemma
+42	37	proof	56170742	362	2026-08-15T06:56:51Z	DONE	Coding-theoretic minimum distance
+43	38	proof	b6a266c0	450	2026-08-15T07:52:17Z	DONE	List decoding of valuation profiles
+44	39	proof	c3264543	485	2026-08-15T09:00:47Z	DONE	An information-capacity bound
+45	40	proof	37c994f2	471	2026-08-15T09:59:49Z	DONE	Mahler-function transcendence of parity series
+46	41	proof	d04a11f1	442	2026-08-15T11:14:25Z	DONE	Christol-Cobham algebraicity trap
+47	42	proof	9273b58a	457	2026-08-15T12:14:23Z	DONE	Aperiodic tilings of Collatz spacetime
+48	43	proof	4ec92fd5	523	2026-08-15T13:05:09Z	DONE	A topological-entropy gap
+49	44	proof	9e0b4cf2	451	2026-08-15T14:04:39Z	DONE	Schmidt-game avoidance in Z_2
+50	45	proof	f00c1373	408	2026-08-15T14:50:06Z	DONE	Arithmetic fractal intersection
+51	46	proof	f1304a20	396	2026-08-15T16:11:28Z	DONE	An adelic product-formula Lyapunov height
+52	47	proof	78895d4c	454	2026-08-15T17:12:19Z	DONE	Vojta or abc for uniform near-cycle exclusion
+53	48	proof	9c3d5e04	467	2026-08-15T18:21:23Z	DONE	The Subspace Theorem for trajectory identities
+54	49	proof	4c251f54	476	2026-08-15T19:35:34Z	DONE	Baker theory for repeated approximate returns
+55	50	proof	d61de5a2	417	2026-08-15T20:36:21Z	DONE	Geometry-of-numbers exclusion cones
+56	51	proof	65c5e4ca	382	2026-08-15T21:27:14Z	DONE	Automorphic dynamics of the affine branch semigroup
+57	52	proof	ef92668f	447	2026-08-15T22:23:39Z	DONE	Property-tau for Collatz residue graphs
+58	53	proof	c79cd6db	407	2026-08-15T23:10:58Z	DONE	A thin-group affine sieve
+59	54	proof	8f202870	401	2026-08-16T00:04:30Z	DONE	Bourgain-Gamburd flattening for branch products
+60	55	proof	1b4d5ac7	414	2026-08-16T00:56:29Z	DONE	Sum-product growth modulo 3^r
+61	56	proof	c79d660c	424	2026-08-16T01:52:35Z	DONE	A cross-prime uncertainty principle
+62	57	proof	127e56ba	375	2026-08-16T02:38:26Z	DONE	2-adic Haar-wavelet diagonalization
+63	58	proof	c03b4dc0	419	2026-08-16T03:21:58Z	DONE	Ruelle-Perron-Frobenius theory for exact survivors
+64	59	proof	d1ef3f0f	472	2026-08-16T05:20:00Z	DONE	A coercive Koopman eigenfunction
+65	60	proof	c6250120	430	2026-08-16T06:40:10Z	DONE	Dirichlet series of exceptional seeds
+66	61	proof	e29192d4	485	2026-08-16T08:20:05Z	DONE	Natural boundaries as a disproof detector
+67	62	proof	2ea50f38	445	2026-08-16T09:11:51Z	DONE	A dynamical zeta function with only the trivial Euler factor
+68	63	proof	07723d73	419	2026-08-16T10:23:12Z	DONE	A uniform determinant involution
+69	64	proof	7703b7d5	409	2026-08-16T10:56:15Z	DONE	Uniform nilpotency after removing the trivial basin
+70	65	proof	53c1704e	418	2026-08-16T11:40:46Z	DONE	Compute the operator commutant directly
+71	66	proof	49d5e283	466	2026-08-16T12:23:05Z	DONE	Exclude peripheral spectrum of a weighted Collatz shift
+72	67	proof	4a54743a	404	2026-08-16T13:29:30Z	DONE	Fredholm determinant and trace cancellation
+73	68	proof	a665cf89	460	2026-08-16T14:33:31Z	DONE	Numen-integrality exclusion
+74	69	proof	e25e8c7d	408	2026-08-16T15:46:02Z	DONE	A 2-3 Tauberian decorrelation theorem
+75	70	proof	089248ce	408	2026-08-16T17:54:59Z	DONE	Grobner bases for q-series carry ideals
+76	71	proof	f9040d23	429	2026-08-16T18:42:53Z	DONE	Characterize the positive-integer image of the parity conjugacy
+77	72	proof	1316c4e5	436	2026-08-16T19:40:06Z	DONE	Use the Collatz autoconjugacy to pair hard and easy paths
+78	73	proof	2ba874d8	388	2026-08-16T21:35:06Z	DONE	A forbidden-lift theorem for de Bruijn paths
+79	74	proof	99439a63	402	2026-08-16T22:13:13Z	DONE	A higher-dimensional sofic certificate
+80	75	proof	451eed50	332	2026-08-16T23:05:48Z	DONE	Finite residue-class descent induction
+81	76	proof	c55a0ec9	469	2026-08-16T23:32:25Z	DONE	Strongly sufficient arithmetic progressions
+82	77	proof	682c4901	368	2026-08-17T00:29:07Z	DONE	Uniform inverse-tree coverage
+83	78	proof	edae51f3	407	2026-08-17T01:31:26Z	DONE	Push difference inequalities to a coverage theorem
+84	79	proof	9cfd7a79	458	2026-08-17T02:40:45Z	DONE	An exact self-similarity equation for the exceptional set
+85	80	proof	f5930fcc	470	2026-08-17T03:57:46Z	DONE	Uniformize Tao's transport theorem over every cylinder
+86	81	proof	64c8bfc9	408	2026-08-17T04:50:38Z	DONE	Replicate one counterexample into many
+87	82	proof	b0c68df5	373	2026-08-17T05:59:05Z	DONE	Uniform large deviations for realizable paths
+88	83	proof	0fd100c9	353	2026-08-17T06:46:54Z	DONE	Deterministic renewal discrepancy
+89	84	proof	fd07bbfd	430	2026-08-17T08:32:08Z	DONE	Benford rigidity for every infinite orbit
+90	85	proof	2d3ecddb	403	2026-08-17T09:39:00Z	DONE	Rigorous renormalization of stopping-time distributions
+91	86	proof	98724990	351	2026-08-17T10:26:31Z	DONE	Cycle-word enumeration plus LLL
+92	87	proof	9adcdd1c	346	2026-08-17T11:30:52Z	DONE	Continued fractions for log_2 3
+93	88	proof	0bd5c31b	395	2026-08-17T13:35:06Z	DONE	Uniform local-minimum classification
+94	89	proof	13674b05	369	2026-08-17T16:41:01Z	DONE	Conditional abc-assisted cycle bounds
+95	90	disproof	b99c2b0d	427	2026-08-17T18:16:58Z	DONE	Verification through 2^75 or 2^77
+96	91	proof	625430f7	449	2026-08-17T19:28:19Z	DONE	Proof-producing exhaustive verification
+97	92	disproof	5d967cda	430	2026-08-17T20:49:02Z	DONE	Branch-and-bound search for a divergent exponent word
+98	93	proof	150de9aa	423	2026-08-17T22:01:09Z	DONE	SAT/SMT search for exact barrier survivors
+99	94	disproof	c3996ffe	354	2026-08-17T23:06:47Z	DONE	MILP or CP-SAT cycle search
+100	95	disproof	4640b4d9	373	2026-08-17T23:58:06Z	DONE	Meet-in-the-middle affine composition
+101	96	proof	200a200b	351	2026-08-18T00:48:23Z	DONE	Distributed inverse-tree enumeration
+102	97	disproof	138299f7	483	2026-08-18T02:07:33Z	DONE	Extreme-trajectory anomaly detection
+103	98	proof	1d16a3fd	443	2026-08-18T03:13:15Z	RUNNING	Classify the qx+1 phase diagram

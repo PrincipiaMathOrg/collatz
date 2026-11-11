@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+33. Sandpile stabilization
+
+**Speculative · P**
+
+Encode binary carries, ternary carries, and valuation deficits as chips on a graph. A Collatz step
+becomes a legal firing sequence. Prove that every finite configuration stabilizes to the trivial
+recurrent state.
+
+Take as long as you need.

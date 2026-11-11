@@ -1,0 +1,489 @@
+{
+    "schema_version":  1,
+    "policy":  "Every catalog record has record.tex. Original TeX is archived only from the arXiv e-print endpoint when supplied.",
+    "literature_count":  30,
+    "record_tex_count":  30,
+    "arxiv_record_count":  17,
+    "archived_source_count":  16,
+    "records":  [
+                    {
+                        "id":  "LIT-APPLEGATE-LAGARIAS-2003",
+                        "record_tex":  "raw-literature/LIT-APPLEGATE-LAGARIAS-2003/record.tex",
+                        "record_tex_sha256":  "097a8103904ef2d4740e929cf53f29041047f2f66f5c98c5c21d0adfdd2cf76a",
+                        "arxiv":  "math/0103054",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  2,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-APPLEGATE-LAGARIAS-2003/source/7mar01.tex",
+                                                     "sha256":  "26acfddc593bf782d60d0bc52851f20afac68674f138ce55f8efa456a91fcb32",
+                                                     "bytes":  50445
+                                                 },
+                                                 {
+                                                     "path":  "raw-literature/LIT-APPLEGATE-LAGARIAS-2003/source/prefix_plot.tex",
+                                                     "sha256":  "9b5f02aa89315a9e659b7843fbe7085973a15c0857493c460825b06c94d2db66",
+                                                     "bytes":  16101
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-BARINA-2025",
+                        "record_tex":  "raw-literature/LIT-BARINA-2025/record.tex",
+                        "record_tex_sha256":  "041f08eb8507b8fc59f455643cd3a22f58379ab0da4a42af4920e98327c81fc7",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-BERNSTEIN-LAGARIAS-1996",
+                        "record_tex":  "raw-literature/LIT-BERNSTEIN-LAGARIAS-1996/record.tex",
+                        "record_tex_sha256":  "80ab563d634456006bc9da3271e2cfcca14ec5ca5c170d932a6c73f2c3d69c83",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-BONDAREVA-LUCHIN-SALIKHOV-2018",
+                        "record_tex":  "raw-literature/LIT-BONDAREVA-LUCHIN-SALIKHOV-2018/record.tex",
+                        "record_tex_sha256":  "5be77fd90b8fc2081f2acb6b17f304ccc8909aefca96530183b1d31dd6280365",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-BUSTOS-FOKKINK-YASSAWI-2025",
+                        "record_tex":  "raw-literature/LIT-BUSTOS-FOKKINK-YASSAWI-2025/record.tex",
+                        "record_tex_sha256":  "f855889e635b75542c5466d575e5ec850475cd07487eceafd3cc11301a20bb95",
+                        "arxiv":  "2510.01440",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-BUSTOS-FOKKINK-YASSAWI-2025/source/main.tex",
+                                                     "sha256":  "f8c588d77f5af86307331f6856286400fdd5f8c8e2597ea57224dc31307b2019",
+                                                     "bytes":  92326
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-FERNANDEZ-IBANEZ-2026",
+                        "record_tex":  "raw-literature/LIT-FERNANDEZ-IBANEZ-2026/record.tex",
+                        "record_tex_sha256":  "a7a3c681c9dda3af55f5ee15967e34c95c62180d26293b11bd01335a77834a36",
+                        "arxiv":  "2607.24844",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-FERNANDEZ-IBANEZ-2026/source/FernandezIbanez.tex",
+                                                     "sha256":  "ff9f17c63094c9081f70198200c09fa32624bb11b152e0b43d2d0acb3f80c395",
+                                                     "bytes":  54011
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-GARCIA-TAL-1999",
+                        "record_tex":  "raw-literature/LIT-GARCIA-TAL-1999/record.tex",
+                        "record_tex_sha256":  "c3e4bb8f4ce4e9031b2d0344e99d3d20a0b57c660478d5545b384647c1aff760",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-HERCHER-2023",
+                        "record_tex":  "raw-literature/LIT-HERCHER-2023/record.tex",
+                        "record_tex_sha256":  "69d4adbf04cf997b5f8209f3442bd4167c80238fde0d050c301f4e11e966380d",
+                        "arxiv":  "2201.00406",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-HERCHER-2023/source/main.tex",
+                                                     "sha256":  "1e512273072fa1ffef3712f4b08c50c6d9d8663229322d19994fa9f7a2a44a86",
+                                                     "bytes":  59239
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-KONTOROVICH-SINAI-2002",
+                        "record_tex":  "raw-literature/LIT-KONTOROVICH-SINAI-2002/record.tex",
+                        "record_tex_sha256":  "4b8c5f649e61f18b7da6d34cbb087c319f1f33f76dba19671e47dda9dafb050b",
+                        "arxiv":  "math/0601622",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-KONTOROVICH-SINAI-2002/source/main.tex",
+                                                     "sha256":  "cb15ed2e6e10c62766b7a3b3a8f902d3b9be6167e982c1626e9d4e5c34f412a8",
+                                                     "bytes":  33146
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-KRAMER-2026",
+                        "record_tex":  "raw-literature/LIT-KRAMER-2026/record.tex",
+                        "record_tex_sha256":  "5003c6af68042823229fd9ed9ffd5946f6a53676aa53353356fd39f515be509f",
+                        "arxiv":  "2607.10041",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-KRAMER-2026/source/paper.tex",
+                                                     "sha256":  "72cb63c1c8f7943ccb4cdbdf93aad3528dbb8508ba5060e15c6bea59d0c41d1c",
+                                                     "bytes":  14460
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-KRASIKOV-LAGARIAS-2003",
+                        "record_tex":  "raw-literature/LIT-KRASIKOV-LAGARIAS-2003/record.tex",
+                        "record_tex_sha256":  "6f96fd034c57d66eadc2a914c94ac787c6cc1e6a973e26e7e68e33bb680b53e9",
+                        "arxiv":  "math/0205002",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-KRASIKOV-LAGARIAS-2003/source/30apr02.tex",
+                                                     "sha256":  "04fa4d484fe89256f6771f5651338891219385f6e049ffaf41035541016232cd",
+                                                     "bytes":  69729
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-KURTZ-SIMON-2007",
+                        "record_tex":  "raw-literature/LIT-KURTZ-SIMON-2007/record.tex",
+                        "record_tex_sha256":  "c1713ca4e3e780f2740bd8127ec2f1ab3fc5ff031d512fadfd89147bf2078850",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-LAGARIAS-1985",
+                        "record_tex":  "raw-literature/LIT-LAGARIAS-1985/record.tex",
+                        "record_tex_sha256":  "577f2f7bdcb75ab2ff9f92252317d20b47e25f8263c0727067e49f0aff436dfa",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-LAGARIAS-WEISS-1992",
+                        "record_tex":  "raw-literature/LIT-LAGARIAS-WEISS-1992/record.tex",
+                        "record_tex_sha256":  "25bc6087feac0acf10a8253a719aefa4f2e30eaf285f1ba794473391d3964524",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-LAI-SHI-2025",
+                        "record_tex":  "raw-literature/LIT-LAI-SHI-2025/record.tex",
+                        "record_tex_sha256":  "055ddce5e68ba99b806bd64eb6dc6e6bdf386f7f851bc4e88aff21993e6554c8",
+                        "arxiv":  "2501.00864",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-LAI-SHI-2025/source/Revision-file.tex",
+                                                     "sha256":  "b7671a750bbc240f61b3d49c3329c224c78c3427c658e3de5a070162075cb5a9",
+                                                     "bytes":  72066
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-MONKS-2025",
+                        "record_tex":  "raw-literature/LIT-MONKS-2025/record.tex",
+                        "record_tex_sha256":  "a1c02ae049bab4b0780dad9a5e633c40890264108b6882ec0667e705ff5df25d",
+                        "arxiv":  "2508.10153",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-MONKS-2025/source/main.tex",
+                                                     "sha256":  "8ba76f4e7222d3392e62b91f656f20af13fb8c616eb0df3e35888f88092fc121",
+                                                     "bytes":  33160
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-MONKS-ETAL-2013",
+                        "record_tex":  "raw-literature/LIT-MONKS-ETAL-2013/record.tex",
+                        "record_tex_sha256":  "d2113fd3bd644ec54a84c477fb761ee36d56ff68520e1a3085aa233c982c9272",
+                        "arxiv":  "1204.3904",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-MONKS-ETAL-2013/source/MMMM.tex",
+                                                     "sha256":  "859d8c466621464261927ac1b16bbf046117fcfb44ee201cf0025cd0a9f373c4",
+                                                     "bytes":  110172
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-MONKS-YAZINSKI-2004",
+                        "record_tex":  "raw-literature/LIT-MONKS-YAZINSKI-2004/record.tex",
+                        "record_tex_sha256":  "ceaad24a07fe6fef1f70b5e5a451344ccd5919181ff908ebbc828f0ac3411c32",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-NIU-2026",
+                        "record_tex":  "raw-literature/LIT-NIU-2026/record.tex",
+                        "record_tex_sha256":  "d7abf6b1efd50417ed6c9c611fd0f46328725e53aa759aad8e2149614842738e",
+                        "arxiv":  "2605.13886",
+                        "arxiv_license":  null,
+                        "source_status":  "arxiv_source_unavailable",
+                        "source_error":  "The remote server returned an error: (404) Not Found.",
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-RHIN-1987",
+                        "record_tex":  "raw-literature/LIT-RHIN-1987/record.tex",
+                        "record_tex_sha256":  "5f959df6ec55031719464f3fbf9bf973f16aa490326caaac84dcede4677ccf21",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-ROJAS-ZHU-2022",
+                        "record_tex":  "raw-literature/LIT-ROJAS-ZHU-2022/record.tex",
+                        "record_tex_sha256":  "795f9c678eb0a09b531f6b49dc46cb5eaaa596bec764cfbdeef0d4288ff2810d",
+                        "arxiv":  "2107.09173",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-ROJAS-ZHU-2022/source/20210719arxiv.tex",
+                                                     "sha256":  "efc58103f229e99e28158997270e4bd451b9c0895f9ed990f62679d0e85122f0",
+                                                     "bytes":  149063
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-ROZIER-TERRACOL-2026",
+                        "record_tex":  "raw-literature/LIT-ROZIER-TERRACOL-2026/record.tex",
+                        "record_tex_sha256":  "2aa48773c6e65f03523beb8908cfa9321cc6c8d3547296823fe530390454752c",
+                        "arxiv":  "2502.00948v5",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-ROZIER-TERRACOL-2026/source/Paradox.tex",
+                                                     "sha256":  "c3aa692d3e2c4ca0f55ac6a3f433fd23170acc7bbb6841b5be9c42b9d76b05fa",
+                                                     "bytes":  63644
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-SIMONS-DEWEGER-2005",
+                        "record_tex":  "raw-literature/LIT-SIMONS-DEWEGER-2005/record.tex",
+                        "record_tex_sha256":  "564f12be1625f2b2fa9665735d32919874850c7123e876ec972e916e7dcd0a58",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-SOLOMYAK-2025",
+                        "record_tex":  "raw-literature/LIT-SOLOMYAK-2025/record.tex",
+                        "record_tex_sha256":  "5f5fbde835a93213cb38795323d2ea1f66d5df48eeaf1901f65fa9e9080c0043",
+                        "arxiv":  "2502.14308",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-SOLOMYAK-2025/source/Lyap_Spec_final_18.07.25.tex",
+                                                     "sha256":  "cc7d75fa1b4beff4d00fb16d2ee920946876081a39554f5ce11bf443f847b8ae",
+                                                     "bytes":  54532
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-TAO-2022",
+                        "record_tex":  "raw-literature/LIT-TAO-2022/record.tex",
+                        "record_tex_sha256":  "3bd89c2adbe91e150794dee727dd2ea029d3e42f6a02b2a7f775d2fda466bb7a",
+                        "arxiv":  "1909.03562",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-TAO-2022/source/collatz.tex",
+                                                     "sha256":  "bfbc39432d4084a276416cb019a592003c868fa32f18e2f90028ac325ae5c19d",
+                                                     "bytes":  164932
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-TERRAS-1976",
+                        "record_tex":  "raw-literature/LIT-TERRAS-1976/record.tex",
+                        "record_tex_sha256":  "2e1da3183dff9cfce2a1f2d8216a06663e9b8b4f51324c44f8406ded2ae363de",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-WANG-2026",
+                        "record_tex":  "raw-literature/LIT-WANG-2026/record.tex",
+                        "record_tex_sha256":  "08bfcefefaa7f43307434f26af73f225134eafe2c8e4c5a1f1f8f73ffe4bf25f",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-WIRSCHING-1998",
+                        "record_tex":  "raw-literature/LIT-WIRSCHING-1998/record.tex",
+                        "record_tex_sha256":  "29cdfe62733b2435a5b57df07b9643680eb94fffda87deb166048093ac918295",
+                        "arxiv":  null,
+                        "arxiv_license":  null,
+                        "source_status":  "no_arxiv_source_cataloged",
+                        "source_error":  null,
+                        "source_tex_count":  0,
+                        "source_tex_files":  [
+
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-YAH-2023",
+                        "record_tex":  "raw-literature/LIT-YAH-2023/record.tex",
+                        "record_tex_sha256":  "93b423b6d118fe8120bbbe5d60adeeb695ec678f7f1f1309c061132fbc25f630",
+                        "arxiv":  "2105.14697",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  5,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-YAH-2023/source/abstract.tex",
+                                                     "sha256":  "ebdaa792bf03fb81b8eb0ee4a0d4a4e0addcc72ac7e4d4ffd757bc867d2e8ab6",
+                                                     "bytes":  1125
+                                                 },
+                                                 {
+                                                     "path":  "raw-literature/LIT-YAH-2023/source/acks.tex",
+                                                     "sha256":  "ab509a894d202f3a4d6075e96c47c9b0502b7f6f2e1d8cb8c45a914dc1deee02",
+                                                     "bytes":  1384
+                                                 },
+                                                 {
+                                                     "path":  "raw-literature/LIT-YAH-2023/source/appendix.tex",
+                                                     "sha256":  "3e04d3be70e3452da3e540b8f20fdeb232a2d41d7be7c7706e743486e427d460",
+                                                     "bytes":  30634
+                                                 },
+                                                 {
+                                                     "path":  "raw-literature/LIT-YAH-2023/source/content.tex",
+                                                     "sha256":  "deec7804308ee1449b4a20248ecc8a7f770836d5478a4f72c1d55437c9622af4",
+                                                     "bytes":  142248
+                                                 },
+                                                 {
+                                                     "path":  "raw-literature/LIT-YAH-2023/source/main.tex",
+                                                     "sha256":  "148ad1097c91268586e782504c32fca352b4dbd13db71d51972eef7b322a9a0c",
+                                                     "bytes":  1402
+                                                 }
+                                             ]
+                    },
+                    {
+                        "id":  "LIT-ZHAO-LI-2026",
+                        "record_tex":  "raw-literature/LIT-ZHAO-LI-2026/record.tex",
+                        "record_tex_sha256":  "fe62824ed8b08365f800e677934e7189f5f6c8a3c173bdde32a2f0b88954da94",
+                        "arxiv":  "2603.01627",
+                        "arxiv_license":  null,
+                        "source_status":  "archived",
+                        "source_error":  null,
+                        "source_tex_count":  1,
+                        "source_tex_files":  [
+                                                 {
+                                                     "path":  "raw-literature/LIT-ZHAO-LI-2026/source/Moving_target_2026.tex",
+                                                     "sha256":  "01b123702e91d8305ef2398f91b02b538e8da920e691877997796cd499ce477d",
+                                                     "bytes":  50887
+                                                 }
+                                             ]
+                    }
+                ]
+}

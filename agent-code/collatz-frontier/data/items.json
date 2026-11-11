@@ -1,0 +1,1041 @@
+{
+  "schema_version": 1,
+  "epistemic_labels": {
+    "closed": "A proof is supplied in the project sources; this catalog checks organization and dependency flow, not every mathematical line.",
+    "certified": "A finite or computer-assisted claim is paired with source, output, environment, or hash material inside the stated trust boundary.",
+    "open": "An unproved statement required by at least one full-proof skeleton.",
+    "method_ceiling": "A proved counterexample, equivalence barrier, or insufficiency result ruling out a proposed method; it is not a theorem toward Collatz by itself.",
+    "context_only": "Literature or project material used for orientation or analogy, not as a proof dependency."
+  },
+  "items": [
+    {
+      "id": "DEF-U-01",
+      "kind": "definition",
+      "status": "closed",
+      "statement": "For a positive odd integer x, U(x)=(3x+1)/2^{v_2(3x+1)}. The odd-only Collatz conjecture is: for every positive odd n, some iterate U^k(n) equals 1.",
+      "provenance": "standard literature; normalized by this project",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "LIT-LAGARIAS-1985"]
+    },
+    {
+      "id": "DEF-WORD-01",
+      "kind": "definition",
+      "status": "closed",
+      "statement": "For a valuation word a=(a_0,...,a_{r-1}), put A_k=sum_{i<k}a_i, C_0=0, C_{k+1}=3C_k+2^{A_k}, and D_k=C_k+2^{A_k}. A strict barrier satisfies 2^{A_k}<3^k for each nonempty prefix.",
+      "provenance": "project normalization",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md"]
+    },
+    {
+      "id": "THM-AFFINE-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Along a word-realized accelerated orbit, 2^{A_k}x_k=3^k x_0+C_k; the corresponding carry concatenation and suffix-divisibility identities hold.",
+      "dependencies": ["DEF-U-01", "DEF-WORD-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-audit-bundle/Collatz_Proof_Skeleton.lean"]
+    },
+    {
+      "id": "THM-BARRIER-DUALITY-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "If 3^r divides C_r+2^{A_r}y for positive odd y, the valuation word reconstructs an exact positive 3x-1 trajectory ending at y; strict barriers provide the target-one dual language used below.",
+      "dependencies": ["THM-AFFINE-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-audit-bundle/Collatz_All_Depth_Audit.tex"]
+    },
+    {
+      "id": "CERT-SHELL-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "Every finite positive simple negative-shortcut path has reciprocal mass below 10.789. The trust boundary is symbolic shell injection, an exact shell table through 1000, its verifier, and an analytic tail.",
+      "dependencies": ["THM-BARRIER-DUALITY-01"],
+      "provenance": "project result; audited certificate bundle",
+      "evidence": ["agent-code/collatz-audit-bundle/README.txt", "agent-code/collatz-audit-bundle/certificates/mass_certificate.py", "agent-code/collatz-audit-bundle/certificates/mass_shells_k0_1000.csv", "agent-code/collatz-audit-bundle/certificates/verify_mass_csv.py", "agent-code/collatz-audit-bundle/certificates/SHA256SUMS"]
+    },
+    {
+      "id": "THM-FIXED-TARGET-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "A negative strict-barrier path ending at positive odd y starts below 3^{11}y, reducing a fixed target to finitely many seeds.",
+      "dependencies": ["CERT-SHELL-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-audit-bundle/Collatz_All_Depth_Audit.tex"]
+    },
+    {
+      "id": "CERT-TARGET1-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "If a is a strict barrier of length r and 3^r divides D_r, then a=1^r. This is a target-one theorem for the negative accelerated 3x-1 language, not the Collatz conjecture.",
+      "dependencies": ["THM-FIXED-TARGET-01"],
+      "provenance": "project result; audited certificate bundle",
+      "evidence": ["agent-code/collatz-audit-bundle/README.txt", "agent-code/collatz-audit-bundle/certificates/shortcut_seed_certificate.py", "agent-code/collatz-audit-bundle/certificates/accelerated_seed_certificate.cpp", "agent-code/collatz-audit-bundle/certificates/SHA256SUMS"]
+    },
+    {
+      "id": "CERT-DEFICIT23-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "The strict-barrier words with 3^{r-2}|D are exactly 1^r and (1,2,1^{r-2}); with 3^{r-3}|D they are exactly 1^r, 1121^{r-3}, 121^{r-2}, and 11131^{r-4} (where defined).",
+      "dependencies": ["THM-FIXED-TARGET-01"],
+      "provenance": "project result; exact finite classifications",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-audit-bundle/Collatz_All_Depth_Audit.tex"]
+    },
+    {
+      "id": "OPEN-DIV-DEFICIT4-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "The deficit-four classification is complete. For every strict barrier word w of length r>=4, 3^{r-4} divides D(w) exactly when w=s1^{r-|s|} for s in {empty,12,112,1112,1113,1122,1212,11113}. The resulting fixed-start horizon R_4 proves v_3(U^r(x)+1)<=r-5 for every strict prefix with r>=4 and r>R_4(x). Thus a tail-record hit of depth at least r-4 beyond R_4 at a length r>=4 suffices to exclude divergence.",
+      "dependencies": ["THM-FIXED-TARGET-01", "CERT-DEFICIT23-01"],
+      "provenance": "project exact computer-assisted theorem",
+      "evidence": ["agent-code/collatz-research/divergence_deficit_four_classification.tex", "agent-code/collatz-research/sync/deficit_four_scan.js", "agent-code/collatz-research/sync/deficit_four_shortcut_scan.js"]
+    },
+    {
+      "id": "THM-DIV-NORM-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Any divergent positive orbit can be shifted to a coefficient record whose entire future valuation word is a strict barrier and whose coefficient surplus tends to infinity.",
+      "dependencies": ["DEF-U-01", "DEF-WORD-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/sync_divergence.md"]
+    },
+    {
+      "id": "THM-DIV-FIXEDRAY-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "On one normalized divergent ray, equal factors obey an exact return lattice and decoder transport; eventually periodic tails, Sturmian/quasi-Sturmian binary tails, unbounded powers of one fixed block, and several finite-window synchronization mechanisms are excluded.",
+      "dependencies": ["THM-DIV-NORM-01", "THM-AFFINE-01"],
+      "provenance": "project result family",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/divergence_transition_core.md", "agent-code/collatz-research/transition_entropy_linear.md"]
+    },
+    {
+      "id": "THM-DIV-TRANSITION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "A normalized divergent obstruction must be transition-dense: in general T_s=Omega(sqrt(s)); under bounded height T_s=Omega(s/log s), sharpened to a positive linear lower density by entropy.",
+      "dependencies": ["THM-DIV-FIXEDRAY-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/divergence_transition_core.md", "agent-code/collatz-research/transition_entropy_linear.md", "agent-code/collatz-research/cycles/transition_entropy_linear_certificate.js"]
+    },
+    {
+      "id": "THM-DIV-RETURN-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For returned stabilized prefixes, one lift transports the decoder, reciprocal-mass, and product restrictions. Along nested returns with depth jumps tending to infinity, gap surplus and prior lift growth cannot both be sublinear in the jump.",
+      "dependencies": ["THM-DIV-FIXEDRAY-01", "CERT-SHELL-01"],
+      "provenance": "project post-master result (R099)",
+      "evidence": ["agent-code/collatz-research/divergence_fixed_seed_return_mass_collapse.md"]
+    },
+    {
+      "id": "THM-DIV-RETURN-HORIZON-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "If a length-L prefix of one fixed strict-barrier orbit returns at shift d, then x_d=x_0+t_L2^{A_L+1}; the return extends h more letters exactly when 2^{A_{L+h}-A_L} divides t_L. For every sufficiently long return, R_4(x_d)=R_4(x_0). Consequently, for every r>=L whose exponent block from x_d is strict, v_3(x_{d+r}+1)<=r-5. A returned start cannot supply any later deficit-four synchronization hit, even after the two exponent words branch; the block start must change.",
+      "dependencies": ["THM-DIV-RETURN-01", "OPEN-DIV-DEFICIT4-01"],
+      "provenance": "project formal fixed-seed theorem",
+      "evidence": ["agent-code/collatz-research/divergence_return_horizon_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-POSTBRANCH-GATE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The exact first-branch exponent law is retained: if T is the residual return lift and c=v_2(T)<a, then the new exponent is c+1 when c+1<a, while c+1=a forces an upward 2-adic cancellation. The formerly recorded simultaneous post-branch collision gate is retracted as vacuous. Horizon transport already contradicts every strict deficit-four hit from the same returned start, before or after branching. A valid return argument must produce a new strict-barrier block start.",
+      "dependencies": ["THM-DIV-RETURN-HORIZON-01", "THM-DIV-DECODER-COLLISION-01"],
+      "provenance": "project formal correction and method ceiling",
+      "evidence": ["agent-code/collatz-research/divergence_return_horizon_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-DUAL-TAIL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Every normalized divergent ray has a fixed positive real 3x-1 companion driven by the same valuation word. The companion has divergent reciprocal mass, while the paired positive integer 3x+1 orbit has finite reciprocal mass.",
+      "dependencies": ["THM-DIV-NORM-01"],
+      "provenance": "project post-master result (R102)",
+      "evidence": ["agent-code/collatz-research/divergence_dual_tail_companion.md"]
+    },
+    {
+      "id": "THM-DIV-CHARGE-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "The fixed dual companion satisfies e_j>1 and admits a centered nonnegative charge transfer between the paired integer and real orbits. Ceiling the companion gives an integer defect cocycle, and a divergent portion of its reciprocal mass is forced onto the three defects -2, -1, and 0.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01"],
+      "provenance": "project post-master result (R103)",
+      "evidence": ["agent-code/collatz-research/divergence_companion_charge_rounding.md"]
+    },
+    {
+      "id": "THM-DIV-DEFECT-RIGIDITY-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For the synchronized ceiling cocycle, every all-nonpositive block has the exact defect-carry identities M m'=P m-C-R, M N'=P N-R, and M theta'=P theta-R. Its terminal carry satisfies 3^t|D if and only if 3^t divides R+M(m'-1). No integer defect value can be eventually constant on a normalized divergent ray.",
+      "dependencies": ["THM-DIV-CHARGE-01", "THM-DIV-DEFECT-SWITCH-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-DEFECT-SWITCH-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let c_j=1-d_j and Z_j(c)=c x_j+m_j. On the normalized divergent tail, 2^{a_j}Z_{j+1}(c_j)=3Z_j(c_j). Each constant-defect run spends exactly the 2-adic valuation of this synchronized linear form, and total exponent equals the initial valuation plus the cumulative gains injected at defect switches. Those switch gains tend cumulatively to infinity, and a gain is positive exactly at the proved cancellation condition v_2(c x+m)=v_2(c'-c).",
+      "dependencies": ["THM-DIV-CHARGE-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-SWITCH-CARRY-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For every synchronized block, the switch carry S=sum_{i=1}^r 3^{r-i}2^{B_i}(c_i-c_{i-1})x_i satisfies 2^{B_r}(c_r x_r+m_r)=3^r(c_0 x_0+m_0)+S. If ell is the last color switch and 3 does not divide (c_ell-c_{ell-1})x_ell, then v_3(S)=r-ell. Writing t=r-ell and delta=min{v_3(x_r+1)+v_3(c_r),r}, one has delta=min{t,v_3(m_r-c_r)} whenever these two endpoint valuations differ. Excess divisibility delta>t is possible only on the matched shell v_3(m_r-c_r)=t, and there it is equivalent to the explicit last-switch residue cancellation proved in (L4).",
+      "dependencies": ["THM-DIV-DEFECT-SWITCH-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-DEFECT-SHELL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "On every consecutive nonpositive-defect block, the last-switch unit condition is automatic. If t is the age of the current defect color and the truncated terminal valuation delta exceeds t, then v_3(m-c)=t, m>=3^t+c, and 1/m<3^{-t}. Hence every chosen summable family of late-run depth cutoffs gives a finite reciprocal-mass contribution from these high-decoder endpoints. Since total nonpositive-defect mass diverges, at least one of the three explicitly defined residual sets E, S, or L in (G4) has divergent reciprocal mass.",
+      "dependencies": ["THM-DIV-CHARGE-01", "THM-DIV-SWITCH-CARRY-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-NEG-SHADOW-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Every constant nonpositive-defect run has an exact positive odd accelerated 3y-1 shadow: y=m for color 1, y=m/2 apart from the last ceiling state for color 2, and y=m/3 apart from the first ceiling state for color 3. The certified simple negative-path mass theorem therefore gives the explicit run budgets H, H/2+1/2, and H/3+1/3 with H=10.789. Any run exceeding its color budget contains a repeated shadow state and hence a genuine positive 3y-1 cycle.",
+      "dependencies": ["THM-DIV-CHARGE-01", "CERT-SHELL-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-SHADOW-LAP-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Suppose K complete laps of one positive odd accelerated 3y-1 shadow cycle occur inside a synchronized constant nonpositive-defect run of color c. If the cycle has length L, exponent B, maximum M, and multiplier rho=3^L/2^B, then rho>1, v_2(x+M)=KB+v_2(x'+M)>=KB+1, the paired sum x+M grows by rho^K, and the ceiling reciprocal mass of the laps is less than (3/c) times that logarithmic growth. The rounding error is exponentially pinched: theta<rho^(-K) for color 1, while the exceptional color-2 fixed shadow y=1 has 1-theta<=(2/3)^K. At a cycle maximum rho>=1+1/(2M), so color 3 permits at most one complete lap and every nonfixed color-2 cycle permits at most two. Hence arbitrarily long within-run repetition has exactly two surviving forms: color-1 cycle laps or a terminal color-2 tower with m=2 and exponent 1.",
+      "dependencies": ["THM-DIV-NEG-SHADOW-01", "THM-DIV-DEFECT-RIGIDITY-01", "CERT-SHELL-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-TOWER-SHELL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For the fixed synchronized companion of a normalized divergent orbit, Xi_j:=(x_j+1)/q_j is a nondecreasing rational anchor with Xi_{j+1}-Xi_j=(2^{a_j}-2)/(3q_j) and Kappa-Xi_j=(e_j-1)/q_j. On every exceptional m=2 exponent-one tower, Xi_j and D_j:=max(0,j-v_3(x_j+1)) are constant, while x_j+1 transfers one dyadic valuation into one ternary valuation at each edge. The reduced anchor denominator is exactly 3^{D_j}; distinct maximal towers have distinct increasing anchors. Hence at most ceil(Kappa*3^D)-1 towers have depth at most D. For adjacent tower depths D_i,D_{i+1}, max(D_i,D_{i+1})>log_3 q at the first endpoint. A K-edge tower also satisfies K+1+v_3(x+1)log_2(3)<log_2(q)+log_2(Kappa) and the corresponding seed-only moving-start bound.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01", "THM-DIV-SHADOW-LAP-01", "THM-DIV-DEFECT-RIGIDITY-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-BILATERAL-SHELL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Zero-defect cycle laps are the upper counterpart of m=2 tower plateaus. With N=x+m and Omega=N/q, one has Omega_{j+1}-Omega_j=d_j/(3q_j) and Omega-Kappa=theta_j/q_j>=0. Omega and the exact reduced ternary depth E=max(0,j-v_3(N_j)) are constant on every finite zero-defect interval. Only finitely many such intervals occupy any bounded E-shell. Distinct upper anchors satisfy 3^{-max(E_i,E_j)}<=|Omega_i-Omega_j|<1/Q_i+1/Q_j, and J complete cycle laps satisfy JB+1+v_3(x+M)log_2(3)<log_2(q)+log_2(Kappa+1). Together with the lower tower anchor Xi<Kappa, every exceptional repeated-mass interval has a rational plateau anchor on one side of Kappa, bounded-depth exceptional intervals are finite, and every infinite exceptional family must escape through unbounded ternary depth at the quantitative spacing scale.",
+      "dependencies": ["THM-DIV-SHADOW-LAP-01", "THM-DIV-TOWER-SHELL-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-DEFECT-RIGIDITY-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-RUN-SHELL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Every maximal constant nonpositive-defect run of color c in {1,2,3} has one integer rational anchor Lambda=(cx+m)/q. The exact identity 2^a(cx'+m')=3(cx+m) makes Lambda and F=max(0,j-v_3(cx+m)) constant on the whole run, and the reduced denominator of Lambda is exactly 3^F. The anchor approaches c*Kappa from a prescribed side, with an explicit distance bound tending to zero on late runs. For each color and fixed F, only finitely many runs have depth at most F; distinct same-color anchors satisfy 3^{-max(F_I,F_J)}<=|Lambda_I-Lambda_J|<epsilon_I+epsilon_J with epsilon_I tending to zero. Consequently, after deleting every run of depth at most any fixed F, the reciprocal mass on nonpositive defects still diverges. Thus all residual simple-fragment and repeated-cycle mass is forced to escape through unbounded exact ternary run depth on one fixed orbit.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01", "THM-DIV-DEFECT-SWITCH-01", "THM-DIV-BILATERAL-SHELL-01", "THM-DIV-CHARGE-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-SWITCH-DEPTH-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "At an internal switch between two distinct nonpositive colors c,c' in {1,2,3} at state index s>=1, the adjacent run anchors satisfy Lambda'-Lambda=(c'-c)x_s/q_s=(c'-c)2^{A_s}x_s/3^s. The exiting synchronized form is divisible by 3, while (c'-c)x_s is a unit modulo 3. Therefore the newly entered run has exact depth F'=s and satisfies v_3(c'x_j+m_j)=j-s throughout. If it runs from s to a second internal switch at t with exponent sum B, there is a 3-adic unit H such that c'x_s+m_s=2^B H and c'x_t+m_t=3^{t-s}H. The cofactor H is odd for an exit color change of size one and even for a jump between colors one and three. Thus every internal switch directionally resets an exact dyadic-to-ternary carrier.",
+      "dependencies": ["THM-DIV-RUN-SHELL-01", "THM-DIV-RUN-MASS-01", "THM-DIV-DEFECT-SWITCH-01"],
+      "provenance": "project formal result and method ceiling",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-DYADIC-SHELL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For every constant nonpositive-defect run I=[s,t], the reduced ternary anchor numerator R_I is independent of the state and satisfies Lambda_I=R_I/3^{F_I} and v_2(R_I)=A_j+v_2(c x_j+m_j). Writing R_I=2^{A_t+V_I} eta_I with eta_I odd gives the exact exponent identity B_I=F_I log_2(3)-A_s+log_2(Lambda_I)-V_I-log_2(eta_I). Hence run reciprocal mass is at most kappa_c B_I and, on the fixed normalized ray, B_I<log_2(Cq_s)-(s-F_I)log_2(3), where C=3Kappa+1. In particular F_I>s-log_3(Cq_s)>=s log_3(2)-log_3(C). Thus every late run has automatic linear ternary depth; the genuine uncontrolled variable is its positive shell slack, not depth alone.",
+      "dependencies": ["THM-DIV-RUN-SHELL-01", "THM-DIV-RUN-MASS-01", "THM-DIV-DUAL-TAIL-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-ENTRANCE-EXPONENT-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "In the finite-transition branch, divergent entrance-run mass requires infinitely many entrance runs. Their preceding indices are distinct and every preceding accelerated exponent is at least one, so the sum of preceding exponents diverges automatically, independently of reciprocal mass. The preceding-exponent alternative in the run-mass valuation budget therefore cannot close the branch. A necessary sharper condition is divergence of the total exact shell slack sum log_2(Cq_s)-(s-F_I)log_2(3); any closure must make this slack summable or prove a strictly stronger compensated switch-gain bound.",
+      "dependencies": ["THM-DIV-DYADIC-SHELL-01", "THM-DIV-SWITCH-DEPTH-01", "THM-DIV-RUN-MASS-01"],
+      "provenance": "project formal result and method ceiling",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-BARRIER-LOG-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "With normalized coordinates h=x/q, g=Kappa-h=e/q, and u=m/q, every color-c nonpositive run lies on one rational barrier u=c(beta-h), where beta=Lambda/c is constant. Its reciprocal mass is trapped between (2/c)log((beta-h_s)/(beta-h_t)) and (3/c) times the same logarithm. This gives the uniform bounds mass<log(2) for every color-3 run and mass<(3/2)log(2) for the entire color-2 run outside its optional terminal m=2 tower. A color-2 run ending at an internal switch cannot contain that tower, because the next color forces an odd terminal ceiling, so its full mass is <(3/2)log(2). At an internal color switch, beta'-beta=u(1/c'-1/c) and |beta'-beta|/m=|1/c'-1/c|/q; hence the total reciprocal-weighted barrier-jump charge over all internal switches is at most 2(Kappa-h_0). The raw boundary charge is summable, so any transition-rich divergence must occur through logarithmic within-run barrier approach.",
+      "dependencies": ["THM-DIV-RUN-SHELL-01", "THM-DIV-DYADIC-SHELL-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-CHARGE-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-CARRIER-ESCAPE-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For an internally bracketed color-c run of length r with terminal carrier H, one has H/m_t=(1+c x_t/m_t)/3^r. Hence H<=m_t forces r log(3)>log(x_t/m_t), so bounded-length runs eventually satisfy H>m_t on a normalized divergent ray. For two adjacent internally bracketed runs with colors c,c', exiting length r, entering exponent sum B', and carriers H,H', the common state satisfies (c'-c)x=2^{B'}H'-3^rH and (c'-c)m=c'3^rH-c2^{B'}H'. If H'=H, then m/x=|c'3^r-c2^{B'}|/|2^{B'}-3^r|>1/max(2^{B'},3^r). Since m/x tends to zero, every infinite adjacent-carrier collision family must escape through unbounded run length or unbounded entering exponent sum.",
+      "dependencies": ["THM-DIV-SWITCH-DEPTH-01", "THM-DIV-DUAL-TAIL-01"],
+      "provenance": "project formal fixed-ray theorem",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "NOGO-DIV-CARRIER-LOCAL-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Finite strict-barrier synchronization does not imply H>=m_t or local carrier injectivity. The explicit segment x=(91,137,103,155), m=(48,71,53,78), theta=(26/27,17/18,17/24,1/16), a=(1,2,1), c=(2,1,3) has an internally bracketed carrier H=52<m_2=53. The explicit segment x=(27,41,31,47,71,107), m=(29,43,32,47,70,104), theta=(1/2,3/4,9/16,11/32,33/64,35/128), a=(1,2,1,1,1), c=(1,1,2,1,2) has two adjacent internally bracketed runs, of colors 2 and 1, both with carrier 47. Any carrier charging theorem must therefore use fixed-ray information beyond finite strict-barrier synchronization.",
+      "dependencies": ["THM-DIV-SWITCH-DEPTH-01"],
+      "provenance": "project formal counterexamples",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-PROJECTIVE-CHARGE-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Put p_j=theta_j/m_j. On a color-1 nonpositive edge, 0<=p_{j+1}-p_j<1/(8m_j). On a color-2 edge with m_j>=4, 1/m_j<5(p_j-p_{j+1}), while on every color-3 edge, 1/m_j<2(p_j-p_{j+1}). For each maximal nonpositive block B beginning at alpha, let Z_B be its color-1 edges, T_B its color-2 m=2 tower edges, and R_B all remaining edges. Then sum_{R_B}1/m_j<=5/m_alpha+(5/8)sum_{Z_B}1/m_j. Consequently divergent nonpositive mass forces divergence on block entrances, color-1 edges, or terminal m=2 towers. Define P_1(p)=p, P_2(p)=1-2p, and P_3(p)=2-3p. Every color-c edge satisfies P_c(p_{j+1})/P_c(p_j)=(1-c/(3m_j))^{-1}, so run mass is between (2/c) and (3/c) times the logarithmic P_c amplification. Exact zero rounding occurs on only finitely many color-1 runs. Hence the last two alternatives are precisely logarithmic amplification of P_1 on zero-defect runs and P_2 on terminal towers.",
+      "dependencies": ["THM-DIV-CHARGE-01", "THM-DIV-BARRIER-LOG-01", "THM-DIV-TOWER-SHELL-01"],
+      "provenance": "project formal projective-charge theorem",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-THRESHOLD-RESET-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let I=[s,t] be an internally bracketed color-1 run with positive entrance rounding, preceded by color c_- in {2,3} and followed by color c_+ in {2,3}. Define rho_I=3theta_{s-1}-(c_--1)=2^{a_{s-1}}theta_s and Gamma_I=log((3m_{s-1}-c_-)/(m_t rho_I)). Then p_s=rho_I/(3m_{s-1}-c_-), Gamma_I=log(m_s/(m_t theta_s)), and the exact projective gain is ell_I=Gamma_I+log(theta_t). Moreover 0<Gamma_I-ell_I<=log(3/(c_+-1)), with equality on the right exactly when theta_{t+1}=0. Therefore divergent reciprocal mass on any collection of internally bracketed color-1 runs forces divergent total size-corrected reset depth.",
+      "dependencies": ["THM-DIV-PROJECTIVE-CHARGE-01"],
+      "provenance": "project formal threshold-reset theorem",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "NOGO-DIV-PROJECTIVE-LOCAL-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "For every K>=1, the strict-barrier exponent word (1,(1,2)^K,1) has a positive odd ordinary realization and a synchronized real companion with ceilings (4,5,(7,5)^K,6) and colors (2,1^{2K},3). Its middle color-1 run has reciprocal mass 12K/35, projective gain K log(9/8), entrance residual (4/3)(8/9)^K, and reset depth K log(9/8)+log(3/2). The complete discrete boundary tuple (2,1,4,5,5,3,1,6) is independent of K. Hence no finite-valued bound based only on that tuple, or on fixed-width exponent, color, and ceiling windows at the two boundaries, controls zero-defect mass or projective amplification on finite strict-barrier synchronized segments. A valid bound must detect threshold depth or use coherence along one fixed ordinary ray.",
+      "dependencies": ["THM-DIV-THRESHOLD-RESET-01"],
+      "provenance": "project formal counterexample family",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-LOG-CLOCK-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Define L_j=log(q_j/m_j). Every edge satisfies L_{j+1}-L_j=-log(1+(d_j-1)/(3m_j)); this increment is positive exactly for d_j<=0, zero for d_j=1, and negative for d_j>=2. On every nonpositive edge of color c, (2/c)Delta L<=1/m_j<(3/c)Delta L, so the reciprocal mass of an entire consecutive nonpositive block lies between (2/3) and 3 times its total L-rise. On any constant color-c run, P_c(theta/m)=Delta_I q/m for the fixed rational-anchor distance Delta_I, hence every projective run gain is exactly the L-rise. If C_N is the accumulated nonpositive gain and P_N the accumulated positive-defect contraction, then L_N-L_0=C_N-P_N and nonpositive reciprocal mass is comparable to C_N. The corresponding gain of log(x/m) differs only by log(1+1/(3x_j)), whose total is finite. Since m_j/q_j tends to zero on a normalized divergent ray, C_N-P_N tends to infinity. Thus zero-defect laps, terminal towers, and all other nonpositive mechanisms are quantitatively one global logarithmic drift.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01", "THM-DIV-PROJECTIVE-CHARGE-01", "THM-DIV-THRESHOLD-RESET-01"],
+      "provenance": "project formal global logarithmic-clock theorem",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "THM-DIV-DEFECT-TAIL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "The ordered defect tail satisfies theta_j/q_j=Omega_j-K=-sum_{k>=j}d_k/(3q_k). For an internally bracketed color-1 run [s,t] followed by color c_+, its entrance residual is rho_I=q_{s-1}((c_+-1)/q_t-sum_{k>t}d_k/q_k)=q_{s-1}((c_+-1)/q_t+3theta_{t+1}/q_{t+1}). Hence the threshold reset is exactly the exit jump transported to the entrance scale together with the complete future defect tail; no absolute convergence is asserted or needed.",
+      "dependencies": ["THM-DIV-THRESHOLD-RESET-01", "THM-DIV-LOG-CLOCK-01"],
+      "provenance": "project formal defect-tail corollary",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex"]
+    },
+    {
+      "id": "NOGO-DIV-ENTRANCE-LOCAL-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "For every k>=1, the strict-barrier word (1,2,1^k) has an explicit positive odd realization and a synchronized real companion with 1<e_j<2, m_j=2, and defect word (-1,3,-1^k). Its second nonpositive-defect block is one entrance run with reciprocal mass k/2. The nested words have no common nonnegative ordinary seed. Hence entrance-run mass cannot be bounded by a finite-window argument; fixed-seed coherence across all depths is indispensable.",
+      "dependencies": ["THM-DIV-DEFECT-SHELL-01"],
+      "provenance": "project formal counterexample family",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-RUN-MASS-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For a constant nonpositive-defect run of color c, total exponent B, and synchronized endpoint valuations U and V, one has B=U-V and sum 1/m <= kappa_c(U-V), where kappa_2=1/2 and kappa_1=kappa_3=1/3. At an entrance from a positive defect, U is at most the preceding exponent plus the positive switch-cancellation gain. Thus divergent entrance mass forces divergent preceding-exponent mass or divergent positive entrance gains. The family (1,2,1^k) attains the run-mass inequality exactly.",
+      "dependencies": ["THM-DIV-DEFECT-SWITCH-01", "THM-DIV-DEFECT-SHELL-01", "NOGO-DIV-ENTRANCE-LOCAL-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "NOGO-DIV-DEFECT-LOCAL-BRIDGE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "For every k, the strict-barrier block (1,2)^k has an explicit positive integer realization paired with the periodic real companion 5,7, all ceiling defects equal to 0, and v_3(D)=0. Hence no one-window implication from nonpositive companion defects to terminal deficit two or three is valid.",
+      "dependencies": ["THM-DIV-DEFECT-RIGIDITY-01", "CERT-DEFICIT23-01"],
+      "provenance": "project formal counterexample family",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "NOGO-DIV-DEFECT-IFS-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Three explicit length-16, exponent-24 strict-barrier return blocks generate a common rational contraction interval for the ceiling error. Adaptive concatenation gives an aperiodic branch with q_j tending to infinity, 4<e_j<=14, every defect in {-1,0}, divergent companion reciprocal mass, and positive realizations of every finite prefix, while its least ordinary representatives tend to infinity. Thus bounded companion states, all-nonpositive defects, and aperiodicity still do not replace one fixed ordinary seed.",
+      "dependencies": ["THM-DIV-CHARGE-01", "THM-DIV-DEFECT-SWITCH-01"],
+      "provenance": "project formal iterated-function countermodel",
+      "evidence": ["agent-code/collatz-research/divergence_rounding_defect_rigidity.tex"]
+    },
+    {
+      "id": "NOGO-DIV-ROUND-LOCAL-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Neither a simple logarithmic bound for finite companion mass nor local floor-or-ceiling exactness transfers the real companion to one long integer negative trajectory. Seed 27 refutes the tested 3 log potential, and exact layered probes have many local edges but only short coherent shadows.",
+      "dependencies": ["THM-DIV-CHARGE-01"],
+      "provenance": "project exact regressions (R103)",
+      "evidence": ["agent-code/collatz-research/divergence_companion_charge_rounding.md", "agent-code/collatz-research/sync/dual_tail_stabilization_probe.js", "agent-code/collatz-research/sync/dual_tail_fixed_seed_probe.js"]
+    },
+    {
+      "id": "THM-DIV-DECODER-COLLISION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For the terminal decoder b_t=v_3(x_t+1), write x_t+1=3^{b_t}u_t and q(a)=v_3(2^a-2). Then q(1)=infinity, q(a)=0 for even a, and q(a)=1+v_3((a-1)/2) for odd a>1. The next depth is min(q(a_t),b_t+1) unless those valuations collide; in the collision case it is b_t+1+v_3(u_t+(2^{a_t}-2)/3^{q(a_t)}). Consequently a tail bounded by D avoids a_t congruent to 1 modulo 2*3^D whenever b_t=D and contains no factor 1^{D+1}.",
+      "dependencies": ["THM-DIV-NORM-01"],
+      "provenance": "project formal result",
+      "evidence": ["agent-code/collatz-research/divergence_decoder_collision_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-DECODER-AUTOMATON-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Fix D and reduce x_t+1 modulo 3^{D+1}. Every nonzero decoder state has exactly one exponent residue class modulo 2*3^D that sends the next state to zero, hence above depth D. Every finite path avoiding those classes is realized by infinitely many positive odd seeds through the exact dyadic cylinder congruence and the Chinese remainder theorem. On a complete exponent residue alphabet, each state has exactly 2*3^D-1 admissible children, so the finite bounded-decoder language has exponential size.",
+      "dependencies": ["THM-DIV-DECODER-COLLISION-01"],
+      "provenance": "project formal result and method ceiling",
+      "evidence": ["agent-code/collatz-research/divergence_decoder_collision_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-DECODER-RATE-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let a strict barrier block have length r, terminal decoder depth b_r, terminal exponent-one run length ell, and final non-one collision gain g. With K(r)=ceil(log_3((log_2 3)r/2)), one has b_r<=K(r)+ell+g unless the whole block is all ones. Hence a deficit-three endpoint b_r>=r-3 forces ell+g>=r-3-K(r); if ell is sublinear, the last non-one step has an explicit 3-adic collision of depth r-o(r).",
+      "dependencies": ["THM-DIV-DECODER-COLLISION-01"],
+      "provenance": "project formal rate reduction",
+      "evidence": ["agent-code/collatz-research/divergence_decoder_rate_reduction.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-RENEWAL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let Q_t=3^t/2^{A_t} tend to infinity, let j_i be consecutive tail-record times, put r_i=j_{i+1}-j_i, and let R_i=R_4(x_{j_i}). If r_i>R_i, then r_i>=6 and v_3(x_{j_{i+1}}+1)<=r_i-5. If r_i<=R_i, then the complete record-gap word is one of {1,12,1113,1122}; the next horizon satisfies R_{i+1}>=R_i-r_i; and the decoder transports respectively as b->b+1, b->0, b->1, or b->0. Consequently every normalized ray has one of three exhaustive behaviors: infinitely many horizon exits, unbounded runs of the atom 1 inside the horizons, or an eventually bounded decoder. Every nontrivial record gap of length r has total exponent floor(r log_2 3), multiplier in (1,3/2), and normalized carry less than (r+1/2)/3. If its endpoint y has decoder depth b>=1, then z=2^b(y+1)/3^b-1 is a positive b-step all-one coalescing ancestor; b>=2 and 4r<9x+13 suffice for z to be smaller than the record start x. On every chain of interior renewals, the canonical ancestor size W=2^b(x+1)/3^b has the weighted monotonicity kappa(b')W'>=kappa(b)W, where kappa(0)=1 and kappa(b)=32/27 for b>=1; hence every later W is at least 27/32 of its initial value, and every one-letter atom leaves W exactly unchanged. More generally, on every injective infinite accelerated orbit the canonical sizes W_t=2^{b_t}(x_t+1)/3^{b_t}, b_t=v_3(x_t+1), tend to infinity; for every positive integer M, #{t:W_t=M}<=v_2(M), with no occurrences for odd M. If the initial seed n is the globally least positive odd seed with an unbounded orbit, then W_t>=n+1, with equality exactly on the finite initial all-one tower of n. If the normalized height has finite limit K, then 2^{v_2(x_t+1)}3^{b_t}<=x_t+1<=KQ_t and W_t>=G_0(2/K)^{log_3(3/2)}Q_t^{log_3 2}. At the ith tail record, with alpha=log_2 3 and ell_i=v_2(x_{j_i}+1)-1, ell_i+1+alpha b_{j_i}<=(alpha-1)i+log_2(KQ_{j_0}); in particular b_{j_i}<=(alpha-1)i/alpha+(log_2(KQ_{j_0})-2)/alpha. If L_i consecutive one-letter record atoms begin there, then L_i+2+alpha b_{j_i}<=(alpha-1)i+log_2(KQ_{j_0}).",
+      "dependencies": ["THM-DIV-NORM-01", "OPEN-DIV-DEFICIT4-01", "THM-DIV-DECODER-COLLISION-01"],
+      "provenance": "project formal tail-record renewal theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_horizon_renewal.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-COMPANION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "At consecutive coefficient tail records j_i, the synchronized companion satisfies e_{j_i}=(C(w_i)+2^{B_i}e_{j_{i+1}})/3^{r_i}; equivalently e_{j_i}=R_i/3+e_{j_{i+1}}/mu_i, where R_i is the reciprocal coefficient mass inside the gap. If all sufficiently late gaps lie inside their deficit-four horizons, then w_i is in {1,12,1113,1122} and the record companion is generated backward by the four contractions (2u+1)/3, (8u+5)/9, (64u+65)/81, and (64u+73)/81. The boundary condition e_j/q_j->0 forces 1<e_{j_i}<=5, every raw companion state on that tail satisfies 1<e_j<=41/3, and 2<=ceil(e_j)<=14. With L_j=log(q_j/ceil(e_j)), one has L_{j_i}-L_{j_0}>=i log(9/8)-log(5/2), while every ceiling defect lies in {-2,-1,0,1,2,3,4,5,6,7}. Hence every normalized hypothetical divergent orbit has infinitely many deficit-four horizon exits or an eventually bounded-companion finite-alphabet tail with positive linear logarithmic drift per coefficient record.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-LOG-CLOCK-01"],
+      "provenance": "project formal record-companion renewal theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_companion_renewal.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-SPACING-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "On an eventual record-atom tail over {1,12,1113,1122}, suppose that a length-L atom factor V repeats at record positions i<k, and let r(V) and B(V) be its raw length and total dyadic exponent. Then 2^{B(V)+1} divides x_{j_k}-x_{j_i}, while 2*3^{r(V)} divides x_{j_{k+L}}-x_{j_{i+L}}. Both differences are positive. With alpha=log_2 3 and C_0=log_2(K Q_{j_0}), every repetition satisfies B(V)+1<C_0+(alpha-1)k. Consequently the atom-factor complexity obeys p_omega(L)>(L+1-C_0)/(alpha-1) and liminf p_omega(L)/L>=1/(log_2 3-1)=1.709511.... If every run of the one-letter atom has length at most M, then p_omega(L)>(L+2 floor(L/(M+1))+1-C_0)/(alpha-1), giving asymptotic slope at least (1+2/(M+1))/(log_2 3-1). Thus the bounded-companion interior branch is neither eventually periodic nor quasi-Sturmian and must retain genuinely fixed-seed high factor complexity.",
+      "dependencies": ["THM-DIV-NORM-01", "THM-DIV-FIXEDRAY-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01"],
+      "provenance": "project formal fixed-seed record-atom spacing theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_atom_spacing.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-BRANCHING-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "On an eventual interior record-atom tail over A=1, B=12, C=1113, D=1122, a C transition from x to y satisfies x=79 mod 128 and y=(81x+65)/64. The smaller positive odd state z=(x-1)/2 has exact accelerated word 1121 and U_+^4(z)=y. For the synchronized companions, 64e_y=81e_x-65, e_z=(e_x+1)/2 is transported through 1121 to e_y, and z+e_z=(x+e_x)/2. Hence, on the orbit of a globally least positive odd unbounded seed n, every C occurrence satisfies x>=2n+1 and Q>2(n+1)/K. If C occurs only finitely often, then after its last occurrence there are infinitely many decoder-zero resets, and every consecutive reset block is A^kB or A^kD. For Y=x+1=2^nu u at the first reset, the exact laws are nu=k+2, Y'=(3^nu u+1)/2, Q'/Q=3^nu/2^{nu+1} in the A^kB case, and nu=k+3, Y'=(3^{nu+1}u+7)/8, Q'/Q=3^{nu+1}/2^{nu+3} in the A^kD case. In both cases u is odd, 3 does not divide YY', and nu<=(log_2 3-1)i+log_2(KQ_{j_0}) at record index i. Thus the interior branch splits exhaustively into infinitely many exact half-coalescences or an eventual exact two-map reset renewal.",
+      "dependencies": ["THM-DIV-NORM-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-SPACING-01"],
+      "provenance": "project formal record-atom branching theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_atom_branching.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-C-LADDER-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let a record atom C=1113 start at x, end at y, and put b=v_3(x+1). For every 0<=s<=b, the positive odd state z_s defined by z_s+1=2^{s-1}(x+1)/3^s has exact word 1^s1121 and reaches y in s+4 accelerated steps. If e_x is the synchronized companion at x, then epsilon_s=1+(2/3)^s(e_x-1)/2 is transported with z_s and z_s+epsilon_s=2^{s-1}(x+e_x)/3^s. On a globally least unbounded ray this forces x+1>=2(n+1)(3/2)^s and Q>[2(n+1)/K](3/2)^s, in particular at s=b. More generally, if a record p is followed by A^rC, then h=(p-1)/2 has exact word 1^r1121 to the same endpoint and halves p+e_p. This direct half-seed pullback is blocked by the preceding nontrivial atom: after B or D the state h is divisible by 3 and has no accelerated odd predecessor; after a preceding C from q to p, every four-step predecessor of h is at least 4q-1>q, with equality uniquely for the word 1215. Thus the local C ladder cannot be propagated toward the fixed initial seed across a nontrivial record atom without terminating or expanding.",
+      "dependencies": ["THM-DIV-NORM-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-BRANCHING-01"],
+      "provenance": "project formal C-decoder ladder and predecessor-blocker theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_C_ladder_blocker.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-RESET-C-MIN-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For every r>=0, consider either exact record block W_B(r)=12 1^r 1113 of raw length r+6 or W_D(r)=1122 1^r 1113 of raw length r+8, with actual start q and terminal endpoint y. The exact inverse-mass recursion shows that among all same-depth inverse words to y, the unique word of minimum total dyadic exponent is the original word: its reverse exponent string is (3,1^{r+3},2,1) with mass r+9 in the B case, and (3,1^{r+3},2,2,1,1) with mass r+12 in the D case. Every inverse word of larger mass starts above q by the uniform carry bound C(v)<2^{B(v)-L}3^L. Consequently q is the unique least positive odd L-step predecessor of y. Thus no same-depth inverse branch can cross one reset atom B or D followed by A^rC from a state smaller than the actual block start; such a descent must change inverse depth or span at least two nontrivial record atoms.",
+      "dependencies": ["THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01"],
+      "provenance": "project formal reset-C same-depth inverse-minimum theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_reset_C_inverse_minimum.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-TWO-PREFIX-MIN-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For every P,Q in {B,C,D} and r,s>=0, let W=P A^r Q A^s C be an exact interior record block of raw length L, with actual start q and endpoint y. The complete inverse-mass recursion has a unique minimum. If P is B or D, its mass is B(W), its word is W itself, and q is the unique least positive odd L-step predecessor of y. If P=C, its mass is B(W)-1, its word is obtained by replacing the initial 1113 by 1121, and (q-1)/2 is the unique least predecessor; this is exactly the already known local half-seed at that earlier C. The proof gives all nine finite reverse profiles modulo 9 or 81 and a two-variable induction in r,s, followed by a uniform carry comparison for every larger-mass word. Consequently a pullback based on the terminal C yields no new same-depth descent while crossing its two preceding nontrivial atoms: after removing the local half-seed alternative at an earlier C, a viable construction must change raw inverse depth or cross at least three preceding nontrivial atoms.",
+      "dependencies": ["THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-RESET-C-MIN-01"],
+      "provenance": "project formal two-prefix same-depth inverse-rigidity theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_two_prefix_inverse_rigidity.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(W=PU\\) be an exact finite word from a positive odd integer \\(q\\) to \\(y\\), where \\(P\\in\\{B,C,D\\}\\), \\(U\\in\\{A,B,C,D\\}^*\\), and \\(L:=|W|\\). Among all positive odd integers \\(z\\) satisfying \\(U_+^L(z)=y\\), the unique least one is\n\n\\[\nq_{\\min}=\\begin{cases}q,&P\\in\\{B,D\\},\\\\(q-1)/2,&P=C.\\end{cases}\n\\]\n\nIn the second case, the unique minimum word is \\(1121U\\). Thus extending the segment across any finite number of earlier record atoms creates no new same-depth descent. Any new smaller predecessor must use a different number of accelerated steps.",
+      "dependencies": ["THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-TWO-PREFIX-MIN-01"],
+      "provenance": "project formal arbitrary-prefix same-depth inverse-rigidity theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_arbitrary_prefix_rigidity.tex", "agent-code/collatz-research/verify_divergence_record_arbitrary_prefix.py"]
+    },
+    {
+      "id": "THM-DIV-RECORD-VARDEPTH-REDUCTION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(W=PU\\) be an exact \\(L\\)-step word from \\(q\\) to \\(y\\), and let \\(V=EF\\) be an exact \\((L+h)\\)-step word from \\(z\\) to the same endpoint, with \\(|E|=h\\) and \\(|F|=L\\). Put\n\n\\[\nr:=U_+^h(z),\\qquad t:=\\operatorname B(E)-h.\n\\]\n\nThen \\(t\\ge0\\), and the suffix start \\(r\\) lies in exactly one of three cases:\n\n1. \\(r=(q-1)/2\\), possible only when \\(P=C\\);\n2. \\(r\\in\\{q,q+2\\}\\);\n3. \\(r\\ge2^\\delta(q-1)\\) for some \\(\\delta\\ge1\\).\n\nThe prefixes of excess zero and one are completely classified by the valuations \\(v_3(r+1)\\) and \\(v_3(2^{b+1}(r+1)/3^b-1)\\). In particular, for \\(0\\le h\\le v_3(q_*+1)\\), the unique least longer predecessor satisfies\n\n\\[\nz_h+1=\\left(\\frac23\\right)^h(q_*+1),\n\\]\n\nwhere \\(q_*:=q\\) for \\(P\\in\\{B,D\\}\\) and \\(q_*:=(q-1)/2\\) for \\(P=C\\).",
+      "dependencies": ["THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01"],
+      "provenance": "project formal variable-depth channel reduction and low-excess decoder theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_variable_depth_reduction.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-EXCESS2-DECODER-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Fix a positive odd terminal state \\(r\\), and let \\(E\\) be an exact inverse prefix with excess \\(\\operatorname B(E)-|E|=2\\). Put \\(b:=v_3(r+1)\\) and \\(s:=(r+1)/3^b\\). Every such word belongs to exactly one of two families:\n\n\\[\nE=1^\\ell3\\,1^k\\qquad(0\\le k<b),\n\\]\n\nor\n\n\\[\nE=1^{j-1}2\\,1^{b_1-1}2\\,1^b.\n\\]\n\nThe allowed ranges of \\(\\ell\\) and \\(j\\), and the corresponding starts, are given explicitly by finite \\(3\\)-adic valuation ladders. No other excess-two word exists. Consequently there is an explicit finite horizon \\(H_{\\le2}(r)\\) beyond which every exact prefix has excess at least three.",
+      "dependencies": ["THM-DIV-RECORD-VARDEPTH-REDUCTION-01"],
+      "provenance": "project formal complete excess-two inverse decoder theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_excess_two_decoder.tex"]
+    },
+    {
+      "id": "THM-DIV-RECORD-EXCESS3-DECODER-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Fix a positive odd terminal state \\(r\\). Every exact inverse prefix \\(E\\) with\n\n\\[\nt(E):=\\operatorname B(E)-|E|=3\n\\]\n\nbelongs to exactly one of four finite \\(3\\)-adic families. Their word shapes are\n\n\\[\n1^{j-1}4\\,1^b,\\qquad 1^{j-1}2\\,1^c3\\,1^k,\\qquad 1^\\ell3\\,1^k2\\,1^b,\\qquad 1^{j-1}2\\,1^{b_2-1}2\\,1^{b_1-1}2\\,1^b.\n\\]\n\nThe allowed indices and starting values are explicit functions of successive \\(3\\)-adic valuations. No other excess-three word exists. Hence there is an explicit finite horizon \\(H_{\\le3}(r)\\) beyond which every exact prefix has excess at least four.",
+      "dependencies": ["THM-DIV-RECORD-EXCESS2-DECODER-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"],
+      "provenance": "project formal complete excess-three inverse decoder theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_excess_three_decoder.tex", "agent-code/collatz-research/verify_divergence_record_excess_three.py"]
+    },
+    {
+      "id": "THM-DIV-RECORD-SHARP-PREFIX-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(E\\) be a positive exponent word of length \\(h\\) and excess \\(t:=\\operatorname B(E)-h\\). Its shifted carry satisfies the sharp bounds\n\n\\[\n2^h(2^t-1)\\le \\operatorname D(E)\\le2\\,3^{h-1}(2^t-1).\n\\]\n\nIf \\(E\\) is an exact path from \\(z\\) to \\(r\\), and \\(\\mathcal A_h(r):=(2/3)^h(r+1)\\), then\n\n\\[\n2^t\\left(\\mathcal A_h(r)-\\frac23\\right)-\\frac13\\le z\\le\\left(\\frac23\\right)^h(2^t r+1)-1.\n\\]\n\nBoth endpoints are best possible. In particular, every positive prefix satisfies\n\n\\[\nt\\ge\\max\\left\\{0,\\left\\lceil\\log_2\\left(\\frac{2(3/2)^h-1}{r}\\right)\\right\\rceil\\right\\}.\n\\]\n\nThus excess grows with asymptotic slope at least \\(\\log_2(3/2)\\) along inverse paths of unbounded depth to a fixed terminal state. If \\(n\\) is the least unbounded seed, any prefix with \\(t\\ge3\\) that starts below \\(n\\) must lie beyond\n\n\\[\nh>\\log_{3/2}\\left(\\frac{24(q_*+1)}{3n+17}\\right).\n\\]\n\nThe theorem excludes the entire shallower range but does not exclude the remaining deep branch.",
+      "dependencies": ["THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-EXCESS3-DECODER-01"],
+      "provenance": "project formal sharp carry-rearrangement theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_sharp_prefix_interval.tex", "agent-code/collatz-research/verify_divergence_record_sharp_prefix.py"]
+    },
+    {
+      "id": "THM-DIV-RECORD-QPLUS2-EXCLUSION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(W=PU\\), with \\(P\\in\\{B,C,D\\}\\), be an exact record-atom word of length \\(L\\), mass \\(M\\), start \\(q\\), and endpoint \\(y\\). There is no exact word \\(F\\) of length \\(L\\) and mass \\(M\\) from \\(q+2\\) to \\(y\\).\n\nConsequently every exact same-depth suffix from a positive odd start \\(r\\) to \\(y\\) lies in exactly one of the following cases:\n\n\\[\n\\begin{array}{c|c}\n\\text{mass defect}&\\text{suffix start}\\\\ \\hline\n-1&r=(q-1)/2,\\quad P=C,\\\\\n0&r=q,\\quad F=W,\\\\\n\\delta\\ge1&r\\ge2^\\delta(q-1).\n\\end{array}\n\\]\n\nThus the formerly possible zero-defect value \\(r=q+2\\) is eliminated. The proof reduces the first record atom to 187 exact transition cases in the already proved distortion strip.",
+      "dependencies": ["THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"],
+      "provenance": "project formal elimination of the q+2 same-depth suffix channel",
+      "evidence": ["agent-code/collatz-research/divergence_record_qplus2_exclusion.tex", "agent-code/collatz-research/verify_divergence_record_qplus2_exclusion.py"]
+    },
+    {
+      "id": "THM-DIV-RECORD-JACOBSTHAL-SUFFIX-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(W=PU\\), with \\(P\\in\\{B,C,D\\}\\), be an exact record-atom word from \\(q\\) to \\(y\\). Let \\(F\\) be an exact word of the same raw length from \\(r\\) to \\(y\\), with positive mass defect\n\n\\[\n\\operatorname B(F)-\\operatorname B(W)=\\delta\\ge1.\n\\]\n\nThen\n\n\\[\nr\\ge2^\\delta q-J_\\delta,\n\\qquad\nJ_\\delta:=\\frac{2^\\delta-(-1)^\\delta}{3}.\n\\]\n\nThe proof establishes the lower distortion strip \\(u\\ge-1\\) immediately after the first exponent of every nontrivial record atom. The three exceptional phases reduce to 1,030 exact canonical transition cases. Consequently, if an inverse prefix over this suffix has length \\(h\\), excess \\(t\\ge T\\), and start below the least unbounded seed \\(n\\), then\n\n\\[\nh>\\log_{3/2}\\left(\\frac{2^\\delta q-J_\\delta+1}{2/3+(n+1/3)/2^T}\\right).\n\\]\n\nThis strengthens the former suffix bound \\(r\\ge2^\\delta(q-1)\\), but does not exclude the remaining deep branch.",
+      "dependencies": ["THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-SHARP-PREFIX-01"],
+      "provenance": "project phase-strip and Jacobsthal positive-defect suffix theorem",
+      "evidence": ["agent-code/collatz-research/divergence_record_phase_strip_jacobsthal.tex", "agent-code/collatz-research/verify_divergence_record_phase_strip.py"]
+    },
+    {
+      "id": "THM-DIV-RECORD-CARRY-POSITION-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let \\(E=(1+c_1,\\ldots,1+c_h)\\) be an exact inverse prefix from \\(z\\) to \\(r\\), with total excess \\(t=\\sum_i c_i\\) and cumulative excess \\(p_k=\\sum_{i\\le k}c_i\\). If \\(L_{h,t}(r)\\) and \\(U_{h,t}(r)\\) are the sharp lower and upper endpoints for \\(z\\), then\n\n\\[\nU_{h,t}(r)-z=\\frac13\\sum_{k=1}^{h-1}\\left(\\frac23\\right)^k(2^{p_k}-1),\n\\]\n\n\\[\nz-L_{h,t}(r)=\\frac13\\sum_{k=1}^{h-1}\\left(\\frac23\\right)^k(2^t-2^{p_k}).\n\\]\n\nConsequently, for every \\(1\\le k<h\\),\n\n\\[\n\\frac23\\left(1-\\left(\\frac23\\right)^k\\right)(2^t-2^{p_k})\\le z-L_{h,t}(r),\n\\]\n\n\\[\n\\left(\\frac23\\right)^k\\left(1-\\left(\\frac23\\right)^{h-k}\\right)(2^{p_k}-1)\\le U_{h,t}(r)-z.\n\\]\n\nFor a proposed bounded start \\(1\\le z<N\\), these inequalities give an explicit finite power-of-two screen for every cumulative excess \\(p_k\\). They retain the positions of the excess units, but do not yet exclude all deep triples \\((h,t,r)\\) simultaneously.",
+      "dependencies": ["THM-DIV-RECORD-SHARP-PREFIX-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"],
+      "provenance": "project exact carry-position decomposition and cumulative-excess squeeze",
+      "evidence": ["agent-code/collatz-research/divergence_record_carry_position_squeeze.tex", "agent-code/collatz-research/verify_divergence_record_carry_position.py"]
+    },
+    {
+      "id": "OPEN-BTS-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "We study the accelerated Collatz map on positive odd integers,\n\n\\[\nU_+(n):=\\frac{3n+1}{2^{v_2(3n+1)}}.\n\\]\n\nAssume that an orbit is unbounded, and let \\(n\\) be the least positive odd starting value with this property. A contradiction would follow from a positive odd integer \\(z<n\\) whose orbit later merges into the orbit of \\(n\\).\n\nFor every fixed finite segment, the least same-depth predecessor of its endpoint is now known exactly. Allowing \\(h\\) additional inverse steps factors every competitor into an \\(h\\)-step prefix and a same-depth suffix. The formerly possible suffix start \\(q+2\\) is now ruled out. The suffix is the least local branch, the actual start \\(q\\), or a positive-defect start. In the last case, the old bound has been sharpened to\n\n\\[\nr\\ge2^\\delta q-J_\\delta,\n\\qquad\nJ_\\delta:=\\frac{2^\\delta-(-1)^\\delta}{3},\n\\qquad \\delta\\ge1.\n\\]\n\nIf \\(t:=\\operatorname B(E)-h\\) is the prefix excess, then all minimum-channel prefixes with \\(t\\le3\\) are contained in explicit finite valuation ladders. Every prefix, in every channel, satisfies the sharp interval\n\n\\[\n2^t\\left(\\left(\\frac23\\right)^h(r+1)-\\frac23\\right)-\\frac13\\le z\\le\\left(\\frac23\\right)^h(2^t r+1)-1.\n\\]\n\nConsequently, a prefix with \\(t\\ge3\\) cannot start below \\(n\\) before the explicit depth\n\n\\[\nh>\\log_{3/2}\\left(\\frac{24(q_*+1)}{3n+17}\\right).\n\\]\n\nThe total-excess interval has now been refined by exact carry-position identities. Writing the prefix exponents as \\(1+c_i\\) and \\(p_k=\\sum_{i\\le k}c_i\\), the slack from each sharp endpoint is an explicit positive weighted sum of \\(2^{p_k}-1\\) or \\(2^t-2^{p_k}\\). Thus every proposed bounded start must pass a simultaneous finite power-of-two screen at every position \\(k\\).\n\nThe remaining inverse-fiber problem is to exclude all deep triples that pass these cumulative-excess screens, the actual \\(q\\)-suffix when it is nonminimal, and the sharpened positive-defect suffixes, or to construct from one of them a start below \\(n\\). The separate horizon-exit and eventual reset-renewal alternatives also remain open. These results concern unbounded orbits only; they do not exclude nontrivial cycles.",
+      "dependencies": ["THM-DIV-NORM-01", "CERT-DEFICIT23-01", "OPEN-DIV-DEFICIT4-01", "THM-DIV-RETURN-01", "THM-DIV-RETURN-HORIZON-01", "THM-DIV-POSTBRANCH-GATE-01", "THM-DIV-DECODER-COLLISION-01", "THM-DIV-DECODER-AUTOMATON-01", "THM-DIV-DECODER-RATE-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-SPACING-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-RESET-C-MIN-01", "THM-DIV-RECORD-TWO-PREFIX-MIN-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-EXCESS2-DECODER-01", "THM-DIV-RECORD-EXCESS3-DECODER-01", "THM-DIV-RECORD-SHARP-PREFIX-01", "THM-DIV-RECORD-QPLUS2-EXCLUSION-01", "THM-DIV-RECORD-JACOBSTHAL-SUFFIX-01", "THM-DIV-RECORD-CARRY-POSITION-01"],
+      "provenance": "project frontier",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/divergence_decoder_collision_rigidity.tex", "agent-code/collatz-research/divergence_decoder_rate_reduction.tex", "agent-code/collatz-research/divergence_deficit_four_classification.tex", "agent-code/collatz-research/divergence_return_horizon_transport.tex", "agent-code/collatz-research/divergence_record_horizon_renewal.tex", "agent-code/collatz-research/divergence_record_atom_spacing.tex", "agent-code/collatz-research/divergence_record_atom_branching.tex", "agent-code/collatz-research/divergence_record_C_ladder_blocker.tex", "agent-code/collatz-research/divergence_record_reset_C_inverse_minimum.tex", "agent-code/collatz-research/divergence_record_two_prefix_inverse_rigidity.tex", "agent-code/collatz-research/divergence_record_arbitrary_prefix_rigidity.tex", "agent-code/collatz-research/divergence_record_variable_depth_reduction.tex", "agent-code/collatz-research/divergence_record_excess_two_decoder.tex", "agent-code/collatz-research/divergence_record_excess_three_decoder.tex", "agent-code/collatz-research/divergence_record_sharp_prefix_interval.tex", "agent-code/collatz-research/divergence_record_qplus2_exclusion.tex", "agent-code/collatz-research/divergence_record_phase_strip_jacobsthal.tex", "agent-code/collatz-research/divergence_record_carry_position_squeeze.tex"]
+    },
+    {
+      "id": "OPEN-HSCI-SYNC-SHELL-01",
+      "kind": "open_subproblem",
+      "status": "open",
+      "statement": "Assume that \\((x_j)\\) is a normalized unbounded accelerated Collatz orbit, with\n\n\\[\n2^{a_j}x_{j+1}=3x_j+1.\n\\]\n\nThe closed companion theorem supplies a positive real sequence \\((e_j)\\), driven by the same exponents, such that\n\n\\[\n2^{a_j}e_{j+1}=3e_j-1.\n\\]\n\nPut\n\n\\[\nm_j:=\\lceil e_j\\rceil,\\qquad d_j:=2^{a_j}m_{j+1}-3m_j+1.\n\\]\n\nIt is already proved that \\(d_j\\in\\{-2,-1,\\ldots,2^{a_j}-1\\}\\) and that the three nonpositive defects carry divergent reciprocal mass:\n\n\\[\n\\sum_{\\substack{j\\ge0\\\\d_j\\in\\{-2,-1,0\\}}}\\frac1{m_j}=\\infty.\n\\]\n\nThe remaining theorem is to use the paired integer orbit \\((x_j)\\) to prove the opposite estimate\n\n\\[\n\\sum_{\\substack{j\\ge0\\\\d_j\\in\\{-2,-1,0\\}}}\\frac1{m_j}<\\infty.\n\\]\n\nThese two estimates are incompatible, so this theorem would exclude unbounded positive orbits. No proof of the finite estimate is currently known.",
+      "dependencies": ["THM-DIV-DUAL-TAIL-01", "THM-DIV-CHARGE-01", "THM-DIV-DEFECT-SWITCH-01", "THM-DIV-SWITCH-CARRY-01", "THM-DIV-DEFECT-SHELL-01", "THM-DIV-NEG-SHADOW-01", "THM-DIV-SHADOW-LAP-01", "THM-DIV-TOWER-SHELL-01", "THM-DIV-BILATERAL-SHELL-01", "THM-DIV-RUN-SHELL-01", "THM-DIV-SWITCH-DEPTH-01", "THM-DIV-DYADIC-SHELL-01", "THM-DIV-ENTRANCE-EXPONENT-01", "THM-DIV-BARRIER-LOG-01", "THM-DIV-CARRIER-ESCAPE-01", "NOGO-DIV-CARRIER-LOCAL-01", "THM-DIV-PROJECTIVE-CHARGE-01", "THM-DIV-THRESHOLD-RESET-01", "NOGO-DIV-PROJECTIVE-LOCAL-01", "THM-DIV-LOG-CLOCK-01", "THM-DIV-DEFECT-TAIL-01", "THM-DIV-RUN-MASS-01", "THM-DIV-DEFECT-RIGIDITY-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-SPACING-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-RESET-C-MIN-01", "THM-DIV-RECORD-TWO-PREFIX-MIN-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-EXCESS2-DECODER-01", "NOGO-DIV-ROUND-LOCAL-01", "NOGO-DIV-ENTRANCE-LOCAL-01", "NOGO-DIV-DEFECT-LOCAL-BRIDGE-01", "NOGO-DIV-DEFECT-IFS-01"],
+      "provenance": "project localized divergence gate (R103)",
+      "evidence": ["agent-code/collatz-research/divergence_shadow_cycle_transport.tex", "agent-code/collatz-research/divergence_rounding_defect_rigidity.tex", "agent-code/collatz-research/divergence_record_companion_renewal.tex", "agent-code/collatz-research/divergence_record_atom_spacing.tex", "agent-code/collatz-research/divergence_record_atom_branching.tex", "agent-code/collatz-research/divergence_record_C_ladder_blocker.tex", "agent-code/collatz-research/divergence_record_reset_C_inverse_minimum.tex", "agent-code/collatz-research/divergence_record_two_prefix_inverse_rigidity.tex", "agent-code/collatz-research/divergence_record_arbitrary_prefix_rigidity.tex", "agent-code/collatz-research/divergence_record_variable_depth_reduction.tex", "agent-code/collatz-research/divergence_record_excess_two_decoder.tex"]
+    },
+    {
+      "id": "OPEN-HSCI-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "For the accelerated map\n\n\\[\nU_+(n):=\\frac{3n+1}{2^{v_2(3n+1)}}\n\\]\n\non positive odd integers, prove that no orbit is unbounded:\n\n\\[\n\\forall n\\in2\\mathbb Z_{\\ge0}+1,\\qquad \\sup_{j\\ge0}U_+^j(n)<\\infty.\n\\]\n\nThe closed normalization theorem converts any hypothetical unbounded orbit into the structured fixed-ray setting used by the companion and inverse-predecessor arguments. The displayed assertion remains open.",
+      "equivalence": "After THM-DIV-NORM-01, this is equivalent to the nonexistence of divergent positive Collatz orbits; it is not a weaker local lemma.",
+      "dependencies": ["THM-DIV-NORM-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-CHARGE-01", "OPEN-HSCI-SYNC-SHELL-01"],
+      "provenance": "project frontier",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/padic_hsci.md", "agent-code/collatz-research/divergence_dual_tail_companion.md", "agent-code/collatz-research/divergence_companion_charge_rounding.md"]
+    },
+    {
+      "id": "THM-FIBER-EQUIV-01",
+      "kind": "equivalence",
+      "status": "closed",
+      "statement": "For odd n, define M_r(n)=min{z positive odd: U^r(z)=U^r(n)}. The assertion that every odd n>1 has some r with M_r(n)<n is equivalent to the full Collatz conjecture by strong induction.",
+      "dependencies": ["DEF-U-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/inverse_fiber.md", "agent-code/collatz-research/inverse/InverseFiberSkeleton.lean"]
+    },
+    {
+      "id": "THM-FIBER-ENV-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "M_r(n) is the minimum of an explicit finite family of affine ancestor scores subject to congruence, positivity, and valuation conditions; it satisfies an exact nested Bellman decomposition. Fixed-progression lower envelopes are concave and eventually affine.",
+      "dependencies": ["THM-AFFINE-01", "THM-FIBER-EQUIV-01"],
+      "provenance": "project result",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/inverse_fiber.md"]
+    },
+    {
+      "id": "OPEN-FIBER-EXT-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "Stationary inverse-fiber extinction: for every positive odd n>1, there is a depth r with M_r(n)<n.",
+      "equivalence": "Equivalent to the full Collatz conjecture by THM-FIBER-EQUIV-01; this route is a clean reformulation but does not yet reduce the global difficulty.",
+      "dependencies": ["THM-FIBER-EQUIV-01", "THM-FIBER-ENV-01"],
+      "provenance": "project frontier",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-audit-bundle/source_documents/collatz_stationary_inverse_fiber.tex"]
+    },
+    {
+      "id": "THM-CYCLE-REDUCE-01",
+      "kind": "computer_assisted_reduction",
+      "status": "certified",
+      "statement": "A primitive nontrivial positive accelerated cycle yields a strict-record one-strip valuation word: A=ceil(r log_2 3), D=2^A-3^r>0, D x_0=C(a), min x_i>2^71, and r>=72,057,431,991.",
+      "dependencies": ["THM-AFFINE-01", "CERT-SHELL-01", "LIT-BARINA-2025", "LIT-RHIN-1987", "LIT-SIMONS-DEWEGER-2005"],
+      "provenance": "project reduction using imported verification and logarithmic-form bounds",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/cycle_exclusion.md", "agent-code/collatz-audit-bundle/Collatz_All_Depth_Audit.tex"]
+    },
+    {
+      "id": "THM-CYCLE-COMPLEXITY-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "Any hypothetical integer cycle has growing height-transition complexity; binary height transitions exceed r/193 and support exceeds r/386. Fixed support, fixed transition count, the formal ramp family, Christoffel words, and all fixed finite deformations treated in the corpus are excluded.",
+      "dependencies": ["THM-CYCLE-REDUCE-01"],
+      "provenance": "project result family",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/cycle_two_level_transition_core.md", "agent-code/collatz-research/transition_entropy_linear.md"]
+    },
+    {
+      "id": "THM-CYCLE-SINGLECLASS-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "For a word, g=gcd(D,C_j) is rotation-invariant and q=D/g is the reduced denominator. Rotation recurrences, all-height dyadic and ternary residues, terminal boundary coupling, ordered residue equations, and the block Smith normal form collapse to the same rank-one global class C mod D; q=1 is exactly integer lifting.",
+      "dependencies": ["THM-CYCLE-REDUCE-01"],
+      "provenance": "project result; strengthened by post-master R095-R097 and R100",
+      "evidence": ["agent-code/collatz-research/cycle_one_drop_terminal_boundary_coupling_no_go.md", "agent-code/collatz-research/cycle_one_drop_all_height_ordered_residue_no_go.md", "agent-code/collatz-research/cycle_one_drop_termwise_transition_ordered_residue_no_go.md", "agent-code/collatz-research/cycle_universal_word_independent_obstruction_audit.md"]
+    },
+    {
+      "id": "THM-CYCLE-SPACING-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For a primitive integer cycle, coprimality to 6 yields the absolute spacing M>=m+3r-4 and a corresponding reciprocal-packing product bound; these bounds do not contradict the known size ranges.",
+      "dependencies": ["THM-CYCLE-REDUCE-01"],
+      "provenance": "project post-master result (R098)",
+      "evidence": ["agent-code/collatz-research/cycle_general_minmax_product_no_go.md"]
+    },
+    {
+      "id": "THM-CYCLE-BOUNDARY-WIND-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let rho=[-C(3^r)^{-1}]_{2^A}, let Z=(3^r rho+C)/2^A, and put g=gcd(C,D), q=D/g, n=C/g. Then 0<Z<3^r, Z=[C(2^A)^{-1}]_{3^r}, and kappa=(q rho-n)/2^A=(rho-Z)/g is an integer. If q>1, gcd(kappa,q)=1 and gcd(rho-Z,D)=g. In the audited cycle range, q=1 is equivalent to kappa=0.",
+      "dependencies": ["THM-AFFINE-01", "THM-CYCLE-REDUCE-01", "THM-CYCLE-SINGLECLASS-01"],
+      "provenance": "project result, 26 August 2026",
+      "evidence": ["agent-code/collatz-research/cycle_full_boundary_winding.md", "agent-code/collatz-research/cycle_full_boundary_winding_attack_2026-08-26.md", "agent-code/collatz-research/cycles/full_boundary_collision_probe.js", "agent-code/collatz-research/cycles/full_boundary_collision_random.js", "agent-code/collatz-research/cycles/full_boundary_move_probe.js"]
+    },
+    {
+      "id": "THM-CYCLE-WIND-CST-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "If a reduced rational cycle is rotated to a strict least numerator and its full boundary winding is kappa=-h<0, then 1<=h<r/3 and the associated canonical integer shortcut segment is coefficient-contractive, ends above its start, and has that start strictly below every later odd state. Thus negative winding would give a cycle-specialized counterexample to the minimum-start formulation of Terras's coefficient-stopping-time conjecture.",
+      "dependencies": ["THM-CYCLE-BOUNDARY-WIND-01", "THM-AFFINE-01", "LIT-ROZIER-TERRACOL-2026", "LIT-TERRAS-1976"],
+      "provenance": "project result, 26 August 2026",
+      "evidence": ["agent-code/collatz-research/cycle_full_boundary_winding.md"]
+    },
+    {
+      "id": "THM-CYCLE-SHADOW-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For the canonical accelerated states y_i of a strict one-strip word, the paired 3x-1 shadow m_i=3^i 2^(A-A_i)-y_i satisfies 2^(a_i)m_(i+1)=3m_i-1. Its absolute loss T=m_0-m_r obeys T=D+Z-rho, so strict positive boundary winding rho>Z is equivalent to T<D, equivalently sum_i (2^(a_i)-3)m_(i+1)<3D-r.",
+      "dependencies": ["THM-CYCLE-BOUNDARY-WIND-01", "THM-AFFINE-01"],
+      "provenance": "project post-master result (R110)",
+      "evidence": ["agent-code/collatz-research/cycle_boundary_anchored_lattice_attack_2026-08-26.md", "agent-code/collatz-research/cycles/full_boundary_theorem_probe.js"]
+    },
+    {
+      "id": "NOGO-CYCLE-LATTICE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The complete terminal-preserving subideal lattice of relative carry differences, wraps, and colors cannot determine the top winding sign when the absolute anchor is omitted. An exact 30-vertex translated lattice has a unique failing top and 29 descending proper subideals. The attempted odd-endpoint repair is not inherited under canonical corner deletion, so a valid proof must retain the unshifted front term, the actual state-dependent wraps, or the absolute paired-shadow loss.",
+      "dependencies": ["THM-CYCLE-SHADOW-01", "THM-FCD-TERMINAL-FLUX-01", "NOGO-FCD-TERMINAL-PARITY-01"],
+      "provenance": "project post-master method ceiling (R110)",
+      "evidence": ["agent-code/collatz-research/cycle_boundary_anchored_lattice_attack_2026-08-26.md", "agent-code/collatz-research/q2_parity_flux_compression.md", "agent-code/collatz-research/corner_flux_solve.md", "agent-code/collatz-research/inverse/q2_full_subideal_virtual_probe.js"]
+    },
+    {
+      "id": "OPEN-CYCLE-INT-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "Cycle integrality obstruction: for every primitive strict-record word with A=ceil(r log_2 3), D=2^A-3^r does not divide C(a), except for the trivial cycle word; equivalently q>1.",
+      "dependencies": ["THM-CYCLE-REDUCE-01", "THM-CYCLE-COMPLEXITY-01", "THM-CYCLE-SINGLECLASS-01", "THM-CYCLE-BOUNDARY-WIND-01"],
+      "provenance": "project frontier",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/cycle_full_boundary_winding.md"]
+    },
+    {
+      "id": "OPEN-CYCLE-WIND-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "Strict positive boundary winding: every nontrivial primitive strict-record one-strip word has kappa>0, equivalently its full canonical dyadic boundary representative rho is strictly larger than its ternary endpoint Z, equivalently its absolute paired-shadow loss T is smaller than D.",
+      "equivalence": "This is a sufficient strengthening of OPEN-CYCLE-INT-01, not a weaker substitute. Its proof excludes every nontrivial positive cycle after THM-CYCLE-REDUCE-01, but it does not address divergence. Exhaustive and randomized searches are falsification evidence only.",
+      "dependencies": ["THM-CYCLE-BOUNDARY-WIND-01", "THM-CYCLE-WIND-CST-01", "THM-CYCLE-SHADOW-01", "NOGO-CYCLE-LATTICE-01", "THM-CYCLE-REDUCE-01"],
+      "provenance": "project frontier, 26 August 2026",
+      "evidence": ["agent-code/collatz-research/cycle_full_boundary_winding.md", "agent-code/collatz-research/cycle_boundary_anchored_lattice_attack_2026-08-26.md", "agent-code/collatz-research/cycles/full_boundary_collision_probe.js", "agent-code/collatz-research/cycles/full_boundary_collision_random.js", "agent-code/collatz-research/cycles/full_boundary_move_probe.js", "agent-code/collatz-research/cycles/full_boundary_suffix_depth_probe.js"]
+    },
+    {
+      "id": "THM-FCD-REDUCE-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "For a nonboundary first coefficient-crossing word w, let rho be its canonical dyadic representative and Z its endpoint. A least-state integer cycle supplies rho=least state and Z>=rho. In reduced-modulus form, tau=[C M^{-1}]_D and tau>=s/3 suffices for rho>Z.",
+      "dependencies": ["THM-AFFINE-01", "THM-CYCLE-REDUCE-01", "LIT-ROZIER-TERRACOL-2026"],
+      "provenance": "project reduction; tied to coefficient stopping-time terminology",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/cycle_first_crossing.md"]
+    },
+    {
+      "id": "THM-FCD-FINITE-01",
+      "kind": "computer_assisted_theorem_family",
+      "status": "certified",
+      "statement": "Exact exhaustive and meet-in-the-middle certificates establish the reduced-modulus First-Crossing Descent inequality through weight 40; several q=2 and q=4 structural layers and the formal ramp family are also closed. None is an all-weight proof.",
+      "dependencies": ["THM-FCD-REDUCE-01"],
+      "provenance": "project finite certificates",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/fcd_q2_zero_lift.md", "agent-code/collatz-research/q2_ramp_fcd_complete.md", "agent-code/collatz-research/cycles/certificate_hashes.sha256"]
+    },
+    {
+      "id": "THM-FCD-ONECORNER-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Every anchored q_s=2, b=1 profile with exactly one removable Ferrers corner is the ramp-plus-one-drop word (1^(s-2),e,2). The all-depth ramp theorem therefore excludes every strict and equality target in the complete one-corner sector, so every hypothetical target has at least two corners.",
+      "dependencies": ["THM-FCD-REDUCE-01", "THM-FCD-FINITE-01"],
+      "provenance": "project post-master result (R104)",
+      "evidence": ["agent-code/collatz-research/q2_one_corner_complete.md", "agent-code/collatz-research/q2_ramp_fcd_complete.md", "agent-code/collatz-research/inverse/q2_one_corner_complete_certificate.js", "agent-code/collatz-research/inverse/q2_ramp_fcd_certificate.js"]
+    },
+    {
+      "id": "THM-FCD-TWOCORNER-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "Every anchored q_s=2, b=1 strict or equality target has at least three removable Ferrers corners. The complete two-corner family has an analytic cutoff s<415, and exact integer enumeration excludes all 2,816,721 smaller profiles, including the denominator-one equality case.",
+      "dependencies": ["THM-FCD-ONECORNER-01", "THM-FCD-REDUCE-01"],
+      "provenance": "project post-master result (R105)",
+      "evidence": ["agent-code/collatz-research/q2_two_corner_complete.md", "agent-code/collatz-research/inverse/q2_two_corner_certificate.js"]
+    },
+    {
+      "id": "THM-FCD-THREECORNER-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "Every anchored q_s=2, b=1 strict or equality target has at least four removable Ferrers corners. The complete three-corner family has an analytic cutoff s<1115; an exact fixed-a meet-in-the-middle certificate covers 4,749,737,770 cylinder-admissible profiles and finds no coarse residue-bucket intersection with the complete target interval.",
+      "dependencies": ["THM-FCD-TWOCORNER-01", "THM-FCD-REDUCE-01"],
+      "provenance": "project post-master result (R109)",
+      "evidence": ["agent-code/collatz-research/q2_three_corner_complete.md", "agent-code/collatz-research/inverse/q2_three_corner_certificate.js"]
+    },
+    {
+      "id": "THM-FCD-FOURCORNER-01",
+      "kind": "computer_assisted_theorem",
+      "status": "certified",
+      "statement": "Every anchored q_s=2, b=1 strict or equality target has at least five removable Ferrers corners. The complete four-corner family has an analytic cutoff s<2672; exact dyadic-prefix and reduced-residue certificates cover every smaller q_s=2 row and find no strict or equality target.",
+      "dependencies": ["THM-FCD-THREECORNER-01", "THM-FCD-REDUCE-01"],
+      "provenance": "project post-master result (R111)",
+      "evidence": ["agent-code/collatz-research/q2_four_corner_complete.md", "agent-code/collatz-research/inverse/q2_four_corner_count_probe.js", "agent-code/collatz-research/inverse/q2_four_corner_low_residue_certificate.js", "agent-code/collatz-research/inverse/q2_four_corner_terminal_seed_row_certificate.js", "agent-code/collatz-research/inverse/q2_four_corner_terminal_seed_driver.js"]
+    },
+    {
+      "id": "THM-FCD-CORNERGROWTH-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "If c is the removable-corner count of an anchored q_s=2, b=1 strict or equality target, then 2^c>(s-1)/log_2(307s^15). Hence c>=log_2 s-log_2 log s-O(1), and the target has a growing near-linear family of distinct dyadic corner-subset sums.",
+      "dependencies": ["THM-FCD-REDUCE-01", "THM-FCD-ONECORNER-01"],
+      "provenance": "project post-master result (R106)",
+      "evidence": ["agent-code/collatz-research/q2_corner_growth.md"]
+    },
+    {
+      "id": "THM-FCD-SHARP-CORNERGROWTH-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Let alpha=log_2(3), beta=alpha-1, R_s=log_2(307s^15), and X_s=(s-1+R_s/beta)/(log_2(154s^15)+R_s/beta). If c is the removable-corner count of an anchored q_s=2, b=1 strict or equality target, then alpha^(c-1)>X_s and 2^(c-1)>X_s^(log_alpha 2). The exponent log_alpha 2 is 1.505007...>3/2.",
+      "dependencies": ["THM-FCD-CORNERGROWTH-01", "THM-FCD-FOURCORNER-01"],
+      "provenance": "project post-master result (R112)",
+      "evidence": ["agent-code/collatz-research/q2_sharp_corner_growth.md", "agent-code/collatz-research/inverse/q2_sharp_corner_growth_certificate.js"]
+    },
+    {
+      "id": "THM-FCD-TERMINAL-FLUX-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "Any q_s=2, b=1 FCD failure has a terminal-preserving minimal failure for which every nonempty subset of the nonterminal corners obeys the exact all-subset flux identity. With the sharp height recurrence, this synchronized cube has more than X_s^(log_(log_2 3) 2) distinct vertices, hence more than (s/O(log s))^1.505.",
+      "dependencies": ["THM-FCD-SHARP-CORNERGROWTH-01", "THM-FCD-REDUCE-01"],
+      "provenance": "project post-master result (R107), sharpened in R112",
+      "evidence": ["agent-code/collatz-research/q2_terminal_preserving_flux.md", "agent-code/collatz-research/q2_sharp_corner_growth.md", "agent-code/collatz-research/fcd_order_ideal.md"]
+    },
+    {
+      "id": "NOGO-FCD-TERMINAL-PARITY-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Terminal-preserving corner deletion does not preserve terminal exactness of the canonical length-N cylinder. At s=8, the odd-endpoint profile (0,0,0,0,0,0,2,4) has canonical point (3903,3127), while deleting corner (6,2) gives (191,154). Hence the attempted endpoint-parity compression and zero next-inverse-bit condition are conditional only and cannot be used in FCD without an additional terminal-lift theorem.",
+      "dependencies": ["THM-FCD-TERMINAL-FLUX-01", "THM-AFFINE-01"],
+      "provenance": "project post-master correction and method ceiling (R113)",
+      "evidence": ["agent-code/collatz-research/q2_parity_flux_compression.md", "agent-code/collatz-research/inverse/q2_terminal_deletion_parity_probe.js", "agent-code/collatz-research/inverse/q2_parity_flux_virtual_probe.js", "agent-code/collatz-research/inverse/q2_parity_flux_small_search.js", "agent-code/collatz-research/inverse/q2_even_corner_chain_probe.js", "agent-code/collatz-research/inverse/q2_parity_full_lattice_probe.js"]
+    },
+    {
+      "id": "NOGO-FCD-CENTERED-FILTER-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The fixed centered weights epsilon_c=V_c mod 2, ell_c=L_c-epsilon_c M, and nu_c=V_c-epsilon_c D do not linearize the unconditional FCD lattice because the actual cover wrap depends on the profile. In the s=8 terminal-parity witness, V_c is even but floor((rho+L_c)/M)=1. The polynomial-time filter dynamic program is therefore a conditional-model diagnostic, not an FCD minimality theorem.",
+      "dependencies": ["NOGO-FCD-TERMINAL-PARITY-01", "THM-FCD-TERMINAL-FLUX-01"],
+      "provenance": "project post-master retraction and method ceiling (R114)",
+      "evidence": ["agent-code/collatz-research/q2_centered_filter_reduction.md", "agent-code/collatz-research/inverse/q2_centered_filter_probe.js"]
+    },
+    {
+      "id": "THM-FCD-PARITY-FLUX-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Retracted identifier retained for AntiDrift provenance. The former unconditional parity-flux statement is false because canonical terminal-preserving deletion need not preserve endpoint oddness. The corrected result is NOGO-FCD-TERMINAL-PARITY-01.",
+      "dependencies": ["NOGO-FCD-TERMINAL-PARITY-01"],
+      "provenance": "deprecated AntiDrift alias for the corrected R113 claim",
+      "evidence": ["agent-code/collatz-research/q2_parity_flux_compression.md", "agent-code/collatz-research/inverse/q2_terminal_deletion_parity_probe.js"]
+    },
+    {
+      "id": "THM-FCD-CENTERED-FILTER-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Retracted identifier retained for AntiDrift provenance. The former unconditional centered-filter statement is false because the actual dyadic wrap is state-dependent. The corrected result is NOGO-FCD-CENTERED-FILTER-01.",
+      "dependencies": ["NOGO-FCD-CENTERED-FILTER-01"],
+      "provenance": "deprecated AntiDrift alias for the corrected R114 claim",
+      "evidence": ["agent-code/collatz-research/q2_centered_filter_reduction.md", "agent-code/collatz-research/inverse/q2_terminal_deletion_parity_probe.js"]
+    },
+    {
+      "id": "THM-FCD-PACKET-LIFT-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "Every anchored q_s=2, b=1 profile with c corners has a unique corner-packet normal form and an exact closed carry formula. For each fixed c, every strict or equality target lies in an effectively finite range; the first propagating cutoffs for c=2,3,4,5 are 415, 1115, 2672, and 6071. The lifted residue hat(rho) modulo 2M records endpoint parity and obeys an exact deletion law, repairing the terminal bit lost by canonical projection without proving unrestricted FCD.",
+      "dependencies": ["THM-FCD-REDUCE-01", "NOGO-FCD-TERMINAL-PARITY-01"],
+      "provenance": "project post-master result and corrected container (R115)",
+      "evidence": ["agent-code/collatz-research/q2_exactness_lifted_packet_container.md", "agent-code/collatz-research/inverse/q2_corner_packet_container_certificate.js"]
+    },
+    {
+      "id": "NOGO-FCD-EXACTNESS-CONTRACTION-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Terminal exactness alone does not force a corner-packet contraction. Through s=20 there are 21,839 odd-endpoint profiles with no exact single-packet deletion, and through s=18 there are 19 with no exact consecutive-block deletion. The first witnesses are descending. Thus a valid contraction theorem must use FCD non-descent together with the lifted bit.",
+      "dependencies": ["THM-FCD-PACKET-LIFT-01"],
+      "provenance": "project exact method ceiling following R115",
+      "evidence": ["agent-code/collatz-research/q2_exactness_lifted_packet_container.md", "agent-code/collatz-research/inverse/q2_lifted_packet_contraction_probe.js", "agent-code/collatz-research/inverse/q2_lifted_block_contraction_probe.js"]
+    },
+    {
+      "id": "NOGO-FCD-LIFTED-LATTICE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Top endpoint exactness together with the complete proper-subideal FCD coloring still does not determine the absolute anchor. For the s=8 shape (0,0,1,1,2,2,3,4), seven translated virtual carries have odd top endpoint and all 29 proper terminal-preserving subideals descending, while none is the anchored Collatz carry.",
+      "dependencies": ["THM-FCD-PACKET-LIFT-01", "NOGO-CYCLE-LATTICE-01"],
+      "provenance": "project exact translated-lattice method ceiling following R115",
+      "evidence": ["agent-code/collatz-research/q2_exactness_lifted_packet_container.md", "agent-code/collatz-research/inverse/q2_lifted_full_lattice_virtual_probe.js"]
+    },
+    {
+      "id": "OPEN-FCD-PACKET-CONTRACTION-01",
+      "kind": "open_subproblem",
+      "status": "open",
+      "statement": "Packet contraction: every exact q_s=2, b=1 non-descent with at least five corners has a proper terminal-preserving packet deletion whose lifted endpoint remains exact and whose FCD color remains zero. Repeated contraction would reduce the q_s=2 branch to the excluded four-corner sector, but this statement is not proved and would not by itself close the other FCD weights.",
+      "dependencies": ["THM-FCD-PACKET-LIFT-01", "THM-FCD-FOURCORNER-01", "NOGO-FCD-EXACTNESS-CONTRACTION-01", "NOGO-FCD-LIFTED-LATTICE-01"],
+      "provenance": "project post-master localized gate (R115)",
+      "evidence": ["agent-code/collatz-research/q2_exactness_lifted_packet_container.md"]
+    },
+    {
+      "id": "OPEN-FCD-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "First-Crossing Descent: every nonboundary coefficient first-crossing shortcut word satisfies rho(w)>Z(w); equivalently, prove the all-weight cumulative-wrap inequality, for example via tau>=s/3.",
+      "dependencies": ["THM-FCD-REDUCE-01", "THM-FCD-FINITE-01", "THM-FCD-ONECORNER-01", "THM-FCD-TWOCORNER-01", "THM-FCD-THREECORNER-01", "THM-FCD-FOURCORNER-01", "THM-FCD-SHARP-CORNERGROWTH-01", "THM-FCD-TERMINAL-FLUX-01", "NOGO-FCD-TERMINAL-PARITY-01", "NOGO-FCD-CENTERED-FILTER-01", "THM-FCD-PACKET-LIFT-01", "OPEN-FCD-PACKET-CONTRACTION-01"],
+      "provenance": "project frontier",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/q2_one_corner_complete.md", "agent-code/collatz-research/q2_two_corner_complete.md", "agent-code/collatz-research/q2_three_corner_complete.md", "agent-code/collatz-research/q2_four_corner_complete.md", "agent-code/collatz-research/q2_sharp_corner_growth.md", "agent-code/collatz-research/q2_terminal_preserving_flux.md", "agent-code/collatz-research/q2_parity_flux_compression.md", "agent-code/collatz-research/q2_centered_filter_reduction.md", "agent-code/collatz-research/q2_exactness_lifted_packet_container.md", "agent-code/collatz-research/inverse/q2_corner_packet_container_certificate.js"]
+    },
+    {
+      "id": "THM-ONEDROP-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "In the one-drop cycle specialization, numerous local, cyclotomic, resultant, norm, factor-language, all-height, and ordered-residue consequences are proved; exact search covers primitive strict-record profiles through r=34, and the actual-factor argument forces rise U>=408,126 for a survivor.",
+      "dependencies": ["THM-CYCLE-REDUCE-01", "THM-CYCLE-COMPLEXITY-01"],
+      "provenance": "project result family (roughly R053-R097)",
+      "evidence": ["agent-code/collatz-research/MASTER_PROOF_SKELETON.md", "agent-code/collatz-research/cycle_one_drop_actual_factor_complexity_gate.md", "agent-code/collatz-research/cycles/certificate_hashes.sha256"]
+    },
+    {
+      "id": "OPEN-ONEDROP-01",
+      "kind": "open_subproblem",
+      "status": "open",
+      "statement": "The one-drop all-depth residual still requires a global q=1-sensitive late-lift/compression theorem. Solving it would close only the one-drop sector, not all cycles and not full Collatz.",
+      "dependencies": ["THM-ONEDROP-01", "THM-CYCLE-SINGLECLASS-01"],
+      "provenance": "project frontier subproblem",
+      "evidence": ["agent-code/collatz-research/cycle_one_drop_termwise_transition_ordered_residue_no_go.md"]
+    },
+    {
+      "id": "DEF-REWRITE-YAH-01",
+      "kind": "definition",
+      "status": "closed",
+      "statement": "Let R_T be the Yolcu-Aaronson-Heule 11-rule string rewriting system on mixed binary-ternary numerals. Its nine auxiliary rules preserve the represented integer, while the two terminal dynamic rules implement the shortcut Collatz map T(n)=n/2 for even n and T(n)=(3n+1)/2 for odd n.",
+      "dependencies": ["LIT-YAH-2023"],
+      "provenance": "imported exact representation",
+      "evidence": ["LIT-YAH-2023", "agent-code/collatz-audit-bundle/source_documents/collatz_continuation_report.md"]
+    },
+    {
+      "id": "THM-REWRITE-SIM-01",
+      "kind": "equivalence",
+      "status": "closed",
+      "statement": "The full mixed binary-ternary system R_T is terminating on all strings if and only if the shortcut Collatz map T is convergent on every positive integer. The canonical-string reduction, value preservation, availability of a dynamic step, and termination of auxiliary-only rewriting prevent syntactic stuttering from creating a false infinite derivation.",
+      "dependencies": ["DEF-REWRITE-YAH-01", "LIT-YAH-2023"],
+      "provenance": "Yolcu-Aaronson-Heule simulation theorem",
+      "evidence": ["LIT-YAH-2023", "agent-code/collatz-audit-bundle/Collatz_All_Depth_Audit.tex"]
+    },
+    {
+      "id": "THM-REWRITE-MACRO-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "Fix the exceptional odd dynamic rule E and let R_0=R_T minus E. Yolcu-Aaronson-Heule prove R_0 terminating (indeed every one-rule-deleted subsystem terminates). The project continuation gives an explicit ordinal phase rank below omega^3, unique R_0-normal form on canonical strings, and shows that one E-step followed by R_0-normalization is exactly one accelerated odd Collatz step, independently of normalization order.",
+      "dependencies": ["DEF-REWRITE-YAH-01", "LIT-YAH-2023"],
+      "provenance": "published deletion theorem plus project macrosemantic continuation",
+      "evidence": ["LIT-YAH-2023", "agent-code/collatz-audit-bundle/source_documents/collatz_continuation_report.md", "agent-code/collatz-audit-bundle/source_documents/collatz_marked_carry_paper.tex"]
+    },
+    {
+      "id": "OPEN-REWRITE-RELTERM-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "Prove that the exceptional odd rule E is terminating relative to R_0: no infinite R_T derivation applies E infinitely often. Equivalently, supply a finitely checkable well-founded macro-rank, a sound finite union of well-founded transition invariants, or another termination certificate covering every exceptional macrostep.",
+      "equivalence": "By THM-REWRITE-SIM-01 and THM-REWRITE-MACRO-01, this relative-termination statement is equivalent to the full Collatz conjecture. It is an exact automation target, not a reduction in mathematical difficulty.",
+      "dependencies": ["THM-REWRITE-SIM-01", "THM-REWRITE-MACRO-01"],
+      "provenance": "Yolcu-Aaronson-Heule residual termination obligation, sharpened by the project continuation",
+      "evidence": ["LIT-YAH-2023", "agent-code/collatz-audit-bundle/source_documents/collatz_continuation_report.md", "agent-code/collatz-audit-bundle/source_documents/synchronization_paper_report.md"]
+    },
+    {
+      "id": "THM-STOPPING-DESCENT-01",
+      "kind": "equivalence",
+      "status": "closed",
+      "statement": "For the shortcut Collatz map T, the ordinary Collatz conjecture is equivalent to: every integer n>1 has some finite iterate T^k(n)<n. The forward implication uses the eventual visit to 1; the reverse implication is strong induction on n.",
+      "dependencies": ["DEF-U-01", "LIT-TERRAS-1976"],
+      "provenance": "standard stopping-time equivalence",
+      "evidence": ["LIT-TERRAS-1976", "agent-code/collatz-research/MASTER_PROOF_SKELETON.md"]
+    },
+    {
+      "id": "THM-PARITY-CYLINDER-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "A prescribed shortcut-parity vector of length k determines one residue class modulo 2^k, and T^k is an explicit affine function on that cylinder. Consequently, a claimed descent on a finite cylinder can be checked exactly by integer arithmetic, with any bounded exceptional prefix checked separately.",
+      "dependencies": ["THM-AFFINE-01", "LIT-TERRAS-1976"],
+      "provenance": "classical parity-vector bijection plus project affine normalization",
+      "evidence": ["LIT-TERRAS-1976", "agent-code/collatz-research/MASTER_PROOF_SKELETON.md"]
+    },
+    {
+      "id": "THM-STRONG-SUFFICIENT-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "The modular Collatz graph has explicit strongly sufficient sets. In particular, every positive orbit contains an integer congruent to 2 modulo 9, and every nontrivial cycle or divergent orbit contains an integer congruent to 20 modulo 27. These are exact orbit-hitting constraints, not convergence results.",
+      "dependencies": ["LIT-MONKS-ETAL-2013"],
+      "provenance": "imported theorem family",
+      "evidence": ["LIT-MONKS-ETAL-2013"]
+    },
+    {
+      "id": "THM-REVERSE-DENSITY-01",
+      "kind": "computer_assisted_theorem",
+      "status": "closed",
+      "statement": "Difference inequalities for inverse 3x+1 trees, with a computer-aided verification step, prove that at least x^0.84 positive integers below x have 1 in their forward orbit.",
+      "dependencies": ["LIT-KRASIKOV-LAGARIAS-2003"],
+      "provenance": "imported Krasikov-Lagarias theorem",
+      "evidence": ["LIT-KRASIKOV-LAGARIAS-2003"]
+    },
+    {
+      "id": "THM-TAO-ALMOSTALL-01",
+      "kind": "theorem",
+      "status": "closed",
+      "statement": "For every function f(N) tending to infinity, the minimum of the Collatz orbit of N is at most f(N) for almost all N in logarithmic density.",
+      "dependencies": ["LIT-TAO-2022"],
+      "provenance": "imported Tao theorem",
+      "evidence": ["LIT-TAO-2022"]
+    },
+    {
+      "id": "OPEN-DESCENT-COVER-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "Construct a finite, independently checkable family of parity/residue cylinders covering every integer n>1 such that each cylinder carries a uniform exact certificate that some prescribed finite Collatz iterate is less than n, with all bounded exceptional representatives discharged explicitly.",
+      "dependencies": ["THM-STOPPING-DESCENT-01", "THM-PARITY-CYLINDER-01", "THM-STRONG-SUFFICIENT-01", "LIT-BARINA-2025", "LIT-APPLEGATE-LAGARIAS-2003"],
+      "provenance": "external-program synthesis: finite residue-cylinder descent certificate",
+      "evidence": ["LIT-TERRAS-1976", "LIT-MONKS-ETAL-2013", "LIT-BARINA-2025", "LIT-APPLEGATE-LAGARIAS-2003"]
+    },
+    {
+      "id": "NOGO-TYPICAL-UNIFORM-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "Stochastic drift laws, logarithmic-density almost-all descent, and power-law lower bounds for the inverse tree do not by themselves exclude one sparse exceptional divergent orbit or cycle. A full proof needs an additional deterministic uniformization, descent-cover, or minimal-counterexample mechanism.",
+      "dependencies": ["THM-REVERSE-DENSITY-01", "THM-TAO-ALMOSTALL-01", "LIT-KONTOROVICH-SINAI-2002", "LIT-LAGARIAS-WEISS-1992"],
+      "provenance": "logical boundary of statistical approaches",
+      "evidence": ["LIT-KRASIKOV-LAGARIAS-2003", "LIT-TAO-2022", "LIT-KONTOROVICH-SINAI-2002", "LIT-LAGARIAS-WEISS-1992"]
+    },
+    {
+      "id": "DEF-QSERIES-01",
+      "kind": "imported_definition",
+      "status": "closed",
+      "statement": "Let T be the shortcut Collatz map on Z_2. For odd A,B in F_2[[q]], define T_{A,B}(f)=f/q when f(0)=0 and T_{A,B}(f)=(Af+B)/q when f(0)=1. A conjugacy H:Z_2->F_2[[q]] satisfies H∘T=T_{A,B}∘H; a series is a polynomial exactly when it has finite q-support.",
+      "dependencies": ["LIT-MONKS-2025"],
+      "provenance": "imported Monks q-analog framework",
+      "evidence": ["LIT-MONKS-2025", "agent-code/collatz-frontier/raw-literature/LIT-MONKS-2025/source/main.tex"]
+    },
+    {
+      "id": "THM-QCONJUGACY-01",
+      "kind": "theorem_family",
+      "status": "closed",
+      "statement": "Every T_{A,B} with odd A,B is topologically conjugate to T on Z_2. For the selected map T_{1,1+q^2}, polynomiality is invariant under one forward step, and every polynomial orbit eventually reaches the 2-cycle {1,q} or one of the fixed points 0 and 1+q.",
+      "dependencies": ["DEF-QSERIES-01", "LIT-MONKS-2025"],
+      "provenance": "imported Theorems 1 and 3 of Monks",
+      "evidence": ["LIT-MONKS-2025", "agent-code/collatz-frontier/raw-literature/LIT-MONKS-2025/source/main.tex"]
+    },
+    {
+      "id": "OPEN-QPOLY-01",
+      "kind": "open_gate",
+      "status": "open",
+      "statement": "For a conjugacy H from T on Z_2 to T_{1,1+q^2} on F_2[[q]], prove that H(n) is a polynomial for every positive integer n.",
+      "equivalence": "Monks's Conjecture 2 is equivalent to the ordinary 3x+1 conjecture: polynomiality places H(n) in the classified polynomial dynamics, while conjugacy transfers eventual arrival at the appropriate finite orbit back to eventual arrival at 1 under T.",
+      "dependencies": ["THM-QCONJUGACY-01", "LIT-MONKS-2025"],
+      "provenance": "Conjecture 2 of Monks",
+      "evidence": ["LIT-MONKS-2025", "agent-code/collatz-frontier/raw-literature/LIT-MONKS-2025/source/main.tex"]
+    },
+    {
+      "id": "NOGO-QANALOG-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The natural coefficient-reading correspondence between ordinary integers and F_2[q] is not a Collatz conjugacy. Consequently, proving termination for polynomial q-analog inputs does not address integer Collatz orbits unless one also proves that the actual conjugacy sends every positive integer into F_2[q]; that missing polynomiality assertion is itself equivalent to Collatz.",
+      "dependencies": ["THM-QCONJUGACY-01", "OPEN-QPOLY-01"],
+      "provenance": "logical boundary stated in Monks and normalized by this audit",
+      "evidence": ["LIT-MONKS-2025", "agent-code/collatz-frontier/raw-literature/LIT-MONKS-2025/source/main.tex"]
+    },
+    {
+      "id": "NOGO-CYCLE-UNIVERSAL-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "All word-independent rotation, prime-power, Smith-normal-form, quadratic-residue, and linear-conjugacy tests audited in R100 recover only the class C mod D. The canonical rational orbit already has the positivity and least-state geometry. Only absolute integer spacing and the paired 3m-1 path remain genuinely q=1-sensitive, and no compression theorem is known.",
+      "dependencies": ["THM-CYCLE-SINGLECLASS-01", "THM-CYCLE-SPACING-01"],
+      "provenance": "project post-master audit (R100)",
+      "evidence": ["agent-code/collatz-research/cycle_universal_word_independent_obstruction_audit.md"]
+    },
+    {
+      "id": "NOGO-REWRITE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The exact quotient macrograph of the rewrite-system route is the accelerated Collatz graph. The representation and automated certificate language are useful, but the residual relative-termination gate is equivalent to Collatz unless a genuinely new finitely described rank or transition invariant is supplied.",
+      "dependencies": ["THM-REWRITE-SIM-01", "THM-REWRITE-MACRO-01", "OPEN-REWRITE-RELTERM-01"],
+      "provenance": "project audit of a literature-derived representation",
+      "evidence": ["agent-code/collatz-audit-bundle/source_documents/collatz_continuation_report.md", "agent-code/collatz-audit-bundle/source_documents/collatz_marked_carry_paper.tex"]
+    },
+    {
+      "id": "NOGO-NEGATIVE-01",
+      "kind": "method_ceiling",
+      "status": "method_ceiling",
+      "statement": "The all-prefix negative-map supercriticality statement remains open, while the target-one consequence it was meant to deliver is already certified. It is retained as a research question, not a full Collatz skeleton.",
+      "dependencies": ["CERT-TARGET1-01"],
+      "provenance": "project audit",
+      "evidence": ["agent-code/collatz-research/negative_supercritical.md", "agent-code/collatz-research/MASTER_PROOF_SKELETON.md"]
+    }
+  ]
+}

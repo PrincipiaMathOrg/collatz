@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+
+\title{Fixed-seed spacing on an interior record-atom tail}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+ x_{t+1}=\Up(x_t):=\frac{3x_t+1}{2^{a_t}},
+ \qquad
+ a_t=v_2(3x_t+1),
+ \qquad
+ A_t=\sum_{h<t}a_h,
+ \tag{1}
+\]
+be an injective infinite accelerated orbit of positive odd integers.  Put
+\[
+ Q_t:=\frac{3^t}{2^{A_t}},
+ \qquad
+ \mathcal K:=\lim_{t\to\infty}\frac{x_t}{Q_t}<\infty,
+ \tag{2}
+\]
+and suppose that $Q_t\to\infty$.  Let
+\[
+ j_0<j_1<j_2<\cdots
+ \tag{3}
+\]
+be consecutive coefficient tail records.  Assume that every record gap
+from $j_0$ onward has one of the four exponent words
+\[
+ \mathcal A_4:=\{1,12,1113,1122\}.
+ \tag{4}
+\]
+Write $\omega_i\in\mathcal A_4$ for the gap from $j_i$ to $j_{i+1}$.
+For an atom $w$, let $r(w)$ be its length and $B(w)$ its total exponent;
+thus
+\[
+\begin{array}{c|rrrr}
+ w&1&12&1113&1122\\ \hline
+ r(w)&1&2&4&4\\
+ B(w)&1&3&6&6.
+\end{array}
+\tag{5}
+\]
+For a finite atom word $V=w_0\cdots w_{L-1}$, put
+\[
+ r(V):=\sum_{h<L}r(w_h),
+ \qquad
+ B(V):=\sum_{h<L}B(w_h).
+ \tag{6}
+\]
+
+\begin{theorem}[record-atom return lattice and spacing]
+Suppose that a length-$L$ atom factor repeats at record positions $i<k$:
+\[
+ \omega_i\omega_{i+1}\cdots\omega_{i+L-1}
+ =
+ \omega_k\omega_{k+1}\cdots\omega_{k+L-1}
+ =V.
+ \tag{7}
+\]
+Then
+\[
+\boxed{
+ 2^{B(V)+1}\mid x_{j_k}-x_{j_i},
+ \qquad
+ 2\,3^{r(V)}\mid x_{j_{k+L}}-x_{j_{i+L}}.}
+\tag{8}
+\]
+The two differences are positive.  If
+\[
+ \alpha:=\log_2 3,
+ \qquad
+ C_0:=\log_2(\mathcal KQ_{j_0}),
+ \tag{9}
+\]
+then every repetition in (7) satisfies
+\[
+\boxed{
+ B(V)+1<C_0+(\alpha-1)k.}
+\tag{10}
+\]
+Equivalently,
+\[
+\boxed{
+ k>\frac{B(V)+1-C_0}{\alpha-1}.}
+\tag{11}
+\]
+Thus a repeated atom factor of dyadic weight $B(V)$ cannot occur before
+the fixed ordinary ray has accumulated comparable record-index surplus.
+\end{theorem}
+
+\begin{proof}
+Let $v$ be the raw exponent word obtained by concatenating the atoms in
+$V$, and put $r=r(V)$ and $B=B(V)$.  There is an integer carry $C(v)$
+such that each occurrence obeys
+\[
+ 2^B x_{j_i+r}=3^r x_{j_i}+C(v),
+ \qquad
+ 2^B x_{j_k+r}=3^r x_{j_k}+C(v).
+ \tag{12}
+\]
+The terminal states in (12) are odd.  Reduction modulo $2^{B+1}$ gives
+\[
+ 3^r x_{j_i}+C(v)\equiv2^B
+ \equiv3^r x_{j_k}+C(v)\pmod {2^{B+1}}.
+ \tag{13}
+\]
+Since $3$ is a unit modulo $2^{B+1}$, the first divisibility in (8)
+follows.  Subtracting the two identities in (12) gives
+\[
+ 2^B\bigl(x_{j_{k+L}}-x_{j_{i+L}}\bigr)
+ =3^r\bigl(x_{j_k}-x_{j_i}\bigr).
+ \tag{14}
+\]
+The first divisibility in (8), substituted into (14), proves the second.
+
+The normalized height $x_t/Q_t$ is strictly increasing, because
+\[
+ \frac{x_{t+1}}{Q_{t+1}}-
+ \frac{x_t}{Q_t}=\frac1{3Q_t}>0.
+ \tag{15}
+\]
+Also $Q_{j_k}>Q_{j_i}$ for $k>i$.  Hence
+$x_{j_k}>x_{j_i}$, and (14) gives positivity at the endpoints as well.
+Therefore
+\[
+ 2^{B+1}
+ \leq x_{j_k}-x_{j_i}
+ <x_{j_k}
+ <\mathcal KQ_{j_k}.
+ \tag{16}
+\]
+For consecutive coefficient records one has
+\[
+ 1<\frac{Q_{j_{h+1}}}{Q_{j_h}}\leq\frac32.
+ \tag{17}
+\]
+Iteration of (17) yields
+\[
+ Q_{j_k}<Q_{j_0}\left(\frac32\right)^k.
+ \tag{18}
+\]
+Substituting (18) into (16) and taking binary logarithms proves (10),
+and (11) is its rearrangement.
+\end{proof}
+
+Let $p_{\omega}(L)$ denote the number of distinct length-$L$ factors of
+the infinite atom word $\omega_0\omega_1\omega_2\cdots$.
+
+\begin{corollary}[stationary atom-complexity floor]
+For every $L\geq1$,
+\[
+\boxed{
+ p_{\omega}(L)>
+ \frac{L+1-C_0}{\alpha-1}.}
+\tag{19}
+\]
+In particular,
+\[
+\boxed{
+ \liminf_{L\to\infty}\frac{p_{\omega}(L)}L
+ \geq\frac1{\log_2 3-1}
+ =1.709511\ldots .}
+\tag{20}
+\]
+Consequently the record-atom word is neither eventually periodic nor
+quasi-Sturmian.
+\end{corollary}
+
+\begin{proof}
+Among the first $p_{\omega}(L)+1$ factors of length $L$, two are equal.
+For the second occurrence in such a pair, $k\leq p_{\omega}(L)$.  Every
+atom has total exponent at least one, so its common factor $V$ satisfies
+$B(V)\geq L$.  Equations (10) and (7) therefore give
+\[
+ L+1<C_0+(\alpha-1)p_{\omega}(L),
+\]
+which is (19).  Division by $L$ and passage to the lower limit proves
+(20).  An eventually periodic word has bounded factor complexity, while a
+quasi-Sturmian word has $p_{\omega}(L)=L+O(1)$; both contradict (20).
+\end{proof}
+
+\begin{corollary}[bounded one-atom runs]
+Suppose that every run of the one-letter atom $1$ has length at most
+$M$.  Then
+\[
+\boxed{
+ p_{\omega}(L)>
+ \frac{
+ L+2\left\lfloor L/(M+1)\right\rfloor+1-C_0
+ }{\alpha-1}.}
+\tag{21}
+\]
+Consequently,
+\[
+\boxed{
+ \liminf_{L\to\infty}\frac{p_{\omega}(L)}L
+ \geq
+ \frac{1+2/(M+1)}{\log_2 3-1}.}
+\tag{22}
+\]
+\end{corollary}
+
+\begin{proof}
+Any length-$L$ factor contains at least
+$\lfloor L/(M+1)\rfloor$ atoms different from $1$.  Replacing a
+one-letter atom by any other atom raises its total exponent from $1$ to at
+least $3$.  Hence every such factor satisfies
+\[
+ B(V)\geq L+2\left\lfloor\frac{L}{M+1}\right\rfloor.
+ \tag{23}
+\]
+Apply the proof of Corollary~2 with (23) in place of $B(V)\geq L$.
+This proves (21), and (22) follows after division by $L$.
+\end{proof}
+
+\begin{corollary}[sharpened interior-tail obstruction]
+Every normalized hypothetical divergent orbit has at least one of the
+following properties.
+\begin{enumerate}
+ \item There are infinitely many deficit-four horizon exits.
+ \item From some coefficient record onward, all gaps are in
+ $\mathcal A_4$, the synchronized companion is bounded by
+ \[
+ 1<e_t\leq\frac{41}{3},
+ \tag{24}
+ \]
+ and its ceiling defects satisfy
+ \[
+ d_t\in\{-2,-1,0,1,2,3,4,5,6,7\}.
+ \tag{25}
+ \]
+ Its logarithmic clock grows at least $i\log(9/8)-O(1)$ at the $i$th
+ record, and its atom word obeys (19)--(20).  If the runs of the atom $1$
+ are bounded by $M$, then it obeys the stronger estimates (21)--(22).
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+The deficit-four record-renewal dichotomy gives the first alternative or
+the four-atom tail in the second.  The synchronized-companion confinement
+theorem gives (24), the finite defect alphabet, and the logarithmic-clock
+bound on that tail.  Corollaries~2 and~3 supply the fixed-seed spacing and
+complexity conclusions.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,87 @@
+  K   m   d   |det| (order)      round-1 formula   agree   Smith diagonal      cyclic?
+  1   1   1                1                 1   yes    trivial            yes   
+  2   1   1                1                 1   yes    trivial            yes   
+  3   1   1                5                 5   yes    5                  yes   
+  4   1   1               13                13   yes    13                 yes   
+  5   1   1               29                29   yes    29                 yes   
+  6   1   1               61                61   yes    61                 yes   
+  7   1   1              125               125   yes    125                yes   
+  8   1   1              253               253   yes    253                yes   
+  9   1   1              509               509   yes    509                yes   
+ 10   1   1             1021              1021   yes    1021               yes   
+ 11   1   1             2045              2045   yes    2045               yes   
+ 12   1   1             4093              4093   yes    4093               yes   
+  1   2   1                7                 7   yes    7                  yes   
+  2   2   2                1                 1   yes    trivial            yes     <- old claim (5, cyclic) FAILS
+  3   2   1                1                 1   yes    trivial            yes   
+  4   2   2                1                 1   yes    trivial            yes     <- old claim (7, cyclic) FAILS
+  5   2   1               23                23   yes    23                 yes   
+  6   2   2               25                25   yes    5,5                NO      <- old claim (55, cyclic) FAILS
+  7   2   1              119               119   yes    119                yes   
+  8   2   2              169               169   yes    13,13              NO      <- old claim (247, cyclic) FAILS
+  9   2   1              503               503   yes    503                yes   
+ 10   2   2              841               841   yes    29,29              NO      <- old claim (1015, cyclic) FAILS
+ 11   2   1             2039              2039   yes    2039               yes   
+ 12   2   2             3721              3721   yes    61,61              NO      <- old claim (4087, cyclic) FAILS
+  1   3   1               25                25   yes    25                 yes   
+  2   3   1               23                23   yes    23                 yes   
+  3   3   3                1                 1   yes    trivial            yes     <- old claim (19, cyclic) FAILS
+  4   3   1               11                11   yes    11                 yes   
+  5   3   1                5                 5   yes    5                  yes   
+  6   3   3                1                 1   yes    trivial            yes     <- old claim (37, cyclic) FAILS
+  7   3   1              101               101   yes    101                yes   
+  8   3   1              229               229   yes    229                yes   
+  9   3   3              125               125   yes    5,5,5              NO      <- old claim (485, cyclic) FAILS
+ 10   3   1              997               997   yes    997                yes   
+ 11   3   1             2021              2021   yes    2021               yes   
+ 12   3   3             2197              2197   yes    13,13,13           NO      <- old claim (4069, cyclic) FAILS
+  1   4   1               79                79   yes    79                 yes   
+  2   4   2               49                49   yes    7,7                NO      <- old claim (77, cyclic) FAILS
+  3   4   1               73                73   yes    73                 yes   
+  4   4   4                1                 1   yes    trivial            yes     <- old claim (65, cyclic) FAILS
+  5   4   1               49                49   yes    49                 yes   
+  6   4   2                1                 1   yes    trivial            yes     <- old claim (17, cyclic) FAILS
+  7   4   1               47                47   yes    47                 yes   
+  8   4   4                1                 1   yes    trivial            yes     <- old claim (175, cyclic) FAILS
+  9   4   1              431               431   yes    431                yes   
+ 10   4   2              529               529   yes    23,23              NO      <- old claim (943, cyclic) FAILS
+ 11   4   1             1967              1967   yes    1967               yes   
+ 12   4   4              625               625   yes    5,5,5,5            NO      <- old claim (4015, cyclic) FAILS
+  1   5   1              241               241   yes    241                yes   
+  2   5   1              239               239   yes    239                yes   
+  3   5   1              235               235   yes    235                yes   
+  4   5   1              227               227   yes    227                yes   
+  5   5   5                1                 1   yes    trivial            yes     <- old claim (211, cyclic) FAILS
+  6   5   1              179               179   yes    179                yes   
+  7   5   1              115               115   yes    115                yes   
+  8   5   1               13                13   yes    13                 yes   
+  9   5   1              269               269   yes    269                yes   
+ 10   5   5                1                 1   yes    trivial            yes     <- old claim (781, cyclic) FAILS
+ 11   5   1             1805              1805   yes    1805               yes   
+ 12   5   1             3853              3853   yes    3853               yes   
+  1   6   1              727               727   yes    727                yes   
+  2   6   2              625               625   yes    25,25              NO      <- old claim (725, cyclic) FAILS
+  3   6   3              343               343   yes    7,7,7              NO      <- old claim (721, cyclic) FAILS
+  4   6   2              529               529   yes    23,23              NO      <- old claim (713, cyclic) FAILS
+  5   6   1              697               697   yes    697                yes   
+  6   6   6                1                 1   yes    trivial            yes     <- old claim (665, cyclic) FAILS
+  7   6   1              601               601   yes    601                yes   
+  8   6   2              121               121   yes    11,11              NO      <- old claim (473, cyclic) FAILS
+  9   6   3                1                 1   yes    trivial            yes     <- old claim (217, cyclic) FAILS
+ 10   6   2               25                25   yes    5,5                NO      <- old claim (295, cyclic) FAILS
+ 11   6   1             1319              1319   yes    1319               yes   
+ 12   6   6                1                 1   yes    trivial            yes     <- old claim (3367, cyclic) FAILS
+  1   7   1             2185              2185   yes    2185               yes   
+  2   7   1             2183              2183   yes    2183               yes   
+  3   7   1             2179              2179   yes    2179               yes   
+  4   7   1             2171              2171   yes    2171               yes   
+  5   7   1             2155              2155   yes    2155               yes   
+  6   7   1             2123              2123   yes    2123               yes   
+  7   7   7                1                 1   yes    trivial            yes     <- old claim (2059, cyclic) FAILS
+  8   7   1             1931              1931   yes    1931               yes   
+  9   7   1             1675              1675   yes    1675               yes   
+ 10   7   1             1163              1163   yes    1163               yes   
+ 11   7   1              139               139   yes    139                yes   
+ 12   7   1             1909              1909   yes    1909               yes   
+
+0 disagreement(s) with round 1's order formula

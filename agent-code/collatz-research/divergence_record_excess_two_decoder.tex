@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+
+\title{The complete excess-two inverse decoder layer}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+For a positive odd integer $x$, let
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+An exponent word $E=(e_1,\ldots,e_h)$ is read from its positive odd
+start toward its terminal state.  Its mass and excess are
+\[
+ \mass(E):=e_1+\cdots+e_h,
+ \qquad t(E):=\mass(E)-h.
+ \tag{2}
+\]
+This note classifies every exact inverse word with $t(E)=2$ at a fixed
+positive odd terminal state.
+
+The elementary reverse rule is useful.  If $x$ is the current odd
+terminal state, an exponent-$a$ predecessor is
+\[
+ p=\frac{2^a x-1}{3}.
+ \tag{3}
+\]
+It exists precisely when $3\nmid x$ and
+\[
+ a\equiv
+ \begin{cases}
+ 1\pmod2,&x\equiv2\pmod3,\\
+ 0\pmod2,&x\equiv1\pmod3.
+ \end{cases}
+ \tag{4}
+\]
+In shifted coordinates $X=x+1$, reversing exponents one, two, and three
+uses respectively
+\[
+ X\longmapsto\frac{2X}{3},
+ \qquad
+ X\longmapsto\frac{4X-2}{3},
+ \qquad
+ X\longmapsto\frac{8X-6}{3}.
+ \tag{5}
+\]
+
+\begin{theorem}[complete excess-two classification]
+Let $r$ be a positive odd integer and put
+\[
+ b:=v_3(r+1),
+ \qquad s:=\frac{r+1}{3^b}.
+ \tag{6}
+\]
+There are exactly two families of exact predecessor words $E$ with
+$t(E)=2$.
+
+\medskip
+\noindent\textbf{Family I: one exponent three.}
+For every $k$ with $0\leq k<b$, define
+\[
+ M_k:=2^{k+2}3^{b-k-1}s-1,
+ \qquad c_k:=v_3(M_k).
+ \tag{7}
+\]
+For every $0\leq\ell\leq c_k$, there is one exact word
+\[
+ \boxed{
+ E=1^\ell3\,1^k,
+ \qquad |E|=k+1+\ell,
+ \qquad z+1=2\left(\frac23\right)^\ell M_k.}
+ \tag{8}
+\]
+These are all the excess-two words containing an exponent three.
+
+\medskip
+\noindent\textbf{Family II: two exponents two.}
+Define
+\[
+ N_1:=2^{b+1}s-1,
+ \qquad b_1:=v_3(N_1).
+ \tag{9}
+\]
+This family is empty if $b_1=0$.  If $b_1\geq1$, put
+\[
+ s_1:=\frac{N_1}{3^{b_1}},
+ \qquad N_2:=2^{b_1+1}s_1-1,
+ \qquad b_2:=v_3(N_2).
+ \tag{10}
+\]
+For every $1\leq j\leq b_2$, there is one exact word
+\[
+ \boxed{
+ E=1^{j-1}2\,1^{b_1-1}2\,1^b,
+ \qquad |E|=b+b_1+j,
+ \qquad z+1=\left(\frac23\right)^jN_2.}
+ \tag{11}
+\]
+These are all the excess-two words containing two exponents two.
+There are no other exact words of excess two.
+\end{theorem}
+
+\begin{proof}
+Because all exponents are positive and their excesses sum to two, the
+word has exactly one of the two forms indicated: one exponent three and
+all other exponents one, or two exponents two and all other exponents
+one.
+
+Read the word backward from $r$, and let $k$ be the number of trailing
+exponents one.  Rule (5) shows that precisely $b$ consecutive
+exponent-one inverses are available at the outset.
+
+First suppose that the next non-one exponent is three.  Its parity in
+(4) is odd, so it must occur before the exponent-one run is exhausted;
+thus $0\leq k<b$.  After reversing the $k$ trailing ones, the shifted
+state is
+\[
+ X=2^k3^{b-k}s.
+ \tag{12}
+\]
+Reversing exponent three gives
+\[
+ \frac{8X-6}{3}
+ =2\bigl(2^{k+2}3^{b-k-1}s-1\bigr)
+ =2M_k.
+ \tag{13}
+\]
+All remaining exponents must equal one.  Exactly $c_k=v_3(M_k)$ of
+them are available, and $\ell$ such steps give shifted start
+\[
+ \left(\frac23\right)^\ell2M_k.
+\]
+This proves (7)--(8), both existence and exhaustion of Family I.
+
+Now suppose that the word contains two exponents two.  Even parity in
+(4) forces the first such exponent, read backward, to occur only after
+all $b$ initial exponent-one inverses.  At that point the shifted state
+is $2^bs$, and reversing exponent two would give
+\[
+ \frac{4\,2^bs-2}{3}=\frac{2N_1}{3}.
+ \tag{14}
+\]
+It is possible exactly when $b_1\geq1$.  The shifted state in (14) has
+$3$-adic valuation $b_1-1$.  Since the only remaining unit of excess
+must form another exponent two, parity forces the intervening run to
+have exactly $b_1-1$ exponents one.  After that run the shifted state is
+\[
+ 2^{b_1}s_1.
+ \tag{15}
+\]
+The second exponent-two inverse gives $2N_2/3$ and is possible exactly
+when $b_2\geq1$.  Thereafter all exponents equal one; reversing $j-1$
+of them is possible precisely for $1\leq j\leq b_2$, and gives shifted
+start
+\[
+ \left(\frac23\right)^{j-1}\frac{2N_2}{3}
+ =\left(\frac23\right)^jN_2.
+ \tag{16}
+\]
+The word and length in (11) follow.  The parity alternatives above are
+forced at every first non-one position, so the two families exhaust all
+excess-two words.
+\end{proof}
+
+\begin{corollary}[finite excess-two horizon]
+With the notation of Theorem~1, set
+\[
+ H_I:=\max_{0\leq k<b}(k+1+c_k),
+ \tag{17}
+\]
+where the maximum of the empty set is zero, and set
+\[
+ H_{II}:=
+ \begin{cases}
+ b+b_1+b_2,&b_1\geq1\text{ and }b_2\geq1,\\
+ 0,&b_1b_2=0.
+ \end{cases}
+ \tag{18}
+\]
+Then no exact $h$-step predecessor word of $r$ has excess two when
+\[
+ \boxed{h>H_2(r):=\max(H_I,H_{II}).}
+ \tag{19}
+\]
+Combining this with the excess-zero and excess-one decoder theorem, put
+\[
+ H_{\leq2}(r):=\max\bigl(b,\ b+b_1,\ H_2(r)\bigr).
+ \tag{20}
+\]
+Every exact $h$-step predecessor word with $h>H_{\leq2}(r)$ has excess
+at least three.
+\end{corollary}
+
+\begin{proof}
+The largest length in Family I is (17), and the largest possible length
+in Family II is (18).  This proves (19).  Excess zero ends at depth $b$,
+and excess one ends at depth $b+b_1$.  Taking the maximum proves (20).
+\end{proof}
+
+\begin{corollary}[fixed-seed inequalities]
+Let $n$ be the globally least positive odd integer with an unbounded
+accelerated orbit, and suppose the orbit of $r$ is unbounded.  Then every
+Family I branch satisfies
+\[
+ \boxed{
+ M_k\geq\frac{n+1}{2}\left(\frac32\right)^\ell
+ \qquad(0\leq\ell\leq c_k),}
+ \tag{21}
+\]
+and every Family II branch satisfies
+\[
+ \boxed{
+ N_2\geq(n+1)\left(\frac32\right)^j
+ \qquad(1\leq j\leq b_2).}
+ \tag{22}
+\]
+In particular, at the least same-depth suffix $q_*$ of a record-atom
+block, all variable-depth prefixes of excess at most two are now given
+by finite explicit valuation ladders.  Beyond $H_{\leq2}(q_*)$, the
+minimum suffix channel has prefix excess at least three.
+\end{corollary}
+
+\begin{proof}
+Every positive predecessor of $r$ also has an unbounded forward orbit,
+so its start $z$ is at least $n$.  Substitution of the two exact shifted
+starts in (8) and (11) gives (21) and (22).  The final assertion is
+Corollary~2 applied to $r=q_*$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,4 @@
+maxK=25 failures=13 nontrivialFailures=1 fewestBadPrefixes=1
+failuresByLength=2:1,3:0,4:1,5:0,6:1,7:0,8:2,9:0,10:1,11:0,12:1,13:0,14:1,15:0,16:1,17:0,18:1,19:0,20:1,21:0,22:1,23:0,24:1,25:0
+closest={"k":8,"s":5,"word":"10111010","minHeight":-0.287682072451781,"badPrefixes":1,"firstBad":2,"rho":"9","Z":"10","D":"13","C":"373","firstCrossingRotations":["11101010"]}
+example k=8 s=5 word=10111010 bad=1 minHeight=-0.287682072451781 rho=9 Z=10

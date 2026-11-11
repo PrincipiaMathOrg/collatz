@@ -1,0 +1,18 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+6. Sheaf cohomology for gluing modular Lyapunov functions
+
+**Speculative · P**
+
+For many moduli M, one can hope to construct local descent potentials
+
+V_M(n) = log n + phi_M(n mod M)
+
+that work on most residue classes. Regard these potentials as local sections on a system of
+congruence covers.
+
+Failure to glue them into one global potential would define a cohomological obstruction. Prove
+that the relevant H^1 vanishes under refinement, and the local certificates glue into a global
+Lyapunov function. A counterexample would instead produce a persistent nonzero class.
+
+Take as long as you need.

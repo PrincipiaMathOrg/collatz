@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+38. List decoding of valuation profiles
+
+**Speculative · B**
+
+Given a coarse growth profile, bound how many residue classes modulo 2^k can realize it while also
+satisfying specified endpoint conditions modulo 3^r. Show that the list size eventually becomes
+zero — or find a uniquely surviving nested sequence that could encode a counterexample.
+
+Take as long as you need.

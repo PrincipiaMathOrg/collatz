@@ -1,0 +1,10 @@
+case=prefix_1_1 floor=4/9 cap=398581 step_cap=100000
+counts={"hit_1":1,"coefficient_floor_failure":199279,"cycle":10}
+hits=[[1,0]]
+longest={"steps":125,"seed":304901,"status":"coefficient_floor_failure"}
+certificate_passed=true
+case=prefix_1_2 floor=8/9 cap=199291 step_cap=100000
+counts={"hit_1":1,"coefficient_floor_failure":99642,"cycle":2}
+hits=[[1,0]]
+longest={"steps":83,"seed":149345,"status":"coefficient_floor_failure"}
+certificate_passed=true

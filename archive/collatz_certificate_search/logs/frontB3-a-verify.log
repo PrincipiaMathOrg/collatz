@@ -1,0 +1,10 @@
+(i) value semantics: rule applications checked per rule: {'f.->.': 23578, 't.->2.': 23513, 'f0->0f': 40717, 'f1->0t': 40805, 'f2->1f': 41109, 't0->1t': 40873, 't1->2f': 41016, 't2->2t': 40730, '/0->/t': 23542, '/1->/ff': 23572, '/2->/ft': 23548} | violations: 0 []
+(i') val(bin_string(n)) == n for n <= 10^5
+(ii) Prop 2.2 (U_+ realised, f-erasures = v2(3n+1)-1, schedule-independent) odd n <= 10^5, random/rightmost schedules n <= 3001 | violations: 0 []
+(iii-a) E,O = A u D processing of fu./tu., recursions (1), R = B-rule + processing, T-step counts 1/2/2, all words |u| <= 8 | violations: 0 []
+(iii-b) Prop 1: N(R(w)) = T(N w) [second digit 0, i.e. n in [3^q, 4 3^{q-1})] or T^2(N w) for all 70476 words with N(w) <= 10^5 | violations: 0 []
+(iii-c) R-orbits of all 70476 n <= 10^5 in S reach eps; values are a subsequence of the T-orbit, odd values a subsequence of the U_+ orbit | total R-steps 3200325 max word length 18 | violations: 0 []
+(iii-d) r17 transitions (12)-(15) and 2220 -> 11022 -> 002222 | violations: []
+(iii-e) F-A in the R system: N(2^m) = 2 3^m - 1 = T^m(2^{m+1}-1), R(2^m) = 1^m, R(1^m) = (01)^{m//2}, /t^m. -> /2^m. in m(m+1)/2 A u D steps, m <= 40 | violations: []
+(iii-f) R = first-return map of T to S = {leading base-3 digit 1}: from n not in S, T(n) in S; from n in S the skipped value is not in S; n <= 10^6 | violations: 0 []
+B3a TOTAL violations: 0 | time 87.1s

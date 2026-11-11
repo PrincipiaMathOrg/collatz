@@ -1,0 +1,1623 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\textwidth}{6.35in}
+\setlength{\oddsidemargin}{0.05in}
+\setlength{\evensidemargin}{0.05in}
+\setlength{\textheight}{8.75in}
+\setlength{\topmargin}{-0.25in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\{-1,0,1\}}
+\newcommand{\Rset}{\mathcal{R}}
+\newcommand{\Dset}{\mathcal{D}}
+\newcommand{\Lset}{\mathcal{L}}
+\newcommand{\res}[2]{\left\langle #1\right\rangle_{#2}}
+
+\title{Round 4 on the proof front: first-wrap rerouting and the primitive local code}
+\author{Principia Math Collatz campaign}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We continue the first-wrap analysis of the pinned-carry formulation of the zero-trace problem.  The wrap integer has a direct geometric meaning: it counts how many old Chinese-remainder fundamental rectangles are crossed by the common lift when one critical block is attached.  This gives two simultaneous quotient formulas and the universal bound
+\[
+1\le z<81\cdot64^3
+\]
+at a first wrap.
+
+We prove an exact rerouting theorem.  If the old carry is below \(64^3\) and the old state passes both the three-step forward mask and the one-step backward mask, then there is a unique alternative pinned extension whose common lift is the old remainder.  Consequently, for a nontrivial critical pinned pair of least positive common lift, its first wrap must have high old carry, fail at least one mask, or have zero old remainder.  This proves the desired first-wrap incompatibility in the low-carry, positive-remainder case, but leaves a primitive zero-remainder case.
+
+We classify that primitive case by an explicit \(81\)-element local code in
+\[
+\Z/(81\cdot64^3)\Z.
+\]
+More generally, if both masks pass at any first wrap, then \(z\) is a difference of two local code values.  This yields exact \(2\)-adic and \(3\)-adic restrictions on \(z\).  These restrictions are sharp in an important negative sense: at phase \(n=2087\), two distinct local code values differ by exactly \(1\).  Thus neither a uniform local spacing theorem nor the one-block recursion alone can exclude the first wrap.
+
+An explicit critical one-block state at \((k,L)=(1,3)\) also has \(z>0\) while both old masks pass.  Its upper pair is not pinned, so it is not a counterexample to the zero-trace conjecture; it proves that any successful exclusion must use the existence of the full upper pinned continuation or a minimality principle.  No proof of the zero-trace conjecture, and no proof of the Collatz conjecture, is claimed.
+\end{abstract}
+
+\section{Chosen front and standing input}
+
+\textbf{Chosen front: P3-ZT-FIRST-WRAP, because the local mask incompatibility proposed after Round 3 is true for a least critical pinned pair except for two sharply isolated escape mechanisms, while it is false as a statement about the one-block recursion alone.}
+
+For a word
+\[
+w=(e_0,\ldots,e_{n-1})\in\E^n,
+\]
+put
+\[
+N_n(w)=
+\sum_{j=0}^{n-1}
+e_j81^{n-1-j}64^j.
+\]
+Let \(R_n(w)\in[0,64^n)\) and \(Q_n(w)\in[0,81^n)\) be the canonical start and endpoint determined by
+\[
+64^nQ_n(w)=81^nR_n(w)+N_n(w).
+\]
+Write
+\[
+\Rset_n=\{R_n(w):w\in\E^n\}.
+\]
+Let
+\[
+B=64^3,
+\qquad
+P=81B,
+\qquad
+\Dset=\{0,19,62\}\subset\Z/81\Z.
+\]
+
+\begin{remark}[Standing results from Rounds 1--3]
+We assume the following results proved in the preceding rounds.
+
+For each \(n\), the maps
+\[
+w\longmapsto R_n(w),
+\qquad
+w\longmapsto Q_n(w)
+\]
+are injective.  The zero word is the unique word whose canonical start or endpoint is zero.  Appending a word of length \(m\) preserves the canonical start modulo \(64^n\), while prepending a word of length \(m\) preserves the endpoint modulo \(81^n\).
+
+For a pair
+\[
+(u,v)\in\E^k\times\E^L,
+\]
+put
+\[
+A=64^k,
+\qquad
+M=81^L,
+\qquad
+r=R_k(u),
+\qquad
+q=Q_L(v).
+\]
+There is a unique carry \(c\in[0,M)\) and an integer \(h\) such that
+\[
+r+Ac=q+Mh.
+\]
+A pair is pinned when \(c=0\).  A pinned pair is called critical when
+\[
+k\le3L-2.
+\]
+The present round reproves the block recursion and every additional fact that it uses.
+\end{remark}
+
+None of the arguments below uses the difference-support formula \(5^L\), the energy identity \(19^L\), or the carry second-moment identity from Round 2.  Their lack of an independent computational audit therefore does not affect any theorem in this document.
+
+\section{The common lift and the wrap quotient}
+
+\begin{lemma}[The two coordinates lie in their fundamental ranges]
+\label{lem:ranges}
+For every pair \((u,v)\in\E^k\times\E^L\), the integer \(h\) determined by
+\[
+r+Ac=q+Mh
+\]
+satisfies
+\[
+0\le h<A.
+\]
+Consequently, the common lift
+\[
+Y_{k,L}(u,v):=r+Ac=q+Mh
+\]
+lies in
+\[
+0\le Y_{k,L}(u,v)<AM.
+\]
+\end{lemma}
+
+\begin{proof}
+Since
+\[
+0\le r<A
+\qquad\text{and}\qquad
+0\le c<M,
+\]
+one has
+\[
+0\le r+Ac<AM.
+\]
+Also
+\[
+0\le q<M.
+\]
+If \(h<0\), then \(h\le-1\), and hence
+\[
+q+Mh\le q-M<0,
+\]
+contradicting \(r+Ac\ge0\).  Thus \(h\ge0\).
+
+If \(h\ge A\), then
+\[
+q+Mh\ge MA,
+\]
+contradicting \(r+Ac<AM\).  Therefore
+\[
+0\le h<A.
+\]
+The asserted range for the common lift has already been established.
+\end{proof}
+
+Let
+\[
+a\in\E^3,
+\qquad
+d\in\E.
+\]
+Write \(ua\) for concatenation on the right and \(dv\) for concatenation on the left.  By the nesting of the canonical classes, there are unique integers
+\[
+0\le t<B,
+\qquad
+0\le s<81
+\]
+such that
+\[
+R_{k+3}(ua)=r+At
+\]
+and
+\[
+Q_{L+1}(dv)=q+Ms.
+\]
+
+Let \(c'\in[0,81M)\) and \(h'\in[0,AB)\) be the carry coordinates of the extended pair:
+\[
+R_{k+3}(ua)+ABc'
+=
+Q_{L+1}(dv)+81Mh'.
+\]
+
+\begin{theorem}[Common-lift form of the block recursion]
+\label{thm:common-lift}
+There is a unique integer \(z\) such that
+\[
+Bc'=c-t+Mz
+\]
+and
+\[
+81h'=h-s+Az.
+\]
+Moreover,
+\[
+Y_{k+3,L+1}(ua,dv)
+=
+Y_{k,L}(u,v)+AMz,
+\]
+and
+\[
+0\le z<P.
+\]
+\end{theorem}
+
+\begin{proof}
+The two common-lift identities are
+\[
+r+Ac=q+Mh
+\]
+and
+\[
+r+At+ABc'=q+Ms+81Mh'.
+\]
+Subtracting the first from the second gives
+\[
+A(t+Bc'-c)=M(s+81h'-h).
+\]
+Since
+\[
+\gcd(A,M)=1,
+\]
+there is a unique integer \(z\) for which
+\[
+t+Bc'-c=Mz
+\]
+and
+\[
+s+81h'-h=Az.
+\]
+Rearranging gives the two displayed recursions.
+
+Using the first identity,
+\begin{align*}
+Y_{k+3,L+1}(ua,dv)
+&=r+A(t+Bc')\\
+&=r+A(c+Mz)\\
+&=Y_{k,L}(u,v)+AMz.
+\end{align*}
+
+It remains to bound \(z\).  From
+\[
+Mz=t+Bc'-c
+\]
+and the ranges
+\[
+t\ge0,\qquad c'\ge0,\qquad c\le M-1,
+\]
+one obtains
+\[
+Mz\ge-(M-1)>-M.
+\]
+Since \(Mz\) is a multiple of \(M\), it cannot be negative.  Hence \(z\ge0\).
+
+The extended common lift belongs to its fundamental rectangle:
+\[
+0\le Y_{k+3,L+1}(ua,dv)<(AB)(81M)=AMP.
+\]
+Since
+\[
+Y_{k,L}(u,v)\ge0
+\]
+and
+\[
+Y_{k+3,L+1}(ua,dv)
+=
+Y_{k,L}(u,v)+AMz,
+\]
+it follows that
+\[
+AMz<AMP.
+\]
+Thus
+\[
+z<P.
+\]
+\end{proof}
+
+\begin{corollary}[Exact quotient formulas at a first wrap]
+\label{cor:quotients}
+Suppose \(z\ne0\).  Then
+\[
+1\le z<P,
+\]
+and
+\[
+z=
+\left\lfloor
+\frac{t+Bc'}{M}
+\right\rfloor,
+\qquad
+c\equiv t+Bc'\pmod M,
+\]
+while
+\[
+z=
+\left\lfloor
+\frac{s+81h'}{A}
+\right\rfloor,
+\qquad
+h\equiv s+81h'\pmod A.
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem \ref{thm:common-lift} gives
+\[
+0<z<P.
+\]
+The first recursion may be written as
+\[
+t+Bc'=c+Mz.
+\]
+Since
+\[
+0\le c<M,
+\]
+division by \(M\) gives
+\[
+z=
+\left\lfloor
+\frac{t+Bc'}{M}
+\right\rfloor
+\]
+and identifies \(c\) as the remainder.
+
+The second recursion may be written as
+\[
+s+81h'=h+Az.
+\]
+Since
+\[
+0\le h<A
+\]
+by Lemma \ref{lem:ranges}, division by \(A\) gives the second quotient formula and remainder congruence.
+\end{proof}
+
+A stripping chain begins with a pinned pair at parameters \((K,T)\) and repeatedly removes the final three symbols of the right word and the initial symbol of the left word.  Reading the chain downward from the pinned pair, a \emph{first wrap} is the first transition for which \(z>0\).  All transitions above it have \(z=0\), so Theorem \ref{thm:common-lift} shows that their common lift is unchanged.
+
+\section{The rerouting theorem}
+
+For an old pair \((u,v)\) with data \(c,h\), define its right and left mask residues by
+\[
+\xi_{k,L}(u,v)
+=
+\res{Q_k(u)+81^kc}{B}
+\]
+and
+\[
+\eta_{k,L}(u,v)
+=
+\res{R_L(v)+64^Lh}{81}.
+\]
+
+\begin{proposition}[Exact rerouting criterion]
+\label{prop:rerouting}
+Assume
+\[
+0\le c<B.
+\]
+Then the following statements are equivalent.
+
+\begin{enumerate}
+\item The two mask conditions
+\[
+\xi_{k,L}(u,v)\in\Rset_3
+\]
+and
+\[
+\eta_{k,L}(u,v)\in\Dset
+\]
+hold.
+
+\item There is a unique pair
+\[
+(\widetilde a,\widetilde d)\in\E^3\times\E
+\]
+for which the extension
+\[
+(u\widetilde a,\widetilde d\,v)
+\]
+is pinned and has common lift exactly
+\[
+Y_{k,L}(u,v).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Assume the two mask conditions.
+
+Because
+\[
+\xi_{k,L}(u,v)\in\Rset_3,
+\]
+there is a unique word \(\widetilde a\in\E^3\) satisfying
+\[
+R_3(\widetilde a)
+\equiv
+Q_k(u)+81^kc
+\pmod B.
+\]
+The associated forward lift digit \(\widetilde t\in[0,B)\) is characterized by
+\[
+Q_k(u)+81^k\widetilde t
+\equiv
+R_3(\widetilde a)
+\pmod B.
+\]
+It follows that
+\[
+\widetilde t\equiv c\pmod B.
+\]
+Both numbers lie in \([0,B)\), so
+\[
+\widetilde t=c.
+\]
+Therefore
+\[
+R_{k+3}(u\widetilde a)
+=
+r+A\widetilde t
+=
+r+Ac
+=
+Y_{k,L}(u,v).
+\]
+
+Now put
+\[
+y=
+R_L(v)+64^Lh.
+\]
+The condition
+\[
+y\bmod81\in\{0,19,62\}
+\]
+determines a unique symbol \(\widetilde d\in\E\) through
+\[
+\widetilde d\equiv64y\pmod{81}.
+\]
+Indeed,
+\[
+64\cdot0\equiv0,\qquad
+64\cdot19\equiv1,\qquad
+64\cdot62\equiv-1
+\pmod{81}.
+\]
+Let \(\widetilde s\in[0,81)\) be the backward lift digit associated with \(\widetilde d\).  Its defining congruence is
+\[
+64R_L(v)+64^{L+1}\widetilde s
+\equiv
+\widetilde d
+\pmod{81}.
+\]
+By the definition of \(\widetilde d\),
+\[
+64R_L(v)+64^{L+1}h
+\equiv
+\widetilde d
+\pmod{81}.
+\]
+Since \(64^{L+1}\) is invertible modulo \(81\),
+\[
+\widetilde s\equiv h\pmod{81}.
+\]
+Thus
+\[
+h=\widetilde s+81\widetilde h
+\]
+for an integer \(\widetilde h\).  Consequently,
+\begin{align*}
+Y_{k,L}(u,v)
+&=q+Mh\\
+&=q+M\widetilde s+81M\widetilde h\\
+&=Q_{L+1}(\widetilde d\,v)+81M\widetilde h.
+\end{align*}
+Together with
+\[
+R_{k+3}(u\widetilde a)=Y_{k,L}(u,v),
+\]
+this proves that the new carry is zero.
+
+The extension is unique because both realization maps are injective and because the three residues in \(\Dset\) determine the backward symbol uniquely.
+
+Conversely, suppose a unique extension is pinned and has the same common lift \(Y_{k,L}(u,v)\).  Its right canonical start has the form
+\[
+r+A\widetilde t
+\]
+with \(0\le\widetilde t<B\), and equality with
+\[
+r+Ac
+\]
+forces
+\[
+\widetilde t=c.
+\]
+The defining congruence for the final three-symbol block then gives
+\[
+Q_k(u)+81^kc\pmod B\in\Rset_3.
+\]
+
+On the left, equality of the common lifts gives
+\[
+h=\widetilde s+81\widetilde h.
+\]
+The defining backward congruence therefore yields
+\[
+R_L(v)+64^Lh\pmod{81}\in\Dset.
+\]
+This proves both mask conditions.
+\end{proof}
+
+\begin{theorem}[First-wrap trichotomy for a least critical pinned pair]
+\label{thm:trichotomy}
+Assume that a nontrivial critical pinned pair exists.  Among all such pairs, choose one whose positive common lift \(Y_*\) is least.
+
+Suppose its stripping chain has a first wrap.  Let \((u,v)\) be the old pair immediately below that wrap, with parameters \((k,L)\), common lift \(Y\), carry coordinates \(c,h\), and mask residues \(\xi,\eta\).
+
+Then
+\[
+c\ge B
+\]
+or
+\[
+\xi\notin\Rset_3
+\]
+or
+\[
+\eta\notin\Dset
+\]
+or
+\[
+Y=0.
+\]
+In the final case,
+\[
+u=(0,\ldots,0),
+\qquad
+v=(0,\ldots,0),
+\qquad
+c=h=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Let there be \(J\ge1\) block transitions from the old pair \((u,v)\) to the chosen top pair.  The top parameters have the form
+\[
+K=k+3J,
+\qquad
+T=L+J.
+\]
+Hence
+\[
+K-3T=k-3L.
+\]
+Since the top pair is critical,
+\[
+K\le3T-2,
+\]
+and therefore
+\[
+k\le3L-2.
+\]
+It follows that
+\[
+k+3\le3(L+1)-2,
+\]
+so an extension at parameters \((k+3,L+1)\) is also critical.
+
+All wraps above the first wrap are zero.  Theorem \ref{thm:common-lift} therefore shows that the common lift immediately above the first wrap is the top common lift \(Y_*\).  At the first wrap,
+\[
+Y_*=Y+64^k81^Lz
+\]
+with \(z>0\).  Consequently,
+\[
+0\le Y<Y_*.
+\]
+
+Suppose, contrary to the asserted trichotomy, that
+\[
+c<B,
+\qquad
+\xi\in\Rset_3,
+\qquad
+\eta\in\Dset,
+\qquad
+Y>0.
+\]
+Proposition \ref{prop:rerouting} supplies a pinned extension at parameters
+\[
+(k+3,L+1)
+\]
+whose positive common lift is \(Y\).  This extension is critical, and
+\[
+0<Y<Y_*,
+\]
+contradicting the choice of \(Y_*\) as the least positive common lift of a nontrivial critical pinned pair.
+
+Thus at least one of the four alternatives in the theorem must hold.
+
+Finally, if \(Y=0\), then
+\[
+0=r+Ac
+\]
+with \(r,c\ge0\), so
+\[
+r=c=0.
+\]
+Similarly,
+\[
+0=q+Mh
+\]
+with \(q,h\ge0\), so
+\[
+q=h=0.
+\]
+Injectivity of the canonical realization maps and uniqueness of their zero values imply that \(u\) and \(v\) are the all-zero words.
+\end{proof}
+
+\begin{corollary}[The preferred incompatibility in the positive low-carry case]
+\label{cor:preferred}
+In the setting of Theorem \ref{thm:trichotomy}, suppose
+\[
+Y>0
+\qquad\text{and}\qquad
+c<B.
+\]
+Then the first wrap cannot satisfy both local masks:
+\[
+\xi\in\Rset_3
+\qquad\text{and}\qquad
+\eta\in\Dset.
+\]
+\end{corollary}
+
+\begin{proof}
+Under the two additional hypotheses, the first and fourth alternatives in Theorem \ref{thm:trichotomy} are false.  Hence at least one of the two mask conditions must fail.
+\end{proof}
+
+Thus the proposed first-wrap exclusion is valid for a least critical pinned pair whenever the old remainder is positive and the old carry lies in the fixed low-carry window.  The two surviving escape mechanisms are
+\[
+c\ge64^3
+\]
+and
+\[
+Y=0.
+\]
+
+\section{The primitive local code}
+
+For \(n\ge0\) and
+\[
+(a,d)\in\E^3\times\E,
+\]
+let
+\[
+\lambda_n(a,d)\in[0,P)
+\]
+be the unique integer satisfying
+\[
+81^n\lambda_n(a,d)
+\equiv
+R_3(a)
+\pmod B
+\]
+and
+\[
+64^{n+1}\lambda_n(a,d)
+\equiv
+d
+\pmod{81}.
+\]
+Existence and uniqueness follow from
+\[
+\gcd(B,81)=1
+\]
+and the invertibility of \(81\) modulo \(B\) and \(64\) modulo \(81\).  Put
+\[
+\Lset_n=
+\{\lambda_n(a,d):(a,d)\in\E^3\times\E\}.
+\]
+
+\begin{proposition}[Classification of a zero-remainder first wrap]
+\label{prop:primitive}
+The map
+\[
+(a,d)\longmapsto\lambda_n(a,d)
+\]
+is injective, and therefore
+\[
+|\Lset_n|=81.
+\]
+
+Suppose a first wrap has old common lift
+\[
+Y=0
+\]
+at parameters \((k,L)\), and let \(a\) and \(d\) be its actual removed blocks.  Then, with
+\[
+n=k+L,
+\]
+its wrap integer is
+\[
+z=\lambda_n(a,d)\ne0.
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose
+\[
+\lambda_n(a,d)=\lambda_n(a',d').
+\]
+The first defining congruence gives
+\[
+R_3(a)\equiv R_3(a')\pmod B.
+\]
+Both representatives lie in \([0,B)\), so
+\[
+R_3(a)=R_3(a').
+\]
+Injectivity of the canonical start map gives
+\[
+a=a'.
+\]
+The second congruence then gives
+\[
+d\equiv d'\pmod{81}.
+\]
+Since
+\[
+d,d'\in\{-1,0,1\},
+\]
+one has
+\[
+d=d'.
+\]
+Thus the local code is injective and has \(3^4=81\) values.
+
+Now suppose \(Y=0\).  Theorem \ref{thm:trichotomy} gives
+\[
+u=0^k,\qquad v=0^L,\qquad c=h=0.
+\]
+For the actual forward block \(a\), the lift digit \(t\) satisfies
+\[
+81^kt\equiv R_3(a)\pmod B.
+\]
+The first recursion in Theorem \ref{thm:common-lift} gives
+\[
+Bc'=-t+81^Lz,
+\]
+so
+\[
+81^Lz\equiv t\pmod B.
+\]
+Multiplication by \(81^k\) yields
+\[
+81^{k+L}z\equiv R_3(a)\pmod B.
+\]
+
+For the actual backward symbol \(d\), the lift digit \(s\) satisfies
+\[
+64^{L+1}s\equiv d\pmod{81},
+\]
+because \(R_L(v)=0\).  The second block recursion gives
+\[
+81h'=-s+64^kz,
+\]
+so
+\[
+64^kz\equiv s\pmod{81}.
+\]
+Multiplication by \(64^{L+1}\) gives
+\[
+64^{k+L+1}z\equiv d\pmod{81}.
+\]
+Thus
+\[
+z\equiv\lambda_{k+L}(a,d)\pmod P.
+\]
+At a first wrap,
+\[
+0<z<P
+\]
+by Corollary \ref{cor:quotients}, so equality holds in the chosen representative interval.  In particular \(z\ne0\).
+\end{proof}
+
+The zero-remainder escape in Theorem \ref{thm:trichotomy} is therefore not unstructured.  It begins with one of exactly \(80\) nonzero local code values.
+
+\section{The exact residue restriction when both masks pass}
+
+\begin{theorem}[Local-code difference law]
+\label{thm:difference-law}
+Consider any first-wrap transition at old parameters \((k,L)\), with actual removed blocks
+\[
+(a,d)\in\E^3\times\E
+\]
+and wrap integer \(z>0\).
+
+Suppose the old state satisfies both mask conditions
+\[
+\xi_{k,L}(u,v)\in\Rset_3
+\]
+and
+\[
+\eta_{k,L}(u,v)\in\Dset.
+\]
+Let
+\[
+(\widetilde a,\widetilde d)\in\E^3\times\E
+\]
+be the unique blocks selected by those masks.  Then, with
+\[
+n=k+L,
+\]
+one has
+\[
+z=
+\res{
+\lambda_n(a,d)-\lambda_n(\widetilde a,\widetilde d)
+}{P}.
+\]
+In particular, \(z\) is a nonzero difference of two values in the \(81\)-element local code \(\Lset_n\).
+\end{theorem}
+
+\begin{proof}
+Let \(t,s\) be the actual lift digits.  The right mask selects a unique lift digit \(\widetilde t\in[0,B)\) satisfying
+\[
+\widetilde t\equiv c\pmod B.
+\]
+The first block recursion is
+\[
+Bc'=c-t+81^Lz.
+\]
+Reducing modulo \(B\) gives
+\[
+81^Lz\equiv t-c\equiv t-\widetilde t\pmod B.
+\]
+The lift-digit definitions give
+\[
+81^kt
+\equiv
+R_3(a)-Q_k(u)
+\pmod B
+\]
+and
+\[
+81^k\widetilde t
+\equiv
+R_3(\widetilde a)-Q_k(u)
+\pmod B.
+\]
+Subtracting and multiplying the preceding congruence by \(81^k\) yields
+\[
+81^{k+L}z
+\equiv
+R_3(a)-R_3(\widetilde a)
+\pmod B.
+\]
+
+Similarly, the left mask selects a unique lift digit \(\widetilde s\) satisfying
+\[
+\widetilde s\equiv h\pmod{81}.
+\]
+The second block recursion gives
+\[
+64^kz\equiv s-h\equiv s-\widetilde s\pmod{81}.
+\]
+The lift-digit definitions give
+\[
+64^{L+1}s
+\equiv
+d-64R_L(v)
+\pmod{81}
+\]
+and
+\[
+64^{L+1}\widetilde s
+\equiv
+\widetilde d-64R_L(v)
+\pmod{81}.
+\]
+Subtracting and multiplying by \(64^k\) gives
+\[
+64^{k+L+1}z
+\equiv
+d-\widetilde d
+\pmod{81}.
+\]
+
+By definition, the residue
+\[
+\lambda_n(a,d)-\lambda_n(\widetilde a,\widetilde d)
+\]
+satisfies these same two congruences modulo \(B\) and modulo \(81\).  The Chinese remainder theorem therefore gives
+\[
+z\equiv
+\lambda_n(a,d)-\lambda_n(\widetilde a,\widetilde d)
+\pmod P.
+\]
+Since
+\[
+0<z<P,
+\]
+\(z\) is the least residue displayed in the theorem.
+
+If the two local code values were equal, injectivity from Proposition \ref{prop:primitive} would give
+\[
+(a,d)=(\widetilde a,\widetilde d),
+\]
+and the displayed congruence would force
+\[
+z=0,
+\]
+contrary to the first-wrap hypothesis.  Hence the difference is nonzero.
+\end{proof}
+
+\begin{corollary}[A \(2\)-adic and \(3\)-adic sieve for a reroutable wrap]
+\label{cor:valuation-sieve}
+Under the hypotheses of Theorem \ref{thm:difference-law}, the wrap integer satisfies
+\[
+\nu_2(z)\in\{0,1,6,7,12,13\}
+\]
+or
+\[
+64^3\mid z.
+\]
+It also satisfies
+\[
+\nu_3(z)=0
+\]
+or
+\[
+81\mid z.
+\]
+Equivalently, no reroutable first wrap can have
+\[
+\nu_3(z)\in\{1,2,3\}.
+\]
+\end{corollary}
+
+\begin{proof}
+Put
+\[
+\delta_j=a_j-\widetilde a_j
+\qquad
+(0\le j\le2).
+\]
+The canonical-start formula gives
+\[
+R_3(a)-R_3(\widetilde a)
+\equiv
+-81^{-3}
+\sum_{j=0}^{2}
+\delta_j81^{2-j}64^j
+\pmod B.
+\]
+
+Suppose first that
+\[
+a\ne\widetilde a.
+\]
+Let \(j_0\) be the least index for which \(\delta_{j_0}\ne0\).  Factoring out \(64^{j_0}\), the sum becomes
+\[
+64^{j_0}
+\left(
+\delta_{j_0}81^{2-j_0}+64T
+\right)
+\]
+for an integer \(T\).  Since
+\[
+\delta_{j_0}\in\{-2,-1,1,2\},
+\]
+the term
+\[
+\delta_{j_0}81^{2-j_0}
+\]
+has \(2\)-adic valuation \(0\) or \(1\), while \(64T\) has valuation at least \(6\).  Therefore
+\[
+\nu_2\bigl(R_3(a)-R_3(\widetilde a)\bigr)
+=
+6j_0+\nu_2(\delta_{j_0}).
+\]
+The possible values are
+\[
+0,1,6,7,12,13.
+\]
+
+Theorem \ref{thm:difference-law} gives
+\[
+81^{k+L}z
+\equiv
+R_3(a)-R_3(\widetilde a)
+\pmod{2^{18}}.
+\]
+The multiplier \(81^{k+L}\) is odd.  Since the valuation on the right is below \(18\), adding a multiple of \(2^{18}\) cannot change it.  Hence
+\[
+\nu_2(z)\in\{0,1,6,7,12,13\}.
+\]
+
+If
+\[
+a=\widetilde a,
+\]
+the same congruence gives
+\[
+z\equiv0\pmod{B},
+\]
+so
+\[
+B=64^3\mid z.
+\]
+
+For the \(3\)-adic assertion, Theorem \ref{thm:difference-law} gives
+\[
+64^{k+L+1}z
+\equiv
+d-\widetilde d
+\pmod{81}.
+\]
+If
+\[
+d\ne\widetilde d,
+\]
+then
+\[
+d-\widetilde d\in\{-2,-1,1,2\},
+\]
+which is not divisible by \(3\).  Since \(64\) is a unit modulo \(81\), it follows that
+\[
+3\nmid z.
+\]
+Thus
+\[
+\nu_3(z)=0.
+\]
+
+If
+\[
+d=\widetilde d,
+\]
+then
+\[
+z\equiv0\pmod{81}.
+\]
+This proves the stated alternatives.
+\end{proof}
+
+Theorem \ref{thm:difference-law} and Corollary \ref{cor:valuation-sieve} are the strongest unconditional local residue restrictions obtained in this round.  The next section shows that they cannot be strengthened to a uniform positive separation.
+
+\section{Two exact obstructions to a purely local exclusion}
+
+\begin{proposition}[A critical wrap with both old masks passing]
+\label{prop:local-counterexample}
+At the smallest positive forward depth compatible with \(L\ge3\), namely
+\[
+(k,L)=(1,3),
+\]
+the one-block recursion admits a positive wrap while both old masks pass.
+
+Take
+\[
+u=(0),
+\qquad
+v=(0,0,0),
+\]
+and attach the actual blocks
+\[
+a=(-1,1,1),
+\qquad
+d=0.
+\]
+Then the old data are
+\[
+r=q=c=h=0,
+\]
+both mask residues are zero, and
+\[
+z=142641>0.
+\]
+The extended pair has
+\[
+R_4(ua)=2984000,
+\qquad
+Q_4(dv)=0,
+\]
+\[
+c'=289174,
+\qquad
+h'=112704.
+\]
+The block recursion holds exactly:
+\[
+64^3c'=-46625+81^3z
+\]
+and
+\[
+81h'=64z.
+\]
+\end{proposition}
+
+\begin{proof}
+For the all-zero old words,
+\[
+R_1(u)=Q_1(u)=0
+\]
+and
+\[
+R_3(v)=Q_3(v)=0.
+\]
+Therefore
+\[
+c=h=0
+\]
+and
+\[
+Y_{1,3}(u,v)=0.
+\]
+The old right mask is
+\[
+Q_1(u)+81c\equiv0\pmod{64^3},
+\]
+and
+\[
+0=R_3(0,0,0)\in\Rset_3.
+\]
+The old left mask is
+\[
+R_3(v)+64^3h\equiv0\pmod{81},
+\]
+and
+\[
+0\in\Dset.
+\]
+
+For
+\[
+a=(-1,1,1),
+\]
+the word numerator is
+\[
+N_3(a)
+=
+-81^2+81\cdot64+64^2
+=
+2719.
+\]
+The exact identity
+\[
+64^3\cdot216127
+=
+81^3\cdot106609+2719
+\]
+shows that
+\[
+R_3(a)=106609.
+\]
+The forward lift digit \(t\) is determined by
+\[
+81t\equiv106609\pmod{64^3}.
+\]
+The integer
+\[
+t=46625
+\]
+satisfies this because
+\[
+81\cdot46625
+=
+14\cdot64^3+106609.
+\]
+Since \(d=0\) and \(v\) is the zero word, the backward lift digit is
+\[
+s=0.
+\]
+
+The extended right word is
+\[
+ua=(0,-1,1,1).
+\]
+Its numerator is
+\[
+N_4(ua)=64N_3(a)=174016.
+\]
+The identity
+\[
+64^4\cdot7656301
+=
+81^4\cdot2984000+174016
+\]
+gives
+\[
+R_4(ua)=2984000.
+\]
+The extended left word \(dv\) is the all-zero word of length four, so its endpoint is zero.
+
+Now
+\[
+81^3\cdot142641=75805275681
+\]
+and
+\[
+64^3\cdot289174=75805229056.
+\]
+Their difference is
+\[
+75805275681-75805229056=46625.
+\]
+Hence
+\[
+64^3\cdot289174
+=
+-46625+81^3\cdot142641.
+\]
+Also,
+\[
+64\cdot142641=9129024
+\]
+and
+\[
+81\cdot112704=9129024.
+\]
+Thus the two block recursions hold with
+\[
+z=142641,
+\qquad
+c'=289174,
+\qquad
+h'=112704.
+\]
+
+Finally, the extended common lift is
+\begin{align*}
+R_4(ua)+64^4c'
+&=
+2984000+64^4\cdot289174\\
+&=
+4851537643584\\
+&=
+81^4\cdot112704.
+\end{align*}
+This confirms the stated carry coordinates directly.
+
+The critical inequality is
+\[
+1\le3\cdot3-2.
+\]
+The parameters are minimal among those with \(k\ge1\) and \(L\ge3\).
+\end{proof}
+
+\begin{remark}
+The upper pair in Proposition \ref{prop:local-counterexample} is not pinned because
+\[
+c'=289174\ne0.
+\]
+Thus the example is not a violation of pinned carry repulsion.  It proves that the block recursion, the critical inequality, and the two old mask conditions do not by themselves exclude a positive wrap.  An exclusion theorem must also use the existence of the full upper pinned continuation, the least-lift choice in Theorem \ref{thm:trichotomy}, or another global constraint.
+\end{remark}
+
+The following exact calculation shows that even the local code itself can have the smallest possible nonzero gap.
+
+\begin{proposition}[A unit gap in the local code]
+\label{prop:unit-gap}
+At phase
+\[
+n=2087,
+\]
+the local code \(\Lset_n\) contains two consecutive integers:
+\[
+\lambda_{2087}\bigl((0,1,-1),0\bigr)=3146688
+\]
+and
+\[
+\lambda_{2087}\bigl((-1,-1,1),1\bigr)=3146689.
+\]
+Consequently, at the critical parameter pair
+\[
+(k,L)=(1,2086),
+\]
+the simultaneous local residue conditions permit the smallest possible positive wrap difference
+\[
+z=1.
+\]
+No actual upper pinned continuation is asserted.
+\end{proposition}
+
+\begin{proof}
+We first determine the required unit modulo
+\[
+B=64^3=262144.
+\]
+Repeated squaring gives
+\[
+\begin{array}{c|rrrrrrr}
+j&0&1&2&3&4&5&6\\ \hline
+81^{2^j}\bmod B
+&81&6561&55105&147073&179457&162305&62465
+\end{array}
+\]
+and
+\[
+\begin{array}{c|rrrrrrr}
+j&7&8&9&10&11&12&13\\ \hline
+81^{2^j}\bmod B
+&124929&249857&237569&212993&163841&65537&131073.
+\end{array}
+\]
+Each entry after the first is the square of its predecessor modulo \(B\).  Since
+\[
+131073=1+2^{17},
+\]
+one has
+\[
+131073^2\equiv1\pmod{2^{18}}.
+\]
+Therefore
+\[
+81^{2^{14}}\equiv1\pmod B.
+\]
+
+Now
+\[
+14297
+=
+2^0+2^3+2^4+2^6+2^7+2^8+2^9+2^{10}+2^{12}+2^{13}.
+\]
+Multiplying the corresponding entries in the preceding tables gives the following cumulative residues:
+\[
+\begin{array}{c|rrrrrrrrrr}
+j
+&0&3&4&6&7&8&9&10&12&13\\ \hline
+\text{cumulative residue}
+&81&116433&5073&214993&110545&
+163793&8145&221137&24529&155601.
+\end{array}
+\]
+Hence
+\[
+81^{14297}\equiv155601\pmod B.
+\]
+Since
+\[
+14297+2087=16384=2^{14},
+\]
+it follows that
+\[
+81^{-2087}\equiv155601\pmod B.
+\]
+
+For the first word
+\[
+a=(0,1,-1),
+\]
+one has
+\[
+N_3(a)=81\cdot64-64^2=1088,
+\]
+and
+\[
+64^3\cdot327869
+=
+81^3\cdot161728+1088.
+\]
+Thus
+\[
+R_3(a)=161728.
+\]
+Integer division gives
+\[
+155601\cdot161728
+=
+95997\cdot262144+960.
+\]
+Therefore
+\[
+81^{-2087}R_3(a)\equiv960\pmod B.
+\]
+
+For the second word
+\[
+a'=(-1,-1,1),
+\]
+one has
+\[
+N_3(a')=-81^2-81\cdot64+64^2=-7649,
+\]
+and
+\[
+64^3\cdot374158
+=
+81^3\cdot184561-7649.
+\]
+Thus
+\[
+R_3(a')=184561.
+\]
+Integer division gives
+\[
+155601\cdot184561
+=
+109550\cdot262144+961.
+\]
+Therefore
+\[
+81^{-2087}R_3(a')\equiv961\pmod B.
+\]
+
+The powers of \(64\) modulo \(81\) are
+\[
+64,46,28,10,73,55,37,19,1
+\]
+for exponents \(1,\ldots,9\).  Hence
+\[
+64^9\equiv1\pmod{81}.
+\]
+Since
+\[
+2088=232\cdot9,
+\]
+one has
+\[
+64^{-2088}\equiv1\pmod{81}.
+\]
+
+Now
+\[
+3146688=12\cdot262144+960
+\]
+and
+\[
+3146688=81\cdot38848.
+\]
+Thus
+\[
+3146688\equiv960\pmod B
+\]
+and
+\[
+3146688\equiv0\pmod{81}.
+\]
+These are precisely the two defining congruences for
+\[
+\lambda_{2087}\bigl((0,1,-1),0\bigr).
+\]
+
+Similarly,
+\[
+3146689=12\cdot262144+961
+\]
+and
+\[
+3146689\equiv1\pmod{81}.
+\]
+These are precisely the defining congruences for
+\[
+\lambda_{2087}\bigl((-1,-1,1),1\bigr).
+\]
+The two local code values therefore differ by \(1\).
+
+Finally,
+\[
+1\le3\cdot2086-2,
+\]
+so \((1,2086)\) lies in the critical region.  Choosing the second local block as the actual block and the first as the mask-selected block makes the local-code difference in Theorem \ref{thm:difference-law} equal to \(1\).
+\end{proof}
+
+\begin{corollary}[Death of uniform local-spacing exclusion]
+\label{cor:spacing-dead}
+No proof of first-wrap exclusion can rest on a uniform inequality
+\[
+\left|
+\lambda_n(a,d)-\lambda_n(a',d')
+\right|_{\mathrm{circ}}
+\ge\Delta
+\]
+for all distinct local blocks and all phases \(n\), with any constant
+\[
+\Delta>1.
+\]
+Nor can the two local residue conditions alone exclude \(z=1\) throughout the critical region.
+\end{corollary}
+
+\begin{proof}
+Proposition \ref{prop:unit-gap} gives two distinct local blocks whose code values differ by exactly \(1\).  Their circular distance in \(\Z/P\Z\) is therefore \(1\).  The same proposition places this phase at a critical parameter pair and realizes the local residue difference \(z=1\).
+\end{proof}
+
+\section{Assessment}
+
+The preferred first-wrap statement divides into two mathematically different claims.
+
+For a nontrivial critical pinned pair of least positive common lift, the statement is true in the positive low-carry case.  If the first-wrap remainder is positive and
+\[
+c<64^3,
+\]
+then the right and left masks cannot both pass.  Otherwise Proposition \ref{prop:rerouting} would produce a smaller positive critical pinned pair.  This is Theorem \ref{thm:trichotomy} and Corollary \ref{cor:preferred}.
+
+The unconditional statement about the one-block recursion is false.  Proposition \ref{prop:local-counterexample} gives a positive critical wrap with both old masks passing at the smallest relevant parameter pair.  Proposition \ref{prop:unit-gap} goes further: at a critical phase, the local code permits a wrap difference of exactly \(1\).  Thus neither a local congruence incompatibility nor a uniform spacing estimate can close the branch.
+
+The exact remaining first-wrap alternatives for a least critical pinned pair are now:
+
+\[
+\text{high old carry }c\ge64^3,
+\]
+\[
+\text{failure of at least one local mask},
+\]
+or
+\[
+\text{primitive zero remainder }Y=0.
+\]
+
+The primitive case is classified by the \(81\)-element code \(\Lset_{k+L}\), but is not excluded.  It is the only case in which both masks can pass without producing a smaller positive critical pinned pair.  The high-carry case is also not controlled by the one-block rerouting theorem.
+
+The supplied count-all values through \((25,8)\) are not used in any proof above.  The unfinished count for \((25,9)\) likewise has no bearing on the present conclusions.
+
+No nontrivial Collatz cycle and no divergent Collatz trajectory is excluded.  Even a proof of the pinned carry theorem would settle only the recurrent \(81/64\) subsystem; the global synchronization theorem connecting every hypothetical least Collatz counterexample to that subsystem remains absent.
+
+\section{Next-round directive}
+
+Continue on branch \texttt{P3-ZT-FIRST-WRAP}.  Treat the first-wrap trichotomy of Theorem \ref{thm:trichotomy} as the new state reduction.  The two live escape mechanisms are the primitive case \(Y=0\) and the high-carry case \(c\ge64^3\).  Do not pursue a uniform local-code spacing theorem: Proposition \ref{prop:unit-gap} proves that the local code has gap \(1\).
+
+Finish the count-all run for
+\[
+(k,L)=(25,9)
+\]
+and record its exact \(N(k,L)\), \(C_{k,L}(0)\), split, elapsed time, peak resident memory, source digest, output digest, and every witness if the count is at most \(1000\).  Do not start \((28,10)\) yet.
+
+Implement \texttt{compute/zt\_strip\_profile.py}, but spend no compute on rechecking the Round 2 energy identities.  Recover every nonzero pinned solution, not merely one witness, in the completed cells
+\[
+(20,7),(21,7),(22,7),(23,7),(24,7),(25,8),
+\]
+whose current counts are respectively
+\[
+1,1,5,7,23,3.
+\]
+For each solution reconstruct its full right word, full left word, and top common lift.  At every stripped level record
+\[
+(k_i,L_i,Y_i,c_i,h_i,t_i,s_i,z_i).
+\]
+At the first nonzero \(z_i\), additionally record
+\[
+c_i<64^3,
+\]
+\[
+\xi_i=
+Q_{k_i}(u_i)+81^{k_i}c_i\pmod{64^3},
+\]
+\[
+\eta_i=
+R_{L_i}(v_i)+64^{L_i}h_i\pmod{81},
+\]
+the two mask-membership booleans, and whether
+\[
+Y_i=0.
+\]
+Verify exactly that
+\[
+Y_{i+1}=Y_i+64^{k_i}81^{L_i}z_i
+\]
+at every level.
+
+The strip-profile numbers have the following decisive meanings.
+
+A first wrap with
+\[
+c_i<64^3,\qquad
+\xi_i\in\Rset_3,\qquad
+\eta_i\in\{0,19,62\},\qquad
+Y_i>0
+\]
+would refute any unconditional version of the actual-chain mask incompatibility, though it would not refute Theorem \ref{thm:trichotomy} unless its top common lift were least among all critical pinned pairs.
+
+A first wrap with
+\[
+Y_i=0
+\]
+would exhibit the primitive escape mechanism directly.  In that case verify that the actual local block satisfies
+\[
+z_i=\lambda_{k_i+L_i}(a_i,d_i).
+\]
+
+A first wrap with
+\[
+c_i\ge64^3
+\]
+belongs to the high-carry escape mechanism and should be retained for the next renormalization rather than discarded.
+
+Implement \texttt{compute/zt\_local\_code.py}.  For every phase \(n\) appearing in the strip profiles, enumerate all \(81\) values of \(\Lset_n\), verify Theorem \ref{thm:difference-law} whenever both masks pass, and verify the valuation alternatives in Corollary \ref{cor:valuation-sieve}.  Independently verify the exact unit-gap certificate at \(n=2087\).  Then scan one full phase period
+\[
+\operatorname{lcm}(2^{14},9)=147456
+\]
+and record, for each \(n\), the least positive circular gap in \(\Lset_n\).  This scan is diagnostic: its purpose is to classify local phases, not to support a uniform gap argument that is already dead.
+
+The theoretical target for the next round is the primitive case.  Suppose a least positive critical pinned pair has first-wrap remainder \(Y=0\).  Then its old words are \(0^k\) and \(0^L\), and its first wrap begins with
+\[
+z=\lambda_{k+L}(a,d).
+\]
+Derive the exact phase-shifted dynamics imposed on \(z\) by the remaining upper no-wrap blocks.  Seek a descent that converts the positive top common lift
+\[
+64^k81^Lz
+\]
+into a smaller positive pinned object, possibly in a finite phase extension of the original carry system.  If such a descent is false, return the smallest exact phase-word counterexample and formulate the strongest true finite-state replacement.
+
+Edit \texttt{COLLATZ\_MAP.md} to record as proved in Round 4: the common-lift interpretation of \(z\), the exact rerouting criterion, the least-lift first-wrap trichotomy, the primitive \(81\)-element local code, the local-code difference law, and the \(2\)-adic/\(3\)-adic valuation sieve.  Record the unconditional one-block mask incompatibility as dead, with the explicit \((1,3)\) wrap.  Record uniform local-code spacing as dead, with the exact unit gap at phase \(2087\).  Rename the immediate theoretical obstruction from \texttt{first-wrap exclusion} to \texttt{primitive-wrap descent}, while retaining the high-carry escape as a parallel open branch.
+
+\end{document}

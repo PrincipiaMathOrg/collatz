@@ -1,0 +1,410 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+\newcommand{\car}{\operatorname{C}}
+\newcommand{\sh}{\operatorname{D}}
+
+\title{Arbitrary-prefix same-depth inverse rigidity on a record-atom tail}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+For a positive odd integer $x$, put
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+For an exponent word $w=(a_1,\ldots,a_L)$, define
+\[
+ \mass(w):=\sum_{i=1}^L a_i,
+ \qquad
+ \car(w):=\sum_{i=1}^L3^{L-i}2^{a_1+\cdots+a_{i-1}}.
+ \tag{2}
+\]
+Thus an exact path with word $w$ satisfies
+\[
+ 2^{\mass(w)}\Up^L(x)=3^Lx+\car(w).
+ \tag{3}
+\]
+Use the record-atom notation
+\[
+ A:=1,\qquad B:=12,\qquad C:=1113,\qquad D:=1122.
+ \tag{4}
+\]
+The purpose of this note is to classify the least same-depth inverse over
+an arbitrary finite word in these atoms.  No bound on the number of atoms
+or on the intervening runs of $A$ is imposed.
+
+\section{Shifted carries}
+
+It is convenient to translate every state by one.  Define
+\[
+ \sh(w):=\car(w)+2^{\mass(w)}-3^{|w|}.
+ \tag{5}
+\]
+If $X=x+1$ and $Y=\Up^{|w|}(x)+1$, then (3) becomes
+\[
+ 2^{\mass(w)}Y=3^{|w|}X+\sh(w).
+ \tag{6}
+\]
+
+\begin{lemma}[nonnegative and uniformly bounded shifted carry]
+For every positive exponent word $v=(d_1,\ldots,d_\ell)$,
+\[
+ \sh(v)=\sum_{i=1}^{\ell}
+ 3^{\ell-i}2^{d_1+\cdots+d_{i-1}}(2^{d_i}-2)\geq0
+ \tag{7}
+\]
+and
+\[
+ \frac{\car(v)}{2^{\mass(v)}}
+ \leq\sum_{j=0}^{\ell-1}\frac{3^j}{2^{j+1}}
+ =\left(\frac32\right)^\ell-1.
+ \tag{8}
+\]
+If $W$ is a nonempty finite word over the atoms $A,B,C,D$, then
+\[
+ \boxed{0\leq\sh(W)<4\,3^{|W|}.}
+ \tag{9}
+\]
+\end{lemma}
+
+\begin{proof}
+Expanding (5) one letter at a time gives (7).  Also
+\[
+ \frac{\car(v)}{2^{\mass(v)}}
+ =\sum_{i=1}^{\ell}
+ \frac{3^{\ell-i}}{2^{d_i+\cdots+d_\ell}},
+\]
+and $d_i+\cdots+d_\ell\geq\ell-i+1$, proving (8).
+
+For concatenated words,
+\[
+ \sh(UV)=3^{|V|}\sh(U)+2^{\mass(U)}\sh(V).
+ \tag{10}
+\]
+The atom data are
+\[
+\begin{array}{c|c|c|c|c}
+P&|P|&\mass(P)&\car(P)&\sh(P)\\ \hline
+A&1&1&1&0\\
+B&2&3&5&4\\
+C&4&6&65&48\\
+D&4&6&73&56.
+\end{array}
+\tag{11}
+\]
+Write $h(W)=\sh(W)/3^{|W|}$.  From (10),
+\[
+ h(PU)=\frac{\sh(P)}{3^{|P|}}
+       +\frac{2^{\mass(P)}}{3^{|P|}}h(U).
+ \tag{12}
+\]
+If $h(U)<4$, the four right sides in (12) are respectively less than
+\[
+ \frac83,\qquad
+ \frac4{9}+\frac{32}{9}=4,\qquad
+ \frac{48+256}{81},\qquad
+ \frac{56+256}{81}.
+\]
+They are all at most $4$, with strictness inherited in the $B$ case.
+Induction on the number of atoms proves (9).
+\end{proof}
+
+\section{Distortion states}
+
+Let $W$ be an exact record-atom word from $x$ to $y$, and let $V$ be
+an exact positive exponent word of the same raw length from $z$ to $y$.
+At any common raw-time boundary put
+\[
+ \Delta:=\mass(V_{\rm rem})-\mass(W_{\rm rem}),
+ \qquad z=2^\Delta x+c,
+ \qquad u:=\frac{c}{2^\Delta},
+ \tag{13}
+\]
+where ``rem'' denotes the two remaining suffixes from that boundary to
+the common endpoint.  At the endpoint the state is $(\Delta,c)=(0,0)$.
+
+Suppose an actual atom $P$ of length $\ell$, mass $b$, and carry $C_P$
+is prepended to a processed suffix.  Partition the alternative path at
+the same raw time and let $v$ be the corresponding length-$\ell$ block,
+with mass $s$ and carry $C_v$.  If $(\Delta,c)$ is the state on the right
+and $(\Delta',c')$ the state on the left, then
+\[
+ \boxed{
+ \Delta'=\Delta+s-b,
+ \qquad
+ c'=\frac{2^{\Delta'}C_P+2^s c-C_v}{3^\ell}.}
+ \tag{14}
+\]
+Consequently, with $R(v):=C_v/2^s$,
+\[
+ \boxed{
+ u'=\frac{2^b}{3^\ell}u+\frac{C_P}{3^\ell}
+       -\frac{2^{b-\Delta}}{3^\ell}R(v).}
+ \tag{15}
+\]
+
+Because both boundary states are odd, every genuine state lies in the
+parity lattice
+\[
+ \begin{cases}
+ c\in2\mathbb Z+1,&\Delta\geq1,\\
+ c\in2\mathbb Z,&\Delta=0,\\
+ c=m/2^{-\Delta}\text{ with }m\text{ odd},&\Delta<0.
+ \end{cases}
+ \tag{16}
+\]
+
+The only finite arithmetic needed below is isolated next.  It is included
+as an exact certificate rather than hidden in a search over word length.
+
+\newpage
+\begin{lemma}[exceptional transition certificate]
+For a lattice-admissible left state with $\Delta'\geq-1$, the eight
+exceptional cases have the following sharp bounds; a dash means none exists.
+\[
+\begin{array}{c|c|c|c}
+(\Delta,c)&P&\max R(v)&\text{maximizing }v\\ \hline
+(-1,-\tfrac12)&B&\text{--}&\text{--}\\
+(0,0)&B&5/8&12\\ \hline
+(-1,-\tfrac12)&C&85/512&1215\\
+(-1,-\tfrac12)&D&\text{--}&\text{--}\\
+(0,0)&C&73/32&1121\\
+(0,0)&D&73/64&1122\\
+(1,-1)&C&\text{--}&\text{--}\\
+(1,-1)&D&85/256&1214.
+\end{array}
+\tag{17}
+\]
+If the right state satisfies $\Delta\geq-1$ and $-1\leq u\leq5$, with
+$c=-1/2$ when $\Delta=-1$, then no lattice-admissible transition has
+$\Delta'<-1$.
+Moreover, among all strip states which enter the half-state
+$(-1,-1/2)$ in one atom, the complete preimage table is
+\[
+\begin{array}{c|c|c|c}
+(\Delta,c)_{\rm right}&P&v&(\Delta',c')_{\rm left}\\ \hline
+(-1,-\tfrac12)&A&1&(-1,-\tfrac12)\\
+(0,0)&C&1121&(-1,-\tfrac12).
+\end{array}
+\tag{18}
+\]
+\end{lemma}
+
+\begin{proof}
+For $\Delta'\leq2$, the total mass
+$s=\Delta'-\Delta+b$ is fixed.  Substitution of all positive
+compositions of $s$ into (14) gives the low part of (17).
+
+For $\Delta'\geq3$, write $v=(a,\eta)$.  In all eight cases the numerator
+in (14) is an integer of the form
+\[
+ 2^aK(\eta)-3^{\ell-1}.
+ \tag{19}
+\]
+Thus divisibility by $3^\ell$ depends on $a$ only through its parity,
+because increasing $a$ by two changes (19) from $N$ to
+$4N+3^\ell$.  The suffix exponents may be reduced to positive residues
+modulo
+\[
+ \operatorname{ord}_{9}(2)=6,
+ \qquad
+ \operatorname{ord}_{81}(2)=54.
+ \tag{20}
+\]
+Indeed, transfer of one full period from a suffix exponent to $a$
+preserves the total mass and the congruence, and can only increase
+\[
+ R(v)=\sum_{i=1}^{\ell}
+ \frac{3^{\ell-i}}{2^{d_i+\cdots+d_\ell}}.
+ \tag{21}
+\]
+\newpage
+For each of the two parities, lowering $a$ to the first positive value
+with $\Delta'\geq3$ again preserves the congruence and increases (21).
+It therefore suffices to inspect $6$ suffix residues for $B$ and
+$54^3$ suffix triples for $C,D$, with two choices of parity.  Exact
+integer substitution gives (17).
+
+The cases which could have $\Delta'<-1$ have total mass at most five;
+direct substitution in (14) gives no point of the lattice (16).
+Finally, imposing $(\Delta',c')=(-1,-1/2)$ bounds the right defect by
+$1$ and the alternative mass by $6$.  Substitution gives exactly the two
+rows of (18).  The accompanying program
+\texttt{verify\_divergence\_record\_arbitrary\_prefix.py} performs these
+finite integer checks and independently verifies every maximum in (17).
+\end{proof}
+
+\begin{lemma}[uniform distortion strip and rigidity at defect $-1$]
+At every atom boundary of the two aligned paths,
+\[
+ \boxed{\Delta\geq-1,\qquad -1\leq u\leq5.}
+ \tag{22}
+\]
+If the remaining actual suffix is nonempty and $\Delta=-1$, then
+\[
+ \boxed{c=-\frac12,\qquad z=\frac{x-1}{2}.}
+ \tag{23}
+\]
+\end{lemma}
+
+\begin{proof}
+We induct from the common endpoint toward the two starts.  The empty
+suffix has $(\Delta,c,u)=(0,0,0)$.
+
+First consider the upper edge of the strip.  Since $C_v>0$, equation
+(15) and $u\leq5$ give
+\[
+ u'<\frac{5\,2^b+C_P}{3^\ell}\leq5;
+ \tag{24}
+\]
+the four numerators for $A,B,C,D$ are $11,45,385,393$, while the four
+denominators are $3,9,81,81$.
+
+For the lower edge, (8) gives $R(v)\leq1/2,5/4,65/16$ for blocks of
+length $1,2,4$, respectively.  Substitution in (15) proves $u'\geq-1$
+directly for
+\[
+ A:\Delta\geq-1,
+ \qquad B:\Delta\geq1,
+ \qquad C,D:\Delta\geq2.
+ \tag{25}
+\]
+At the smallest listed defects the resulting lower bounds are
+\[
+ -1,\qquad -\frac89,\qquad -\frac{64}{81},\qquad -\frac{56}{81}.
+\]
+
+\newpage
+It remains to treat lower right defects.  By the inductive form of (23),
+$\Delta=-1$ has $c=-1/2$.  If $\Delta=0$, the lattice and the strip give
+$c\in\{0,2,4\}$; if $\Delta=1$, they give
+$c\in\{-1,1,3,5,7,9\}$.  The worst values $c=-1/2,0,-1$ are precisely
+the rows of (17).  Equation (15) then gives, in the nonempty cases, the
+lower bounds
+\[
+ 0,-\frac14,-1,0,\frac38
+ \tag{26}
+\]
+for $B(0),C(-1),C(0),D(0),D(1,-1)$.
+For $c\geq2$ at defect zero and $c\geq1$ at defect one, the unrestricted
+bound (8) already gives a value greater than $-1$.  The finite
+below-$-1$ assertion of Lemma~2 proves $\Delta'\geq-1$.  This establishes
+(22).
+
+Suppose now that a nonempty processed suffix $W$ has $\Delta=-1$.
+The lattice and (22) give
+\[
+ 2c\in\{-1,1,3,5\}.
+ \tag{27}
+\]
+Put $X=x+1$, $Z=z+1$, and
+\[
+ k:=-c-\frac12,
+ \qquad Z=\frac{X}{2}-k.
+ \tag{28}
+\]
+Since the alternative suffix has one less unit of mass, its shifted
+equation (6), multiplied by two and compared with the actual equation,
+gives
+\[
+ \sh(V)=\frac{\sh(W)}2+k3^{|W|}.
+ \tag{29}
+\]
+By Lemma~1, $\sh(V)\geq0$ and $\sh(W)<4\,3^{|W|}$.  Therefore
+$k\leq-2$ is impossible.  The value $k=-1$ corresponds to $c=1/2$,
+but every atom begins with exponent one, so $x\equiv3\pmod4$; then
+$z=(x+1)/2$ is even.  The only remaining value is $k=0$, which is (23).
+This also closes the inductive assertion used above.
+\end{proof}
+
+\section{The arbitrary-prefix minimum}
+
+\begin{theorem}[arbitrary-prefix same-depth inverse minimum]
+Let
+\[
+ W=PU,
+ \qquad P\in\{B,C,D\},
+ \qquad U\in\{A,B,C,D\}^*,
+ \tag{30}
+\]
+be an exact word from a positive odd integer $q$ to $y$, and put
+$L=|W|$.  Among all positive odd $L$-step predecessors of $y$, the
+unique least one is
+\[
+ \boxed{
+ q_{\min}=\begin{cases}
+ q,&P=B\text{ or }D,\\[1mm]
+ (q-1)/2,&P=C.
+ \end{cases}}
+ \tag{31}
+\]
+In the second case the unique minimum word is $1121\,U$; it is exactly
+the local half-coalescing branch at the initial atom $C$, followed by the
+unchanged suffix $U$.
+\end{theorem}
+
+\begin{proof}
+Let $V$ be any exact length-$L$ word from $z$ to $y$, and form its start
+state $(\Delta,c)$.  Lemma~3 gives $\Delta\geq-1$.
+
+If $\Delta=-1$, equation (23) gives $z=(q-1)/2$.  Read the first actual
+atom forward, or equivalently use the one-atom preimage table (18).
+Since the left state is the half-state, the first atom is either $A$ and
+the half-state persists, or it is $C$, the alternative block is $1121$,
+and the right state is $(0,0)$.  Here the first atom belongs to
+$\{B,C,D\}$, so only the second alternative is possible.  Thus $P=C$.
+At the right boundary the two positive odd states are equal.  The
+accelerated map is deterministic, so the remaining exact word is $U$ on
+both paths.  Conversely, exactness of $C$ gives
+$q\equiv79\pmod {128}$; direct substitution then gives the exact word
+$1121$ from $(q-1)/2$ and the identity
+\[
+ \Up^4\!\left(\frac{q-1}{2}\right)=\Up^4(q)
+ \tag{32}
+\]
+for the words $1121$ and $1113$ shows that this branch always exists
+when $P=C$.
+
+If $\Delta=0$, the lattice and (22) give $c\in\{0,2,4\}$, hence
+$z=q+c\geq q$.  Equality forces the same start and therefore the same
+deterministic word $V=W$.  If $\Delta\geq1$, (22) gives
+\[
+ z=2^\Delta q+c\geq2^\Delta(q-1)>q,
+ \tag{33}
+\]
+because an atom start has $q\equiv3\pmod4$ and hence $q\geq3$.
+These alternatives prove (31) and uniqueness.
+\end{proof}
+
+\enlargethispage{3\baselineskip}
+\begin{corollary}[no finite same-depth pullback creates a new descent]
+Suppose an interior record tail contains a finite block beginning at a
+nontrivial atom $P\in\{B,C,D\}$ and ending at any later atom boundary.
+Extending the block across arbitrarily many intervening record atoms can
+never create a new same-depth smaller predecessor.  If $P=B$ or $D$, the
+actual block start remains uniquely least.  If $P=C$, the unique smaller
+predecessor is only the local half-seed at that initial $C$.
+
+Consequently, pulling a terminal-$C$ half-coalescence across any finite
+number of preceding record atoms cannot yield a new same-depth descent.
+Any genuinely new descent on this branch must change the raw inverse
+depth.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~4 to the complete finite atom word.  Its two alternatives
+depend only on the first nontrivial atom, not on the length or composition
+of the suffix.
+\end{proof}
+
+\end{document}

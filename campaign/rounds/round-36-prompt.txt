@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+31. Rotor-router inverse branching
+
+**Speculative · P**
+
+Replace the probabilistic inverse-tree model by a rotor-router or deterministic branching process
+with provably bounded discrepancy from the random model. Then show the actual Collatz inverse tree
+is sandwiched by such a process and must cover all residue classes.
+
+Take as long as you need.

@@ -1,0 +1,330 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+
+\title{The complete excess-three inverse decoder layer}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+For a positive odd integer $x$, let
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+An exponent word $E=(e_1,\ldots,e_h)$ is read from its positive odd
+start toward its terminal state.  We define its mass and excess by
+\[
+ \mass(E):=e_1+\cdots+e_h,
+ \qquad t(E):=\mass(E)-h.
+ \tag{2}
+\]
+The purpose of this note is to classify every exact inverse word with
+$t(E)=3$ at a fixed positive odd terminal state.
+
+We begin by recalling the reverse rule.  If $x$ is the current odd
+terminal state, an exponent-$a$ predecessor is
+\[
+ p=\frac{2^a x-1}{3}.
+ \tag{3}
+\]
+It exists precisely when $3\nmid x$ and
+\[
+ a\equiv
+ \begin{cases}
+ 1\pmod2,&x\equiv2\pmod3,\\
+ 0\pmod2,&x\equiv1\pmod3.
+ \end{cases}
+ \tag{4}
+\]
+In the shifted coordinate $X:=x+1$, the four reverse operations used
+below are
+\[
+ X\longmapsto\frac{2X}{3},
+ \qquad
+ X\longmapsto\frac{4X-2}{3},
+ \qquad
+ X\longmapsto\frac{8X-6}{3},
+ \qquad
+ X\longmapsto\frac{16X-14}{3}.
+ \tag{5}
+\]
+
+\begin{theorem}[complete excess-three classification]
+Let $r$ be a positive odd integer and put
+\[
+ b:=v_3(r+1),
+ \qquad s:=\frac{r+1}{3^b}.
+ \tag{6}
+\]
+There are exactly four families of exact predecessor words $E$ with
+$t(E)=3$.
+
+\medskip
+\noindent\textbf{Family I: one exponent four.}
+Define
+\[
+ Q:=2^{b+3}s-7,
+ \qquad c:=v_3(Q).
+ \tag{7}
+\]
+For every $1\leq j\leq c$, there is one exact word
+\[
+ \boxed{
+ E=1^{j-1}4\,1^b,
+ \qquad |E|=b+j,
+ \qquad z+1=\left(\frac23\right)^jQ.}
+ \tag{8}
+\]
+This family is empty when $c=0$.
+
+\medskip
+\noindent\textbf{Family II: an exponent three followed in reverse by an
+exponent two.}
+For every $0\leq k<b$, define
+\[
+ M_k:=2^{k+2}3^{b-k-1}s-1,
+ \qquad c_k:=v_3(M_k),
+ \qquad u_k:=\frac{M_k}{3^{c_k}},
+ \tag{9}
+\]
+We also define
+\[
+ P_k:=2^{c_k+2}u_k-1,
+ \qquad d_k:=v_3(P_k).
+ \tag{10}
+\]
+For every $1\leq j\leq d_k$, there is one exact word
+\[
+ \boxed{
+ E=1^{j-1}2\,1^{c_k}3\,1^k,
+ \qquad |E|=k+c_k+j+1,
+ \qquad z+1=\left(\frac23\right)^jP_k.}
+ \tag{11}
+\]
+The branch indexed by $k$ is empty when $d_k=0$.
+
+\medskip
+\noindent\textbf{Family III: an exponent two followed in reverse by an
+exponent three.}
+Define
+\[
+ N_1:=2^{b+1}s-1,
+ \qquad b_1:=v_3(N_1).
+ \tag{12}
+\]
+This family is empty when $b_1=0$.  If $b_1\geq1$, put
+\[
+ s_1:=\frac{N_1}{3^{b_1}}.
+ \tag{13}
+\]
+For every $0\leq k<b_1-1$, define
+\[
+ R_k:=2^{k+3}3^{b_1-k-2}s_1-1,
+ \qquad f_k:=v_3(R_k).
+ \tag{14}
+\]
+For every $0\leq\ell\leq f_k$, there is one exact word
+\[
+ \boxed{
+ E=1^\ell3\,1^k2\,1^b,
+ \qquad |E|=b+k+\ell+2,
+ \qquad z+1=2\left(\frac23\right)^\ell R_k.}
+ \tag{15}
+\]
+
+\newpage
+\noindent\textbf{Family IV: three exponents two.}
+Suppose $b_1\geq1$, and use $s_1$ from (13).  Define
+\[
+ N_2:=2^{b_1+1}s_1-1,
+ \qquad b_2:=v_3(N_2).
+ \tag{16}
+\]
+This family is empty when $b_2=0$.  If $b_2\geq1$, put
+\[
+ s_2:=\frac{N_2}{3^{b_2}},
+ \qquad
+ N_3:=2^{b_2+1}s_2-1,
+ \qquad b_3:=v_3(N_3).
+ \tag{17}
+\]
+For every $1\leq j\leq b_3$, there is one exact word
+\[
+ \boxed{
+ \begin{aligned}
+ E&=1^{j-1}2\,1^{b_2-1}2\,1^{b_1-1}2\,1^b,\\
+ |E|&=b+b_1+b_2+j,\\
+ z+1&=\left(\frac23\right)^jN_3.
+ \end{aligned}}
+ \tag{18}
+\]
+There are no other exact words of excess three.
+
+For the horizon statement below, we set $b_2=b_3:=0$ when $b_1=0$, and
+we set $b_3:=0$ when $b_1\geq1$ and $b_2=0$.
+\end{theorem}
+
+\begin{proof}
+Every exponent contributes $e_i-1$ to the excess.  Therefore, an
+excess-three word has exactly one of the following forms: one exponent
+four, one exponent three together with one exponent two, or three
+exponents two.  We read each possibility backward from $r$.
+
+The shifted terminal state is $3^bs$.  Precisely $b$ consecutive
+exponent-one inverses are initially available, and after all of them the
+shifted state is $2^bs$.
+
+Suppose first that the word contains one exponent four.  This exponent
+must occur at the first even-parity junction, after all $b$
+exponent-one inverses.  Reversing it gives
+\[
+ \frac{16\cdot2^bs-14}{3}=\frac{2Q}{3}.
+ \tag{19}
+\]
+This is integral exactly when $c\geq1$.  Its $3$-adic valuation is
+$c-1$, so exactly $j-1$ additional exponent-one inverses are available
+for $1\leq j\leq c$.  Their shifted starts are $(2/3)^jQ$.  This proves
+Family I.
+
+Next suppose that an exponent three is encountered first when reading
+backward.  It must occur strictly inside the initial exponent-one run.
+After $k$ exponent-one inverses, where $0\leq k<b$, the shifted state is
+\[
+ 2^k3^{b-k}s.
+ \tag{20}
+\]
+Reversing exponent three gives $2M_k$.  The next non-one inverse must be
+the unique exponent two, so all $c_k$ available exponent-one inverses
+must first be taken.  The shifted state at that junction is
+$2^{c_k+1}u_k$, and the exponent-two inverse gives
+\[
+ \frac{4\cdot2^{c_k+1}u_k-2}{3}=\frac{2P_k}{3}.
+ \tag{21}
+\]
+The remaining exponent-one inverses give exactly (11).  This proves
+Family II.
+
+Suppose instead that the exponent two is encountered first.  It must
+occur at the first even-parity junction.  Its shifted output is
+\[
+ \frac{4\cdot2^bs-2}{3}=\frac{2N_1}{3},
+ \tag{22}
+\]
+so it exists exactly when $b_1\geq1$.  If the exponent three is
+encountered next, it must occur strictly inside the following run of
+$b_1-1$ exponent-one inverses.  After $k$ of these inverses the shifted
+state is
+\[
+ 2^{k+1}3^{b_1-k-1}s_1.
+ \tag{23}
+\]
+Reversing exponent three gives $2R_k$, after which precisely $f_k$
+exponent-one inverses remain available.  This proves Family III.
+
+It remains to consider three exponents two.  Parity forces each one to
+occur at the next junction, after the current exponent-one run is
+exhausted.  The first junction is described by (22).  After the next
+$b_1-1$ exponent-one inverses, the shifted state is $2^{b_1}s_1$, and
+the second exponent-two inverse gives $2N_2/3$.  After the following
+$b_2-1$ exponent-one inverses, the shifted state is $2^{b_2}s_2$, and
+the third exponent-two inverse gives $2N_3/3$.  Reversing a final
+$j-1$ exponent-one steps gives (18).
+
+The three partitions of the excess are exhaustive.  In each partition,
+the parity rule forces every non-one exponent into the positions used
+above.  Therefore, the four displayed families contain every exact
+excess-three word.
+\end{proof}
+
+\begin{corollary}[finite excess-three horizon]
+With the notation of Theorem~1, define
+\[
+ H_I:=b+c,
+ \tag{24}
+\]
+\[
+ H_{II}:=\max_{0\leq k<b}(k+c_k+d_k+1),
+ \qquad
+ H_{III}:=\max_{0\leq k<b_1-1}(b+k+f_k+2),
+ \tag{25}
+\]
+where the maximum of an empty set is zero, and define
+\[
+ H_{IV}:=
+ \begin{cases}
+ b+b_1+b_2+b_3,&b_1b_2b_3>0,\\
+ 0,&b_1b_2b_3=0.
+ \end{cases}
+ \tag{26}
+\]
+Then no exact $h$-step predecessor word of $r$ has excess three when
+\[
+ \boxed{h>H_3(r):=\max(H_I,H_{II},H_{III},H_{IV}).}
+ \tag{27}
+\]
+If $H_{\leq2}(r)$ denotes the horizon from the excess-zero, excess-one,
+and excess-two classifications, then every exact prefix with
+\[
+ h>H_{\leq3}(r):=\max\bigl(H_{\leq2}(r),H_3(r)\bigr)
+ \tag{28}
+\]
+has excess at least four.
+\end{corollary}
+
+\begin{proof}
+The largest word length in each family is the corresponding quantity in
+(24)--(26).  Theorem~1 proves (27).  Combining it with the three earlier
+decoder layers proves (28).
+\end{proof}
+
+\begin{corollary}[fixed-seed inequalities]
+Let $n$ be the globally least positive odd integer with an unbounded
+accelerated orbit, and suppose that the orbit of $r$ is unbounded.  Every
+branch in Theorem~1 satisfies its corresponding inequality
+\[
+ \boxed{
+ \begin{aligned}
+ Q&\geq(n+1)\left(\frac32\right)^j,
+ &&1\leq j\leq c,\\
+ P_k&\geq(n+1)\left(\frac32\right)^j,
+ &&1\leq j\leq d_k,\\
+ R_k&\geq\frac{n+1}{2}\left(\frac32\right)^\ell,
+ &&0\leq\ell\leq f_k,\\
+ N_3&\geq(n+1)\left(\frac32\right)^j,
+ &&1\leq j\leq b_3.
+ \end{aligned}}
+ \tag{29}
+\]
+In particular, every minimum-channel prefix of excess at most three is
+now contained in a finite explicit valuation ladder.  Beyond
+$H_{\leq3}(r)$, that channel has excess at least four.
+\end{corollary}
+
+\begin{proof}
+Every positive predecessor of $r$ also has an unbounded forward orbit.
+Its start is therefore at least $n$.  Substitution of the four shifted
+starts in (8), (11), (15), and (18) proves (29).  The final assertion is
+Corollary~2.
+\end{proof}
+
+The accompanying exact certificate is
+\[
+ \begin{gathered}
+ \texttt{verify\_divergence\_record\_}\\
+ \texttt{excess\_three.py}.
+ \end{gathered}
+\]
+It independently enumerates every reverse word of excess three and checks the four
+families for all $50{,}001$ odd terminal states $r\leq100{,}001$ using
+exact integer arithmetic.
+
+\end{document}

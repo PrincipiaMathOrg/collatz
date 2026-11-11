@@ -1,0 +1,1403 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Arithmetic Rigidity and Limiting Transfer Operators in the 3x+1 Problem}}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\usepackage{longtable}
+
+\numberwithin{equation}{section}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=2em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\A}{\mathcal A}
+\newcommand{\W}{\mathcal W}
+\newcommand{\Zp}{\mathbb Z_{>0}}
+\newcommand{\Ftwo}{\mathbb F_2}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lam}{\lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\pop}{\operatorname{popcount}}
+\newcommand{\CW}{\operatorname{cw}}
+\newcommand{\Span}{\operatorname{span}}
+
+\title{Arithmetic Rigidity and Limiting Transfer Operators in the $3x+1$ Problem}
+\date{July 2026}
+
+\begin{document}
+
+\begin{abstract}
+We collect two structural investigations of the $3x+1$ problem.  The first concerns positive cycles encoded by parity words.  Starting from the rational-cycle parametrization of Lagarias, we isolate the exact arithmetic condition for an integer cycle, sharpen the classical fixed-window estimate by retaining the window weight and the number of one-runs, and prove a quantitative obstruction to every argument whose only output is uniqueness of a completion.  We then give the exact decoder, determine the arithmetic structure of its image sets, classify their integer multiplicative self-overlaps, describe the modular wrap-around mechanisms that invalidate the same classification modulo $2^K-3^m$, and show that the affine carry recursion is self-similar but not a descent.
+
+The second part concerns the Krasikov--Lagarias difference-inequality programs.  We identify the finite programs with nonlinear Perron problems and prove that their limit is the lower Collatz--Wielandt value of an explicit positive transfer operator on $2+3\mathbb Z_3$.  Its $L^1$ spectral radius is elementary, but it does not determine the required lower spectral value.  We characterize the finite-depth loss as sibling-minimum dispersion, record exact certified computations through depth $18$, and repair a minor omission in the passage from noncyclic targets to targets lying in a cycle.  Throughout, published results, proved deductions, and finite computations are distinguished explicitly.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let
+\[
+T(n)=\begin{cases}
+ n/2,&n\equiv0\pmod2,\\
+ (3n+1)/2,&n\equiv1\pmod2.
+\end{cases}
+\]
+The two possible ways in which the Collatz conjecture could fail are an unbounded orbit and a nontrivial positive cycle.  This paper concerns two methods aimed at these two failure modes.
+
+The coding of rational cycles by parity words was developed systematically by Lagarias~\cite{Lagarias1990}.  In particular, his Theorem~2.1 gives the rational periodic point associated with a parity word, Corollary~2.1a proves fixed-weight injectivity of the numerator map, and Theorems~4.1--4.2 use fixed and moving windows to bound its residue multiplicities.  Halbeisen and Hungerb\"uhler~\cite{HalbeisenHungerbuehler1997} emphasized that estimates depending only on length and size also apply to rational cycles, and hence cannot by themselves distinguish integer cycles.  The cycle literature also includes the one-circuit theorem of Steiner~\cite{Steiner1978}, the many-circuit bounds of Simons and de Weger~\cite{SimonsDeWeger2005}, Hercher's exclusion of cycles with at most $91$ circuits~\cite{Hercher2023}, Barina's verification below $2^{71}$~\cite{Barina2025}, and Knight's exclusion of the opposite high-cycle extremal class~\cite{Knight2026}.
+
+Our cycle analysis retains Lagarias's arithmetic numerator map but separates three logically distinct levels.  A window estimate can show that a residue class has at most one completion.  The exact decoder identifies that completion or proves that none exists.  Finally, an arithmetic anti-alignment theorem would have to show that the identified completions are absent on a family large enough to cover all parity words.  We prove that the first level is permanently insufficient, and that the second is exact but, without additional arithmetic input, merely reorganizes the original problem.
+
+The second part begins with the difference inequalities of Krasikov~\cite{Krasikov1989}.  Applegate and Lagarias~\cite{ApplegateLagarias1995II} obtained the exponent $0.81$ by finite nonlinear programs, and Krasikov and Lagarias~\cite{KrasikovLagarias2003} removed the earlier truncation of advanced terms and reached $0.84$ at depth $11$.  We show that the entire hierarchy is the cylinder approximation of one transfer operator on the compact $3$-adic space $2+3\mathbb Z_3$.  The limiting question is therefore a generalized principal-eigenvalue problem rather than an intrinsically finite linear-programming problem.
+
+All decimal values in the paper were evaluated with at least $60$ decimal digits before rounding, unless stated otherwise.  Finite searches and exact-integer certificates reported in \cref{sec:computations} are computational statements, not substitutes for the proofs in the main text.
+
+\part{Parity words and positive cycles}
+
+\section{Parity words and the integer-cycle condition}
+
+For a binary word $w=(w_0,\ldots,w_{K-1})$ of weight $m$, define
+\begin{equation}\label{eq:Phi-def}
+\Phi(w)=\sum_{\substack{0\le j<K\\w_j=1}}2^j3^{w_{j+1}+\cdots+w_{K-1}}.
+\end{equation}
+If the ones occur at $0\le c_1<\cdots<c_m<K$, then
+\begin{equation}\label{eq:Phi-ci}
+\Phi(w)=\sum_{i=1}^m3^{m-i}2^{c_i}.
+\end{equation}
+Set
+\[
+D=D(K,m):=2^K-3^m.
+\]
+Throughout the cycle part we assume $D>0$.
+
+The affine composition formula is
+\begin{equation}\label{eq:affine-composition}
+T_w(x)=\frac{3^m x+\Phi(w)}{2^K},
+\end{equation}
+where $T_w$ means that the branches prescribed by $w$ are applied in order.  Hence the unique rational fixed point is
+\begin{equation}\label{eq:rational-fixed}
+N(w)=\frac{\Phi(w)}{D}.
+\end{equation}
+This is the rational-cycle parametrization of Lagarias~\cite[Theorem~2.1]{Lagarias1990}.
+
+A cyclic rotation of $w$ will be denoted by $\rho w$.  A word is called \emph{minimal} if its associated rational orbit begins at its least value.  When $\gcd(K,m)=1$, each rotation orbit has size $K$ and exactly one minimal representative.
+
+\begin{proposition}[Rotation recurrence]\label{prop:rotation-recurrence}
+Let $S_t$ be the numerator of the cyclic rotation beginning at time $t$, and let $\eps_t=w_t$.  Then
+\begin{equation}\label{eq:rotation-recurrence}
+2S_{t+1}=3^{\eps_t}S_t+\eps_tD.
+\end{equation}
+In particular, divisibility by $D$ is invariant under cyclic rotation.
+\end{proposition}
+
+\begin{proof}
+The fixed point at time $t$ is $S_t/D$.  Applying one branch gives
+\[
+\frac{S_{t+1}}D=\frac{3^{\eps_t}S_t/D+\eps_t}{2},
+\]
+which is \eqref{eq:rotation-recurrence}.  Since $D$ is odd, divisibility propagates in both directions around the cycle.
+\end{proof}
+
+\begin{theorem}[Integer-cycle criterion]\label{thm:integer-cycle-criterion}
+A minimal word $w$ satisfies $D\mid\Phi(w)$ if and only if $N(w)$ is the least element of a positive integer cycle of $T$.  Consequently, if
+\[
+Z(K,m)=\#\{\text{minimal weight-$m$ words of length $K$ with }D\mid\Phi(w)\},
+\]
+then $Z(K,m)$ counts positive integer cycles with $K$ total steps and $m$ odd steps, written from their least element.
+\end{theorem}
+
+\begin{proof}
+If $D\mid S_0$, then \cref{prop:rotation-recurrence} gives $D\mid S_t$ for every $t$, so all orbit values $x_t=S_t/D$ are integers.  If $w_t=0$, integrality of $x_{t+1}=x_t/2$ forces $x_t$ even; if $w_t=1$, integrality of $(3x_t+1)/2$ forces $x_t$ odd.  Thus the prescribed word is the actual parity word of an integer cycle.
+
+Conversely, the affine identity \eqref{eq:affine-composition} for an integer cycle gives $D x_0=\Phi(w)$.  Rotating to the least cycle element gives a minimal word.
+\end{proof}
+
+\subsection{The trivial ray and the minimum}
+
+Let $b_1,\ldots,b_m$ be the odd values in a positive integer cycle, and let $k_i\ge1$ be the number of steps from $b_i$ to $b_{i+1}$.  Then
+\begin{equation}\label{eq:odd-product-local}
+2^{k_i}b_{i+1}=3b_i+1
+=3b_i\left(1+\frac1{3b_i}\right).
+\end{equation}
+Multiplying around the cycle yields
+\begin{equation}\label{eq:odd-product}
+\frac{2^K}{3^m}=\prod_{i=1}^m\left(1+\frac1{3b_i}\right).
+\end{equation}
+
+\begin{theorem}[The trivial ray]\label{thm:trivial-ray}
+For every $m\ge1$,
+\[
+Z(2m,m)=1,
+\]
+represented by the word with ones at $0,2,\ldots,2m-2$.  If $K>2m$, then $Z(K,m)=0$.
+\end{theorem}
+
+\begin{proof}
+Every factor in \eqref{eq:odd-product} is at most $4/3$, hence $2^K/3^m\le(4/3)^m$ and $K\le2m$.  Equality forces every $b_i=1$, so the cycle is the $m$-fold repetition of $1\mapsto2\mapsto1$.  Its numerator equals $2^{2m}-3^m$.
+\end{proof}
+
+Let $N$ be the least element of a nontrivial positive cycle.  Since at least one odd cycle element is larger than $N$, \eqref{eq:odd-product} gives the strict bound
+\begin{equation}\label{eq:N-upper}
+N< U(K,m):=\frac1{2^{K/m}-3}.
+\end{equation}
+The linearized version is
+\[
+N<\frac1{3\log 2\,(K/m-\log_2 3)}.
+\]
+
+\begin{lemma}[Congruence of the minimum]\label{lem:min-congruence}
+The least element $N>1$ of a positive integer cycle satisfies
+\[
+N\equiv7\ \text{or}\ 11\pmod{12}.
+\]
+Moreover $N\ge31$.
+\end{lemma}
+
+\begin{proof}
+The minimum is odd.  If $N\equiv1\pmod4$, then $(3N+1)/4<N$, so $N\equiv3\pmod4$.  Every odd cycle element is prime to $3$, because $2^k b'=3b+1$.  This gives the two classes modulo $12$.
+
+The first four possibilities descend below themselves under the odd-to-odd map:
+\[
+7\mapsto11\mapsto17\mapsto13\mapsto5,
+\quad
+11\mapsto17\mapsto13\mapsto5,
+\]
+\[
+19\mapsto29\mapsto11,
+\quad
+23\mapsto35\mapsto53\mapsto5.
+\]
+Hence $N\ge31$.
+\end{proof}
+
+The preceding lemma already excludes every nontrivial cycle with
+\[
+\frac Km\ge\log_2\frac{94}{31}
+=1.6003925412907621634\ldots.
+\]
+
+\subsection{The current computational cutoff}
+
+Barina proved computationally that every starting value below $2^{71}$ reaches the trivial cycle~\cite{Barina2025}.  Therefore a nontrivial cycle minimum satisfies
+\begin{equation}\label{eq:N-Barina}
+N>2^{71}=2361183241434822606848.
+\end{equation}
+Combining \eqref{eq:N-upper} and \eqref{eq:N-Barina} gives
+\begin{equation}\label{eq:approx-cutoff}
+0<\frac Km-\log_2 3
+<\log_2(3+2^{-71})-\log_2 3
+=2.0366837207889\ldots\times10^{-22}.
+\end{equation}
+An exact continued-fraction computation then eliminates all upper convergents through
+\[
+\frac{10439860591}{6586818670}
+\]
+and leaves first
+\begin{equation}\label{eq:first-survivor}
+(K,m)=
+(217976794617,137528045312).
+\end{equation}
+Thus the reduced denominator of $K/m$ is at least $137528045312$.  This agrees in scale with the circuit analysis of Hercher~\cite{Hercher2023}.
+
+At the pair \eqref{eq:first-survivor}, the exact values used below are
+\begin{align}
+\log_2D&=217976794576.982701920360802569\ldots,\label{eq:logD-first}\\
+\frac{m}{K}&=0.6309297535714574370995233617\ldots.\label{eq:alpha-first}
+\end{align}
+The total number of minimal words is about
+\[
+10^{62333757647.2929},
+\]
+whereas $D$ is about $10^{65617553526.3576}$.
+
+\section{Window rigidity and its refinements}\label{sec:windows}
+
+For $0\le a\le L$, define
+\begin{equation}\label{eq:A-def}
+\A_{L,a}=
+\left\{
+\sum_{i=1}^a3^{a-i}2^{d_i}:
+0\le d_1<\cdots<d_a<L
+\right\},
+\end{equation}
+with $\A_{L,0}=\{0\}$.  Lagarias's Corollary~2.1a~\cite{Lagarias1990} proves that the defining map is injective.  We record the exact range because retaining the weight $a$ is the source of the sharper constants below.
+
+\begin{lemma}[Exact image range]\label{lem:A-range}
+For $1\le a\le L$,
+\begin{align}
+\min\A_{L,a}&=3^a-2^a,\label{eq:A-min}\\
+\max\A_{L,a}&=2^{L-a}(3^a-2^a),\label{eq:A-max}\\
+\operatorname{diam}(\A_{L,a})&=(2^{L-a}-1)(3^a-2^a),\label{eq:A-diam}\\
+|\A_{L,a}|&=\binom La.\label{eq:A-card}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The inequalities $i-1\le d_i\le L-a+i-1$ give the extrema.  For injectivity, the least exponent is $v_2(x)$; subtract its term and continue recursively.
+\end{proof}
+
+Suppose a contiguous window of length $L$ begins at position $t$, contains $a$ ones, and has $u$ ones before it.  Its contribution to the global numerator is a unit times an element of $\A_{L,a}$.  Hence the following is the fixed-window argument of Lagarias, in its weight-refined form.
+
+\begin{proposition}[Window uniqueness]\label{prop:window-uniqueness}
+Let $q\mid D$.  Fix all bits outside one contiguous cyclic window of length $L$, so that the window weight is forced to be $a$.  If
+\begin{equation}\label{eq:window-rigid}
+(2^{L-a}-1)(3^a-2^a)<q,
+\end{equation}
+then at most one filling of the window can satisfy $q\mid\Phi(w)$.
+\end{proposition}
+
+\begin{proof}
+The difference of the global numerators for two fillings is a unit modulo $q$ times the difference of two elements of $\A_{L,a}$.  A nonzero such difference has absolute value below $q$, so it cannot vanish modulo $q$.
+\end{proof}
+
+\subsection{The corrected adaptive-window bound}
+
+Let $J$ be a cyclic interval of length $r$, and let $b_J(w)$ be its number of ones.  Put $L=K-r$ and $a=m-b$.  Define $b_q(r)$ to be the least feasible integer $b$ for which
+\begin{equation}\label{eq:bqr-def}
+(2^{K-r-m+b}-1)(3^{m-b}-2^{m-b})<q.
+\end{equation}
+
+\begin{theorem}[Adaptive-window bound]\label{thm:adaptive-window}
+If
+\[
+b_q(r)\le\left\lceil\frac{rm}{K}\right\rceil,
+\]
+then the number $Y_q(K,m)$ of labelled weight-$m$ words satisfying $q\mid\Phi(w)$ obeys
+\begin{equation}\label{eq:adaptive-labelled}
+Y_q(K,m)
+\le
+K\sum_{b=b_q(r)}^r\binom rb.
+\end{equation}
+If $\gcd(K,m)=1$, then
+\begin{equation}\label{eq:adaptive-Z}
+Z_q(K,m)
+\le
+\min_r\sum_{b=b_q(r)}^r\binom rb,
+\end{equation}
+where the minimum is over eligible $r$.
+\end{theorem}
+
+\begin{proof}
+Every one belongs to exactly $r$ cyclic $r$-intervals, so the average of $b_J(w)$ is $rm/K$.  Choose the first interval with $b_J(w)\ge\lceil rm/K\rceil$.  Once its position and complete pattern are fixed, \cref{prop:window-uniqueness} gives at most one completion of the complement.  There are $K$ positions and the displayed binomial tail possible retained patterns.  When $\gcd(K,m)=1$, divisibility is rotation invariant and every orbit has $K$ words, so division by $K$ is exact.  Each eligible $r$ gives a separate bound, hence the minimum.
+\end{proof}
+
+Let
+\[
+\lambda_0=\log_2 3,
+\qquad
+\alpha_0=\lambda_0^{-1},
+\qquad
+h_0=H_2(\alpha_0)
+=0.94995552718833063481\ldots.
+\]
+The admissible-word count is
+\[
+\frac1K\binom Km
+=\left(c+o(1)\right)^m,
+\qquad
+c=\frac{\lambda_0^{\lambda_0}}
+{(\lambda_0-1)^{\lambda_0-1}}
+=2.8395137304977525964\ldots.
+\]
+Optimizing \eqref{eq:adaptive-Z} in the regime $K/m\to\lambda_0$ gives
+\begin{equation}\label{eq:base-132}
+Z(K,m)
+\le
+\left(1.3249036051098228362\ldots+o(1)\right)^m.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:D-saving-0693}
+Z(K,m)
+\le
+\frac1K\binom Km
+D^{-0.69386909084209123650\ldots+o(1)}.
+\end{equation}
+The constant is
+\[
+0.69386909084209123650\ldots
+=\frac{h_0}{2-\alpha_0}.
+\]
+The architecture of this estimate is Lagarias's Theorem~4.2~\cite{Lagarias1990}; the improvement from the classical base $3/2$ to \eqref{eq:base-132} comes from the exact weight-dependent diameter \eqref{eq:A-diam}.
+
+At the pair \eqref{eq:first-survivor}, exact log-gamma evaluation of the optimal corrected binomial tail gives a logarithm of approximately
+\begin{equation}\label{eq:block-first-size}
+5.58209005483\times10^{10}
+\end{equation}
+binary bits.  This must not be confused with the independent $73$-step prefix sieve in \cref{sec:prefix-sieve}.
+
+\subsection{A circuit-sensitive refinement}
+
+A run of consecutive ones will be called a circuit.  For a local word of length $L$, weight $a$, and exactly $\nu$ one-runs, put $p=a-\nu$, the number of internal $11$ edges.
+
+\begin{lemma}[Maximum with fixed run count]\label{lem:fixed-runs-max}
+Among all $a$-subsets of $\{0,\ldots,L-1\}$ with $\nu$ runs, the maximum of the numerator is
+\begin{equation}\label{eq:fixed-runs-max}
+M_{L,a,\nu}
+=2^{L-a}3^{a-1}
+\left(
+6\left(\frac23\right)^{\nu-1}
+-\frac3{2^{\nu-1}}
+-3\left(\frac23\right)^a
+\right),
+\end{equation}
+and in particular
+\begin{equation}\label{eq:fixed-runs-simple}
+M_{L,a,\nu}<3^{p+1}2^{L-p}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Shift the set to the right until its last point is $L-1$.  Every positive gap between successive selected positions can then be reduced to $1$, increasing the numerator, and an exchange moves all such gaps as far left as possible.  Thus the maximizing word, after an initial string of zeros, is
+\[
+(10)^{\nu-1}1^{a-\nu+1}.
+\]
+Summing the two resulting geometric progressions gives \eqref{eq:fixed-runs-max}; deleting its two negative terms gives \eqref{eq:fixed-runs-simple}.
+\end{proof}
+
+Combining \cref{lem:fixed-runs-max} with an averaging argument for internal $11$ edges and the exact enumeration
+\begin{equation}\label{eq:linear-runs-count}
+\#\{\text{length-$r$, weight-$b$ words with $\nu$ runs}\}
+=\binom{b-1}{\nu-1}\binom{r-b+1}{\nu}
+\end{equation}
+gives a circuit-sensitive analogue of \cref{thm:adaptive-window}.  Optimizing the resulting transfer-matrix entropy bound yields
+\begin{equation}\label{eq:base-125}
+Z(K,m)
+\le
+\left(1.2520119844986764273\ldots+o(1)\right)^m.
+\end{equation}
+The maximizing asymptotic circuit density is
+\[
+\frac{s}{K}
+=0.05651895370790335220\ldots,
+\]
+and the exponent per total step is
+\[
+0.2045779454987309821\ldots.
+\]
+Thus the known exclusion of at most $91$ circuits~\cite{Hercher2023} removes only a zero-density part of the dominant regime of this bound.  The refinement is substantial, but it still leaves exponentially many possible words.
+
+\section{A quantitative no-go theorem for uniqueness-only arguments}\label{sec:no-go}
+
+We now define precisely the family to which the no-go theorem applies.  Let $\Omega_{K,m}$ be the set of minimal weight-$m$ words of length $K$.  Fix one contiguous cyclic interval $I$ of length $L$ and the complete pattern outside $I$.  If the outside pattern has $m-a$ ones, feasibility is
+\begin{equation}\label{eq:feasible-a}
+\max(0,m-K+L)\le a\le\min(m,L).
+\end{equation}
+The corresponding bucket consists of the words in $\Omega_{K,m}$ with that outside pattern.  We include the bucket in $\mathcal B_{K,m}$ when \eqref{eq:window-rigid} holds with $q=D$.  By \cref{prop:window-uniqueness}, the true solution set meets each bucket in at most one word.
+This family contains all single contiguous cyclic windows with a fixed outside pattern.  Passing to a proper divisor $q\mid D$ only strengthens the diameter hypothesis and therefore does not enlarge the family at the uniqueness level; noncontiguous free sets are not included.
+
+Associate a graph to these buckets by joining two candidate words when they belong to a common bucket.  A hypothetical solution set compatible with all uniqueness statements is exactly an independent set in this graph.
+
+The underlying obstruction can also be stated in block form.  If
+$C\subseteq X_1\times\cdots\times X_B$ and every coordinate is uniquely determined by the other $B-1$, then
+\begin{equation}\label{eq:single-check}
+|C|\le\min_i\prod_{j\ne i}|X_j|.
+\end{equation}
+For equal alphabets the bound $q^{B-1}$ is sharp, as shown by the single equation
+$x_1+\cdots+x_B=0$ in an abelian group of order $q$.  Thus several recovery statements need not yield several independent savings.
+
+\begin{lemma}[Greedy packing]\label{lem:greedy-packing}
+Suppose every candidate lies in at most $T$ buckets and every bucket has at most $B$ elements.  Then all uniqueness statements are simultaneously compatible with a set of at least
+\begin{equation}\label{eq:packing-basic}
+\frac{|\Omega_{K,m}|}{1+T(B-1)}
+\end{equation}
+candidates.
+\end{lemma}
+
+\begin{proof}
+The bucket graph has maximum degree at most $T(B-1)$.  Greedily selecting a vertex and deleting its closed neighborhood produces an independent set of size at least \eqref{eq:packing-basic}.
+\end{proof}
+
+For $\gcd(K,m)=1$,
+\begin{equation}\label{eq:Omega-card}
+|\Omega_{K,m}|=\frac1K\binom Km.
+\end{equation}
+There are fewer than $K^2$ cyclic intervals of all lengths, and a word lies in one outside-pattern bucket for each interval, so $T\le K^2$.
+
+The maximum feasible bucket is obtained by optimizing both the rigidity condition and the outside-capacity constraint.  Put
+\begin{align}
+p_f&=\frac1{\lambda_0^2-\lambda_0+1}
+=0.51890268347709980987\ldots,\label{eq:pf}\\
+\ell_f&=\frac{\lambda_0^2-\lambda_0+1}{\lambda_0^2}
+=0.76714260037028257151\ldots.\label{eq:ellf}
+\end{align}
+Its entropy exponent is
+\begin{equation}\label{eq:theta-f}
+\theta_f=\ell_f H_2(p_f)
+=0.76635150096424994537\ldots.
+\end{equation}
+
+\begin{theorem}[Quantitative uniqueness ceiling]\label{thm:quant-no-go}
+At the first surviving pair \eqref{eq:first-survivor}, the complete family $\mathcal B_{K,m}$ of ordinary contiguous-window uniqueness statements is compatible with a hypothetical solution set of size greater than
+\begin{equation}\label{eq:no-go-number}
+2^{40021417064.53}.
+\end{equation}
+Consequently, no argument whose entire arithmetic input consists of finitely many such at-most-one completion statements can prove $Z(K,m)=0$.
+\end{theorem}
+
+\begin{proof}
+The entropy lower bound
+\[
+\binom Km\ge\frac{2^{K H_2(m/K)}}{K+1}
+\]
+and the feasible bucket bound \eqref{eq:theta-f} give
+\[
+\log_2\nu
+\ge
+K H_2(m/K)-\theta_fK-O(\log K).
+\]
+Substitution of \eqref{eq:first-survivor} and exact log-gamma evaluation gives \eqref{eq:no-go-number}.  Any finite adaptive use of ordinary window uniqueness invokes a subfamily of $\mathcal B_{K,m}$, so it cannot improve this semantic ceiling.
+\end{proof}
+
+The Smith normal form of the ideal quotient in \cref{sec:ideal} is the arithmetic form of the same single-check obstruction.
+
+\section{The exact decoder and the capacity barrier}\label{sec:decoder}
+
+Let a cyclic word be written linearly as $w=uvz$, where $v$ is the free window, $|u|=r$, $|v|=L$, and $|z|_1=c$.  If $|v|_1=a$, then the concatenation identity gives
+\begin{equation}\label{eq:three-block}
+\Phi(uvz)=F(u,z,a)+C\Phi(v),
+\end{equation}
+where
+\[
+C=2^r3^c,
+\qquad
+F(u,z,a)=3^{a+c}\Phi(u)+2^{r+L}\Phi(z).
+\]
+Let $q\mid D$.  Define the required residue
+\begin{equation}\label{eq:decoder-residue}
+\rho_q=\langle-C^{-1}F\rangle_q\in\{0,\ldots,q-1\}.
+\end{equation}
+Assume $\operatorname{diam}(\A_{L,a})<q$.  Put
+\begin{equation}\label{eq:decoder-lift}
+k_q=\left\lceil\frac{(3^a-2^a)-\rho_q}{q}\right\rceil,
+\qquad
+y_q=\rho_q+k_qq.
+\end{equation}
+
+\begin{theorem}[Exact window decoder]\label{thm:exact-decoder}
+Under the diameter hypothesis, a completion $v$ with $q\mid\Phi(uvz)$ exists if and only if
+\begin{equation}\label{eq:decoder-test}
+y_q\le2^{L-a}(3^a-2^a)
+\qquad\text{and}\qquad
+y_q\in\A_{L,a}.
+\end{equation}
+When it exists, $v$ is unique.
+\end{theorem}
+
+\begin{proof}
+Every possible $\Phi(v)$ lies in the interval from \eqref{eq:A-min} to \eqref{eq:A-max}.  The integer $y_q$ is the least element of the required residue class in this interval, and the interval has length below $q$.  Thus it is the only possible local numerator.  Membership in $\A_{L,a}$ is equivalent to existence, and injectivity gives uniqueness.
+\end{proof}
+
+Membership is decided recursively by
+\begin{equation}\label{eq:A-recursion}
+\A_{L,a}
+=2\A_{L-1,a}\ \dot\cup\ 
+\bigl(3^{a-1}+2\A_{L-1,a-1}\bigr).
+\end{equation}
+Equivalently, starting from $y$, repeatedly take $d_i=v_2(y)$, subtract $3^{a-i}2^{d_i}$, and require strictly increasing exponents below $L$.  This is Lagarias's fixed-weight inverse map in algorithmic form.
+
+If $D=qQ$ and the $q$-decoder produces a block $v$, then
+\begin{equation}\label{eq:cofactor-test}
+D\mid\Phi(uvz)
+\quad\Longleftrightarrow\quad
+Q\mid\frac{F+C\Phi(v)}q.
+\end{equation}
+This second test is not another uniqueness statement: it can make the identified fibre empty.
+
+\subsection{Balanced windows cover every word}
+
+For a cyclic word $w$, let $A_j$ be the number of ones in the length-$L$ interval beginning at $j$.  Since $A_{j+1}-A_j\in\{-1,0,1\}$ and the average is $mL/K$, some interval has weight
+\begin{equation}\label{eq:balanced-weight}
+a\in\left\{\left\lfloor\frac{mL}{K}\right\rfloor,
+\left\lceil\frac{mL}{K}\right\rceil\right\}.
+\end{equation}
+Thus balanced-window buckets cover every candidate word.
+
+At the first surviving pair, taking $L=\lfloor K/2\rfloor$ gives
+\[
+a\in\{68764022655,68764022656\}
+\]
+and, in the worse case,
+\begin{equation}\label{eq:half-thinness}
+\log_2D-\bigl(L+(\lambda_0-1)a\bigr)
+=68764022616.48270192036145\ldots.
+\end{equation}
+Hence every candidate belongs to a bucket whose local numerator interval occupies less than $2^{-68764022616}$ of the modulus.  This enormous thinness does not by itself imply rejection.
+
+Indeed, for a split $K=L+R$, $m=a+b$, the outside target set is a unit multiple of $\A_{R,b}$ modulo $D$.  Under double rigidity, the exact number of completions is
+\begin{equation}\label{eq:intersection-form}
+\left|
+\A_{L,a}
+\cap
+\left(-3^a2^{-R}\A_{R,b}\right)
+\pmod D
+\right|.
+\end{equation}
+Cardinality and injectivity alone give only
+\begin{equation}\label{eq:capacity}
+\min\left\{\binom La,\binom Rb\right\}.
+\end{equation}
+This bound is sharp from those data alone: an injective target map may send every outside configuration into the accepting set whenever the latter is large enough.
+
+Let $\rho=L/K$ and assume $a/L,b/R\to\alpha_0$.  Then
+\begin{align}
+\log_2|\A_{L,a}|&=\rho h_0K+o(K),\label{eq:local-card-exp}\\
+\log_2|\A_{R,b}|&=(1-\rho)h_0K+o(K),\label{eq:outside-card-exp}\\
+\log_2\operatorname{diam}(\A_{L,a})&=\rho(2-\alpha_0)K+o(K).\label{eq:range-exp}
+\end{align}
+Thus the local-image exponent plus the outside-bucket exponent is always $h_0K$.  Optimizing the size-only matching bound recovers exactly the base in \eqref{eq:base-132}.  This is the conservation law behind the capacity barrier.
+
+\subsection{A genuine decoder exclusion}
+
+The decoder can nevertheless empty special buckets.  Suppose a cyclic word ends in a run $1^c$, so $w=v1^c$, and put
+\[
+a=m-c,
+\qquad L=K-c,
+\qquad z=K-m.
+\]
+Then
+\begin{equation}\label{eq:run-identity}
+\Phi(w)+D
+=3^c\bigl(\Phi(v)+2^L-3^a\bigr).
+\end{equation}
+If $0<2^L-3^a<D$, a necessary condition for divisibility is
+\begin{equation}\label{eq:run-necessary}
+(2^z-1)2^a\le D\le(2^z-1)3^a.
+\end{equation}
+At \eqref{eq:first-survivor}, the first integer $c$ violating the upper inequality is
+\begin{equation}\label{eq:c0-run}
+c_0=50757509600.
+\end{equation}
+The logarithmic margin is
+\[
+\log_2D-\log_2\bigl((2^z-1)3^{m-c_0}\bigr)
+=0.97679372359959545687\ldots.
+\]
+Consequently, no divisible word at the first surviving pair contains $c_0$ consecutive ones.  In this one-parameter family the side conditions hold for $41\le c\le m$; the range test excludes the $86770535713$ values $c\ge c_0$ and leaves $50757509559$.  The normalized surviving proportion tends to
+\[
+1-\frac1{\log_2 3}=0.36907024642854256290\ldots.
+\]
+This is a true zero-fibre result, but it covers only a highly structured family and is much weaker than the known $92$-circuit exclusion.
+
+\section{Arithmetic structure of the local images}\label{sec:A-structure}
+
+The exact decoder suggests studying $\A_{L,a}$ as an arithmetic set rather than through its size.  Besides \eqref{eq:A-recursion}, fixing the final one gives
+\begin{equation}\label{eq:last-one-recursion}
+\A_{L,a}
+=\mathop{\dot\bigcup}_{d=a-1}^{L-1}
+\left(2^d+3\A_{d,a-1}\right).
+\end{equation}
+The gap variables $g_0,\ldots,g_a\ge0$ with $\sum g_i=L-a$ give the triangular representation
+\begin{equation}\label{eq:gap-representation}
+2^{g_0}\left(3^{a-1}+2^{g_1+1}
+\left(3^{a-2}+\cdots+2^{g_{a-1}+1}\right)\right).
+\end{equation}
+This is an $a$-dimensional $\{2,3\}$-unit expression, not a bounded-rank progression.
+
+\subsection{$2$-adic and $3$-adic saturation}
+
+For $0\le s\le L$, the number of residues modulo $2^s$ attained by $\A_{L,a}$ is exactly
+\begin{equation}\label{eq:2adic-residues}
+\sum_{u=\max(0,a-L+s)}^{\min(a,s)}\binom su.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:2adic-full}
+\A_{L,a}\pmod{2^s}=\mathbb Z/2^s\mathbb Z
+\quad\text{whenever }s\le\min(a,L-a).
+\end{equation}
+This follows by splitting off a prefix of length $s$ and applying the deterministic decoder modulo $2^s$.
+
+Similarly, every element of $\A_{L,a}$ is prime to $3$.  Since $\ord_{3^k}(2)=2\cdot3^{k-1}$, an induction on $k$ shows that every unit modulo $3^k$ has a representation
+\[
+\sum_{i=1}^k3^{k-i}2^{e_i}
+\quad(0\le e_1<\cdots<e_k\le3^k-2).
+\]
+Hence
+\begin{equation}\label{eq:3adic-full}
+\A_{L,a}\pmod{3^k}
+=(\mathbb Z/3^k\mathbb Z)^\times
+\end{equation}
+whenever $k\le a$ and
+\begin{equation}\label{eq:3adic-condition}
+L\ge a-k+3^k-1.
+\end{equation}
+For the half-window at \eqref{eq:first-survivor}, \eqref{eq:2adic-full} holds through $s=40224374652$, while \eqref{eq:3adic-full} holds through $k=22$.  Thus bounded-depth local congruences cannot supply the missing anti-alignment.
+
+\subsection{The quantitative $S$-unit route}
+
+For a fixed possible minimum $N$, the equation $\Phi(w)=ND$ is an $m$-term linear equation in powers of $2$.  The uniform theorem of Evertse--Schlickewei--Schmidt~\cite[Theorem~1.1]{EvertseSchlickeweiSchmidt2002} applies, and the explicit refinement of Amoroso--Viada~\cite[Theorem~6.2]{AmorosoViada2009} bounds the number of nondegenerate solutions in dimension $n$ and group rank $r$ by
+\[
+(8n)^{4n^4(n+r+1)}.
+\]
+Here $n=r=m$.  At \eqref{eq:first-survivor}, the binary logarithm of this bound is
+\begin{equation}\label{eq:S-unit-vacuous}
+4m^4(2m+1)\log_2(8m)
+=1.5744050737955322841\ldots\times10^{58},
+\end{equation}
+whereas the whole fixed-weight candidate space has logarithm
+$207068260826.1075\ldots$.  Even a hypothetical reduction with $n=r=d$ would need $d<77.374$ merely to beat brute force.  Thus the general $S$-unit theorem is effective only after an independent reduction to a bounded number of blocks.
+
+\subsection{Multiplicative self-overlap over the integers}
+
+\begin{theorem}[Integer self-overlap classification]\label{thm:integer-self-overlap}
+Let $\mu=\eps2^t3^s$ with $\eps\in\{\pm1\}$ and $s,t\in\mathbb Z$.  Then
+\[
+\A_{L,a}\cap\mu\A_{L,a}=\varnothing
+\]
+unless $\eps=1$ and $s=0$.  For $u\ge0$,
+\begin{align}
+\A_{L,a}\cap2^u\A_{L,a}&=2^u\A_{L-u,a},\label{eq:positive-shift-overlap}\\
+\A_{L,a}\cap2^{-u}\A_{L,a}&=\A_{L-u,a},\label{eq:negative-shift-overlap}
+\end{align}
+with the convention that $\A_{L-u,a}=\varnothing$ when $L-u<a$.  Therefore
+\begin{equation}\label{eq:overlap-card}
+\left|\A_{L,a}\cap2^t\A_{L,a}\right|
+=\binom{L-|t|}{a}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Every element of $\A_{L,a}$ is positive and has $3$-adic valuation zero, forcing $\eps=1$ and $s=0$.  Multiplication by $2^u$ shifts every representing exponent by $u$; injectivity shows that this is possible exactly when the original last exponent is below $L-u$.
+\end{proof}
+
+Thus powers of $2$ are the only integer overlap mechanism.  This classification fails modulo $D$ because modular reduction can create carry coincidences.
+
+\begin{proposition}[No-wrap sector]\label{prop:no-wrap}
+Let $M_{L,a}=\max\A_{L,a}<D$, and let $\mu\equiv pq^{-1}\pmod D$, where $p,q$ are coprime positive $\{2,3\}$-units.  If
+\begin{equation}\label{eq:no-wrap-height}
+\max(p,q)M_{L,a}<D,
+\end{equation}
+then the modular intersection is exactly the reduction of the corresponding integer intersection.  For a negative multiplier, it is empty under $(p+q)M_{L,a}<D$.
+\end{proposition}
+
+\begin{proof}
+A modular coincidence gives $qx-py=nD$.  Under \eqref{eq:no-wrap-height}, its absolute value is below $D$, so $n=0$ and \cref{thm:integer-self-overlap} applies.
+\end{proof}
+
+At the half-window of \eqref{eq:first-survivor},
+\begin{equation}\label{eq:no-wrap-first}
+\log_2\frac{D}{M_{L,a}}
+=68764022616.48270192036145\ldots.
+\end{equation}
+Every genuinely new positive modular overlap multiplier therefore has minimal $\{2,3\}$-height at least $2^{68764022616.48\ldots}$.
+
+\subsection{Wrap-around can create large overlap}
+
+If $w=1u$ and $\rho w=u1$, then
+\begin{equation}\label{eq:rotation-3over2}
+2\Phi(\rho w)=3\Phi(w)+D,
+\end{equation}
+so
+\begin{equation}\label{eq:rotation-mod}
+\Phi(\rho w)\equiv\frac32\Phi(w)\pmod D.
+\end{equation}
+More generally, rotating through $t$ bits containing $r$ ones multiplies the numerator by $3^r2^{-t}$ modulo $D$.
+
+For the full set $\A_{K,m}$, partition the remaining positions into blocks of length $K^{2/3}$ and prescribe in each block either the floor or the ceiling of the required density.  Stirling's formula gives $2^{K H_2(m/K)-o(K)}$ words with a prescribed first bit, while every prefix discrepancy is $o(K)$; hence their numerators are at most $2^{K+o(K)}$.  Since $D=2^{K-o(K)}$ in the relevant regime, reduction modulo $D$ has only subexponential multiplicity on this family.  Therefore
+\begin{equation}\label{eq:large-rotation-overlap}
+\left|
+\overline{\A}_{K,m}
+\cap\frac32\overline{\A}_{K,m}
+\right|
+\ge
+|\overline{\A}_{K,m}|^{1-o(1)}.
+\end{equation}
+Thus the integer classification does not survive globally modulo $D$.  The mechanism is exact cyclic symmetry, not generic $\{2,3\}$-unit structure.
+
+For a proper window, the corresponding identity has defect $2^L-3^a$ rather than $D$; in the double-rigid regime this defect does not vanish modulo $D$.  Hence \eqref{eq:large-rotation-overlap} does not itself produce a large-overlap mechanism for the half-window multiplier.
+
+\section{Ideal membership and affine peeling}\label{sec:ideal}
+
+Assume first that $\gcd(K,m)=1$.  Choose $u,v\in\mathbb Z$ with $um+vK=1$ and put
+\[
+g=2^u3^v\pmod D.
+\]
+Then
+\[
+g^m=2,
+\qquad
+g^K=3\pmod D.
+\]
+For one-positions $c_0<\cdots<c_{m-1}$, set
+\[
+a_j=mc_j-Kj.
+\]
+Up to a unit, the divisibility condition is
+\begin{equation}\label{eq:path-poly-congruence}
+\sum_{j=0}^{m-1}g^{a_j}\equiv0\pmod D.
+\end{equation}
+Equivalently, after shifting exponents to be nonnegative, the associated path polynomial lies in
+\begin{equation}\label{eq:ideal}
+(X^m-2,X^K-3)\subset\mathbb Z[X].
+\end{equation}
+
+\begin{proposition}[Cyclic ideal quotient]\label{prop:ideal-quotient}
+If $\gcd(K,m)=1$, then
+\[
+\mathbb Z[X]/(X^m-2,X^K-3)\cong\mathbb Z/D\mathbb Z.
+\]
+Consequently the presentation matrix has Smith normal form
+\begin{equation}\label{eq:SNF}
+\operatorname{diag}(1,\ldots,1,D).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Evaluation at $X=g$ gives a surjection onto $\mathbb Z/D\mathbb Z$.  The order of the source is the absolute resultant
+\[
+|\operatorname{Res}(X^m-2,X^K-3)|=2^K-3^m=D,
+\]
+where coprimality of $K$ and $m$ is used.  The surjection is therefore an isomorphism, and a finite cyclic cokernel of order $D$ has the stated Smith form.
+\end{proof}
+
+Thus the ideal condition contains one nontrivial finite congruence, not a family of independent block congruences.  For $d=\gcd(K,m)>1$ there is an analogous group-ring presentation with a $d$-torsion variable; its cyclotomic components factor $D$, while equality of the torsion coefficients is exactly the condition that the word is a $d$-fold repetition.  The quotient remains cyclic of order $D$.
+
+The exact peeling recursion makes the same point dynamically.  Let
+\[
+I(L,a;R,b;\gamma,\delta)
+\]
+count pairs $x\in\A_{L,a}$, $y\in\A_{R,b}$ satisfying
+\[
+x\equiv\gamma y+\delta\pmod D.
+\]
+Write
+\[
+x=\eps3^{a-1}+2x',
+\qquad
+y=\eta3^{b-1}+2y'.
+\]
+Then
+\begin{equation}\label{eq:affine-recursion}
+\delta'
+=2^{-1}\bigl(\delta+\gamma\eta3^{b-1}-\eps3^{a-1}\bigr),
+\end{equation}
+and
+\begin{equation}\label{eq:I-recursion}
+I(L,a;R,b;\gamma,\delta)
+=
+\sum_{\eps,\eta\in\{0,1\}}
+I(L-1,a-\eps;R-1,b-\eta;\gamma,\delta'),
+\end{equation}
+with infeasible terms omitted.
+
+After peeling length-$n$ prefixes $p,q$ of weights $u,v$, the correct closed form is
+\begin{equation}\label{eq:delta-n}
+\delta_n(p,q)
+=2^{-n}
+\left(
+\delta_0
++\gamma3^{b-v}\Phi(q)
+-3^{a-u}\Phi(p)
+\right).
+\end{equation}
+The raw binary integers of the prefixes range over Hamming spheres, while the operative contributions range over the scaled sets
+\[
+3^{a-u}\A_{n,u},
+\qquad
+3^{b-v}\A_{n,v}.
+\]
+Thus peeling is self-similar inside the broader affine-intersection family.
+
+It is not a descent.  The modulus and multiplier remain unchanged, a generally nonzero offset is created, and Vandermonde's identity gives exact conservation of candidate mass:
+\begin{equation}\label{eq:mass-conservation}
+\sum_{u,v}
+\binom nu\binom nv
+\binom{L-n}{a-u}
+\binom{R-n}{b-v}
+=\binom La\binom Rb.
+\end{equation}
+Moreover, under the local diameter hypothesis, fixing one right prefix and one left prefix weight makes $p\mapsto\delta_n(p,q)$ injective.  At the half-split of \eqref{eq:first-survivor}, a single layer therefore contains at least
+\begin{equation}\label{eq:offset-count}
+\binom{108988397308}{68764022656}
+=2^{103534130403.2811376207262\ldots}
+\end{equation}
+distinct offsets.  Exact state memoization alone meets the same square-root-scale obstruction as Fourier analysis.
+
+The target half-window intersection has
+\begin{align}
+\log_2|\A_{L,a}|&=103534130403.2811376207262\ldots,\label{eq:exact-half-A}\\
+\log_2|\A_{R,b}|&=103534130404.7191702799971\ldots,\label{eq:exact-half-B}\\
+\log_2\frac{|\A_{L,a}||\A_{R,b}|}{D}
+&=-10908533768.98239401963748\ldots.
+\label{eq:expected-half-intersection}
+\end{align}
+A one-shot estimate
+\[
+|I|\le|\A_{L,a}|D^{-\theta}
+\]
+would force $I=0$ only if
+\begin{equation}\label{eq:critical-theta}
+\theta>
+\frac{\log_2|\A_{L,a}|}{\log_2D}
+=0.4749777635927023691839\ldots.
+\end{equation}
+The equivalent saving per peeled left position is
+\begin{equation}\label{eq:critical-rate}
+\frac{\log_2|\A_{L,a}|}{L}
+=0.9499555270153650879001\ldots.
+\end{equation}
+These are the same requirement in two normalizations.
+
+\section{An independent prefix sieve}\label{sec:prefix-sieve}
+
+The lower bound $N>2^{71}$ yields a different necessary condition.  Let $r_t$ be the number of odd steps among the first $t$ steps of a cycle beginning at its minimum.  Since every current value is at least $N>2^{71}$,
+\begin{equation}\label{eq:prefix-density}
+2^t(2^{71})^{r_t}
+\le(3\cdot2^{71}+1)^{r_t}
+\qquad(1\le t\le K).
+\end{equation}
+Let $A_{71}(L)$ be the number of length-$L$ binary words satisfying all prefix inequalities \eqref{eq:prefix-density}.  It is computed exactly by
+\begin{equation}\label{eq:prefix-DP}
+a(0,0)=1,
+\qquad
+a(t,r)=
+\one_{\{2^tM^r\le(3M+1)^r\}}
+\bigl(a(t-1,r)+a(t-1,r-1)\bigr),
+\end{equation}
+where $M=2^{71}$, and $A_{71}(L)=\sum_r a(L,r)$.
+
+The parity-vector map is a bijection modulo $2^L$, so each accepted prefix determines one residue class of possible minima.  Therefore
+\begin{equation}\label{eq:prefix-bound}
+Z(K,m)
+\le
+\left\lceil\frac{U(K,m)}{2^L}\right\rceil A_{71}(L).
+\end{equation}
+At \eqref{eq:first-survivor}, exact integer arithmetic gives
+\begin{equation}\label{eq:A73}
+A_{71}(73)=8334012028975509798,
+\qquad
+\left\lceil\frac{U(K,m)}{2^{73}}\right\rceil=6,
+\end{equation}
+so
+\begin{equation}\label{eq:prefix-first}
+Z(K,m)
+\le50004072173853058788
+<2^{66}.
+\end{equation}
+This bound is independent of the window estimate \eqref{eq:block-first-size}; the two numbers have entirely different origins.
+
+The entropy exponent of the prefix condition is asymptotically
+\[
+H_2\left(\frac1{\log_2(3+2^{-71})}\right)
+=0.94995552718833063481\ldots,
+\]
+which differs from $h_0$ only in the twenty-second decimal place.  The main effect of the verification cutoff is the continued-fraction reduction, not a new entropy exponent.
+
+\part{The Krasikov--Lagarias hierarchy}
+
+\section{Difference inequalities and certified finite computations}\label{sec:KL-finite}
+
+For $a\not\equiv0\pmod3$, let $\pi_a(x)$ count positive integers at most $x$ whose forward orbit reaches $a$, and let $\pi_a^*(x)$ impose in addition that the orbit segment up to $a$ stays below $x$.  Krasikov~\cite{Krasikov1989} introduced difference inequalities for functions indexed by residue classes modulo $3^k$.  Applegate and Lagarias~\cite{ApplegateLagarias1995II} associated nonlinear linear-program families to derived retarded systems, obtaining the exponent $0.81$.  Krasikov and Lagarias~\cite{KrasikovLagarias2003} proved that the untruncated family $L_k^{NT}(\lambda)$ itself yields valid bounds and found a feasible value $\lambda=1.7922310$ at $k=11$, giving exponent $0.841756\ldots$.
+
+Let $\lambda_k$ be the supremum of $\lambda$ for which $L_k^{NT}(\lambda)$ is feasible.  The programs are nested, so $\lambda_k\le\lambda_{k+1}$.  Exact-integer certificates extending the published computation give the following feasible values; the displayed decimals are lower bounds for $\lambda_k$.
+
+\begin{table}[ht]
+\centering
+\caption{Certified feasible values for $L_k^{NT}(\lambda)$ beyond the published depth.}
+\label{tab:lambda-ladder}
+\begin{tabular}{c@{\qquad}c@{\qquad}c}
+\toprule
+$k$& certified $\lambda$&$\log_2\lambda$\\
+\midrule
+11&1.7922310&0.8417566\\
+12&1.8064220&0.8531350\\
+13&1.8188220&0.8630044\\
+14&1.8307700&0.8724506\\
+15&1.8419670&0.8812472\\
+16&1.8522330&0.8892656\\
+17&1.8615000&0.8964656\\
+18&1.8703000&0.9032697\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These values suggest, but do not prove, $\lambda_k\to2$.  Their gap ratios are
+\begin{equation}\label{eq:gap-ratios}
+0.9316982,
+0.9359431,
+0.9340538,
+0.9338356,
+0.9350389,
+0.9372864,
+0.9364621,
+\end{equation}
+with mean
+\begin{equation}\label{eq:ratio-mean}
+0.934902587371668\ldots.
+\end{equation}
+A least-squares regression of these ratios against $k$ has slope $6.415\times10^{-4}$, standard error $2.648\times10^{-4}$, and $t$-statistic $2.423$ on five degrees of freedom.  This is suggestive only; eight depths cannot distinguish geometric convergence to $2$ from convergence to a positive gap.
+
+We stress one point of interpretation.  If $\lambda_k\to2$, the method gives
+\[
+\pi_a(x)\gg_{a,\eps}x^{1-\eps}
+\quad\text{for every }\eps>0.
+\]
+This means exponent one on a logarithmic scale.  It does not imply that the set of predecessors has natural density one, or even positive lower density.  Tao's theorem~\cite{Tao2022} is different: it controls the minimum of almost every orbit in logarithmic density, but does not assert that those orbits reach $1$.
+
+\section{The finite nonlinear Perron problem}\label{sec:finite-PF}
+
+Let
+\[
+X_k=\{m\pmod{3^k}:m\equiv2\pmod3\},
+\qquad |X_k|=3^{k-1},
+\]
+and write $\alpha=\log_2 3$.  For a positive vector $c=(c_m)_{m\in X_k}$, define
+\begin{equation}\label{eq:Pk}
+(P_kc)_n=
+\min_{j=0,1,2}c_{n+j3^{k-1}},
+\qquad n\in X_{k-1}.
+\end{equation}
+The principal variables of $L_k^{NT}(\lambda)$ satisfy the following nonlinear inequality after the auxiliary variables are set equal to their maximal admissible values, namely the sibling minima; compare Krasikov--Lagarias~\cite[equations (2.3)--(2.6)]{KrasikovLagarias2003}.
+
+Define $F_{k,\lambda}$ by
+\begin{equation}\label{eq:Fklambda}
+(F_{k,\lambda}c)_m
+=
+\lambda^{-2}c_{4m}
++
+\begin{cases}
+\lambda^{\alpha-2}(P_kc)_{(4m-2)/3},&m\equiv2\pmod9,\\
+0,&m\equiv5\pmod9,\\
+\lambda^{\alpha-1}(P_kc)_{(2m-1)/3},&m\equiv8\pmod9.
+\end{cases}
+\end{equation}
+
+\begin{theorem}[Finite operator formulation]\label{thm:finite-operator}
+The program $L_k^{NT}(\lambda)$ is feasible if and only if there exists $c>0$ such that
+\begin{equation}\label{eq:finite-subeigen}
+c\le F_{k,\lambda}c.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+In a feasible linear-program solution, each auxiliary variable can be raised to the minimum of its three principal children without violating any constraint.  Substitution gives \eqref{eq:finite-subeigen}.  Conversely, the sibling minima supply admissible auxiliary variables.  Positive homogeneity permits the normalization used in the linear program.
+\end{proof}
+
+Set
+\begin{equation}\label{eq:rk}
+r_k(\lambda)
+=
+\sup_{c>0}
+\min_{m\in X_k}
+\frac{(F_{k,\lambda}c)_m}{c_m}.
+\end{equation}
+Then feasibility is equivalent to $r_k(\lambda)\ge1$.
+
+\begin{proposition}[Finite nonlinear eigenvalue]\label{prop:finite-eigen}
+There is a vector $v>0$ such that
+\[
+F_{k,\lambda}v=r_k(\lambda)v.
+\]
+Moreover, if one chooses in every minimum of \eqref{eq:Fklambda} one of the three siblings, obtaining a nonnegative matrix $M^\sigma_{k,\lambda}$, then
+\begin{equation}\label{eq:robust-radius}
+r_k(\lambda)=\min_\sigma\rho(M^\sigma_{k,\lambda}).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Normalize $F_{k,\lambda}$ on the simplex and apply Brouwer's theorem.  A fixed vector cannot have a zero coordinate, because the edge $m\mapsto4m$ is present in every row and multiplication by $4$ is a single cycle on $X_k$.  Thus the fixed vector is positive.  The usual Collatz--Wielandt comparison proves that its eigenvalue is \eqref{eq:rk}.
+
+At the eigenvector choose a minimizing sibling in every row.  The resulting matrix has $v$ as a Perron eigenvector with eigenvalue $r_k$.  Every other policy matrix dominates $F$ at $v$, and hence has spectral radius at least $r_k$.
+\end{proof}
+
+\begin{proposition}[Strict finite ceiling]\label{prop:lambda-k-less-2}
+For every finite $k$,
+\[
+\lambda_k<2.
+\]
+\end{proposition}
+
+\begin{proof}
+At $\lambda=2$, sum \eqref{eq:finite-subeigen} over all residue classes.  The permutation term contributes one quarter of the total.  The two inverse-branch terms contribute at most the remaining three quarters, with equality only if every sibling triple has three equal entries.  Equality would therefore force the vector to descend successively through every level, hence to be constant.  But for $m\equiv5\pmod9$, a constant vector satisfies $(F_{k,2}c)_m=c/4<c$.  Thus no positive subeigenvector exists at $2$.  Continuity in $\lambda$ gives the strict inequality.
+\end{proof}
+
+\section{The limiting $3$-adic transfer operator}\label{sec:3adic-operator}
+
+Let
+\[
+X=2+3\mathbb Z_3
+\]
+with normalized Haar measure $\mu$.  Partition $X$ according to the residue modulo $9$ and define
+\[
+A(x)=4x,
+\qquad
+B(x)=\frac{4x-2}{3}\quad(x\equiv2\pmod9),
+\qquad
+C(x)=\frac{2x-1}{3}\quad(x\equiv8\pmod9).
+\]
+For $f\in C(X)$, set
+\begin{equation}\label{eq:transfer-operator}
+(\mathcal L_\lambda f)(x)
+=
+\lambda^{-2}f(Ax)
++
+\begin{cases}
+\lambda^{\alpha-2}f(Bx),&x\equiv2\pmod9,\\
+0,&x\equiv5\pmod9,\\
+\lambda^{\alpha-1}f(Cx),&x\equiv8\pmod9.
+\end{cases}
+\end{equation}
+
+Let $\mathcal C_k$ be the functions constant on residue classes modulo $3^k$.  If $f_c\in\mathcal C_k$ corresponds to $c\in\mathbb R^{X_k}$, then
+\begin{equation}\label{eq:cylinder-inf}
+(F_{k,\lambda}c)_m
+=
+\inf_{\substack{x\in X\\x\equiv m\ (3^k)}}
+(\mathcal L_\lambda f_c)(x).
+\end{equation}
+Therefore $c\le F_{k,\lambda}c$ if and only if $f_c\le\mathcal L_\lambda f_c$ pointwise.
+
+Define the lower Collatz--Wielandt value
+\begin{equation}\label{eq:mathfrak-r}
+\mathfrak r(\lambda)
+=
+\sup_{\substack{f\in C(X)\\f>0}}
+\inf_{x\in X}
+\frac{(\mathcal L_\lambda f)(x)}{f(x)}.
+\end{equation}
+
+\begin{theorem}[Limiting variational principle]\label{thm:limiting-variational}
+For every $\lambda>0$,
+\begin{equation}\label{eq:rk-limit}
+\lim_{k\to\infty}r_k(\lambda)=\mathfrak r(\lambda).
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:log-variational}
+\log\mathfrak r(\lambda)
+=
+\sup_{u\in C(X)}
+\inf_{x\in X}
+\left[
+\log(\mathcal L_\lambda e^u)(x)-u(x)
+\right].
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:cylinder-inf}, $r_k(\lambda)$ is the supremum in \eqref{eq:mathfrak-r} restricted to $\mathcal C_k$.  These spaces are nested and their union is uniformly dense in $C(X)$.  For a fixed positive $f$, uniform approximation preserves the quotient $\mathcal L_\lambda f/f$ uniformly because $\min f>0$ and $\mathcal L_\lambda$ is bounded.  Hence the restricted suprema converge to \eqref{eq:mathfrak-r}.  Setting $f=e^u$ gives \eqref{eq:log-variational}.
+\end{proof}
+
+The general theory of order-preserving homogeneous maps gives related Collatz--Wielandt formulas under compactness hypotheses; see Akian, Gaubert, and Nussbaum~\cite{AkianGaubertNussbaum}.  Here the cylinder proof is elementary, but the lack of compactness is central to the unresolved endpoint question.
+
+\subsection{The ordinary spectral radius}
+
+The maps $A$, $B$, and $C$ preserve Haar measure after accounting for the one-third domains of $B$ and $C$.  Hence
+\begin{equation}\label{eq:q-lambda}
+\int_X\mathcal L_\lambda f\,\dd\mu
+=q(\lambda)\int_Xf\,\dd\mu,
+\qquad
+q(\lambda)
+=\lambda^{-2}
++\frac{\lambda^{\alpha-2}+\lambda^{\alpha-1}}3.
+\end{equation}
+Thus the $L^1$ spectral radius of $\mathcal L_\lambda$ is exactly $q(\lambda)$, and
+\begin{equation}\label{eq:q2}
+q(2)=1.
+\end{equation}
+Integration of a subeigenfunction gives
+\begin{equation}\label{eq:r-below-q}
+\mathfrak r(\lambda)\le q(\lambda).
+\end{equation}
+The endpoint problem is therefore
+\begin{equation}\label{eq:endpoint-problem}
+\mathfrak r(2)=1
+\quad\text{or}\quad
+\mathfrak r(2)<1.
+\end{equation}
+The ordinary spectral radius cannot decide it.
+
+\begin{proposition}[A strict-ceiling certificate]\label{prop:strict-ceiling}
+Let $\lambda_\infty=\lim_k\lambda_k$.  Then
+\begin{equation}\label{eq:lambda-infty-bound}
+\lambda_\infty\le2\sqrt{\mathfrak r(2)}.
+\end{equation}
+In particular, any proof that $\mathfrak r(2)\le1-\delta$ would give
+\[
+\lambda_\infty\le2\sqrt{1-\delta}<2.
+\]
+\end{proposition}
+
+\begin{proof}
+For $1\le\lambda\le2$, comparison of the three coefficients in \eqref{eq:transfer-operator} gives
+\[
+\mathcal L_2 f
+\ge\left(\frac\lambda2\right)^2\mathcal L_\lambda f
+\qquad(f\ge0).
+\]
+A finite feasible cylinder function at $\lambda$ therefore gives a subeigenfunction of $\mathcal L_2$ with eigenvalue $(\lambda/2)^2$.  Take the supremum over feasible $\lambda$.
+\end{proof}
+
+A sufficient dual certificate would be a positive finite measure $\nu$ with
+\[
+\mathcal L_2^*\nu\le(1-\delta)\nu.
+\]
+No such measure, and no family of near-critical subeigenfunctions proving equality, is presently known.
+
+\section{The finite-depth defect}\label{sec:truncation-defect}
+
+Krasikov and Lagarias define the average principal coefficient $\bar c_{k,k}$ and the average sibling minimum $\bar c_{k-1,k}$; summing the principal inequalities gives~\cite[equation following Table~2]{KrasikovLagarias2003}
+\begin{equation}\label{eq:average-ineq}
+\bar c_{k,k}
+\le
+\lambda^{-2}\bar c_{k,k}
++
+\frac13\bigl(\lambda^{\alpha-1}+\lambda^{\alpha-2}\bigr)
+\bar c_{k-1,k}.
+\end{equation}
+Hence every feasible solution satisfies
+\begin{equation}\label{eq:rho-lower}
+\frac{\bar c_{k-1,k}}{\bar c_{k,k}}
+\ge
+\frac{3(\lambda-1)}{\lambda^\alpha}.
+\end{equation}
+
+For an optimal boundary solution for which the principal inequalities are tight, equality holds.  In that case
+\begin{equation}\label{eq:eps-k}
+\eps_k
+=1-\frac{3(\lambda_k-1)}{\lambda_k^\alpha}
+\end{equation}
+is the normalized average difference between each sibling mean and its minimum.  It is precisely the information lost by forgetting the next ternary digit.  The numerical table below evaluates the same scalar at the displayed certified feasible values; because only seven decimals of those values are printed, the table is diagnostic rather than an exact determination of the optimal dispersion.
+
+Near $\lambda=2$,
+\begin{align}
+\eps
+&=0.2075187496394219092731305280\,(2-\lambda)
+\notag\\
+&\qquad
++0.2803476716839009419183008965\,(2-\lambda)^2
++O((2-\lambda)^3),\label{eq:eps-expansion}\\
+2-\lambda
+&=4.818841679306418009164808662\,\eps
++O(\eps^2).
+\label{eq:lambda-eps-inverse}
+\end{align}
+For the certified ladder, the corresponding defects are displayed in \cref{tab:defects}.
+
+\begin{table}[ht]
+\centering
+\caption{Sibling-dispersion diagnostics computed from the displayed certified feasible values.}
+\label{tab:defects}
+\begin{tabular}{c@{\qquad}c@{\qquad}c}
+\toprule
+$k$&$\eps_k$&$\eps_{k+1}/\eps_k$\\
+\midrule
+11&0.0573442457261314&0.9134087072\\
+12&0.0523787333556300&0.9199139337\\
+13&0.0481839266444278&0.9186735007\\
+14&0.0442652965679896&0.9194510044\\
+15&0.0406997713900323&0.9218522169\\
+16&0.0375191744835234&0.9253680855\\
+17&0.0347190466605157&0.9251695058\\
+18&0.0321210032408954&--\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+If $\lambda_\infty<2$, then $\eps_k$ tends to a positive limit and the successive ratios tend to $1$.  If $\lambda_\infty=2$ with geometric convergence, the ratios tend to a constant below $1$.  The available depths do not distinguish these alternatives.
+
+There is a natural conditional explanation of a geometric law.  If a positive near-extremizer of \eqref{eq:mathfrak-r} is $\beta$-H\"older in the $3$-adic metric, its level-$k$ cylinder approximation has error $O(3^{-\beta k})$.  Stability of the lower quotient then gives
+\begin{equation}\label{eq:holder-rate}
+\mathfrak r(\lambda)-r_k(\lambda)=O(3^{-\beta k}).
+\end{equation}
+Under a nondegenerate crossing in $\lambda$, this yields
+\[
+\lambda_\infty-\lambda_k=O(3^{-\beta k}).
+\]
+The mean ratio \eqref{eq:ratio-mean} would correspond to
+\begin{equation}\label{eq:beta-fit}
+\beta
+=-\frac{\log(0.934902587371668\ldots)}{\log3}
+=0.061270878\ldots.
+\end{equation}
+This is a heuristic interpretation only.  Krasikov and Lagarias observed that the optimal spread $C_k^{\max}$ appeared to grow exponentially~\cite[Section~6]{KrasikovLagarias2003}, which points toward loss of projective compactness rather than uniform H\"older control.
+
+\section{Cyclic targets in the Krasikov--Lagarias theorem}\label{sec:cyclic-target-fix}
+
+Krasikov and Lagarias define $\phi_k^m$ by taking an infimum over targets not lying in a cycle, but their Theorem~6.1 is stated for every positive $a\not\equiv0\pmod3$, including $a=1$.  The omitted passage is elementary.
+
+\begin{lemma}\label{lem:dyadic-noncyclic}
+For every positive $a\not\equiv0\pmod3$, some dyadic multiple $b=2^ra$ is not periodic; $r$ may be chosen so that $b\equiv2\pmod3$.
+\end{lemma}
+
+\begin{proof}
+Every $2^ra$ reaches $a$ after $r$ halving steps.  If $2^ra$ is periodic, it belongs to the finite cycle containing $a$.  Only finitely many of the distinct numbers $2^ra$ can do so.  The parity of $r$ controls the residue modulo $3$.
+\end{proof}
+
+\begin{proposition}[Repair of Theorem~6.1]\label{prop:KL-repair}
+Suppose the Krasikov--Lagarias lower bound for noncyclic $b$ gives
+\[
+\pi_b^*(2^yb)\ge\Delta c_m\lambda^y.
+\]
+Then for every positive $a\not\equiv0\pmod3$,
+\[
+\pi_a(x)\ge C_a x^{\log_2\lambda}
+\]
+for sufficiently large $x$, with $C_a>0$.
+\end{proposition}
+
+\begin{proof}
+Choose $b=2^ra$ from \cref{lem:dyadic-noncyclic}.  Every orbit reaching $b$ reaches $a$, so $\pi_a(x)\ge\pi_b^*(x)$.  With $y=\lfloor\log_2(x/b)\rfloor$,
+\[
+\pi_a(x)
+\ge\Delta c_m\lambda^y
+\ge\frac{\Delta c_m}{\lambda b^{\log_2\lambda}}
+ x^{\log_2\lambda}.
+\]
+\end{proof}
+
+For $a=1$, one may take $b=8$.  Thus the omission changes the implied constant and the threshold $x_0(a)$, but not the exponent.
+
+\section{Computational record and methodological limits}\label{sec:computations}
+
+We conclude by collecting the finite computations used to motivate or certify the preceding results.  These statements were evaluated with exact integer or rational arithmetic unless a decimal approximation is explicitly displayed.
+
+\subsection{Cycle computations}
+
+\begin{enumerate}[label=(\roman*)]
+\item $Z(K,m)=0$ was verified for every $3\le m\le18$ with $K$ minimal subject to $2^K>3^m$.  The only positive values observed were the repetitions $Z(2m,m)=1$.
+
+\item The map from minimal words to $\Phi(w)\bmod D$ is not injective.  The counts of words and distinct residues are respectively
+\[
+(504,501)\ \text{at }(K,m)=(16,10),
+\]
+\[
+(9690,9688)\ \text{at }(21,13),
+\qquad
+(54484,54367)\ \text{at }(24,15).
+\]
+
+\item For $3\le m\le18$, the largest observed value of $\gcd(\Phi(w),D)$ was always $D/p$ for a single prime $p\mid D$.  Examples include
+\[
+D=5\cdot59\cdot1753,
+\quad\max\gcd=59\cdot1753
+\quad(m=12),
+\]
+\[
+D=7\cdot233\cdot14753,
+\quad\max\gcd=7\cdot14753
+\quad(m=16).
+\]
+When $D$ was prime, the maximum gcd was $1$.
+
+\item Small prime divisibility rates were close to $1/p$: the observed values of $p\times$rate were $1.000$ for $p=7,m=16$, $0.999$ for $p=13,m=15$, $1.007$ for $p=79,m=14$, $1.008$ for $p=11,m=11$, and $0.978$ for $p=233,m=16$.  Larger prime factors could be hit much more often than $1/p$; for example $p=186793$ at $m=15$ had $8$ hits against expectation $0.29$.  Where joint counts were large enough to read, the observed lift over independence was between $1.06$ and $1.18$, never negative.  These data reflect rational cycles of smaller denominator and do not support a prime-by-prime avoidance argument.
+
+\item For the Fourier sum over admissible words at $(K,m)=(21,13)$, the largest nonzero-frequency magnitude was approximately $3736.8$, compared with $9690$ words and square-root scale $98.4$.  Thus pointwise square-root cancellation is false.  More generally, if $X$ is the number of words, $R$ counts equal-residue pairs, and $E=\sum_{t\ne0}|T(t)|$, then Parseval gives $E\ge(DR-X^2)/X\ge D-X$.  Hence the triangle-inequality route cannot make the zero-count bound smaller than $1$.
+
+\item For the modular self-overlap experiments at balanced small parameters, pure powers of $2$ exhibited the exact structural overlaps of \cref{thm:integer-self-overlap}; multipliers with nonzero displayed $3$-exponent usually had zero overlap, with one small exception at $(K,m)=(13,8)$.  These sizes lie at the random noise floor and do not constitute an asymptotic theorem.
+\end{enumerate}
+
+\subsection{Krasikov--Lagarias computations}
+
+The certified values in \cref{tab:lambda-ladder} used exact-integer feasibility certificates for systems with up to
+\[
+3^{17}=129140163
+\]
+principal variables.  The geometric gap fit over $k=11,\ldots,18$ has mean ratio \eqref{eq:ratio-mean}; a power-law fit has approximately $34$ times the sum of squared residuals of the geometric fit over these eight points.  This comparison is descriptive only.
+
+The finite programs also admit rigorous upper certificates, and \cref{prop:lambda-k-less-2} gives an analytic proof of the strict inequality $\lambda_k<2$ at every finite depth.  What remains unresolved is the endpoint value of the limiting lower spectral quantity \eqref{eq:mathfrak-r}.
+
+\section{Concluding remarks}
+
+The cycle investigation separates three levels that are often conflated.  Fixed-window rigidity, already present in Lagarias's work, gives uniqueness.  The weight and circuit refinements improve its exponential constant, but the packing theorem shows that every uniqueness-only arrangement leaves an enormous compatible family.  The exact decoder escapes that theorem by identifying a candidate and permitting a zero-fibre test.  Yet size, interval width, local congruences, generic $S$-unit theory, and affine state memoization all saturate before the required scale.  The remaining cycle problem is a specific modular anti-alignment statement for two valuation-tree images under a distinguished multiplier and all affine offsets created by peeling.
+
+For the predecessor-density method, the hierarchy of linear programs has an exact analytic limit.  The finite depth records one more ternary digit at each step; the lost information is sibling-minimum dispersion.  The endpoint $\lambda_\infty=2$ is equivalent to the disappearance of this dispersion along near-extremizers, but the transfer operator has no evident smoothing or compactness.  A strict dual subinvariant measure would prove a ceiling below $2$; a regular family of near-critical subeigenfunctions would point toward equality.  Either would replace an infeasible extrapolation to enormous finite depth by a theorem about one explicit $3$-adic operator.
+
+\enlargethispage{2\baselineskip}
+\begingroup\footnotesize
+\begin{thebibliography}{99}
+
+\bibitem{AkianGaubertNussbaum}
+M.~Akian, S.~Gaubert, and R.~D.~Nussbaum,
+\emph{A Collatz--Wielandt characterization of the spectral radius of order-preserving homogeneous maps on cones},
+arXiv:1112.5968, 2011; revised 2014.
+
+\bibitem{AmorosoViada2009}
+F.~Amoroso and E.~Viada,
+\emph{Small points on subvarieties of a torus},
+Duke Math. J. \textbf{150} (2009), 407--442.
+
+\bibitem{ApplegateLagarias1995I}
+D.~Applegate and J.~C.~Lagarias,
+\emph{Density bounds for the $3x+1$ problem. I. Tree-search method},
+Math. Comp. \textbf{64} (1995), 411--426.
+
+\bibitem{ApplegateLagarias1995II}
+D.~Applegate and J.~C.~Lagarias,
+\emph{Density bounds for the $3x+1$ problem. II. Krasikov inequalities},
+Math. Comp. \textbf{64} (1995), 427--438.
+
+\bibitem{Barina2025}
+D.~Barina,
+\emph{Improved verification limit for the convergence of the Collatz conjecture},
+J. Supercomput. \textbf{81} (2025), Article 810.
+
+\bibitem{EvertseSchlickeweiSchmidt2002}
+J.-H.~Evertse, H.~P.~Schlickewei, and W.~M.~Schmidt,
+\emph{Linear equations in variables which lie in a multiplicative group},
+Ann. of Math. (2) \textbf{155} (2002), 807--836.
+
+\bibitem{HalbeisenHungerbuehler1997}
+L.~Halbeisen and N.~Hungerb\"uhler,
+\emph{Optimal bounds for the length of rational Collatz cycles},
+Acta Arith. \textbf{78} (1997), 227--239.
+
+\bibitem{Hercher2023}
+C.~Hercher,
+\emph{There are no Collatz $m$-cycles with $m\le91$},
+J. Integer Seq. \textbf{26} (2023), Article 23.3.5.
+
+\bibitem{Knight2026}
+K.~Knight,
+\emph{Collatz high cycles do not exist},
+Discrete Math. \textbf{349} (2026), Article 114812.
+
+\bibitem{Krasikov1989}
+I.~Krasikov,
+\emph{How many numbers satisfy the $3x+1$ conjecture?},
+Internat. J. Math. Math. Sci. \textbf{12} (1989), 791--796.
+
+\bibitem{KrasikovLagarias2003}
+I.~Krasikov and J.~C.~Lagarias,
+\emph{Bounds for the $3x+1$ problem using difference inequalities},
+Acta Arith. \textbf{109} (2003), 237--258.
+
+\bibitem{Lagarias1990}
+J.~C.~Lagarias,
+\emph{The set of rational cycles for the $3x+1$ problem},
+Acta Arith. \textbf{56} (1990), 33--53.
+
+\bibitem{SimonsDeWeger2005}
+J.~Simons and B.~de Weger,
+\emph{Theoretical and computational bounds for $m$-cycles of the $3n+1$ problem},
+Acta Arith. \textbf{117} (2005), 51--70.
+
+\bibitem{Steiner1978}
+R.~P.~Steiner,
+\emph{A theorem on the Syracuse problem},
+in: Proceedings of the Seventh Manitoba Conference on Numerical Mathematics and Computing, Winnipeg, 1978, 553--559.
+
+\bibitem{Tao2022}
+T.~Tao,
+\emph{Almost all orbits of the Collatz map attain almost bounded values},
+Forum Math. Pi \textbf{10} (2022), e12.
+
+\end{thebibliography}
+\endgroup
+
+\end{document}

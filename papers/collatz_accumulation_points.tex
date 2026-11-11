@@ -1,0 +1,573 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Qodd}{\mathbb{Q}_{\mathrm{odd}}}
+\newcommand{\al}{\alpha}
+\newcommand{\ga}{\gamma}
+\newcommand{\fr}[1]{\{#1\}}
+
+\title{Accumulation points for the Collatz conjugacy map in $\mathbb{R}$}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Collatz conjecture splits into two independent assertions: that no trajectory diverges, and
+that the only cycle is the trivial one. Lagarias' periodicity conjecture is the divergence half,
+extended from the integers to the rationals with odd denominator, and by the Bernstein--Lagarias
+conjugacy it becomes a question about which aperiodic words can be parity vectors. L\'opez and
+Stoll transported this question to $\R$, where a word with an accumulation point in its forced
+trajectory is excluded as a witness; for their Example 6 they could not decide whether such a point
+exists. We prove that it does. The argument rests on the identity $3^{\log2/\log3}=2$, which makes
+every discontinuity of a certain limit function an upward jump and so produces an honest root of a
+level set; the only computational input is a pair of inequalities verified in exact rational
+interval arithmetic. We then embed the example in a one-parameter family, determine exactly for
+which parameters one distinguished fibre is excluded, identify the limit of the family in closed
+form, and isolate a scalar $R_n$ whose boundedness governs recurrence throughout the class. A
+counterexample shows that recurrence is \emph{not} governed by the obvious candidates. We are
+explicit about what this does not do: it does not bear on either half of the Collatz conjecture,
+for reasons we set out precisely.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection*{The two halves}
+
+Let $T$ be the $3x+1$ map, $T(x)=x/2$ for $x$ even and $T(x)=(3x+1)/2$ for $x$ odd. The Collatz
+conjecture states that the trajectory of every positive integer reaches the cycle $1\mapsto2\mapsto1$.
+It is the conjunction of two logically independent assertions:
+\begin{itemize}
+\item[(D)] \emph{no divergence}: every trajectory is bounded, hence eventually cyclic;
+\item[(C)] \emph{no nontrivial cycle}: the only cycle among the positive integers is $\{1,2\}$.
+\end{itemize}
+Neither implies the other, and they are attacked by quite different means --- (C) by lower bounds on
+the length of a hypothetical cycle, (D) by growth and density estimates.
+
+The map $T$ extends to the $2$-adic integers $\Z_2$, and there it acts on the ring $\Qodd$ of
+rationals with odd denominator, which is exactly the set of $x\in\Z_2$ whose orbit could be
+rational. Lagarias' \emph{periodicity conjecture} asserts that the trajectory of every $x\in\Qodd$
+is eventually cyclic. Restricted to the positive integers this is precisely (D); so the periodicity
+conjecture \emph{is} the divergence half of Collatz, posed over a larger ring. It says nothing about
+(C): eventual cyclicity does not assert which cycles occur. Thus
+\[
+   \text{periodicity conjecture}\ \Longrightarrow\ \text{(D)},
+   \qquad
+   \text{Collatz}=\text{(D)}\wedge\text{(C)} ,
+\]
+and a proof of the periodicity conjecture would settle the harder-looking half of Collatz while
+leaving the cycle half untouched.
+
+\subsection*{Words}
+
+Bernstein and Lagarias \cite{BL} showed that the parity map $x\mapsto v(x)=(T^k(x)\bmod2)_{k\ge0}$
+is a homeomorphism of $\Z_2$ conjugating $T$ to the shift, with inverse
+\begin{equation}\label{eq:Phi}
+   \Phi\Big(\sum_{i\ge0}2^{d_i}\Big)=-\sum_{i\ge0}\frac{2^{d_i}}{3^{i+1}},
+   \qquad d_0<d_1<\cdots .
+\end{equation}
+Under this dictionary a trajectory is eventually cyclic exactly when its parity vector is eventually
+periodic, so the periodicity conjecture becomes: \emph{no aperiodic word is the parity vector of an
+element of $\Qodd$}. A counterexample would be a single aperiodic word $v$ with $\Phi(v)\in\Qodd$.
+One is therefore led to examine aperiodic words one at a time and try to rule each out.
+
+Two facts delimit the search. First \cite[Theorem 1]{LS}: if some $\zeta\in\Qodd$ has a divergent
+trajectory, then necessarily $\liminf_\ell h(\ell)/\ell=\log2/\log3$, where $h(\ell)$ counts the
+ones among the first $\ell$ digits of its parity vector. So a counterexample can only have this one
+critical density, and every word considered below has it. Second \cite[p.~3]{LS}: an infinite subset
+of $\Qodd$ has no accumulation point in $\R$; hence exhibiting one accumulation point in the orbit
+of $\zeta$ proves $\zeta\notin\Qodd$ and eliminates that word.
+
+\subsection*{The real picture}
+
+L\'opez and Stoll \cite{LS} transported this to $\R$: for a word $v$ one reads \eqref{eq:Phi} as a
+real series, obtaining $\Phi_\R(v)$ when it converges, and lets $T$ act on $\R$ through the branches
+prescribed by $v$, irrespective of parity. Writing $\sigma$ for the shift, the \emph{forced
+trajectory} of $\zeta=\Phi_\R(v)$ has terms $\Phi_\R(\sigma^tv)$. They eliminate every word of
+supercritical density, and among critical-density words they settle several; for their Example 6
+the question was left open:
+
+\begin{quote}
+``Example 6 is such a case where we cannot guarantee a (probably existing) accumulation point.''
+\cite[p.~4]{LS}
+\end{quote}
+
+Our main result settles this case.
+
+\begin{theorem}\label{thm:main}
+Let $v$ be the word of \cite[\S14]{LS} and $\zeta=\Phi_\R(v)$. Then $\zeta$ is an accumulation point
+of its own forced trajectory.
+\end{theorem}
+
+Sections \ref{sec:family}--\ref{sec:crit} develop the surrounding structure: the example lies in a
+family indexed by a parameter $k$, for which the whole apparatus is parameter-free
+(Proposition~\ref{prop:family}); one distinguished fibre of the reduction is excluded for exactly
+$k\ge3$ (Theorem~\ref{thm:s0}); the family has an explicit limit (Proposition~\ref{prop:limit}); and
+a single scalar governs recurrence throughout the class (Theorem~\ref{thm:Rn}), though not the one
+the examples suggest (Remark~\ref{rem:counter}).
+
+\subsection*{Where this sits}
+
+It is worth being blunt about the distance to the conjectures. The programme sketched above would,
+if carried out for \emph{every} aperiodic word, prove the periodicity conjecture and hence half (D)
+of Collatz; half (C) would remain untouched by any of it. What is proved here is one step of that
+programme --- a single word, and then a family --- together with two structural facts about how far
+the step generalises.
+
+Both facts are negative, and both are worth recording. The associated word of
+\cite[Example 7]{LS} has the same critical density and provably \emph{no} accumulation point, so the
+method cannot be universal: it will never eliminate all aperiodic words. And
+Corollary~\ref{cor:irr} constrains the \emph{real} value $\Phi_\R(v)$, whereas the periodicity
+conjecture concerns the \emph{$2$-adic} value $\Phi(v)$; these are limits of the same rational
+partial sums in different completions, and we cannot show they agree. Section~\ref{sec:scope}
+locates that missing implication exactly, as a growth estimate \eqref{eq:bridge} for the orbit of
+the hypothetical rational, which is the sharpest form in which we can state what is absent. Nothing
+below should be read as progress on the Collatz conjecture itself.
+
+\section{Notation}\label{sec:setup}
+
+Throughout $\al=\log2/\log3$ and $\ga=\al/(1-\al)=\log2/\log(3/2)$, so that
+\begin{equation}\label{eq:key}
+  3^{\al}=2,\qquad \ga\log\tfrac32=\log2 .
+\end{equation}
+Every constant below is a consequence of \eqref{eq:key}. We write $\fr{x}$ for the fractional part.
+
+Fix $k\ge2$ and set $f(n)=\lceil n/k\rceil$, $g(n)=n-f(n)$. The word is
+\begin{equation}\label{eq:word}
+  v=\prod_{n\ge1}1^{m_n}0^{f(n)},\qquad
+  m_n=\left\lfloor\frac{(L_{n-1}+n)\al-H_{n-1}}{1-\al}\right\rfloor ,
+\end{equation}
+where $L_n,H_n$ are the length and the number of ones of the first $n$ factors, $L_0=H_0=0$; thus
+$L_n=L_{n-1}+m_n+f(n)$ and $H_n=H_{n-1}+m_n$. Example 6 of \cite{LS} is $k=6$; its first values are
+$m_1,\dots,m_8=1,4,3,3,4,3,4,5$. Let $Z_n$ be the number of zeros among the first $n$ factors and
+$G(n)=Z_{n-1}+n$; from $f(n)=\lceil n/k\rceil$ one computes that $G(kM+s)$ is a quadratic polynomial
+in $M$ with leading coefficient $k/2$.
+
+Put $D_n=\al L_n-H_n$. Let $z_n=\Phi_\R(\sigma^{L_n}v)$ be the value of the forced trajectory at the
+end of the $n$-th factor, so $z_0=\zeta$.
+
+\begin{lemma}\label{lem:drift}
+$H_n=\lfloor\ga G(n)\rfloor$ and $D_n=-\al g(n)+\beta_n$ with $\beta_n=(1-\al)\fr{\ga G(n)}\in[0,1-\al)$.
+Consequently
+\begin{equation}\label{eq:ramp}
+   D_{n+r}-D_n\le-\al\Big\lfloor\tfrac{(k-1)r}{k}\Big\rfloor+(1-\al),
+   \qquad
+   D_n\le(1-\al)-\tfrac{(k-1)\al}{k}(n-1).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+As $H_{n-1}\in\Z$ it may be absorbed into the floor in \eqref{eq:word}, giving
+\[
+  H_n=\left\lfloor\frac{\al L_{n-1}+n\al-\al H_{n-1}}{1-\al}\right\rfloor
+     =\big\lfloor\ga(L_{n-1}-H_{n-1}+n)\big\rfloor=\lfloor\ga G(n)\rfloor .
+\]
+Then $D_n=\al Z_n-(1-\al)H_n=\al(Z_n-G(n))+\beta_n$ and $Z_n-G(n)=f(n)-n=-g(n)$. The estimates
+follow from $\beta_{n+r}-\beta_n<1-\al$ and $g(n)=\lfloor(k-1)n/k\rfloor$.
+\end{proof}
+
+\section{Proof of Theorem \ref{thm:main}}\label{sec:proof}
+
+Throughout this section $k=6$. Let $d_0<d_1<\cdots$ be the positions of the ones of $v$.
+
+\begin{lemma}\label{lem:stage}
+$\displaystyle z_n=-\sum_{r\ge0}3^{\,D_{n+r}-D_n}\Big(1-(2/3)^{m_{n+r+1}}\Big)$.
+\end{lemma}
+
+\begin{proof}
+The ones of $\sigma^{L_n}v$ are the $d_{H_n+i}-L_n$, so
+$z_n=-\sum_{i\ge0}2^{\,d_{H_n+i}-L_n}3^{-(i+1)}$. The ones of the factor $n+r+1$ occupy the
+positions $L_{n+r},\dots,L_{n+r}+m_{n+r+1}-1$ and carry the indices
+$H_{n+r},\dots,H_{n+r}+m_{n+r+1}-1$, so they contribute
+$-2^{\,L_{n+r}-L_n}3^{-(H_{n+r}-H_n)}\cdot\tfrac13\sum_{i<m}(2/3)^i$ with $m=m_{n+r+1}$. The inner
+sum is $3(1-(2/3)^m)$, and $2^{\Delta L}3^{-\Delta H}=3^{\,\al\Delta L-\Delta H}=3^{\,D_{n+r}-D_n}$
+by \eqref{eq:key}.
+\end{proof}
+
+Let $w_n=-\sum_{r\ge0}3^{\,D_{n+r}-D_n}$ be the corresponding sum with all damping factors removed.
+
+\begin{proposition}\label{prop:sat}
+$0\le z_n-w_n\le 9\rho^{\,n+1}$ with $\rho=2^{-1/6}$.
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:ramp} and \eqref{eq:key}, $3^{\,D_{n+r}-D_n}\le3^{1-\al}3^{\al}q_1^{\,r}=3q_1^{\,r}$
+where
+\begin{equation}\label{eq:q1}
+  q_1=3^{-5\al/6}=2^{-5/6}.
+\end{equation}
+From \eqref{eq:word}, $m_n\ge\ga(n+5)/6-1$, and $(2/3)^{\ga/6}=2^{-1/6}=\rho$ by \eqref{eq:key}, so
+$(2/3)^{m_{n+r+1}}\le\tfrac32\rho^{\,n+r+1}$. The $r$-th term of
+$z_n-w_n=\sum_r3^{\,D_{n+r}-D_n}(2/3)^{m_{n+r+1}}$ is therefore at most
+$\tfrac92q_1^{\,r}\rho^{\,n+r+1}$. Now
+\[
+   q_1\rho=2^{-5/6}\cdot2^{-1/6}=\tfrac12 ,
+\]
+so the series is geometric of ratio $\tfrac12$ and sums to at most $9\rho^{\,n+1}$.
+\end{proof}
+
+The coincidence $q_1\rho=\tfrac12$ is not accidental: by \eqref{eq:key} the loss of drift and the
+gain of damping per factor are reciprocal at the critical density, for every $k$.
+
+Write $n=6M+s$ with $0\le s\le5$, and set $u=\fr{\ga G(n)}$, $v=\fr{\ga M}$ (no confusion with the
+word should arise). Since $6M\equiv0\pmod 6$ we have
+$f(n+r)-f(n)=\lceil(s+r)/6\rceil-\lceil s/6\rceil$, and expanding the quadratic $G$ gives
+$G(n+r)-G(n)=rM+C_s(r)$ with $C_s(r)=G(s+r)-G(s)$ free of $M$. As $r\lfloor\ga M\rfloor\in\Z$,
+$\fr{\ga G(n+r)}=\fr{u+rv+\ga C_s(r)}$. With
+$A_s(r)=\al\big((\lceil(s+r)/6\rceil-\lceil s/6\rceil)-r\big)$, Lemma~\ref{lem:drift} therefore
+yields
+\begin{equation}\label{eq:F}
+  w_{6M+s}=F_s(u,v),\qquad
+  F_s(u,v)=-\sum_{r\ge0}3^{\,A_s(r)+(1-\al)(\fr{u+rv+\ga C_s(r)}-u)} .
+\end{equation}
+Thus $w$ is a fixed function of two variables sampled along an orbit. Since
+$A_s(r)\le\al(1-5r/6)$ and the second exponent is less than $1-\al$, every term of \eqref{eq:F} is
+smaller than $3q_1^{\,r}$; the series converges uniformly and $F_s$ has one-sided limits everywhere.
+Moreover $\fr\cdot$ is right-continuous, hence so is $F_s$.
+
+\begin{lemma}\label{lem:up}
+Every discontinuity of $F_s$ is an upward jump.
+\end{lemma}
+
+\begin{proof}
+As a phase $u+rv+\ga C_s(r)$ crosses an integer upward, $\fr\cdot$ drops by $1$, so the exponent of
+that term drops by $1-\al$ and the term is multiplied by $3^{\al-1}=2/3$ by \eqref{eq:key}. Every
+term is positive, so each jump of $F_s=-\sum$ is upward; uniform convergence transfers this to the
+sum.
+\end{proof}
+
+\begin{lemma}\label{lem:cross}
+Let $f:[a,b]\to\R$ have one-sided limits everywhere, be right-continuous, and satisfy
+$f(x^-)\le f(x)$ for all $x$. If $f(a)>c>f(b)$ then $x^*=\sup\{x:f(x)>c\}$ satisfies $f(x^*)=c$, and
+$f$ has no jump at $x^*$.
+\end{lemma}
+
+\begin{proof}
+The set $A=\{x:f(x)>c\}$ contains $a$. If $x^*=b$ then $x_j\uparrow b$ with $f(x_j)>c$ would give
+$f(b)\ge f(b^-)\ge c$, contradicting $f(b)<c$; so $x^*<b$. No $x>x^*$ lies in $A$, so $f\le c$ on
+$(x^*,b]$ and right-continuity gives $f(x^*)\le c$. Points of $A$ increasing to $x^*$ give
+$f(x^{*-})\ge c$, and $f(x^*)\ge f(x^{*-})$. Hence $c\le f(x^{*-})\le f(x^*)\le c$.
+\end{proof}
+
+\begin{lemma}\label{lem:2d}
+If $F_s(u_0,\cdot)$ has no jump at $v^*$ and $u_0\in(0,1)$, then $F_s$ is continuous at $(u_0,v^*)$
+as a function on $\T^2$.
+\end{lemma}
+
+\begin{proof}
+The jump of $F_s(u_0,\cdot)$ at $v^*$ is the sum of the jumps of the individual terms, all of one
+sign by Lemma~\ref{lem:up}; a sum of nonnegative terms vanishes only if each does. For $r\ge1$ the
+phase is strictly monotone in $v$, so no phase line $u+rv+\ga C_s(r)\in\Z$ passes through
+$(u_0,v^*)$; the term $r=0$ is constant. Now given $\varepsilon>0$ choose $R$ with
+$3q_1^{\,R+1}/(1-q_1)<\varepsilon/3$. The tail contributes less than $\varepsilon/3$ at every point
+of $\T^2$, while the head is a finite sum whose discontinuity set is a finite union of lines, none
+through $(u_0,v^*)$; it therefore varies by less than $\varepsilon/3$ on a ball there.
+\end{proof}
+
+The care in Lemma~\ref{lem:2d} is necessary: the full discontinuity set is a countable union of
+lines of spacing $1/r$, hence dense, and no jump-free neighbourhood exists.
+
+\begin{lemma}\label{lem:weyl}
+For each $s$, the sequence $\big(\fr{\ga G(6M+s)},\fr{\ga M}\big)_{M\ge0}$ is equidistributed in
+$\T^2$.
+\end{lemma}
+
+\begin{proof}
+$\ga$ is irrational, since $\ga=p/q$ would give $2^{q+p}=3^p$. For $(h_1,h_2)\ne(0,0)$ the
+polynomial $h_1\ga G(6M+s)+h_2\ga M$ has an irrational non-constant coefficient, namely $3h_1\ga$ if
+$h_1\ne0$ and $h_2\ga$ otherwise. Apply Weyl's theorem and the Weyl criterion on $\T^2$.
+\end{proof}
+
+\begin{proposition}\label{prop:straddle}
+$F_3\big(\tfrac{37}{100},\tfrac{369}{4000}\big)>\zeta>F_3\big(\tfrac{37}{100},\tfrac{37}{400}\big)$.
+\end{proposition}
+
+This is a finite computation, carried out in interval arithmetic whose endpoints are exact
+rationals: $\log2$ and $\log3$ come from the $\operatorname{artanh}$ series with its explicit
+remainder, $3^x$ from an argument-reduced exponential with the Lagrange remainder, $\zeta$ from its
+defining series with the geometric tail of \eqref{eq:ramp}, and $F_3$ from \eqref{eq:F} truncated at
+$r=150$ with the tail bound $3q_1^{151}/(1-q_1)<9.1\cdot10^{-38}$. Each floor and fractional part
+occurring is certified not to straddle an integer. The certified values are
+\[
+\begin{array}{ll}
+  \zeta &=-2.2923055020547008507324073557\ldots\\
+  F_3(\tfrac{37}{100},\tfrac{369}{4000}) &=-2.2922631366352524359395122553\ldots\\
+  F_3(\tfrac{37}{100},\tfrac{37}{400}) &=-2.2925637964328159779770742733\ldots
+\end{array}
+\]
+with margins $4.2\cdot10^{-5}$ and $2.6\cdot10^{-4}$ against arithmetic widths below $10^{-37}$.
+
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+Take $s=3$ and $u_0=37/100$. By Proposition~\ref{prop:straddle} and Lemmas~\ref{lem:up},
+\ref{lem:cross}, the function $F_3(u_0,\cdot)$ meets the level $\zeta$ at
+$v^*=\sup\{v:F_3(u_0,v)>\zeta\}$ without a jump there, so $F_3(u_0,v^*)=\zeta$ and, by
+Lemma~\ref{lem:2d}, $F_3$ is continuous at $(u_0,v^*)$. By Lemma~\ref{lem:weyl} there are
+$M_1<M_2<\cdots$ with $(\fr{\ga G(6M_j+3)},\fr{\ga M_j})\to(u_0,v^*)$, whence
+$w_{6M_j+3}=F_3(\cdot)\to\zeta$ by \eqref{eq:F}, and $z_{6M_j+3}\to\zeta$ by
+Proposition~\ref{prop:sat}.
+\end{proof}
+
+\begin{remark}
+The conclusion is a genuine one about the trajectory, not only about the auxiliary sequence:
+computing $z_{6M+3}$ directly from Lemma~\ref{lem:stage} at orbit points approaching $(u_0,v^*)$
+gives $|z_{6M+3}-\zeta|$ proportional to the distance, with ratio between $0.88$ and $1.20$ at the
+five closest points with $M<2\cdot10^7$ (the nearest being $M=4\,153\,063$ at distance
+$9.4\cdot10^{-5}$).
+\end{remark}
+
+\section{A family}\label{sec:family}
+
+Nothing in \S\ref{sec:proof} used the value $6$ except through $f$. Keep \eqref{eq:word} with
+$f(n)=\lceil n/k\rceil$ and write $\zeta_k$, $F^{(k)}_s$ for the resulting objects.
+
+\begin{proposition}\label{prop:family}
+For every $k\ge2$, Lemmas~\ref{lem:drift}--\ref{lem:weyl} and Proposition~\ref{prop:sat} hold with
+\[
+   q_1=3^{-\al(k-1)/k}=2^{-(k-1)/k},\qquad \rho=(2/3)^{\ga/k}=2^{-1/k},
+   \qquad q_1\rho=\tfrac12 .
+\]
+The ratios $3^{\al-1}=2/3$, $3^{1-\al}=3/2$ and $3^{-\al}=1/2$ do not involve $k$, so
+Lemma~\ref{lem:up} is unchanged; $C_s(r)$ is free of $M$; and $G(kM+s)$ is quadratic in $M$ with
+leading coefficient $k/2\ne0$.
+\end{proposition}
+
+Consequently the proof of Theorem~\ref{thm:main} applies verbatim once a level crossing is
+exhibited.
+
+\begin{theorem}\label{thm:family}
+Let $k\ge2$. If $F^{(k)}_s(u_0,v_1)>\zeta_k>F^{(k)}_s(u_0,v_2)$ for some $s$ and $v_1<v_2$, then
+$\zeta_k$ is an accumulation point of its own forced trajectory.
+\end{theorem}
+
+The hypothesis has been certified, by the computation described after
+Proposition~\ref{prop:straddle}, in the five cases of Table~\ref{tab:family}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrlll}
+\toprule
+$k$ & $s$ & $u_0$ & $[v_1,v_2]$ & $\zeta_k$\\
+\midrule
+$6$ & $3$ & $37/100$ & $[\tfrac{369}{4000},\tfrac{37}{400}]$ & $-2.29230550205470085\ldots$\\
+$4$ & $2$ & $1/60$   & $[\tfrac{257}{400},\tfrac{129}{200}]$ & $-2.43242829803240526\ldots$\\
+$5$ & $1$ & $7/40$   & $[\tfrac{9}{25},\tfrac{73}{200}]$     & $-2.34442124302516940\ldots$\\
+$8$ & $3$ & $1/40$   & $[\tfrac{4}{25},\tfrac{33}{200}]$     & $-2.26316625669379821\ldots$\\
+$2$ & $0$ & $19/24$  & $[\tfrac{47}{75},\tfrac{377}{600}]$   & $-3.51194122554282436\ldots$\\
+\bottomrule
+\end{tabular}
+\caption{Certified crossings. Margins exceed $4\cdot10^{-5}$ throughout, against arithmetic widths
+below $10^{-21}$.}\label{tab:family}
+\end{table}
+
+\section{The fibre \texorpdfstring{$s=0$}{s=0}}\label{sec:s0}
+
+For $k\ge3$ the crossings above occur only for $s\ge1$, and this is not an accident of the search.
+Write $\lambda=3^{1-\al}=3/2$ and $a_r=3^{A_0(r)}=2^{\lceil r/k\rceil-r}$, so that
+$-F^{(k)}_0(u,v)=1+\sum_{r\ge1}a_r\lambda^{\,x_r-u}$ with $x_r$ the relevant fractional part.
+
+\begin{proposition}\label{prop:s0}
+$-F^{(k)}_0(u,v)>B_k$ for all $(u,v)$, where
+\[
+   B_k=1+\tfrac23\sum_{r\ge1}2^{\lceil r/k\rceil-r}=1+\frac43\cdot\frac{1-2^{-k}}{1-2^{-(k-1)}} .
+\]
+$B_k$ decreases strictly to $7/3$, so $B_k>7/3$ for every $k$.
+\end{proposition}
+
+\begin{proof}
+The term $r=0$ equals $1$; for $r\ge1$ the factor $\lambda^{\,x_r-u}$ exceeds
+$\lambda^{-1}=\tfrac23$, and $3^{A_0(r)}=2^{\lceil r/k\rceil-r}$ by \eqref{eq:key}. Writing
+$r=(b-1)k+i$ with $1\le i\le k$ gives
+$\sum_{r\ge1}2^{\lceil r/k\rceil-r}=(1-2^{-k})\cdot2/(1-2^{-(k-1)})$. Finally
+$x\mapsto(1-x)/(1-2x)$ is increasing and $x=2^{-k}$ decreases.
+\end{proof}
+
+$B_k$ suffices for $k\ge5$ but not below, and the deficiency is repaired by observing that the first
+two terms are coupled: $C_0(1)=1$ and $C_0(2)=3$ for every $k$, so with $x=\fr{u+v+\ga}$ one has
+$x_2=\fr{2x+\ga-u}$.
+
+\begin{proposition}\label{prop:two}
+$\displaystyle\inf_{u,v}\Big(\lambda^{\,x-u}+\tfrac12\lambda^{\,x_2-u}\Big)=\frac1{\sqrt2}+\frac13$,
+whence $-F^{(k)}_0>B_k^{\sharp}:=B_k+\tfrac1{\sqrt2}-\tfrac23$.
+\end{proposition}
+
+\begin{proof}
+Put $e=x-u$ and $m=\lfloor2e+u+\ga\rfloor\in\{0,1,2,3\}$, so that $x_2-u=2e+\ga-m$ and the quantity
+is $\lambda^{\,e}+\tfrac12\lambda^{\,2e+\ga-m}$, strictly increasing in $e$. On the branch $m$ the
+constraint $m\le2e+u+\ga$ with $u<1$ gives $e>(m-1-\ga)/2$, and $x\ge0$ gives $e>-1$. Evaluating at
+these endpoints gives $1.1112\ldots$, $\tfrac1{\sqrt2}+\tfrac13$, $1.1993\ldots$, $1.3936\ldots$ for
+$m=0,1,2,3$. The minimum is at $m=1$, $e=-\ga/2$, where $\lambda^{-\ga/2}=(3/2)^{-\ga/2}=2^{-1/2}$
+by \eqref{eq:key} and $\tfrac12\lambda^{-1}=\tfrac13$. The two terms were assigned
+$\tfrac23(1+\tfrac12)=1$ in $B_k$.
+\end{proof}
+
+For $k=3$ even $B_3^{\sharp}$ falls short, and one uses all of the coupling.
+
+\begin{proposition}\label{prop:QR}
+Let $\theta_r=rv+\ga C_0(r)$ and $Q_R=\inf_v\sum_{r\le R}a_r\lambda^{\fr{\theta_r}}$. Then
+$-F^{(k)}_0\ge B_k+\tfrac23\big(Q_R-\sum_{r\le R}a_r\big)$, and $Q_R$ is the minimum of the finitely
+many values at $v=(n-\ga C_0(r'))/r'$, $1\le r'\le R$, $0\le n<r'$.
+\end{proposition}
+
+\begin{proof}
+Since $x_r-u=\fr{\theta_r}-[\,u\ge1-\fr{\theta_r}\,]$ and $\lambda>1$, each term is at least
+$\tfrac23a_r\lambda^{\fr{\theta_r}}$ for every $u$; bounding the terms $r>R$ by $\tfrac23a_r$ gives
+the inequality. On a cell where all $\lfloor\theta_r\rfloor$ are constant, $\fr{\theta_r}$ is linear
+in $v$ with slope $r>0$, so every summand increases and the infimum over the cell is at its left
+endpoint. These are the stated points, taken modulo $1$, the configuration being $1$-periodic. At
+such a point $\theta_r=p+\ga c$ with $p,c$ rational, and as $\ga$ is irrational this is an integer
+only when $c=0$ and $p\in\Z$, a case decided exactly.
+\end{proof}
+
+\begin{theorem}\label{thm:s0}
+For $k\ge3$ one has $F^{(k)}_0<\zeta_k$ everywhere, so the hypothesis of
+Theorem~\ref{thm:family} cannot hold with $s=0$. For $k=2$ it does hold with $s=0$
+(Table~\ref{tab:family}).
+\end{theorem}
+
+\begin{proof}
+For $k\ge7$: the words for different $k$ agree on their first $k$ factors, since
+$\lceil n/k\rceil=1$ for $n\le k$; so the sum of the first seven terms of
+$|\zeta_k|=\sum_n3^{D_{n-1}}(1-(2/3)^{m_n})$ is independent of $k$, and \eqref{eq:ramp} bounds the
+remainder by $\tfrac32q_1^{\,6}/(1-q_1)$ with $q_1\le2^{-6/7}$. This gives
+$|\zeta_k|\le2.3231<\tfrac73<B_k$. For $k=6,5$ one has $|\zeta_6|=2.29231<B_6=2.35484$ and
+$|\zeta_5|=2.34442<B_5=2.37778$; note $|\zeta_5|>7/3$, which is why $B_k$ rather than its limit is
+used. For $k=4$, $B_4=17/7$ is too small but
+$B_4^{\sharp}=\tfrac{17}7+\tfrac1{\sqrt2}-\tfrac23=2.46901>2.43243=|\zeta_4|$. For $k=3$,
+Proposition~\ref{prop:QR} with $R=8$ gives $-F^{(3)}_0\ge2.69267>2.66441=|\zeta_3|$.
+\end{proof}
+
+At $k=2$ every version of the bound fails, as it must; running the $R=8$ estimate there returns
+$3.189<3.512=|\zeta_2|$ and correctly declines to conclude.
+
+\begin{proposition}\label{prop:limit}
+As $k\to\infty$ the words agree on ever longer initial segments and converge to the word with one
+zero per factor and $H_n=\lfloor\ga(2n-1)\rfloor$, $H_0=0$, $L_n=H_n+n$. Correspondingly
+$\zeta_k\to\zeta_\infty$ with
+\[
+   |\zeta_\infty|=1+\frac12\sum_{n\ge1}2^{\,n}\Big(\frac23\Big)^{\lfloor\ga(2n-1)\rfloor}
+   =2.2548974992816421641\ldots
+\]
+\end{proposition}
+
+\begin{proof}
+With $f\equiv1$ one has $Z_n=n$ and $G(n)=2n-1$, so Lemma~\ref{lem:drift} gives $H_n$ and $L_n$. The
+$n$-th factor contributes $2^{L_{n-1}}3^{-H_{n-1}}(1-(2/3)^{m_n})=2^{\,n-1}A_{n-1}(1-A_n/A_{n-1})$
+to $|\zeta_\infty|$, where $A_n=(2/3)^{H_n}$; summing $\sum_n2^{\,n-1}(A_{n-1}-A_n)$ by parts gives
+$A_0+\tfrac12\sum_n2^{\,n}A_n$. Convergence is geometric of ratio $\tfrac12$ by \eqref{eq:key}.
+\end{proof}
+
+The limit word has ones of density $2\ga/(2\ga+1)$, not $\al$, so it is not itself a member of the
+family; Proposition~\ref{prop:limit} concerns the limit of the values.
+
+\section{A criterion for recurrence}\label{sec:crit}
+
+The examples above raise the question of which words of the shape \eqref{eq:word} have recurrent
+trajectories at all. By Lemma~\ref{lem:drift},
+\begin{equation}\label{eq:split}
+   3^{\,D_{n+r}-D_n}=2^{-(g(n+r)-g(n))}\cdot3^{\,\beta_{n+r}-\beta_n},
+   \qquad \tfrac23<3^{\,\beta_{n+r}-\beta_n}<\tfrac32 ,
+\end{equation}
+splitting the ratio into a deterministic part and a bounded fluctuation. This suggests the scalar
+\[
+   R_n=\sum_{r\ge0}2^{-(g(n+r)-g(n))}.
+\]
+
+\begin{theorem}\label{thm:Rn}
+Let $f$ in \eqref{eq:word} be nondecreasing with $f(n)\to\infty$, the density being critical, and
+suppose $\Phi_\R(v)$ exists. Then $\tfrac29R_n\le-z_n\le\tfrac32R_n$ for all large $n$, so
+$(z_n)$ has an accumulation point if and only if $\liminf_nR_n<\infty$. Equivalently, if a run of
+$b_j$ zeros begins at time $t_j$ then $R_{t_j+b_j}=2^{-b_j}R_{t_j}$, and recurrence holds iff
+$\liminf_j2^{-b_j}R_{t_j}<\infty$.
+\end{theorem}
+
+The constants come from \eqref{eq:split} and from the damping factor of Lemma~\ref{lem:stage} being
+eventually at least $\tfrac13$. A finite $\liminf$ gives a bounded infinite subsequence of the
+$z_n$ and hence a convergent one; if $R_n\to\infty$ then the local minima of $R$, which occur at the
+ends of the zero runs, escape, and with them the trajectory.
+
+\begin{corollary}\label{cor:irr}
+Under the hypotheses of Theorem~\ref{thm:Rn}, $\liminf_nR_n<\infty$ implies $\Phi_\R(v)\notin\Qodd$.
+\end{corollary}
+
+Indeed an infinite subset of $\Qodd$ has no accumulation point in $\R$ \cite[p.~3]{LS}. For the word
+of Theorem~\ref{thm:main}, $g(n)=\lfloor5n/6\rfloor$ gives $R_n\to(1-2^{-5/6})^{-1}=2.2791\ldots$,
+so \S\ref{sec:proof} is the bounded case of Theorem~\ref{thm:Rn}.
+
+\begin{remark}\label{rem:counter}
+Neither obvious candidate governs recurrence. Zero runs tending to infinity do not suffice: taking
+$g(n)=\lceil c\log(n+1)\rceil$ in \eqref{eq:word}, so that $f(n)=n-g(n)\sim n$ and the zero runs grow
+\emph{linearly}, one still has critical density, yet $R_n$ diverges and no accumulation point exists.
+What matters is whether $g$ outruns $\log_2$, since $R_n$ is bounded exactly when
+$g(n+r)-g(n)\gtrsim(1+\varepsilon)\log_2r$. Nor is the drift the invariant: $D_n\to-\infty$ governs
+convergence of the series, not recurrence, and the word of Theorem~\ref{thm:main} and its associated
+word \cite[Example 7]{LS} both have $D_n\to-\infty$ with opposite behaviour. By the zero-run form of
+Theorem~\ref{thm:Rn} the relevant quantity is not the contraction length $b_j$ alone but the scale
+$R_{t_j}$ on which it acts.
+\end{remark}
+
+\section{Scope}\label{sec:scope}
+
+Theorem~\ref{thm:main} settles the case left open in \cite{LS} and, by \cite[p.~3]{LS}, gives
+$\zeta\notin\Qodd$ for that word. It bears on neither half of the Collatz conjecture. Half (C), the
+absence of nontrivial cycles, is untouched by everything here: cycles correspond to eventually
+periodic words, and every word considered is aperiodic by construction. Half (D) would follow from
+the periodicity conjecture, but our results fall short of that for two reasons worth stating
+precisely.
+
+First, the conjecture quantifies over all aperiodic words, and no uniform mechanism is available
+here: the associated word of \cite[Example 7]{LS} has the same critical density and provably no
+accumulation point, while the method above is parasitic on the structure of \eqref{eq:word} --- $G$
+quadratic and $C_s(r)$ free of $M$ --- which a general word does not possess. Theorem~\ref{thm:Rn}
+identifies when recurrence holds in the class \eqref{eq:word}, but it yields only the existence of
+\emph{some} accumulation point, not that $\zeta$ is one of them; the latter needs the recurrence of
+the reduction to a phase at which \eqref{eq:F} takes the value $\zeta$, which is what
+Lemma~\ref{lem:weyl} supplies here and what a general argument would have to replace.
+
+Second, Corollary~\ref{cor:irr} constrains the real value $\Phi_\R(v)$, whereas the conjecture
+concerns the $2$-adic value $\Phi(v)$. These are limits of the same rational partial sums
+$S_\ell=\Phi_\R(u^{(\ell)})$ in different completions and need not agree. The missing implication is
+that $\Phi(v)\in\Qodd$ forces $\Phi_\R(v)=\Phi(v)$ when the real series converges. It can be located
+exactly: for a finite prefix there is no ambiguity, $\Phi(u)=\Phi_\R(u)$, and combining
+$T^\ell(x)=(\varphi(u)+3^hx)/2^\ell$ with $\Phi(u)=-\varphi(u)/3^h$ gives
+\begin{equation}\label{eq:bridge}
+   x-S_\ell=\frac{2^\ell}{3^h}\,T^\ell(x)=3^{\,D_\ell}\,T^\ell(x),
+\end{equation}
+so that $\Phi_\R(v)=x$ if and only if $T^\ell(x)=o(3^{-D_\ell})$, while $S_\ell\to L\ne x$ forces
+$T^\ell(x)\sim3^{-D_\ell}(x-L)$. This is a relocation rather than a weakening: $3^{-D_\ell}$ is the
+natural homogeneous growth scale of the maps being iterated, so the condition carries no slack and
+is precisely the cancellation selecting $x=\Phi_\R(v)$. What \eqref{eq:bridge} provides is a
+concrete form for what is missing --- a growth estimate for the orbit of the hypothetical rational
+--- rather than an abstract incompatibility of completions. We have not been able to supply it.
+
+Finally, Proposition~\ref{prop:straddle} and Table~\ref{tab:family} are computer-assisted, and their
+correctness depends on that of the interval arithmetic; the code is short, uses no third-party
+library, and was checked against an independent implementation agreeing to twenty significant
+digits. We have not found the scalar $R_n$ or the equivalence of Theorem~\ref{thm:Rn} in \cite{LS},
+but make no claim of novelty beyond that comparison.
+
+\begin{thebibliography}{9}
+\bibitem{BL} D.~J.~Bernstein and J.~C.~Lagarias, \emph{The $3x+1$ conjugacy map},
+Canad. J. Math. \textbf{48} (1996), 1154--1169.
+\bibitem{LS} J.~L\'opez and P.~Stoll, \emph{The $3x+1$ periodicity conjecture in $\mathbb{R}$},
+arXiv:2101.12747 (2021).
+\bibitem{MY} K.~G.~Monks and J.~Yazinski, \emph{The autoconjugacy of the $3x+1$ function},
+Discrete Math. \textbf{275} (2004), 219--236.
+\bibitem{KN} L.~Kuipers and H.~Niederreiter, \emph{Uniform Distribution of Sequences}, Wiley, 1974.
+\end{thebibliography}
+
+\end{document}

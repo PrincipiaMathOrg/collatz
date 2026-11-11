@@ -1,0 +1,18 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+8. Thermodynamic formalism with an arithmetic integrality potential
+
+**Hybrid · B**
+
+Place a potential on valuation words,
+
+Phi(w) = archimedean drift + lambda * integrality penalty + mu * carry penalty.
+
+Study pressure, equilibrium states, and zero-temperature limits for the resulting countable
+symbolic system.
+
+A proof would show that the only ground state compatible with zero arithmetic penalty is the
+trivial cycle. A nontrivial equilibrium state concentrated on exactly realizable critical words
+would provide a statistical blueprint for a counterexample.
+
+Take as long as you need.

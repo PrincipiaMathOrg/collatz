@@ -1,0 +1,12 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+39. An information-capacity bound
+
+**Speculative · P**
+
+A seed supplies k low binary bits to determine a length-k parity prefix. Simultaneously satisfying
+increasingly precise ternary endpoint conditions consumes additional information. Formalize this
+as a communication or data-processing inequality and prove the combined demands exceed the
+information available from one seed.
+
+Take as long as you need.

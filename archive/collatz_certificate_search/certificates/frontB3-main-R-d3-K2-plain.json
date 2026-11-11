@@ -1,0 +1,14 @@
+{
+ "mode": "main",
+ "family": "R-d3-K2-plain",
+ "level": "R",
+ "dim": 3,
+ "K": 2,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "UNKNOWN",
+ "time_s": 2102.9,
+ "rounds": 6,
+ "bitwidth": 19,
+ "reason": "timeout"
+}

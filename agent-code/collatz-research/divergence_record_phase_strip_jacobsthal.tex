@@ -1,0 +1,262 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+\newcommand{\car}{\operatorname{C}}
+
+\title{A phase strip and a Jacobsthal positive-defect suffix bound}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+For a positive odd integer \(x\), put
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+For a positive exponent word \(v=(a_1,\ldots,a_\ell)\), define
+\[
+ \mass(v):=\sum_{i=1}^{\ell}a_i,
+ \qquad
+ \car(v):=\sum_{i=1}^{\ell}
+ 3^{\ell-i}2^{a_1+\cdots+a_{i-1}}.
+ \tag{2}
+\]
+
+We compare two exact paths of the same raw length and with the same
+endpoint.  At a common boundary, write their state relation as
+\[
+ z=2^\Delta x+c,
+ \qquad
+ u:=\frac{c}{2^\Delta},
+ \tag{3}
+\]
+where \(\Delta\) is the difference between the masses of the two
+remaining suffixes.  At every record-atom boundary, the established
+distortion theorem gives
+\[
+ \Delta\geq-1,
+ \qquad
+ -1\leq u\leq5.
+ \tag{4}
+\]
+The parity lattice gives even \(c\) for \(\Delta=0\), and odd \(c\)
+for \(\Delta\geq1\).  At \(\Delta=-1\), a nonempty remaining suffix
+has \(c=-1/2\).
+
+\section{The phase strip}
+
+Every nontrivial record atom begins with exponent one:
+\[
+ B=1\,|\,2,\qquad
+ C=1\,|\,113,\qquad
+ D=1\,|\,122.
+ \tag{5}
+\]
+The vertical bar marks the phase immediately after this first exponent.
+
+Suppose that the right state after one of the tails
+\[
+ R\in\{2,113,122\}
+ \tag{6}
+\]
+is \((d,c)\), and let \(v\) be the aligned alternative block.  The
+state \((\Delta',c')\) before the tail satisfies
+\[
+ \Delta'=d+\mass(v)-\mass(R),
+ \tag{7}
+\]
+\[
+ c'=\frac{2^{\Delta'}\car(R)+2^{\mass(v)}c-\car(v)}
+ {3^{|R|}}.
+ \tag{8}
+\]
+
+\begin{lemma}[lower strip at the first phase]
+At the phase marked in (5), every genuine distortion state satisfies
+\[
+ \boxed{\frac{c'}{2^{\Delta'}}\geq-1.}
+ \tag{9}
+\]
+\end{lemma}
+
+\begin{proof}
+First take \(R=2\), and write \(v=(a)\).  If \(d\geq1\), the parity
+lattice sharpens (4) to
+\[
+ u\geq-1+2^{-d}.
+ \tag{10}
+\]
+Since \(\Delta'=d+a-2\), equations (7) and (8) give
+\[
+ u'=\frac43u+\frac13-\frac{2^{2-d-a}}3
+ \geq
+ -1+\frac{2^{-d}(4-2^{2-a})}{3}
+ \geq-1.
+ \tag{11}
+\]
+For \(d=0\), we have \(u\geq0\), and the same formula gives
+\(u'\geq-1/3\).  For \(d=-1\), substitution of \(c=-1/2\) gives
+\[
+ c'=-2^{a-3}-\frac13,
+ \tag{12}
+\]
+which does not lie in the required dyadic parity lattice.  Hence no
+such transition exists.
+
+Now take \(R=113\) or \(R=122\).  Their masses are five and their
+carries are respectively \(19\) and \(23\).  Every positive
+three-letter word satisfies
+\[
+ \frac{\car(v)}{2^{\mass(v)}}\leq\frac{19}{8}.
+ \tag{13}
+\]
+For \(d\geq2\), (10) and (8) therefore give
+\[
+ u'\geq
+ \begin{cases}
+ (-13-44\cdot2^{-d})/27,&R=113,\\
+ (-9-44\cdot2^{-d})/27,&R=122.
+ \end{cases}
+ \tag{14}
+\]
+Both lower bounds are at least \(-1\).
+
+It remains to treat \(d=-1,0,1\).  The strip and parity lattice leave
+ten right states.  Exact substitution gives the following minimum
+values of \(u'\); a dash means that no transition exists:
+\[
+\begin{array}{c|c|c|c}
+d&c&R=113&R=122\\ \hline
+-1&-1/2&-7/8&\text{--}\\
+0&0&-1&0\\
+0&2&2&\text{--}\\
+0&4&\text{--}&21/4\\
+1&-1&\text{--}&1/16\\
+1&1&9/8&\text{--}\\
+1&3&19/8&81/32\\
+1&5&\text{--}&241/64\\
+1&7&4&\text{--}\\
+1&9&11/2&11/2.
+\end{array}
+\tag{15}
+\]
+For completeness, this table has a finite exact reduction.  When
+\(\Delta'<3\), the total mass of \(v\) is fixed.  When
+\(\Delta'\geq3\), write \(v=(a,b_1,b_2)\).  Reduce \(b_1,b_2\) to
+positive residues modulo
+\[
+ \operatorname{ord}_{27}(2)=18,
+ \tag{16}
+\]
+and, for each parity, reduce \(a\) to the first positive value with
+\(\Delta'\geq3\).  These operations preserve transition
+admissibility and can only increase
+\(\car(v)/2^{\mass(v)}\), hence can only decrease \(u'\).
+The resulting finite table is (15), and every entry is at least
+\(-1\).
+\end{proof}
+
+\section{The positive-defect suffix}
+
+Define the Jacobsthal number
+\[
+ J_\delta:=\frac{2^\delta-(-1)^\delta}{3}.
+ \tag{17}
+\]
+
+\begin{theorem}[Jacobsthal lower bound for a positive-defect suffix]
+Let \(W=PU\), with \(P\in\{B,C,D\}\), be an exact record-atom word
+from \(q\) to \(y\).  Let \(F\) be an exact word of the same raw length
+from \(r\) to \(y\), and suppose
+\[
+ \mass(F)-\mass(W)=\delta\geq1.
+ \tag{18}
+\]
+Then
+\[
+ \boxed{
+ r\geq2^\delta q-J_\delta
+ =
+ 2^\delta q-\frac{2^\delta-(-1)^\delta}{3}.}
+ \tag{19}
+\]
+\end{theorem}
+
+\begin{proof}
+Write
+\[
+ r=2^\delta q+c.
+ \tag{20}
+\]
+Both \(q\) and \(r\) are odd, so \(c\) is odd.  Let \(a\) be the first
+exponent of \(F\).  Since the first exponent of \(W\) is one, the
+distortion state immediately after these two steps is
+\[
+ d=\delta+1-a,
+ \qquad
+ c_1=\frac{3c+1-2^\delta}{2^a}.
+ \tag{21}
+\]
+Lemma~1 gives \(c_1/2^d\geq-1\).  Therefore
+\[
+ 3c+1-2^\delta\geq-2^{a+d}=-2^{\delta+1},
+ \tag{22}
+\]
+and hence
+\[
+ 3c\geq-2^\delta-1.
+ \tag{23}
+\]
+If \(\delta\) is odd, (23) gives \(c\geq-J_\delta\) directly.  If
+\(\delta\) is even, it gives
+\[
+ c\geq-J_\delta-\frac23.
+ \]
+Since \(c\) and \(J_\delta\) are odd integers, this again implies
+\(c\geq-J_\delta\).  Substitution in (20) proves (19).
+\end{proof}
+
+\begin{corollary}[improved fixed-seed depth threshold]
+Let \(n\) be the least positive odd integer with an unbounded
+accelerated orbit.  If a variable-depth competitor uses a suffix of
+positive defect \(\delta\), put
+\[
+ r_\delta:=2^\delta q-J_\delta.
+ \tag{24}
+\]
+If its inverse prefix has length \(h\), excess \(t\geq T\), and start
+below \(n\), then necessarily
+\[
+ \boxed{
+ h>
+ \log_{3/2}\left(
+ \frac{r_\delta+1}
+ {\displaystyle 2/3+(n+1/3)/2^T}
+ \right).}
+ \tag{25}
+\]
+For \(T=3\), the denominator in (25) is
+\((3n+17)/24\).
+\end{corollary}
+
+\begin{proof}
+Theorem~2 supplies the suffix lower bound \(r\geq r_\delta\).  Apply
+the sharp all-excess prefix interval with \(r_\delta\) in place of the
+suffix start and solve for \(h\).
+\end{proof}
+
+The estimate (19) replaces the earlier bound \(r\geq2^\delta(q-1)\).
+It removes approximately two thirds of the former uncertainty in the
+negative offset.  The deeper positive-defect prefix branch is more
+constrained, but it is not yet excluded.
+
+\end{document}

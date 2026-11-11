@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "rules": {
+    "completion_test": "For each skeleton, replacing every open step by a proof makes the final Collatz statement follow by the displayed dependency chain.",
+    "citation_test": "Every term and claimed input in a step is pinned to a canonical item ID; canonical items carry source paths and literature IDs in data/items.json.",
+    "nonredundancy_test": "A route is retained only if its remaining gate or proof architecture is not merely a special case or representation of another retained route."
+  },
+  "skeletons": [
+    {
+      "id": "SK-TSC",
+      "name": "Terminal synchronization plus cycle integrality",
+      "status": "proposed",
+      "sufficiency": "Closing OPEN-BTS-01 and OPEN-CYCLE-INT-01 proves the full Collatz conjecture.",
+      "open_gates": ["OPEN-BTS-01", "OPEN-CYCLE-INT-01"],
+      "steps": [
+        {
+          "id": "TSC-01",
+          "status": "closed",
+          "formal_statement": "For every word-realized accelerated odd orbit, 2^{A_k}x_k=3^k x_0+C_k, with the strict-barrier and target-dual definitions fixed by DEF-U-01 and DEF-WORD-01.",
+          "lean_style": "theorem affine_iterate (x : OddPos) (a : ValuationWord) (k : Nat) (hk : k ≤ a.length) : 2^(partialA a k) * orbit x k = 3^k * x + carryAt a k := by ...",
+          "citations": ["DEF-U-01", "DEF-WORD-01", "THM-AFFINE-01", "THM-BARRIER-DUALITY-01"]
+        },
+        {
+          "id": "TSC-02",
+          "status": "closed",
+          "formal_statement": "If Collatz is false, choose the least positive odd n that does not reach 1. Its orbit never drops below n; because U is deterministic on integers, that orbit is either unbounded or eventually enters a nontrivial cycle.",
+          "lean_style": "theorem least_counterexample_dichotomy (h : ¬ Collatz) : ∃ n : OddPos, MinimalBad n ∧ (UnboundedOrbit U n ∨ EntersNontrivialCycle U n) := by ...",
+          "citations": ["DEF-U-01"]
+        },
+        {
+          "id": "TSC-03",
+          "status": "closed",
+          "formal_statement": "Every unbounded positive orbit has a tail whose valuation word is an infinite strict barrier and whose coefficient surplus tends to infinity; the nested dyadic cylinder representatives of a fixed ordinary seed eventually stabilize to that seed.",
+          "lean_style": "theorem normalize_unbounded (n : OddPos) (h : UnboundedOrbit U n) : ∃ tail : BarrierRay, SurplusTendsToInfinity tail ∧ EventuallyConstantLeastLift tail := by ...",
+          "citations": ["THM-DIV-NORM-01", "THM-DIV-FIXEDRAY-01", "THM-DIV-RETURN-01"]
+        },
+        {
+          "id": "TSC-03R",
+          "status": "closed",
+          "formal_statement": "At consecutive coefficient tail records j_i of a normalized unbounded ray, either r_i>R_4(x_{j_i}), in which case r_i>=6 and v_3(x_{j_{i+1}}+1)<=r_i-5, or the gap word is one of {1,12,1113,1122}. Hence every ray has infinitely many horizon exits, unbounded runs of the one-letter atom inside the horizons, or an eventually bounded decoder. Canonical decoder ancestors tend to infinity; with finite stationary height K, their decoder depths and one-letter run lengths satisfy the explicit record-index budgets in THM-DIV-RECORD-RENEWAL-01.",
+          "lean_style": "theorem record_horizon_trichotomy (ray : NormalizedUnboundedRay) : InfinitelyManyHorizonExits ray ∨ UnboundedOneAtomRuns ray ∨ EventuallyBoundedDecoder ray := by ...",
+          "citations": ["THM-DIV-NORM-01", "OPEN-DIV-DEFICIT4-01", "THM-DIV-RECORD-RENEWAL-01"]
+        },
+        {
+          "id": "TSC-04",
+          "status": "open",
+          "formal_statement": "Assume that \\(n\\) is the least positive odd integer with an unbounded accelerated orbit. Fix a finite segment of that orbit. The least same-depth predecessor of its endpoint is already classified and gives no new start below \\(n\\). Every longer predecessor factors into an inverse prefix and a same-depth suffix. The formerly possible suffix start \\(q+2\\) is impossible; the unresolved nonminimal suffixes are the actual \\(q\\)-suffix when the local half-seed is smaller and the positive-defect starts\n\n\\[\nr\\ge2^\\delta q-\\frac{2^\\delta-(-1)^\\delta}{3}.\n\\]\n\nIf the prefix has length \\(h\\) and exponent sum \\(\\operatorname B(E)\\), put \\(t:=\\operatorname B(E)-h\\). The cases \\(t=0,1,2,3\\) are classified by finite valuation ladders, and every prefix satisfies the sharp interval\n\n\\[\n2^t\\left(\\left(\\frac23\\right)^h(r+1)-\\frac23\\right)-\\frac13\\le z\\le\\left(\\frac23\\right)^h(2^t r+1)-1.\n\\]\n\nWriting the exponents as \\(1+c_i\\) and \\(p_k=\\sum_{i\\le k}c_i\\), exact carry-position identities now impose a simultaneous finite power-of-two screen on every \\(p_k\\). Prove that every deep prefix passing all of these screens and every unresolved suffix starts at least at \\(n\\), or construct a positive odd start \\(z<n\\) whose orbit merges into the orbit of \\(n\\). The horizon-exit and eventual reset alternatives must also be excluded.",
+          "lean_style": "theorem binary_ternary_stabilization (n : OddPos) (hmin : GloballyLeastUnbounded n) : ExistsHorizonExitCanonicalAncestorBelow n ∨ ExistsInteriorNoncanonicalAncestorBelow n := by -- OPEN",
+          "citations": ["OPEN-BTS-01", "OPEN-DIV-DEFICIT4-01", "THM-DIV-RETURN-HORIZON-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-EXCESS2-DECODER-01", "THM-DIV-RECORD-EXCESS3-DECODER-01", "THM-DIV-RECORD-SHARP-PREFIX-01", "THM-DIV-RECORD-QPLUS2-EXCLUSION-01", "THM-DIV-RECORD-JACOBSTHAL-SUFFIX-01", "THM-DIV-RECORD-CARRY-POSITION-01"]
+        },
+        {
+          "id": "TSC-05",
+          "status": "closed_implication",
+          "formal_statement": "TSC-02, TSC-03, TSC-03R, and TSC-04 contradict global leastness of an unbounded seed: either alternative in TSC-04 supplies a smaller positive odd seed whose orbit reaches the same unbounded tail. Hence no positive orbit is unbounded.",
+          "lean_style": "theorem no_unbounded_of_stabilization (hBTS : BinaryTernaryStabilization) : ∀ n : OddPos, ¬ UnboundedOrbit U n := by ...",
+          "citations": ["THM-DIV-NORM-01", "THM-DIV-RECORD-RENEWAL-01", "OPEN-BTS-01"]
+        },
+        {
+          "id": "TSC-06",
+          "status": "closed",
+          "formal_statement": "Every nontrivial positive cycle produces a primitive strict-record valuation word a with A=ceil(r log_2 3), D=2^A-3^r>0, and D dividing C(a).",
+          "lean_style": "theorem cycle_to_integral_word (c : NontrivialCycle U) : ∃ a : ValuationWord, PrimitiveStrictRecordOneStrip a ∧ determinant a ∣ carry a := by ...",
+          "citations": ["THM-CYCLE-REDUCE-01", "THM-CYCLE-COMPLEXITY-01"]
+        },
+        {
+          "id": "TSC-07",
+          "status": "open",
+          "formal_statement": "No nontrivial primitive strict-record one-strip word satisfies (2^A-3^r) | C(a); equivalently, its reduced rational-cycle denominator q is greater than 1.",
+          "lean_style": "theorem cycle_integrality_obstruction (a : ValuationWord) (h : PrimitiveStrictRecordOneStrip a) (hnontrivial : ¬ TrivialWord a) : ¬ determinant a ∣ carry a := by -- OPEN",
+          "citations": ["OPEN-CYCLE-INT-01", "THM-CYCLE-SINGLECLASS-01", "THM-CYCLE-BOUNDARY-WIND-01", "THM-CYCLE-WIND-CST-01", "THM-CYCLE-SHADOW-01", "OPEN-CYCLE-WIND-01", "NOGO-CYCLE-UNIVERSAL-01", "NOGO-CYCLE-LATTICE-01"]
+        },
+        {
+          "id": "TSC-08",
+          "status": "closed_implication",
+          "formal_statement": "TSC-06 and TSC-07 exclude every nontrivial positive cycle.",
+          "lean_style": "theorem no_nontrivial_cycles (hInt : CycleIntegralityObstruction) : ∀ c, ¬ NontrivialCycle U c := by intro c hc; obtain ⟨a, ha, hdiv⟩ := cycle_to_integral_word ⟨c,hc⟩; exact hInt a ha.1 ha.2 hdiv",
+          "citations": ["THM-CYCLE-REDUCE-01", "OPEN-CYCLE-INT-01"]
+        },
+        {
+          "id": "TSC-09",
+          "status": "closed_implication",
+          "formal_statement": "With unbounded orbits and nontrivial cycles excluded, the least-counterexample dichotomy is impossible; therefore every positive integer reaches 1.",
+          "lean_style": "theorem collatz_of_BTS_and_integrality (hBTS : BinaryTernaryStabilization) (hInt : CycleIntegralityObstruction) : Collatz := by by_contra h; obtain ⟨n,hn,hunb | hcyc⟩ := least_counterexample_dichotomy h; exact (no_unbounded_of_stabilization hBTS n) hunb; exact (no_nontrivial_cycles hInt _ ) hcyc",
+          "citations": ["DEF-U-01", "OPEN-BTS-01", "OPEN-CYCLE-INT-01"]
+        }
+      ]
+    },
+    {
+      "id": "SK-INV",
+      "name": "Stationary inverse-fiber extinction",
+      "status": "proposed_equivalence_route",
+      "sufficiency": "Closing OPEN-FIBER-EXT-01 proves the full Collatz conjecture by strong induction.",
+      "open_gates": ["OPEN-FIBER-EXT-01"],
+      "warning": "The open gate is equivalent to Collatz. The finite-envelope and Bellman results organize the obstruction but do not currently weaken it.",
+      "steps": [
+        {
+          "id": "INV-01",
+          "status": "closed",
+          "formal_statement": "For positive odd n and r, define M_r(n)=min{z positive odd : U^r(z)=U^r(n)}; the set is nonempty because it contains n.",
+          "lean_style": "noncomputable def fiberMin (n : OddPos) (r : Nat) : OddPos := sInf {z | iterate U r z = iterate U r n}",
+          "citations": ["DEF-U-01", "THM-FIBER-EQUIV-01"]
+        },
+        {
+          "id": "INV-02",
+          "status": "closed",
+          "formal_statement": "At each fixed depth, M_r(n) is obtained from a finite exact family of ancestor scores satisfying congruence, positivity, and valuation conditions, and the minima obey the nested Bellman decomposition M_{R+1}=min(M_R,Theta_R).",
+          "lean_style": "theorem fiberMin_finite_envelope (n : OddPos) (r : Nat) : fiberMin n r = Finset.min' (feasibleScores n r) (feasibleScores_nonempty n r) := by ...",
+          "citations": ["THM-AFFINE-01", "THM-FIBER-ENV-01"]
+        },
+        {
+          "id": "INV-03",
+          "status": "open",
+          "formal_statement": "For every positive odd n>1, some finite depth r satisfies M_r(n)<n.",
+          "lean_style": "theorem stationary_inverse_fiber_extinction : ∀ n : OddPos, 1 < n → ∃ r : Nat, fiberMin n r < n := by -- OPEN",
+          "citations": ["OPEN-FIBER-EXT-01"]
+        },
+        {
+          "id": "INV-04",
+          "status": "closed_implication",
+          "formal_statement": "Assume INV-03. By strong induction on odd n, choose z=M_r(n)<n with U^r(z)=U^r(n). The induction hypothesis makes z reach 1, so n reaches the same endpoint and then 1. Hence Collatz holds.",
+          "lean_style": "theorem collatz_of_fiber_extinction (hExt : StationaryInverseFiberExtinction) : Collatz := by intro n; induction n using Nat.strong_induction_on with | h n ih => by_cases h1 : n=1; · simp [h1]; · obtain ⟨r,z,hz,heq⟩ := hExt n (by omega); exact reachesOne_of_coalesces heq (ih z hz)",
+          "citations": ["THM-FIBER-EQUIV-01", "OPEN-FIBER-EXT-01"]
+        }
+      ]
+    },
+    {
+      "id": "SK-FCD-HSCI",
+      "name": "Cycle descent plus exclusion of unbounded orbits",
+      "status": "proposed",
+      "sufficiency": "Closing OPEN-FCD-01 and OPEN-HSCI-01 excludes respectively all nontrivial cycles and all divergent orbits, hence proves Collatz.",
+      "open_gates": ["OPEN-FCD-01", "OPEN-HSCI-01"],
+      "steps": [
+        {
+          "id": "FH-01",
+          "status": "closed",
+          "formal_statement": "If Collatz is false, a least odd counterexample has an orbit that is either unbounded or eventually enters a nontrivial cycle.",
+          "lean_style": "theorem least_counterexample_dichotomy (h : ¬ Collatz) : ∃ n : OddPos, MinimalBad n ∧ (UnboundedOrbit U n ∨ EntersNontrivialCycle U n) := by ...",
+          "citations": ["DEF-U-01"]
+        },
+        {
+          "id": "FH-02",
+          "status": "closed",
+          "formal_statement": "At the first shortcut-coefficient crossing of a least-state nontrivial integer cycle, the least state is the canonical dyadic representative rho and its endpoint Z satisfies Z>=rho.",
+          "lean_style": "theorem cycle_first_crossing_localization (c : NontrivialCycle U) : ∃ w, NonboundaryFirstCrossing w ∧ canonicalStart w = leastState c ∧ canonicalEndpoint w ≥ canonicalStart w := by ...",
+          "citations": ["THM-CYCLE-REDUCE-01", "THM-FCD-REDUCE-01"]
+        },
+        {
+          "id": "FH-03",
+          "status": "open",
+          "formal_statement": "Every nonboundary coefficient first-crossing word satisfies rho(w)>Z(w).",
+          "lean_style": "theorem first_crossing_descent (w : ShortcutWord) (h : NonboundaryFirstCrossing w) : canonicalStart w > canonicalEndpoint w := by -- OPEN",
+          "citations": ["OPEN-FCD-01", "THM-FCD-FINITE-01", "THM-FCD-ONECORNER-01", "THM-FCD-TWOCORNER-01", "THM-FCD-THREECORNER-01", "THM-FCD-FOURCORNER-01", "THM-FCD-CORNERGROWTH-01", "THM-FCD-SHARP-CORNERGROWTH-01", "THM-FCD-TERMINAL-FLUX-01", "NOGO-FCD-TERMINAL-PARITY-01", "NOGO-FCD-CENTERED-FILTER-01", "THM-FCD-PACKET-LIFT-01", "NOGO-FCD-EXACTNESS-CONTRACTION-01", "NOGO-FCD-LIFTED-LATTICE-01", "OPEN-FCD-PACKET-CONTRACTION-01"]
+        },
+        {
+          "id": "FH-04",
+          "status": "closed_implication",
+          "formal_statement": "FH-02 and FH-03 give opposite strict inequalities at the first crossing, so no nontrivial positive cycle exists.",
+          "lean_style": "theorem no_cycles_of_FCD (hFCD : FirstCrossingDescent) : ∀ c, ¬ NontrivialCycle U c := by ...",
+          "citations": ["THM-FCD-REDUCE-01", "OPEN-FCD-01"]
+        },
+        {
+          "id": "FH-05",
+          "status": "closed",
+          "formal_statement": "Every unbounded orbit normalizes to an infinite strict-barrier ray with unbounded surplus and an eventually constant ordinary binary lift.",
+          "lean_style": "theorem unbounded_to_HSCI_counterexample (n : OddPos) (h : UnboundedOrbit U n) : ∃ w : BarrierRay, UnboundedSurplus w ∧ EventuallyConstantOrdinaryLift w := by ...",
+          "citations": ["THM-DIV-NORM-01", "THM-DIV-FIXEDRAY-01"]
+        },
+        {
+          "id": "FH-05R",
+          "status": "closed",
+          "formal_statement": "Every normalized hypothetical divergent orbit has infinitely many deficit-four horizon exits at consecutive coefficient records, or it has a tail on which 1<e_j<=41/3, 2<=ceil(e_j)<=14, every ceiling defect lies in {-2,-1,0,1,2,3,4,5,6,7}, and the logarithmic separation clock at the ith coefficient record is at least i log(9/8)-O(1).",
+          "lean_style": "theorem record_companion_dichotomy (ray : NormalizedUnboundedRay) : InfinitelyManyHorizonExits ray ∨ EventuallyBoundedCompanionWithLinearClock ray := by ...",
+          "citations": ["THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-LOG-CLOCK-01"]
+        },
+        {
+          "id": "FH-05S",
+          "status": "closed",
+          "formal_statement": "In the interior alternative of FH-05R, let omega be the record-atom word over {1,12,1113,1122}. If an atom factor V repeats at record positions i<k, then 2^{B(V)+1} divides the difference of the two starting states and 2*3^{r(V)} divides the difference of the two terminal states. Hence B(V)+1<log_2(KQ_{j_0})+(log_2 3-1)k and liminf p_omega(L)/L>=1/(log_2 3-1). If every run of the atom 1 has length at most M, the lower complexity slope is at least (1+2/(M+1))/(log_2 3-1).",
+          "lean_style": "theorem record_atom_fixed_seed_spacing (ray : InteriorRecordAtomRay) : ReturnLattice ray /\\ AtomComplexityFloor ray := by ...",
+          "citations": ["THM-DIV-RECORD-SPACING-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-FIXEDRAY-01"]
+        },
+        {
+          "id": "FH-05T",
+          "status": "closed",
+          "formal_statement": "The interior alternative of FH-05R splits exhaustively. If C=1113 occurs infinitely often, every C transition x->y has x=79 mod 128 and admits z=(x-1)/2 with exact word 1121 and U_+^4(z)=y; its synchronized value is e_z=(e_x+1)/2 and z+e_z=(x+e_x)/2. On the orbit of a globally least positive odd unbounded seed n, every such occurrence satisfies x>=2n+1 and Q>2(n+1)/K. If C occurs only finitely often, then after its last occurrence there are infinitely many decoder-zero resets. Consecutive reset blocks are A^kB or A^kD and, for Y=2^nu u, obey respectively Y'=(3^nu u+1)/2 with Q'/Q=3^nu/2^{nu+1}, or Y'=(3^{nu+1}u+7)/8 with Q'/Q=3^{nu+1}/2^{nu+3}; moreover nu<=(log_2 3-1)i+log_2(KQ_{j_0}).",
+          "lean_style": "theorem record_atom_branching (ray : InteriorRecordAtomRay) : InfinitelyManyHalfCoalescences ray \/ EventuallyExactTwoMapResetRenewal ray := by ...",
+          "citations": ["THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-SPACING-01"]
+        },
+        {
+          "id": "FH-05U",
+          "status": "closed",
+          "formal_statement": "In the infinite-C alternative of FH-05T, let b=v_3(x+1) at a C transition x->y. For every 0<=s<=b, z_s+1=2^{s-1}(x+1)/3^s has exact word 1^s1121 to y and z_s+epsilon_s=2^{s-1}(x+e_x)/3^s, forcing Q>[2(n+1)/K](3/2)^s on a globally least unbounded ray. The ladder pulls back exactly through a preceding run A^r. At the first preceding nontrivial atom it is blocked: a B/D endpoint makes the pulled-back half-seed divisible by 3, while across a preceding C from q the least four-step ancestor is 4q-1>q, uniquely with word 1215. Hence the direct half-seed ladder cannot itself be propagated to the fixed initial seed across a nontrivial record atom.",
+          "lean_style": "theorem C_decoder_ladder_blocker (ray : InteriorRecordAtomRay) : CDecoderLadder ray /\\ DirectHalfPullbackBlockedAtNontrivialAtom ray := by ...",
+          "citations": ["THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01"]
+        },
+        {
+          "id": "FH-05V",
+          "status": "closed",
+          "formal_statement": "Every exact block BA^rC or DA^rC has its actual start as the unique least same-depth inverse of its endpoint. The inverse mass minimum is respectively r+9 with reverse word (3,1^{r+3},2,1), and r+12 with reverse word (3,1^{r+3},2,2,1,1). Hence crossing one reset blocker before a C half-coalescence cannot descend at the same raw depth; a viable inverse branch must change depth or span at least two nontrivial record atoms.",
+          "lean_style": "theorem reset_C_same_depth_minimum (ray : InteriorRecordAtomRay) : OneResetSameDepthInverseMinimal ray := by ...",
+          "citations": ["THM-DIV-RECORD-RESET-C-MIN-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-BRANCHING-01"]
+        },
+        {
+          "id": "FH-05W",
+          "status": "closed",
+          "formal_statement": "For every P,Q in {B,C,D} and r,s>=0, let W=P A^r Q A^s C be an exact block with start q and endpoint y. Among all positive odd same-depth predecessors of y, the unique least one is q when P is B or D, while for P=C it is (q-1)/2 with initial replacement 1113->1121. The latter is only the already classified local half-seed at the earlier C. Hence a pullback based on the terminal C gives no new same-depth descent across its two preceding nontrivial atoms; after removing the local earlier-C alternative, a viable inverse branch must change raw depth or cross at least three preceding nontrivial atoms.",
+          "lean_style": "theorem two_prefix_same_depth_minimum (ray : InteriorRecordAtomRay) : TwoPrefixSameDepthInverseClassified ray := by ...",
+          "citations": ["THM-DIV-RECORD-TWO-PREFIX-MIN-01", "THM-DIV-RECORD-RESET-C-MIN-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-BRANCHING-01"]
+        },
+        {
+          "id": "FH-05X",
+          "status": "closed",
+          "formal_statement": "For every exact finite record-atom word W=P U of raw depth L, with P in {B,C,D}, U in {A,B,C,D}*, start q, and endpoint y, the unique least positive odd L-step predecessor of y is q when P=B or D, and (q-1)/2 when P=C. In the C case the unique minimum word is 1121 U, exactly the local half-branch followed by the unchanged suffix. The proof propagates the aligned distortion state through an arbitrary number of atoms and establishes the uniform strip Delta>=-1, -1<=c/2^Delta<=5, with exact half-state rigidity at Delta=-1. Hence no finite same-depth pullback across any number of record atoms can create a new descent; the infinite-C branch now requires a different raw inverse depth.",
+          "lean_style": "theorem arbitrary_prefix_same_depth_minimum (ray : InteriorRecordAtomRay) : ArbitraryPrefixSameDepthInverseClassified ray := by ...",
+          "citations": ["THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-TWO-PREFIX-MIN-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-BRANCHING-01"]
+        },
+        {
+          "id": "FH-05Y",
+          "status": "closed",
+          "formal_statement": "Every exact \\((L+h)\\)-step predecessor factors as an \\(h\\)-step prefix followed by one of three same-depth suffix cases: the local half case, a start in \\(\\{q,q+2\\}\\), or a start at least \\(2^\\delta(q-1)\\) for some \\(\\delta\\ge1\\). If the prefix word is \\(E\\), put \\(t:=\\operatorname B(E)-h\\). The excess-zero and excess-one prefixes are classified completely by explicit \\(3\\)-adic valuations. For \\(0\\le h\\le v_3(q_*+1)\\), the unique least longer predecessor is\n\n\\[\nz_h+1=\\left(\\frac23\\right)^h(q_*+1).\n\\]",
+          "lean_style": "theorem variable_depth_channel_and_decoder_reduction (ray : InteriorRecordAtomRay) : VariableDepthReducedToHigherExcessOrNonminimalSuffix ray := by ...",
+          "citations": ["THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-C-LADDER-01"]
+        },
+        {
+          "id": "FH-05Z",
+          "status": "closed",
+          "formal_statement": "At every fixed positive odd suffix start \\(r\\), the exact inverse prefixes of excess two are precisely the two finite valuation families\n\n\\[\n1^\\ell3\\,1^k,\\qquad 1^{j-1}2\\,1^{b_1-1}2\\,1^b.\n\\]\n\nTheir starts and allowed ranges are explicit. No other excess-two word exists. Consequently there is a computable finite horizon \\(H_{\\le2}(r)\\) beyond which every exact prefix has excess at least three.",
+          "lean_style": "theorem complete_excess_two_decoder (r : OddPos) : ExcessTwoPrefixesAreTwoFiniteValuationFamilies r := by ...",
+          "citations": ["THM-DIV-RECORD-EXCESS2-DECODER-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"]
+        },
+        {
+          "id": "FH-05ZA",
+          "status": "closed",
+          "formal_statement": "At every fixed positive odd suffix start \\(r\\), the exact inverse prefixes of excess three belong to exactly four finite valuation families, with word shapes\n\n\\[\n1^{j-1}4\\,1^b,\\qquad 1^{j-1}2\\,1^c3\\,1^k,\\qquad 1^\\ell3\\,1^k2\\,1^b,\\qquad 1^{j-1}2\\,1^{b_2-1}2\\,1^{b_1-1}2\\,1^b.\n\\]\n\nConsequently there is an explicit finite horizon \\(H_{\\le3}(r)\\) beyond which every exact prefix has excess at least four.",
+          "lean_style": "theorem complete_excess_three_decoder (r : OddPos) : ExcessThreePrefixesAreFourFiniteValuationFamilies r := by ...",
+          "citations": ["THM-DIV-RECORD-EXCESS3-DECODER-01", "THM-DIV-RECORD-EXCESS2-DECODER-01"]
+        },
+        {
+          "id": "FH-05ZB",
+          "status": "closed",
+          "formal_statement": "If an exact \\(h\\)-step prefix of excess \\(t\\) runs from \\(z\\) to \\(r\\), then\n\n\\[\n2^t\\left(\\left(\\frac23\\right)^h(r+1)-\\frac23\\right)-\\frac13\\le z\\le\\left(\\frac23\\right)^h(2^t r+1)-1.\n\\]\n\nBoth endpoints are sharp. Hence every positive inverse prefix satisfies\n\n\\[\nt\\ge\\max\\left\\{0,\\left\\lceil\\log_2\\left(\\frac{2(3/2)^h-1}{r}\\right)\\right\\rceil\\right\\},\n\\]\n\nand any prefix with \\(t\\ge3\\) that begins below a threshold \\(N\\) must lie beyond\n\n\\[\nh>\\log_{3/2}\\left(\\frac{24(q_*+1)}{3N+17}\\right).\n\\]",
+          "lean_style": "theorem sharp_prefix_interval (E : ExponentWord) (hE : ExactPrefix E) : SharpCarryInterval E := by ...",
+          "citations": ["THM-DIV-RECORD-SHARP-PREFIX-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"]
+        },
+        {
+          "id": "FH-05ZC",
+          "status": "closed",
+          "formal_statement": "Let \\(W=PU\\), with \\(P\\in\\{B,C,D\\}\\), be an exact record-atom word from \\(q\\) to \\(y\\). No exact word of the same length and mass runs from \\(q+2\\) to \\(y\\). Hence the same-depth suffix start is the local half-seed, the actual start \\(q\\), or a positive-defect value \\(r\\ge2^\\delta(q-1)\\) with \\(\\delta\\ge1\\). The formerly possible zero-defect value \\(q+2\\) is eliminated.",
+          "lean_style": "theorem q_plus_two_suffix_impossible (W : RecordAtomWord) (hW : Exact W q y) : ¬ SameDepthSameMassPath (q + 2) y W.length W.mass := by ...",
+          "citations": ["THM-DIV-RECORD-QPLUS2-EXCLUSION-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01"]
+        },
+        {
+          "id": "FH-05ZD",
+          "status": "closed",
+          "formal_statement": "For a same-depth suffix of positive mass defect \\(\\delta\\ge1\\), the suffix start satisfies the Jacobsthal bound\n\n\\[\nr\\ge2^\\delta q-J_\\delta,\n\\qquad\nJ_\\delta:=\\frac{2^\\delta-(-1)^\\delta}{3}.\n\\]\n\nThe proof extends the lower distortion strip to the phase immediately after the first exponent of each nontrivial record atom. Consequently, a prefix of length \\(h\\), excess \\(t\\ge T\\), and start below the least unbounded seed \\(n\\) must satisfy\n\n\\[\nh>\\log_{3/2}\\left(\\frac{2^\\delta q-J_\\delta+1}{2/3+(n+1/3)/2^T}\\right).\n\\]",
+          "lean_style": "theorem jacobsthal_positive_defect_suffix_bound (F : SameDepthSuffix W) (hdelta : 1 ≤ F.mass - W.mass) : F.start ≥ 2^F.defect * q - jacobsthal F.defect := by ...",
+          "citations": ["THM-DIV-RECORD-JACOBSTHAL-SUFFIX-01", "THM-DIV-RECORD-QPLUS2-EXCLUSION-01", "THM-DIV-RECORD-SHARP-PREFIX-01"]
+        },
+        {
+          "id": "FH-05ZE",
+          "status": "closed",
+          "formal_statement": "Let \\(E=(1+c_1,\\ldots,1+c_h)\\) be an exact inverse prefix from \\(z\\) to \\(r\\). Put \\(t=\\sum_i c_i\\) and \\(p_k=\\sum_{i\\le k}c_i\\). The slack from each endpoint of the sharp interval is exactly\n\n\\[\nU_{h,t}(r)-z=\\frac13\\sum_{k=1}^{h-1}\\left(\\frac23\\right)^k(2^{p_k}-1),\n\\]\n\n\\[\nz-L_{h,t}(r)=\\frac13\\sum_{k=1}^{h-1}\\left(\\frac23\\right)^k(2^t-2^{p_k}).\n\\]\n\nHence a proposed bounded start must pass an explicit simultaneous power-of-two screen for every cumulative excess \\(p_k\\).",
+          "lean_style": "theorem carry_position_squeeze (E : ExponentWord) (hE : ExactPrefix E) : ExactEndpointSlack E ∧ CumulativeExcessScreen E := by ...",
+          "citations": ["THM-DIV-RECORD-CARRY-POSITION-01", "THM-DIV-RECORD-SHARP-PREFIX-01"]
+        },
+        {
+          "id": "FH-06",
+          "status": "open",
+          "formal_statement": "Assume that \\(n\\) is the least positive odd integer with an unbounded accelerated orbit. For the branch containing infinitely many occurrences of the word \\(1113\\), prove that every remaining variable-depth competitor starts at least at \\(n\\), or construct one that starts below \\(n\\). The value \\(q+2\\) is already impossible. The unresolved suffixes are the actual \\(q\\)-suffix when it is nonminimal and the positive-defect starts\n\n\\[\nr\\ge2^\\delta q-\\frac{2^\\delta-(-1)^\\delta}{3}.\n\\]\n\nThe unresolved prefixes include the deep minimum-channel range beyond \\(H_{\\le3}(r)\\). Every such prefix must obey the sharp interval\n\n\\[\n2^t\\left(\\left(\\frac23\\right)^h(r+1)-\\frac23\\right)-\\frac13\\le z\\le\\left(\\frac23\\right)^h(2^t r+1)-1.\n\\]\n\nIn particular, a competitor with \\(t\\ge3\\) and \\(z<n\\) must satisfy\n\n\\[\nh>\\log_{3/2}\\left(\\frac{24(q_*+1)}{3n+17}\\right).\n\\]\n\nMoreover, if the exponent excesses are \\(c_i\\) and \\(p_k=\\sum_{i\\le k}c_i\\), then every surviving deep prefix must satisfy the exact carry-position screen at every \\(1\\le k<h\\). The remaining task is to show that no deep triple passes all of these coupled constraints below \\(n\\), or to turn a survivor into the required smaller merging start.\n\nThe alternative with only finitely many occurrences of \\(1113\\), and the separate horizon-exit alternative, also remain to be excluded. Closing all three alternatives rules out unbounded positive orbits. No claim about nontrivial cycles is made here.",
+          "lean_style": "theorem high_surplus_carry_innovation (ray : NormalizedBarrierRay) (hfix : EventuallyConstantOrdinaryLift ray) : ¬ InfinitelyManyHorizonExits ray ∧ (ExistsSmallerHalfCoalescingSeed ray ∨ ¬ EventuallyExactTwoMapResetRenewal ray) := by -- OPEN",
+          "citations": ["OPEN-HSCI-01", "OPEN-HSCI-SYNC-SHELL-01", "THM-DIV-TRANSITION-01", "THM-DIV-RETURN-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-CHARGE-01", "THM-DIV-RECORD-RENEWAL-01", "THM-DIV-RECORD-COMPANION-01", "THM-DIV-RECORD-SPACING-01", "THM-DIV-RECORD-BRANCHING-01", "THM-DIV-RECORD-C-LADDER-01", "THM-DIV-RECORD-RESET-C-MIN-01", "THM-DIV-RECORD-TWO-PREFIX-MIN-01", "THM-DIV-RECORD-ARBITRARY-PREFIX-MIN-01", "THM-DIV-RECORD-VARDEPTH-REDUCTION-01", "THM-DIV-RECORD-EXCESS2-DECODER-01", "THM-DIV-RECORD-EXCESS3-DECODER-01", "THM-DIV-RECORD-SHARP-PREFIX-01", "THM-DIV-RECORD-QPLUS2-EXCLUSION-01", "THM-DIV-RECORD-JACOBSTHAL-SUFFIX-01", "THM-DIV-RECORD-CARRY-POSITION-01", "NOGO-DIV-ROUND-LOCAL-01"]
+        },
+        {
+          "id": "FH-07",
+          "status": "closed_implication",
+          "formal_statement": "FH-05 and FH-06 exclude every unbounded positive orbit.",
+          "lean_style": "theorem no_unbounded_of_HSCI (hHSCI : HighSurplusCarryInnovation) : ∀ n : OddPos, ¬ UnboundedOrbit U n := by ...",
+          "citations": ["THM-DIV-NORM-01", "OPEN-HSCI-01"]
+        },
+        {
+          "id": "FH-08",
+          "status": "closed_implication",
+          "formal_statement": "With FH-04 and FH-07, both alternatives in FH-01 are impossible, so every positive integer reaches 1.",
+          "lean_style": "theorem collatz_of_FCD_HSCI (hFCD : FirstCrossingDescent) (hHSCI : HighSurplusCarryInnovation) : Collatz := by by_contra h; obtain ⟨n,hn,hunb | hcyc⟩ := least_counterexample_dichotomy h; exact no_unbounded_of_HSCI hHSCI n hunb; exact no_cycles_of_FCD hFCD _ hcyc",
+          "citations": ["OPEN-FCD-01", "OPEN-HSCI-01", "DEF-U-01"]
+        }
+      ]
+    },
+    {
+      "id": "SK-YAH",
+      "name": "Mixed binary-ternary rewrite termination",
+      "status": "proposed_equivalence_route",
+      "sufficiency": "Closing OPEN-REWRITE-RELTERM-01 proves termination of the full Yolcu-Aaronson-Heule rewrite system; their simulation theorem then proves the ordinary Collatz conjecture.",
+      "open_gates": ["OPEN-REWRITE-RELTERM-01"],
+      "warning": "The residual relative-termination gate is equivalent to Collatz. This skeleton is retained as an operationally distinct automated-reasoning route, not as a reduction in difficulty.",
+      "steps": [
+        {
+          "id": "YAH-01",
+          "status": "closed",
+          "formal_statement": "Define the shortcut map T and the 11-rule mixed binary-ternary string rewriting system R_T=D_T union X, with nine value-preserving auxiliary rules and two right-terminal dynamic rules.",
+          "lean_style": "def yahSystem : StringRewriteSystem MixedDigit := dynamicRules ∪ auxiliaryRules",
+          "citations": ["DEF-REWRITE-YAH-01"]
+        },
+        {
+          "id": "YAH-02",
+          "status": "closed",
+          "formal_statement": "For every rewrite N -> N', an auxiliary step preserves Val(N), while a dynamic step satisfies Val(N')=T(Val(N)); the unique representation of 1 is irreducible.",
+          "lean_style": "theorem yah_step_semantics (h : Rewrite yahSystem N N') : (AuxiliaryStep h → value N' = value N) ∧ (DynamicStep h → value N' = shortcutT (value N)) := by ...",
+          "citations": ["DEF-REWRITE-YAH-01", "THM-REWRITE-SIM-01"]
+        },
+        {
+          "id": "YAH-03",
+          "status": "closed",
+          "formal_statement": "Auxiliary-only rewriting terminates, and it suffices to test termination from canonical delimiter strings. Hence an infinite full derivation must contain infinitely many dynamic steps.",
+          "lean_style": "theorem yah_auxiliary_normalization : StronglyNormalizing auxiliaryRules ∧ (TerminatesOnCanonical yahSystem → StronglyNormalizing yahSystem) := by ...",
+          "citations": ["THM-REWRITE-SIM-01"]
+        },
+        {
+          "id": "YAH-04",
+          "status": "closed",
+          "formal_statement": "The full system R_T is terminating if and only if every positive integer reaches 1 under the shortcut Collatz map T.",
+          "lean_style": "theorem yah_simulation_equivalence : StronglyNormalizing yahSystem ↔ Collatz := by ...",
+          "citations": ["THM-REWRITE-SIM-01", "DEF-U-01"]
+        },
+        {
+          "id": "YAH-05",
+          "status": "closed",
+          "formal_statement": "Let E be the exceptional odd terminal rule and R_0=R_T minus E. The system R_0 terminates. On canonical strings it has a unique normal form, and one E-step followed by R_0-normalization is one accelerated odd Collatz step, independent of the normalization schedule.",
+          "lean_style": "theorem yah_deleted_system_and_macrostep : StronglyNormalizing R0 ∧ UniqueCanonicalNormalForm R0 ∧ ExceptionalMacrostep R0 E = acceleratedOddMap := by ...",
+          "citations": ["THM-REWRITE-MACRO-01", "NOGO-REWRITE-01"]
+        },
+        {
+          "id": "YAH-06",
+          "status": "open",
+          "formal_statement": "Prove relative termination SN(E rel R_0): no infinite R_T derivation applies the exceptional rule E infinitely often.",
+          "lean_style": "theorem exceptional_rule_relative_termination : RelativelyStronglyNormalizing E R0 := by -- OPEN",
+          "citations": ["OPEN-REWRITE-RELTERM-01", "THM-REWRITE-MACRO-01"]
+        },
+        {
+          "id": "YAH-07",
+          "status": "closed_implication",
+          "formal_statement": "YAH-05 and YAH-06 imply termination of R_T by rule removal; YAH-04 then yields the ordinary Collatz conjecture.",
+          "lean_style": "theorem collatz_of_exceptional_relative_termination (hE : RelativelyStronglyNormalizing E R0) : Collatz := yah_simulation_equivalence.mp (ruleRemoval hE yah_deleted_system_and_macrostep.1)",
+          "citations": ["OPEN-REWRITE-RELTERM-01", "THM-REWRITE-SIM-01", "THM-REWRITE-MACRO-01"]
+        }
+      ]
+    },
+    {
+      "id": "SK-RDC",
+      "name": "Finite residue-cylinder descent cover",
+      "status": "proposed_stronger_certificate_route",
+      "sufficiency": "Closing OPEN-DESCENT-COVER-01 yields a checked descent below every starting value; the stopping-time equivalence and strong induction then prove the ordinary Collatz conjecture.",
+      "open_gates": ["OPEN-DESCENT-COVER-01"],
+      "warning": "A finite universal descent cover is stronger than Collatz and is not known to exist. Its attraction is certificateability: a proposed cover can be checked by finite exact arithmetic.",
+      "steps": [
+        {
+          "id": "RDC-01",
+          "status": "closed",
+          "formal_statement": "Collatz is equivalent to the finite-descent property that every integer n>1 has some iterate T^k(n)<n.",
+          "lean_style": "theorem collatz_iff_eventual_descent : Collatz ↔ ∀ n > 1, ∃ k, iterate shortcutT k n < n := by ...",
+          "citations": ["THM-STOPPING-DESCENT-01"]
+        },
+        {
+          "id": "RDC-02",
+          "status": "closed",
+          "formal_statement": "Each finite shortcut-parity word determines one residue class modulo a power of 2, and the corresponding iterate is affine on that class; uniform descent and its finite exceptional range are decidable by exact integer arithmetic.",
+          "lean_style": "theorem parity_cylinder_affine (w : ParityWord) : ∃ r c s, ∀ n ∈ cylinder w, 2^w.length * iterate shortcutT w.length n = 3^s * n + c := by ...",
+          "citations": ["THM-PARITY-CYLINDER-01", "THM-AFFINE-01"]
+        },
+        {
+          "id": "RDC-03",
+          "status": "closed",
+          "formal_statement": "Known strongly sufficient residue sets constrain every hypothetical divergent orbit or nontrivial cycle, and finite verification discharges all seeds below 2^71; these facts may prune a cover but do not make it universal.",
+          "lean_style": "theorem known_descent_cover_constraints : StronglySufficient (residue 2 9) ∧ BadOrbitHits (residue 20 27) ∧ VerifiedBelow (2^71) := by ...",
+          "citations": ["THM-STRONG-SUFFICIENT-01", "THM-CYCLE-REDUCE-01"]
+        },
+        {
+          "id": "RDC-04",
+          "status": "open",
+          "formal_statement": "Construct a finite family of parity/residue cylinders covering every n>1, each equipped with a checked finite iterate that is uniformly below n after explicitly discharging its bounded exceptional representatives.",
+          "lean_style": "theorem finite_universal_descent_cover : ∃ C : Finset DescentCylinder, CoversPositiveAboveOne C ∧ ∀ c ∈ C, CheckedUniformDescent c := by -- OPEN",
+          "citations": ["OPEN-DESCENT-COVER-01", "THM-PARITY-CYLINDER-01"]
+        },
+        {
+          "id": "RDC-05",
+          "status": "closed_implication",
+          "formal_statement": "RDC-04 gives eventual descent for every n>1; RDC-01 then proves Collatz by strong induction.",
+          "lean_style": "theorem collatz_of_finite_descent_cover (h : FiniteUniversalDescentCover) : Collatz := collatz_iff_eventual_descent.mpr (descent_of_cover h)",
+          "citations": ["OPEN-DESCENT-COVER-01", "THM-STOPPING-DESCENT-01"]
+        }
+      ]
+    },
+    {
+      "id": "SK-QPOLY",
+      "name": "q-series conjugacy and polynomiality",
+      "status": "proposed_equivalence_route",
+      "sufficiency": "Closing OPEN-QPOLY-01 places every positive integer, through a genuine dynamical conjugacy, inside the completely classified polynomial dynamics of T_{1,1+q^2}; conjugacy then proves the ordinary Collatz conjecture.",
+      "open_gates": ["OPEN-QPOLY-01"],
+      "warning": "Monks proves that the polynomiality gate is equivalent to Collatz. The q-series model supplies a useful no-carry representation and a strict polynomial-degree descent, but it does not reduce the logical difficulty until polynomiality of H(n) is proved for the actual conjugacy.",
+      "steps": [
+        {
+          "id": "QPOLY-01",
+          "status": "closed",
+          "formal_statement": "Define the shortcut map T on Z_2 and the family T_{A,B} on F_2[[q]], with division by q in the even branch and (Af+B)/q in the odd branch, for odd A and B.",
+          "lean_style": "def qAnalog (A B : F2PowerSeries) (hA : Odd A) (hB : Odd B) : F2PowerSeries → F2PowerSeries := fun f => if Even f then f / q else (A*f+B) / q",
+          "citations": ["DEF-QSERIES-01"]
+        },
+        {
+          "id": "QPOLY-02",
+          "status": "closed",
+          "formal_statement": "For every odd A,B in F_2[[q]], the dynamical system T_{A,B} is conjugate to the shortcut Collatz map T on Z_2.",
+          "lean_style": "theorem monks_q_conjugacy (hA : Odd A) (hB : Odd B) : ∃ H : Z2 ≃ F2PowerSeries, H ∘ shortcutT = qAnalog A B ∘ H := by ...",
+          "citations": ["THM-QCONJUGACY-01"]
+        },
+        {
+          "id": "QPOLY-03",
+          "status": "closed",
+          "formal_statement": "For Q=T_{1,1+q^2}, an input is a polynomial if and only if its image under Q is a polynomial; every polynomial orbit strictly descends in degree until it reaches the 2-cycle {1,q} or the fixed points 0 and 1+q.",
+          "lean_style": "theorem selected_q_polynomial_dynamics : (Polynomial f ↔ Polynomial (Q f)) ∧ (Polynomial f → EventuallyIn (orbit Q f) ({1,q} ∪ {0,1+q})) := by ...",
+          "citations": ["THM-QCONJUGACY-01"]
+        },
+        {
+          "id": "QPOLY-04",
+          "status": "closed",
+          "formal_statement": "For any conjugacy H between T and Q, a positive integer n has a T-orbit containing 1 if and only if H(n) is a polynomial. The fixed-point alternatives cannot correspond to positive integer T-orbits.",
+          "lean_style": "theorem reaches_one_iff_conjugate_polynomial (H : Conjugacy shortcutT Q) (n : PositiveInt) : Reaches shortcutT n 1 ↔ Polynomial (H n) := by ...",
+          "citations": ["THM-QCONJUGACY-01"]
+        },
+        {
+          "id": "QPOLY-05",
+          "status": "open",
+          "formal_statement": "For a conjugacy H between T and T_{1,1+q^2}, H(n) is a polynomial for every positive integer n.",
+          "lean_style": "theorem positive_integers_have_polynomial_q_images (H : Conjugacy shortcutT Q) : ∀ n : PositiveInt, Polynomial (H n) := by -- OPEN",
+          "citations": ["OPEN-QPOLY-01", "NOGO-QANALOG-01"]
+        },
+        {
+          "id": "QPOLY-06",
+          "status": "closed_implication",
+          "formal_statement": "QPOLY-04 and QPOLY-05 imply that every positive integer reaches 1 under T, hence prove the ordinary Collatz conjecture.",
+          "lean_style": "theorem collatz_of_q_polynomiality (hPoly : ∀ n : PositiveInt, Polynomial (H n)) : Collatz := fun n => (reaches_one_iff_conjugate_polynomial H n).mpr (hPoly n)",
+          "citations": ["OPEN-QPOLY-01", "THM-QCONJUGACY-01"]
+        }
+      ]
+    }
+  ]
+}

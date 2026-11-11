@@ -1,0 +1,12 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+40. Mahler-function transcendence of parity series
+
+**Speculative · P**
+
+Associate to an orbit a generating series F(z) = sum over j >= 0 of epsilon_j z^j, or a
+carry-weighted variant. Derive functional equations from the Collatz recursion. Show that a
+counterexample would force F to be both highly transcendental and algebraic or meromorphic of a
+prohibited type.
+
+Take as long as you need.

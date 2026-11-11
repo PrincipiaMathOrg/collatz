@@ -1,0 +1,535 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-08-27T18:27:20.2859341-04:00",
+    "note":  "This checks only that present files match recorded hashes. It does not rerun programs or validate mathematical claims.",
+    "manifests":  [
+                      {
+                          "manifest":  "agent-code/collatz-audit-bundle/certificates/SHA256SUMS",
+                          "base":  "agent-code/collatz-audit-bundle/certificates",
+                          "results":  [
+                                          {
+                                              "entry":  "mass_certificate.py",
+                                              "status":  "verified",
+                                              "expected":  "8d83628d918c9828207be42beb26633b770722d4561c2db7e4e2afcb0856c7fa",
+                                              "actual":  "8d83628d918c9828207be42beb26633b770722d4561c2db7e4e2afcb0856c7fa"
+                                          },
+                                          {
+                                              "entry":  "verify_mass_csv.py",
+                                              "status":  "verified",
+                                              "expected":  "76426c4f5400e98fcc31af15d119a54cbd5268d836291b2816429a841082759f",
+                                              "actual":  "76426c4f5400e98fcc31af15d119a54cbd5268d836291b2816429a841082759f"
+                                          },
+                                          {
+                                              "entry":  "shortcut_seed_certificate.py",
+                                              "status":  "verified",
+                                              "expected":  "615e0badd5b6ce48834b9541ab2e3d010526a5cdba5d24565cea0f284d06a45a",
+                                              "actual":  "615e0badd5b6ce48834b9541ab2e3d010526a5cdba5d24565cea0f284d06a45a"
+                                          },
+                                          {
+                                              "entry":  "accelerated_seed_certificate.cpp",
+                                              "status":  "verified",
+                                              "expected":  "4b9bfa5bca84fdd064f1fee0cb85e8ce74985fa06c6bb1dee98fe67ec91c4620",
+                                              "actual":  "4b9bfa5bca84fdd064f1fee0cb85e8ce74985fa06c6bb1dee98fe67ec91c4620"
+                                          },
+                                          {
+                                              "entry":  "mass_shells_k0_1000.csv",
+                                              "status":  "verified",
+                                              "expected":  "3997b941ae24e59e262636d51ab5baa82b6262de0cd04f6a5812978e7ebea266",
+                                              "actual":  "3997b941ae24e59e262636d51ab5baa82b6262de0cd04f6a5812978e7ebea266"
+                                          },
+                                          {
+                                              "entry":  "mass_certificate.out",
+                                              "status":  "verified",
+                                              "expected":  "8630b315ec64a84983041f428f804f48c56be27b3a122ab52ec593bd76acb21f",
+                                              "actual":  "8630b315ec64a84983041f428f804f48c56be27b3a122ab52ec593bd76acb21f"
+                                          },
+                                          {
+                                              "entry":  "verify_mass_csv.out",
+                                              "status":  "verified",
+                                              "expected":  "e7ceaab0085fd8f32368b26df80ff05709f203f95608687839f47e246d91c032",
+                                              "actual":  "e7ceaab0085fd8f32368b26df80ff05709f203f95608687839f47e246d91c032"
+                                          },
+                                          {
+                                              "entry":  "shortcut_seed_certificate.out",
+                                              "status":  "verified",
+                                              "expected":  "efb67cb920fd8cc9a89e2a4410c1a8ab47dc6560d96f792709abf8b81fcb56f8",
+                                              "actual":  "efb67cb920fd8cc9a89e2a4410c1a8ab47dc6560d96f792709abf8b81fcb56f8"
+                                          },
+                                          {
+                                              "entry":  "accelerated_seed_certificate.out",
+                                              "status":  "verified",
+                                              "expected":  "30f5dd9f84454be45a7840b6a3a52f0edbfeccb42c4fb8e6cf9fdd42e86a3348",
+                                              "actual":  "30f5dd9f84454be45a7840b6a3a52f0edbfeccb42c4fb8e6cf9fdd42e86a3348"
+                                          },
+                                          {
+                                              "entry":  "ENVIRONMENT.txt",
+                                              "status":  "verified",
+                                              "expected":  "3df8386c359b194a6414fe70b80e4231b3cfd018f9c02924b2e7c07f356e353c",
+                                              "actual":  "3df8386c359b194a6414fe70b80e4231b3cfd018f9c02924b2e7c07f356e353c"
+                                          }
+                                      ]
+                      },
+                      {
+                          "manifest":  "agent-code/collatz-research/cycles/certificate_hashes.sha256",
+                          "base":  "agent-code/collatz-research/cycles",
+                          "results":  [
+                                          {
+                                              "entry":  "cyclic_shell_one_strip.js",
+                                              "status":  "verified",
+                                              "expected":  "46cf7e93168506ec3909786324e116c7603ac6d5f879c5463c4e8238ac670679",
+                                              "actual":  "46cf7e93168506ec3909786324e116c7603ac6d5f879c5463c4e8238ac670679"
+                                          },
+                                          {
+                                              "entry":  "mechanical_carry_block.js",
+                                              "status":  "verified",
+                                              "expected":  "2d89bf15ff471bcd6071801ef00fbcc5109faedb30b1a4229522049ab54a3870",
+                                              "actual":  "2d89bf15ff471bcd6071801ef00fbcc5109faedb30b1a4229522049ab54a3870"
+                                          },
+                                          {
+                                              "entry":  "continued_fraction_barrier.js",
+                                              "status":  "verified",
+                                              "expected":  "da196fe913656b9634c66db863ae322428d2925bdbac2d7b1ea605d23f710809",
+                                              "actual":  "da196fe913656b9634c66db863ae322428d2925bdbac2d7b1ea605d23f710809"
+                                          },
+                                          {
+                                              "entry":  "enumerate_cycle_words.js",
+                                              "status":  "verified",
+                                              "expected":  "02710fee549ec4d9b3c1c3cccc8c0ed69b422374e6a36a7d1d8216ac4ee196ac",
+                                              "actual":  "02710fee549ec4d9b3c1c3cccc8c0ed69b422374e6a36a7d1d8216ac4ee196ac"
+                                          },
+                                          {
+                                              "entry":  "deficit_residue_moves.js",
+                                              "status":  "verified",
+                                              "expected":  "2ebb420172e3c8e61dfe86f8b40c42f18f1826e8e59c15ad3a79788d8ba917b1",
+                                              "actual":  "2ebb420172e3c8e61dfe86f8b40c42f18f1826e8e59c15ad3a79788d8ba917b1"
+                                          },
+                                          {
+                                              "entry":  "fcd_gap_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "acf42ffca9cda7bdd0d246ba4ee771cab8cb0c96c03ef563f25816fccb711cd1",
+                                              "actual":  "acf42ffca9cda7bdd0d246ba4ee771cab8cb0c96c03ef563f25816fccb711cd1"
+                                          },
+                                          {
+                                              "entry":  "fcd_tau_attack.js",
+                                              "status":  "verified",
+                                              "expected":  "fbcedbd8cb1eb19b08974743def60340e554f4ee334e67079b0a449523130c7d",
+                                              "actual":  "fbcedbd8cb1eb19b08974743def60340e554f4ee334e67079b0a449523130c7d"
+                                          },
+                                          {
+                                              "entry":  "negative_first_crossing_scan.js",
+                                              "status":  "verified",
+                                              "expected":  "8537c16499c633f757b4157f711e2b766d12c05c680f8dc7a6994f9c1c39b363",
+                                              "actual":  "8537c16499c633f757b4157f711e2b766d12c05c680f8dc7a6994f9c1c39b363"
+                                          },
+                                          {
+                                              "entry":  "positive_first_crossing_scan.js",
+                                              "status":  "verified",
+                                              "expected":  "04ffae72dcee48bf5e962d4fc7fa9ccc57bb144b4c2db3606ac59120ae9ef040",
+                                              "actual":  "04ffae72dcee48bf5e962d4fc7fa9ccc57bb144b4c2db3606ac59120ae9ef040"
+                                          },
+                                          {
+                                              "entry":  "prime_obstruction_audit.js",
+                                              "status":  "verified",
+                                              "expected":  "50dea9132ebe498ae1a085c3dcd834ce7087f3096b79538445b6fe8d80eaf7ec",
+                                              "actual":  "50dea9132ebe498ae1a085c3dcd834ce7087f3096b79538445b6fe8d80eaf7ec"
+                                          },
+                                          {
+                                              "entry":  "tau_shadow_counterexample.js",
+                                              "status":  "verified",
+                                              "expected":  "ae1e3501f795daa5eb07a58795ae8bbbc48b3e0a1dac49e2bb0a8086f0bc5bd4",
+                                              "actual":  "ae1e3501f795daa5eb07a58795ae8bbbc48b3e0a1dac49e2bb0a8086f0bc5bd4"
+                                          },
+                                          {
+                                              "entry":  "tau_recurrence_work.js",
+                                              "status":  "verified",
+                                              "expected":  "42f322b5f3c6b508e3585133e1f31a1c112995493140a4c0e1d791c02e4d21f5",
+                                              "actual":  "42f322b5f3c6b508e3585133e1f31a1c112995493140a4c0e1d791c02e4d21f5"
+                                          },
+                                          {
+                                              "entry":  "q1_integrality_gate.js",
+                                              "status":  "verified",
+                                              "expected":  "186c3e5b1918fd86b0808c819ae6aac1fa31b4aeb94dedaa0eb7ad13832b7383",
+                                              "actual":  "186c3e5b1918fd86b0808c819ae6aac1fa31b4aeb94dedaa0eb7ad13832b7383"
+                                          },
+                                          {
+                                              "entry":  "ferrers_wrap_bounds.js",
+                                              "status":  "verified",
+                                              "expected":  "143f48f6b98828e0332dbc7ccd8639d2ddb9605916b3ddcb1872151ac7fec964",
+                                              "actual":  "143f48f6b98828e0332dbc7ccd8639d2ddb9605916b3ddcb1872151ac7fec964"
+                                          },
+                                          {
+                                              "entry":  "isolated_interval_cover_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "ab692f573cce8c5fbbd60ccba698e79a9d263a838eeaa60cc9601eef86b9ca31",
+                                              "actual":  "ab692f573cce8c5fbbd60ccba698e79a9d263a838eeaa60cc9601eef86b9ca31"
+                                          },
+                                          {
+                                              "entry":  "two_plus_one_gap1_interval_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "2273ddb35e4936cb384791ec70870d3a9c78502bd650903a2d1b37981f99a8cf",
+                                              "actual":  "2273ddb35e4936cb384791ec70870d3a9c78502bd650903a2d1b37981f99a8cf"
+                                          },
+                                          {
+                                              "entry":  "four_shift_run_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "9a88033c256703f0d957cd23d4d5b683157cff978d0f286be1ba047335390010",
+                                              "actual":  "9a88033c256703f0d957cd23d4d5b683157cff978d0f286be1ba047335390010"
+                                          },
+                                          {
+                                              "entry":  "two_level_transition_core_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "0f8a9c1372b1696019b00d3980963fe6237acfc2800faaee34e9a5707746361a",
+                                              "actual":  "0f8a9c1372b1696019b00d3980963fe6237acfc2800faaee34e9a5707746361a"
+                                          },
+                                          {
+                                              "entry":  "transition_entropy_linear_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "bf6e4248ece3fcc6e58a2394fa9094d425b42adab606421061dbb2a787a31983",
+                                              "actual":  "bf6e4248ece3fcc6e58a2394fa9094d425b42adab606421061dbb2a787a31983"
+                                          },
+                                          {
+                                              "entry":  "transition_occupation_no_go_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "64ef1d860e06e71e144cbd6d9dbcccf85a779f6dace0a7278b25f70836a53c19",
+                                              "actual":  "64ef1d860e06e71e144cbd6d9dbcccf85a779f6dace0a7278b25f70836a53c19"
+                                          },
+                                          {
+                                              "entry":  "beatty_terminal_residue_dfs.js",
+                                              "status":  "verified",
+                                              "expected":  "d31104fcaa00e606edf3d2106db5a81ec57179d1236e84d501ad9bcc6d985111",
+                                              "actual":  "d31104fcaa00e606edf3d2106db5a81ec57179d1236e84d501ad9bcc6d985111"
+                                          },
+                                          {
+                                              "entry":  "beatty_terminal_residue_fast.js",
+                                              "status":  "verified",
+                                              "expected":  "93d07d1852191bb3e177ee11f94ef0f32ef6f3dba581aa6e2764c212753b70ea",
+                                              "actual":  "93d07d1852191bb3e177ee11f94ef0f32ef6f3dba581aa6e2764c212753b70ea"
+                                          },
+                                          {
+                                              "entry":  "beatty_coefficient_bound_fast.js",
+                                              "status":  "verified",
+                                              "expected":  "4d9e97ee1e95dc1da743938d6476ba1fdd028b834b15e1fb7573be254f155f3a",
+                                              "actual":  "4d9e97ee1e95dc1da743938d6476ba1fdd028b834b15e1fb7573be254f155f3a"
+                                          },
+                                          {
+                                              "entry":  "run2_strengthened_endpoint_fast.js",
+                                              "status":  "verified",
+                                              "expected":  "180eb54308a03c143e508d4d4253fcbcafbc4f0bb181b0ca2567ba9b31e0c4bc",
+                                              "actual":  "180eb54308a03c143e508d4d4253fcbcafbc4f0bb181b0ca2567ba9b31e0c4bc"
+                                          },
+                                          {
+                                              "entry":  "beatty_zero_lift_renewal_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "f36b0cdf662485789a5075fb4ada7662058fbb346621567e9513a36bfc4e192c",
+                                              "actual":  "f36b0cdf662485789a5075fb4ada7662058fbb346621567e9513a36bfc4e192c"
+                                          },
+                                          {
+                                              "entry":  "bottom_normalized_rational_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "7f4ed08eba377c65e5a1091179d5800c22c23e2122f190f458022e71e5f6522d",
+                                              "actual":  "7f4ed08eba377c65e5a1091179d5800c22c23e2122f190f458022e71e5f6522d"
+                                          },
+                                          {
+                                              "entry":  "bottom_normalized_defect_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "a3b43cab4390eeec8e84649306b3cfc3c90286008642255a1dd96a16edbd6968",
+                                              "actual":  "a3b43cab4390eeec8e84649306b3cfc3c90286008642255a1dd96a16edbd6968"
+                                          },
+                                          {
+                                              "entry":  "bottom_sparse_polynomial_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "95cf743c1e1adcbdaade9440a20d8e216567c34f441e8a3a40a7e43ef3f6d0bf",
+                                              "actual":  "95cf743c1e1adcbdaade9440a20d8e216567c34f441e8a3a40a7e43ef3f6d0bf"
+                                          },
+                                          {
+                                              "entry":  "one_drop_rise_barrier_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "2e50c674df78cd1bbf9a51d1413aa295f9f7008b014bbe2e8364d171b8ef3648",
+                                              "actual":  "2e50c674df78cd1bbf9a51d1413aa295f9f7008b014bbe2e8364d171b8ef3648"
+                                          },
+                                          {
+                                              "entry":  "one_drop_cyclotomic_gcd_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "d41a6a4008ecf015c3851241348d4c9f2b6ed5aace311d4c61e00d8555782467",
+                                              "actual":  "d41a6a4008ecf015c3851241348d4c9f2b6ed5aace311d4c61e00d8555782467"
+                                          },
+                                          {
+                                              "entry":  "beatty_ostrowski_prefix_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "1bb73be05db9bc0fe46b202aa1e2641184fa3d50791289a6d281de7cd2a53568",
+                                              "actual":  "1bb73be05db9bc0fe46b202aa1e2641184fa3d50791289a6d281de7cd2a53568"
+                                          },
+                                          {
+                                              "entry":  "renewal_dual_lock_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "302e3d9389fd05b44a89c2b71df8761d8ff8516c9f6466777d37355963f8fc2e",
+                                              "actual":  "302e3d9389fd05b44a89c2b71df8761d8ff8516c9f6466777d37355963f8fc2e"
+                                          },
+                                          {
+                                              "entry":  "renewal_dual_suffix_gate_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "ea06e2b20b1df70c41ca86a5cec6b04affbbb523726dce153dccdf3695e5f60c",
+                                              "actual":  "ea06e2b20b1df70c41ca86a5cec6b04affbbb523726dce153dccdf3695e5f60c"
+                                          },
+                                          {
+                                              "entry":  "beatty_square_root_gate_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "c72e85228640064a80bcec90a51d2654eb94e9545f314bbb619614a46b25224c",
+                                              "actual":  "c72e85228640064a80bcec90a51d2654eb94e9545f314bbb619614a46b25224c"
+                                          },
+                                          {
+                                              "entry":  "renewal_dual_square_suffix_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "2f6d0fa7925e98a8c0b09a940fedf34e24ae210f3db6649b09569314b51bed18",
+                                              "actual":  "2f6d0fa7925e98a8c0b09a940fedf34e24ae210f3db6649b09569314b51bed18"
+                                          },
+                                          {
+                                              "entry":  "renewal_dual_square_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "c719031134cc01f9387ea4c7595684f2e1b276f12b52d4a25f9ed5a31ff1952e",
+                                              "actual":  "c719031134cc01f9387ea4c7595684f2e1b276f12b52d4a25f9ed5a31ff1952e"
+                                          },
+                                          {
+                                              "entry":  "square_reset_denominator_no_go_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "14dd86fb55dce160fb3aa538a4d9efa6018dc0357c3ed790574ef22f2340882c",
+                                              "actual":  "14dd86fb55dce160fb3aa538a4d9efa6018dc0357c3ed790574ef22f2340882c"
+                                          },
+                                          {
+                                              "entry":  "one_drop_global_envelope_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "6ff5b96741171e3b339f2364aab2e61dde504c1737de353b659004c374f3d2ef",
+                                              "actual":  "6ff5b96741171e3b339f2364aab2e61dde504c1737de353b659004c374f3d2ef"
+                                          },
+                                          {
+                                              "entry":  "one_drop_critical_polynomial_gate_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "5ed343336b118f17959b9fa48595a29f48a8bd31fecb4d063ef70b611d7092ca",
+                                              "actual":  "5ed343336b118f17959b9fa48595a29f48a8bd31fecb4d063ef70b611d7092ca"
+                                          },
+                                          {
+                                              "entry":  "one_drop_critical_polynomial_gate_audit_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "422bfa05159b4e4b9d72a57083ab0c3c84e56a80129d208566c2fe137ba74f20",
+                                              "actual":  "422bfa05159b4e4b9d72a57083ab0c3c84e56a80129d208566c2fe137ba74f20"
+                                          },
+                                          {
+                                              "entry":  "one_drop_sqrt_r_rational_no_go_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "01744707cc3786368b6f5d1c4d7852ddfb3b68727b7bd985e1c88a7837619227",
+                                              "actual":  "01744707cc3786368b6f5d1c4d7852ddfb3b68727b7bd985e1c88a7837619227"
+                                          },
+                                          {
+                                              "entry":  "one_drop_actual_factor_complexity_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "65e58e527c641b1666b9ce728d7798d793404cf59438a95b09f5455cab5f4782",
+                                              "actual":  "65e58e527c641b1666b9ce728d7798d793404cf59438a95b09f5455cab5f4782"
+                                          },
+                                          {
+                                              "entry":  "one_drop_critical_gcd_mitm_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "4e3d718aa2572d3df08136a1b32f0be60f691dc84a6d0c2bd9cc71c7faa0ff73",
+                                              "actual":  "4e3d718aa2572d3df08136a1b32f0be60f691dc84a6d0c2bd9cc71c7faa0ff73"
+                                          },
+                                          {
+                                              "entry":  "full_boundary_small_start_scan.js",
+                                              "status":  "verified",
+                                              "expected":  "90e7ced7259deb38016a599470b19ba5de37543683d28b0be0461244dbc268ca",
+                                              "actual":  "90e7ced7259deb38016a599470b19ba5de37543683d28b0be0461244dbc268ca"
+                                          },
+                                          {
+                                              "entry":  "full_boundary_tau_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "3f02ca44b03488c05155114fe12e463a1dab89079e8e9d2ebfaf6314dcb70cd5",
+                                              "actual":  "3f02ca44b03488c05155114fe12e463a1dab89079e8e9d2ebfaf6314dcb70cd5"
+                                          },
+                                          {
+                                              "entry":  "full_boundary_theorem_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "84292be4669608ca651ca3e765355a3828f2b385d06350a57ddf493b117b22f4",
+                                              "actual":  "84292be4669608ca651ca3e765355a3828f2b385d06350a57ddf493b117b22f4"
+                                          },
+                                          {
+                                              "entry":  "full_boundary_shadow_start_scan.js",
+                                              "status":  "verified",
+                                              "expected":  "515fbb1c625531d60dbfc145885f24e42208898b1cf0547e4936c860bff1b143",
+                                              "actual":  "515fbb1c625531d60dbfc145885f24e42208898b1cf0547e4936c860bff1b143"
+                                          },
+                                          {
+                                              "entry":  "full_boundary_suffix_depth_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "2e7ac28a3bed71d472c82cceff132551b7704bafe630aed6921e4ce46dce4f52",
+                                              "actual":  "2e7ac28a3bed71d472c82cceff132551b7704bafe630aed6921e4ce46dce4f52"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_full_subideal_virtual_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "74f5a7437630cb9ca19d42358620f6e9f7566d494cde19f42f44858c2e384791",
+                                              "actual":  "74f5a7437630cb9ca19d42358620f6e9f7566d494cde19f42f44858c2e384791"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_four_corner_count_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "fbc5e384de8b752dee12c7eec74b5678c482f5924b8642d97cdf072f6608e0b3",
+                                              "actual":  "fbc5e384de8b752dee12c7eec74b5678c482f5924b8642d97cdf072f6608e0b3"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_four_corner_low_residue_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "f969b058a502dcb6bd087195882d6f078314114e5a92238fef16c9a3643660d7",
+                                              "actual":  "f969b058a502dcb6bd087195882d6f078314114e5a92238fef16c9a3643660d7"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_four_corner_terminal_seed_row_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "34d3faed6da3dfd75446a6c11dcdc70815865704f2186dd7b931236508438968",
+                                              "actual":  "34d3faed6da3dfd75446a6c11dcdc70815865704f2186dd7b931236508438968"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_four_corner_terminal_seed_driver.js",
+                                              "status":  "verified",
+                                              "expected":  "9a50c5b6ddccee7e081c3d31b8f8782c8b74713c7372f598513f5756e0fa0dd3",
+                                              "actual":  "9a50c5b6ddccee7e081c3d31b8f8782c8b74713c7372f598513f5756e0fa0dd3"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_corner_packet_container_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "0a5b9a20a53732947144f49cf759a29543084b704c61028c0441090dda85ef38",
+                                              "actual":  "0a5b9a20a53732947144f49cf759a29543084b704c61028c0441090dda85ef38"
+                                          },
+                                          {
+                                              "entry":  "../inverse/q2_terminal_deletion_parity_probe.js",
+                                              "status":  "verified",
+                                              "expected":  "d8ff965b15f4d00df1727504db2d4ce76091d49cf8e68bc622ec34ab4c1f473d",
+                                              "actual":  "d8ff965b15f4d00df1727504db2d4ce76091d49cf8e68bc622ec34ab4c1f473d"
+                                          }
+                                      ]
+                      },
+                      {
+                          "manifest":  "agent-code/collatz-research/RESEARCH_MANIFEST.sha256",
+                          "base":  ".",
+                          "results":  [
+                                          {
+                                              "entry":  "agent-code/collatz-research/MASTER_PROOF_SKELETON.md",
+                                              "status":  "mismatch",
+                                              "expected":  "eb072187f7eb86d860cf296a1ab4c0dab427501c3d12fd6bd3590d3500b6e2b9",
+                                              "actual":  "47aae57f04fdb72e4fa5875c5cb39ecadd6be492651cb967ea4a7cdeddf0187e"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/sync_divergence.md",
+                                              "status":  "mismatch",
+                                              "expected":  "c04e25b5100267ceee2ed4bcca6e7a2146cb6ee798200a568273f620009cb16f",
+                                              "actual":  "0e462e8da4414e6c5e5fa8711bc45002a56a90b036e847eadfacbc54a6e322d6"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycle_exclusion.md",
+                                              "status":  "verified",
+                                              "expected":  "363258ae8395385fb826b9765715311829b26adaa87154b37dc03db665dc4009",
+                                              "actual":  "363258ae8395385fb826b9765715311829b26adaa87154b37dc03db665dc4009"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse_fiber.md",
+                                              "status":  "mismatch",
+                                              "expected":  "f92d886fa082770cb693d34d5d7cad374bb37f744330b9b35b1d81eec7e55f11",
+                                              "actual":  "87720b826af89ad9ca32942f2a4088658074c5266de5645d9a1beb6843a947cf"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/negative_supercritical.md",
+                                              "status":  "verified",
+                                              "expected":  "be72f2ffc05dc0633ccf6444f92a26dd989b633eb6fa8a1a626489e6bda2eddd",
+                                              "actual":  "be72f2ffc05dc0633ccf6444f92a26dd989b633eb6fa8a1a626489e6bda2eddd"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse/InverseFiberSkeleton.lean",
+                                              "status":  "verified",
+                                              "expected":  "575293bb88ecaba43be525c3c1431bfccc15dc7a1781c1e107dbeab918c054c2",
+                                              "actual":  "575293bb88ecaba43be525c3c1431bfccc15dc7a1781c1e107dbeab918c054c2"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/negative_supercritical_search.js",
+                                              "status":  "verified",
+                                              "expected":  "6cd86a190dc60c805b225c2c2f4aaf6d5a557ff2f1ff813d2a38235497ecb2ff",
+                                              "actual":  "6cd86a190dc60c805b225c2c2f4aaf6d5a557ff2f1ff813d2a38235497ecb2ff"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse/StationaryExposureCertificate.cs",
+                                              "status":  "verified",
+                                              "expected":  "e3b28c84c4ce36e5f302b16fd27eeb5a7ccc9f9bffd16c872fa481e7f869539c",
+                                              "actual":  "e3b28c84c4ce36e5f302b16fd27eeb5a7ccc9f9bffd16c872fa481e7f869539c"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse/run_stationary_exposure_certificate.ps1",
+                                              "status":  "verified",
+                                              "expected":  "c9f23098006766f8eca09d55a281afbf8169302b0c802031618f2b7de2d3b9e2",
+                                              "actual":  "c9f23098006766f8eca09d55a281afbf8169302b0c802031618f2b7de2d3b9e2"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycle_two_level_transition_core.md",
+                                              "status":  "verified",
+                                              "expected":  "1cab8679e6c6152dec4f376ad9b2878a7d66e8dc26e2de801755019ad94eac6c",
+                                              "actual":  "1cab8679e6c6152dec4f376ad9b2878a7d66e8dc26e2de801755019ad94eac6c"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycles/two_level_transition_core_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "0f8a9c1372b1696019b00d3980963fe6237acfc2800faaee34e9a5707746361a",
+                                              "actual":  "0f8a9c1372b1696019b00d3980963fe6237acfc2800faaee34e9a5707746361a"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/divergence_transition_core.md",
+                                              "status":  "verified",
+                                              "expected":  "d3614b8d3112cc117b7852362104c2acf34182d6315a1f350e8197208a2ba562",
+                                              "actual":  "d3614b8d3112cc117b7852362104c2acf34182d6315a1f350e8197208a2ba562"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/transition_entropy_linear.md",
+                                              "status":  "verified",
+                                              "expected":  "0ae9fc0d92edcf49900e24986368dd9b153b3ccd513455e66ab6c2d19fa661ad",
+                                              "actual":  "0ae9fc0d92edcf49900e24986368dd9b153b3ccd513455e66ab6c2d19fa661ad"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycles/transition_entropy_linear_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "bf6e4248ece3fcc6e58a2394fa9094d425b42adab606421061dbb2a787a31983",
+                                              "actual":  "bf6e4248ece3fcc6e58a2394fa9094d425b42adab606421061dbb2a787a31983"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycle_transition_occupation_no_go.md",
+                                              "status":  "verified",
+                                              "expected":  "15173c5a44c85417db65f3871d9e4b7a351c21e62ccda12d01fdb9a01cce7223",
+                                              "actual":  "15173c5a44c85417db65f3871d9e4b7a351c21e62ccda12d01fdb9a01cce7223"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/cycles/transition_occupation_no_go_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "64ef1d860e06e71e144cbd6d9dbcccf85a779f6dace0a7278b25f70836a53c19",
+                                              "actual":  "64ef1d860e06e71e144cbd6d9dbcccf85a779f6dace0a7278b25f70836a53c19"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/q2_transition_three.md",
+                                              "status":  "verified",
+                                              "expected":  "042827574296b606575b76ee1c9d2f05355f1f603243792fa951fb0b0b6ade6e",
+                                              "actual":  "042827574296b606575b76ee1c9d2f05355f1f603243792fa951fb0b0b6ade6e"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse/q2_transition_three_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "55e91a5a25cc588d44ec334701686fac1ced9dc1f572f4d49c8a90316539cb7e",
+                                              "actual":  "55e91a5a25cc588d44ec334701686fac1ced9dc1f572f4d49c8a90316539cb7e"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/q2_transition_four.md",
+                                              "status":  "verified",
+                                              "expected":  "6fd54c777bfb6eeea4956d11ffa8aeeaa011d45818f95fe5b349277f7459d99f",
+                                              "actual":  "6fd54c777bfb6eeea4956d11ffa8aeeaa011d45818f95fe5b349277f7459d99f"
+                                          },
+                                          {
+                                              "entry":  "agent-code/collatz-research/inverse/q2_transition_four_certificate.js",
+                                              "status":  "verified",
+                                              "expected":  "a41bbb5b8eb173a695e584f31a78a41b3cb73bc2d0061819180a778e2b27cd72",
+                                              "actual":  "a41bbb5b8eb173a695e584f31a78a41b3cb73bc2d0061819180a778e2b27cd72"
+                                          }
+                                      ]
+                      }
+                  ]
+}

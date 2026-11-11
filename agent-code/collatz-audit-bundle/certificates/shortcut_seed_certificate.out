@@ -1,0 +1,7 @@
+cap=200000
+status_counts={'barrier_failure': 99997, 'cycle': 2, 'hit_1': 1}
+terminal_hits=[(1, 0)]
+longest_resolution_steps=132
+longest_resolution_seed=149345
+largest_value_seen=4837921750
+certificate_passed=True

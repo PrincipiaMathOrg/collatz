@@ -1,0 +1,4 @@
++ python zt_mitm_deep.py --validate 14
++ python zt_mitm_deep.py 20
++ python zt_mitm_deep.py 23 --L 8
++ echo DONE

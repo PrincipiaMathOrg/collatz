@@ -1,0 +1,2274 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{Cycle-lap rigidity for synchronized negative shadows}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  2^{a_j}x_{j+1}=3x_j+1,
+  \qquad
+  2^{a_j}e_{j+1}=3e_j-1,
+  \qquad a_j\geq1,
+  \tag{1}
+\]
+where the $x_j$ are positive odd integers and the $e_j$ are real numbers
+greater than $1$.  Put
+\[
+  m_j:=\lceil e_j\rceil,
+  \qquad
+  \theta_j:=m_j-e_j\in[0,1).
+  \tag{2}
+\]
+Suppose that, on an interval of indices, there are a fixed
+$c\in\{1,2,3\}$ and positive odd integers $y_j$ such that
+\[
+  m_j=cy_j,
+  \qquad
+  2^{a_j}y_{j+1}=3y_j-1.
+  \tag{3}
+\]
+Thus $(y_j)$ is an accelerated positive $3y-1$ shadow synchronized with
+the positive $3x+1$ path.
+
+\begin{theorem}[synchronized cycle-lap rigidity]
+Assume that (3) holds from $p$ through $p+KL$, where $K,L\geq1$, and that
+\[
+  y_{p+L}=y_p.
+  \tag{4}
+\]
+Put
+\[
+  M:=y_p,
+  \qquad
+  B:=\sum_{i=0}^{L-1}a_{p+i},
+  \qquad
+  \rho:=\frac{3^L}{2^B}.
+  \tag{5}
+\]
+Then the shadow and exponent blocks of length $L$ repeat throughout the
+displayed interval, and
+\[
+\boxed{\begin{aligned}
+  \rho&>1,\\
+  v_2(x_p+M)&=KB+v_2(x_{p+KL}+M)\geq KB+1,\\
+  x_{p+KL}+M&=\rho^K(x_p+M).
+\end{aligned}}
+\tag{6}
+\]
+Moreover,
+\[
+\boxed{
+  \log\rho
+  =\sum_{i=0}^{L-1}
+    -\log\left(1-\frac1{3y_{p+i}}\right),
+  \qquad
+  \sum_{i=0}^{KL-1}\frac1{m_{p+i}}
+  <\frac3c\log\frac{x_{p+KL}+M}{x_p+M}.}
+\tag{7}
+\]
+
+The rounding error at the first return is exponentially pinched.  More
+precisely,
+\[
+\boxed{
+\begin{aligned}
+  c=1&\quad\Longrightarrow\quad
+    0\leq\theta_p<\rho^{-K},\\
+  c=2,\ M=1&\quad\Longrightarrow\quad
+    \rho=\frac32,
+    \qquad 0<1-\theta_p\leq\left(\frac23\right)^K,\\
+  (c-1)M>1&\quad\Longrightarrow\quad
+    \rho^K<\frac{(c-1)M}{(c-1)M-1}.
+\end{aligned}}
+\tag{8}
+\]
+
+If $p$ is chosen at a maximum state $M$ of the shadow cycle, then
+\[
+  \rho\geq1+\frac1{2M}.
+  \tag{9}
+\]
+Consequently,
+\[
+\boxed{
+  c=3\Longrightarrow K\leq1,
+  \qquad
+  c=2,\ M\geq3\Longrightarrow K\leq2.}
+\tag{10}
+\]
+Thus arbitrarily many complete laps are possible only for a color-$1$
+shadow cycle or for the color-$2$ fixed shadow $y=1$.
+\end{theorem}
+
+\begin{proof}
+Because $y_{j+1}$ is odd, the second identity in (3) determines both
+\[
+  a_j=v_2(3y_j-1)
+  \qquad\text{and}\qquad
+  y_{j+1}=\frac{3y_j-1}{2^{v_2(3y_j-1)}}.
+  \tag{11}
+\]
+The shadow map is deterministic.  Equation (4) therefore makes both the
+shadow states and the exponents $L$-periodic for as long as (3) holds.
+
+Let $C$ be the positive affine carry obtained by iterating one period of
+the negative recurrence.  We have
+\[
+  2^BM=3^LM-C,
+  \qquad C>0.
+  \tag{12}
+\]
+Hence $(3^L-2^B)M=C$, which proves $\rho>1$.  Adding the two synchronized
+recurrences gives
+\[
+  2^{a_j}(x_{j+1}+y_{j+1})=3(x_j+y_j).
+  \tag{13}
+\]
+After $K$ periods,
+\[
+  2^{KB}(x_{p+KL}+M)=3^{KL}(x_p+M).
+  \tag{14}
+\]
+The two powers in (14) are coprime.  Since $x_{p+KL}$ and $M$ are odd,
+taking $2$-adic valuations gives
+\[
+  v_2(x_p+M)=KB+v_2(x_{p+KL}+M)\geq KB+1.
+\]
+Division by $2^{KB}$ gives the last identity in (6).
+
+For one shadow edge we have
+\[
+  \frac{y_{j+1}}{y_j}
+  =\frac3{2^{a_j}}
+   \left(1-\frac1{3y_j}\right).
+  \tag{15}
+\]
+The product over one cycle equals $1$.  Taking logarithms proves the first
+identity in (7).  Since $-\log(1-t)>t$ for $0<t<1$, it follows that
+\[
+  \sum_{i=0}^{L-1}\frac1{y_{p+i}}<3\log\rho.
+  \tag{16}
+\]
+The same $L$ states occur in every lap and $m_j=cy_j$.  Thus
+\[
+  \sum_{i=0}^{KL-1}\frac1{m_{p+i}}
+  =\frac Kc\sum_{i=0}^{L-1}\frac1{y_{p+i}}
+  <\frac{3K}{c}\log\rho.
+  \tag{17}
+\]
+Equation (6) turns the last member into the logarithmic ratio in (7).
+
+Put $\Delta_j:=e_j-y_j$.  Subtracting the two negative recurrences gives
+\[
+  2^{a_j}\Delta_{j+1}=3\Delta_j,
+  \qquad
+  \Delta_{p+KL}=\rho^K\Delta_p.
+  \tag{18}
+\]
+At a return to the state $M$, equations (2) and (3) give
+\[
+  (c-1)M-1<\Delta_j=(c-1)M-\theta_j\leq(c-1)M.
+  \tag{19}
+\]
+If $c=1$, equation (18) says
+$\theta_{p+KL}=\rho^K\theta_p<1$, which proves the first line of (8).
+If $c=2$ and $M=1$, then the only positive shadow cycle is the fixed edge
+$1\mapsto1$, with exponent $1$ and multiplier $3/2$.  Now (18)--(19) give
+\[
+  0<1-\theta_p
+  =\rho^{-K}(1-\theta_{p+KL})
+  \leq\rho^{-K}.
+  \tag{20}
+\]
+Finally, if $(c-1)M>1$, then (18)--(19) give
+\[
+  \rho^K\bigl((c-1)M-1\bigr)<(c-1)M,
+  \tag{21}
+\]
+which is the last line of (8).
+
+We now rotate the cycle so that its displayed initial state $M$ is maximal.
+If $a$ is the exponent on the edge returning to $M$, then
+\[
+  2^aM=3y-1\leq3M-1,
+  \tag{22}
+\]
+where $y\leq M$ is the preceding cycle state.  Since $a\geq1$, equation
+(22) forces $a=1$.  Writing the carry in (12) as
+\[
+  C=\sum_{i=0}^{L-1}3^{L-1-i}2^{B_i},
+  \qquad
+  B_i:=\sum_{h=0}^{i-1}a_{p+h},
+  \tag{23}
+\]
+we see that its last normalized term is
+$2^{B_{L-1}-B}=2^{-a}=1/2$.  Therefore
+\[
+  (\rho-1)M=\frac C{2^B}\geq\frac12,
+  \tag{24}
+\]
+which proves (9).
+
+Bernoulli's inequality and (9) give
+\[
+  \rho^K\geq1+K(\rho-1)\geq1+\frac K{2M}.
+  \tag{25}
+\]
+For $c=3$, equations (8) and (25) imply
+\[
+  K<\frac{2M}{2M-1}<2,
+\]
+so $K\leq1$.  For $c=2$ and $M\geq3$, they imply
+\[
+  K<\frac{2M}{M-1}\leq3,
+\]
+so $K\leq2$.  This proves (10).
+\end{proof}
+
+\begin{corollary}[the two unbounded-lap mechanisms]
+Consider a maximal constant nonpositive-defect run from the synchronized
+ceiling construction, and write $c:=1-d\in\{1,2,3\}$.  Use its positive
+odd shadow
+\[
+\begin{array}{c|c}
+  c&\text{shadow states}\ \\ \hline
+  1&y_j=m_j,\\
+  2&y_j=m_j/2\quad\text{apart from the last ceiling state},\\
+  3&y_j=m_j/3\quad\text{apart from the first ceiling state}.
+\end{array}
+\tag{26}
+\]
+Let $H:=10.789$ be the certified bound for the reciprocal mass of every
+finite simple positive accelerated $3y-1$ path.  Then the following hold.
+
+\begin{enumerate}
+  \item A color-$3$ shadow traverses any one cycle at most once.  Its whole
+  ceiling run has reciprocal mass less than
+  \[
+    H+\frac13.
+    \tag{27}
+  \]
+
+  \item In a color-$2$ shadow, every cycle other than the fixed point $1$
+  is traversed at most twice.  After deleting the terminal block on which
+  $m_j=2$, the reciprocal mass of the ceiling run is less than
+  \[
+    2H+\frac12.
+    \tag{28}
+  \]
+  If that terminal block contains $K$ edges and begins at $p$, then all of
+  its exponents equal $1$ and
+  \[
+  \boxed{\begin{aligned}
+    2^{K+1}&\mid x_p+1,\\
+    x_{p+K}+1&=\left(\frac32\right)^K(x_p+1),\\
+    0<1-\theta_p&\leq\left(\frac23\right)^K.
+  \end{aligned}}
+  \tag{29}
+  \]
+
+  \item In a color-$1$ run which contains two occurrences of a maximum
+  state $M$ on its eventual shadow cycle, choose the first such occurrence
+  $p$ and the last one $q=p+KL$.  The indices outside the complete laps
+  $[p,q)$ form at most two simple shadow pieces.  Hence
+  \[
+  \boxed{\begin{aligned}
+    \sum_{j\text{ in the run}}\frac1{m_j}
+    &<2H+3\log\frac{x_q+M}{x_p+M},\\
+    2^{KB+1}&\mid x_p+M,\\
+    \theta_p&<\rho^{-K}.
+  \end{aligned}}
+  \tag{30}
+  \]
+  If no cycle maximum occurs twice, the run is covered by at most two simple
+  shadow pieces and has mass less than $2H$.  If the complete shadow is
+  simple, the sharper bound $H$ holds.
+\end{enumerate}
+
+Consequently, unbounded reciprocal mass inside individual nonpositive
+defect runs can only be supplied by color-$1$ cycle laps or by terminal
+color-$2$ towers with $m=2$ and exponent $1$.
+\end{corollary}
+
+\begin{proof}
+A finite path under the deterministic accelerated $3y-1$ map is simple
+until its first repeated state.  After that repetition it follows one cycle.
+Every transient piece, every single traversal of the cycle with its repeated
+endpoint removed, and every proper terminal piece is simple, so each has
+reciprocal mass less than $H$.
+
+For $c=3$, the theorem allows at most one complete cycle lap.  We split the
+shadow into a simple initial piece, that lap, and a simple terminal piece.
+Their total shadow mass is less than $3H$.  Division by $c=3$ and inclusion
+of the discarded initial ceiling state, whose value is at least $3$, prove
+(27).
+
+For $c=2$, a nontrivial cycle has maximum at least $3$ and is traversed at
+most twice.  Away from the fixed point $1$, the shadow is therefore covered
+by a simple initial piece, at most two simple cycle laps, and a simple
+terminal piece.  Its shadow mass is less than $4H$.  Division by $2$ and
+inclusion of the discarded last ceiling state prove (28).  Once the shadow
+reaches $1$, determinism gives the fixed edge $1\mapsto1$ with exponent
+$1$.  Formula (29) is (6) and (8) for this fixed cycle.
+
+For $c=1$, the shadow is the complete ceiling run.  If a cycle maximum
+occurs at least twice, the portion before its first chosen occurrence and
+the portion beginning at its last chosen occurrence are simple.  Their
+combined mass is less than $2H$.  Apply (6)--(8) to the complete laps
+between them to obtain (30).  If no cycle maximum occurs twice, splitting
+at the first repeated state covers the path by at most two simple pieces.
+The completely simple case is the definition of $H$.
+\end{proof}
+
+\begin{theorem}[fixed-seed plateau shell for the exceptional towers]
+Assume now that (1) is the fixed synchronized companion of a normalized
+divergent orbit.  Put
+\[
+  A_j:=\sum_{i<j}a_i,
+  \qquad
+  q_j:=\frac{3^j}{2^{A_j}},
+  \tag{31}
+\]
+and let $\mathcal K$ be its stationary constant, so that
+\[
+  x_j+e_j=q_j\mathcal K.
+  \tag{32}
+\]
+Define the centered rational anchor and its reduced ternary depth by
+\[
+  \Xi_j:=\frac{x_j+1}{q_j}
+       =\frac{2^{A_j}(x_j+1)}{3^j},
+  \qquad
+  D_j:=\max\{0,j-v_3(x_j+1)\}.
+  \tag{33}
+\]
+Then
+\[
+\boxed{
+  \Xi_{j+1}-\Xi_j=\frac{2^{a_j}-2}{3q_j}\geq0,
+  \qquad
+  \mathcal K-\Xi_j=\frac{e_j-1}{q_j}>0.}
+\tag{34}
+\]
+In particular, $\Xi_j$ is nondecreasing and changes exactly when $a_j>1$.
+
+Let $[p,p+K]$ be an $m=2$ tower of $K\geq1$ edges, meaning that
+\[
+  m_{p+i}=2,
+  \qquad
+  a_{p+i}=1
+  \qquad(0\leq i<K),
+  \tag{35}
+\]
+and that $m_{p+K}=2$.  Put
+\[
+  b:=v_2(x_p+1),
+  \qquad
+  v:=v_3(x_p+1),
+  \qquad
+  h:=\frac{x_p+1}{2^b3^v}.
+  \tag{36}
+\]
+Then $b\geq K+1$, $(h,6)=1$, and, for $0\leq i\leq K$,
+\[
+\boxed{
+  x_{p+i}+1=2^{b-i}3^{v+i}h,
+  \qquad
+  \Xi_{p+i}=\Xi_p,
+  \qquad
+  D_{p+i}=D_p.}
+\tag{37}
+\]
+The reduced denominator of $\Xi_p$ is exactly $3^{D_p}$.
+
+Distinct maximal $m=2$ towers have distinct, strictly increasing anchors.
+Consequently, for every integer $D\geq0$, the complete fixed orbit contains
+at most
+\[
+\boxed{\left\lceil\mathcal K3^D\right\rceil-1}
+\tag{38}
+\]
+maximal towers whose reduced ternary depth is at most $D$.
+
+Consider two consecutive maximal towers.  Let their anchors be
+$\xi_i<\xi_{i+1}$ and their depths be $D_i,D_{i+1}$.  Let $r_i$ be the
+state index at which the first tower ends.  Then
+\[
+\boxed{
+  3^{-\max\{D_i,D_{i+1}\}}
+  \leq\xi_{i+1}-\xi_i
+  <\mathcal K-\xi_i
+  \leq\frac1{q_{r_i}}.}
+\tag{39}
+\]
+Hence
+\[
+\boxed{
+  \max\{D_i,D_{i+1}\}>\log_3 q_{r_i}.}
+\tag{40}
+\]
+
+Finally, a tower beginning at $p$ satisfies the two fixed-seed length
+bounds
+\[
+\boxed{
+  K+1+v_3(x_p+1)\log_2 3
+  <\log_2q_p+\log_2\mathcal K,}
+\tag{41}
+\]
+and, with $n:=x_0$,
+\[
+\boxed{
+  K+1+v_3(x_p+1)\log_2 3
+  \leq p\log_2\frac32+\log_2(n+1).}
+\tag{42}
+\]
+Thus an infinite family of exceptional towers must escape every bounded
+reduced ternary shell, and every adjacent pair must expose a shell at least
+as deep as the current coefficient surplus measured in base $3$.
+\end{theorem}
+
+\begin{proof}
+Put $X_j:=x_j+1$.  The positive recurrence in (1) gives
+\[
+  2^{a_j}X_{j+1}=3X_j+2^{a_j}-2.
+  \tag{43}
+\]
+After division by $2^{a_j}q_{j+1}=3q_j$, this becomes the first identity
+in (34).  The second follows by subtracting $X_j=x_j+1$ from (32).
+
+On the tower, equation (43) reduces to
+\[
+  X_{j+1}=\frac32X_j.
+  \tag{44}
+\]
+Iteration proves the first identity in (37).  Since $X_{p+K}$ is even, its
+$2$-adic valuation $b-K$ is at least $1$, so $b\geq K+1$.  The definition
+of $h$ gives $(h,6)=1$.  Along the tower we also have
+\[
+  A_{p+i}=A_p+i,
+  \qquad
+  v_2(X_{p+i})=b-i,
+  \qquad
+  v_3(X_{p+i})=v+i.
+  \tag{45}
+\]
+Substitution in (33) proves the other two identities in (37).  Cancellation
+of the exact power $3^{\min\{p,v\}}$ in (33) shows that the remaining
+denominator is precisely $3^{D_p}$.
+
+Suppose that two maximal towers occur in this order.  If every intervening
+exponent were $1$, then (1) would give
+\[
+  e_{j+1}-1=\frac32(e_j-1)
+  \tag{46}
+\]
+throughout the intervening interval.  Once this increasing sequence leaves
+the ceiling cell $1<e_j\leq2$, it cannot return.  Hence some intervening
+exponent is greater than $1$.  Equation (34) proves that the second anchor
+is strictly larger than the first.
+
+If $D_j\leq D$, then the reduced anchor can be written as a positive integer
+multiple of $3^{-D}$.  All anchors lie strictly between $0$ and $\mathcal K$
+by (34).  Their strict increase therefore permits at most
+$\lceil\mathcal K3^D\rceil-1$ such values.  This proves (38).
+
+Two distinct rationals with reduced denominators $3^{D_i}$ and
+$3^{D_{i+1}}$ differ by at least
+$3^{-\max\{D_i,D_{i+1}\}}$.  At the endpoint $r_i$ of the first tower,
+its anchor is still $\xi_i$, while $m_{r_i}=2$ gives
+\[
+  0<e_{r_i}-1\leq1.
+  \tag{47}
+\]
+The second identity in (34) now proves every inequality in (39).  Taking
+reciprocals of the two outer bounds gives (40).
+
+The coprime divisors in (36) and the inequality $b\geq K+1$ give
+\[
+  2^{K+1}3^v\leq X_p.
+  \tag{48}
+\]
+On the other hand, (34) gives $X_p<q_p\mathcal K$.  Taking binary
+logarithms proves (41).
+
+It remains to give a seed-only upper bound.  From (43), for every $a_j\geq1$
+and $X_j\geq2$ we have
+\[
+\begin{aligned}
+  X_{j+1}
+  &=\frac{3X_j+2^{a_j}-2}{2^{a_j}}\\
+  &\leq\frac32X_j,
+\end{aligned}
+\tag{49}
+\]
+because equality holds when $a_j=1$, while for $a_j\geq2$ the difference
+after clearing denominators is
+$(2^{a_j-1}-1)(3X_j-2)\geq0$.  Thus
+\[
+  X_p\leq\left(\frac32\right)^p(n+1).
+  \tag{50}
+\]
+Combining (48) and (50), then taking binary logarithms, proves (42).
+\end{proof}
+
+\begin{theorem}[fixed-seed plateau shell for zero-defect laps]
+Retain the normalized fixed-seed setup of the preceding theorem.  Put
+\[
+  N_j:=x_j+m_j,
+  \qquad
+  d_j:=2^{a_j}m_{j+1}-3m_j+1,
+  \tag{51}
+\]
+and define the upper rational anchor and its reduced ternary depth by
+\[
+  \Omega_j:=\frac{N_j}{q_j}
+  =\frac{2^{A_j}N_j}{3^j},
+  \qquad
+  E_j:=\max\{0,j-v_3(N_j)\}.
+  \tag{52}
+\]
+Then
+\[
+\boxed{
+  \Omega_{j+1}-\Omega_j=\frac{d_j}{3q_j},
+  \qquad
+  \Omega_j-\mathcal K=\frac{\theta_j}{q_j}\geq0.}
+\tag{53}
+\]
+Every maximal zero-defect interval is finite.  On such an interval,
+$\Omega_j$ and $E_j$ are constant, and the reduced denominator of its
+anchor is exactly $3^{E_j}$.
+
+For every integer $E\geq0$, only finitely many maximal zero-defect
+intervals have reduced ternary depth at most $E$.
+
+Let two maximal zero-defect intervals have distinct anchors
+$\omega_i,\omega_{i+1}$ and depths $E_i,E_{i+1}$.  For each interval, let
+\[
+  Q_i:=\max\{q_j:j\text{ is a state index in that interval}\}.
+  \tag{54}
+\]
+Then
+\[
+\boxed{
+  3^{-\max\{E_i,E_{i+1}\}}
+  \leq|\omega_{i+1}-\omega_i|
+  <\frac1{Q_i}+\frac1{Q_{i+1}}
+  \leq\frac2{\min\{Q_i,Q_{i+1}\}}.}
+\tag{55}
+\]
+Consequently,
+\[
+\boxed{
+  \max\{E_i,E_{i+1}\}
+  >\log_3\frac{\min\{Q_i,Q_{i+1}\}}2.}
+\tag{56}
+\]
+
+Suppose that one zero-defect interval contains $J\geq1$ complete laps of
+a positive odd $3y-1$ cycle.  Choose a maximum cycle state $M$, let the
+cycle have length $L$ and total exponent $B$, and let $p$ be the first
+selected occurrence of $M$.  Then
+\[
+\boxed{
+  JB+1+v_3(x_p+M)\log_2 3
+  <\log_2q_p+\log_2(\mathcal K+1).}
+\tag{57}
+\]
+Thus repeated zero-defect laps also escape every bounded ternary shell,
+and their total exponent is paid by the coefficient surplus at their moving
+start.
+\end{theorem}
+
+\begin{proof}
+Adding the positive recurrence in (1) to the ceiling recurrence obtained
+from (51) gives
+\[
+  2^{a_j}N_{j+1}=3N_j+d_j.
+  \tag{58}
+\]
+Division by $2^{a_j}q_{j+1}=3q_j$ proves the first identity in (53).
+The identities $N_j=x_j+m_j$ and $x_j+e_j=q_j\mathcal K$ prove the second.
+
+When $d_j=0$, equation (58) shows that $\Omega_{j+1}=\Omega_j$ and
+\[
+  v_3(N_{j+1})=v_3(N_j)+1.
+  \tag{59}
+\]
+Hence $E_{j+1}=E_j$.  Cancellation in (52), exactly as in the proof of
+(37), shows that the reduced denominator is $3^{E_j}$.  A zero-defect tail
+is impossible: iteration of (58) would force its unbounded accumulated
+exponent to divide the fixed nonzero integer at the initial state.  Thus
+every maximal zero-defect interval is finite.
+
+We next prove finiteness in a bounded shell.  Since the normalized orbit
+has $q_j>1$ for $j\geq1$ and $0\leq\theta_j<1$, equation (53) places every
+upper anchor in the bounded interval
+\[
+  \mathcal K\leq\Omega_j<\mathcal K+1.
+  \tag{60}
+\]
+There are only finitely many rationals in this interval whose reduced
+denominator divides $3^E$.  Fix one such rational $R$.  If
+$R>\mathcal K$, then (53) gives
+\[
+  q_j<\frac1{R-\mathcal K}
+  \tag{61}
+\]
+at every occurrence of $R$.  Since $q_j\to\infty$, this happens only
+finitely often.
+
+It remains to consider $R=\mathcal K$.  If $\mathcal K$ is irrational,
+this rational equality is impossible.  If $\mathcal K=u/v$ in lowest terms,
+then an occurrence would make
+\[
+  q_j\mathcal K=\frac{u3^j}{v2^{A_j}}
+  \tag{62}
+\]
+an integer.  The $2$-adic valuation of the right side tends to $-\infty$
+because $A_j\to\infty$.  Thus (62) also has only finitely many solutions.
+This proves bounded-shell finiteness.
+
+Two distinct anchors with reduced denominators $3^{E_i}$ and
+$3^{E_{i+1}}$ differ by at least the first member of (55).  On the other
+hand, (53) and the definition of $Q_i$ give
+\[
+  0\leq\omega_i-\mathcal K<\frac1{Q_i},
+  \qquad
+  0\leq\omega_{i+1}-\mathcal K<\frac1{Q_{i+1}}.
+  \tag{63}
+\]
+The triangle inequality proves the middle bound in (55), and the last bound
+is immediate.  Rearrangement gives (56).
+
+Finally, on a zero-defect cycle lap we have $m_j=y_j$.  At the selected
+maximum state, $N_p=x_p+M$.  The cycle-lap theorem gives
+\[
+  2^{JB+1}\mid N_p.
+  \tag{64}
+\]
+The coprime ternary divisor therefore gives
+\[
+  2^{JB+1}3^{v_3(N_p)}\leq N_p.
+  \tag{65}
+\]
+Equations (52)--(53) and (60) give
+\[
+  N_p=q_p\Omega_p<q_p(\mathcal K+1).
+  \tag{66}
+\]
+Taking binary logarithms in (65)--(66) proves (57).
+\end{proof}
+
+\begin{corollary}[bilateral exceptional-shell reduction]
+Every repeated-mass interval left by the cycle-lap rigidity theorem has a
+rational plateau anchor on one side of $\mathcal K$:
+\[
+\begin{array}{c|c|c}
+\text{exceptional interval}&\text{anchor}&\text{side}\ \\ \hline
+m=2\text{ exponent-one tower}&\Xi=(x+1)/q&\Xi<\mathcal K,\\
+\text{zero-defect cycle laps}&\Omega=(x+m)/q&\Omega\geq\mathcal K.
+\end{array}
+\tag{67}
+\]
+The reduced denominator of either anchor is an exact power $3^D$ which is
+constant on the interval.  Only finitely many exceptional intervals of
+either kind lie in any bounded depth shell.
+
+For an exceptional interval $I$, let $R_I$ be its anchor, $D_I$ its depth,
+and $Q_I$ the maximum of $q_j$ on the interval.  If two such intervals have
+distinct anchors, then
+\[
+\boxed{
+  3^{-\max\{D_I,D_{I'}\}}
+  \leq|R_I-R_{I'}|
+  <\frac1{Q_I}+\frac1{Q_{I'}}.}
+\tag{68}
+\]
+Hence every infinite family of exceptional repeated-mass intervals must
+escape through unbounded ternary depth, quantitatively at the scale forced
+by (40), (56), and (68).
+\end{corollary}
+
+\begin{proof}
+The two anchor identities and the one-sided inequalities are (34) and (53).
+The exact denominator and bounded-shell assertions are the preceding two
+theorems.  Tower anchors are strictly increasing.  Moreover, on a tower
+$q_j$ increases at every edge and
+$\mathcal K-\Xi=(e_j-1)/q_j\leq1/q_j$, so two tower anchors satisfy (68)
+directly.  For two distinct upper anchors, it is (55).  For one anchor of
+each kind, $\Xi<\mathcal K\leq\Omega$, so
+\[
+  \Omega-\Xi
+  =(\mathcal K-\Xi)+(\Omega-\mathcal K)
+  <\frac1{Q_I}+\frac1{Q_{I'}}.
+\]
+Their power-of-$3$ denominators give the lower bound in (68).
+\end{proof}
+
+\begin{theorem}[universal constant-color run shell]
+Retain the normalized fixed-seed setup, and put $c_j:=1-d_j$.  Let
+$I=[s,t]$ be the state interval of a maximal constant nonpositive-defect
+run, so that
+\[
+  c_j=c\in\{1,2,3\}
+  \qquad(s\leq j<t).
+  \tag{69}
+\]
+For $j\in I$, define
+\[
+\begin{aligned}
+  Z_j(c)&:=cx_j+m_j,
+  &\qquad
+  \Lambda_I&:=\frac{Z_j(c)}{q_j},\\
+  F_j(c)&:=\max\{0,j-v_3(Z_j(c))\},
+  &
+  F_I&:=F_j(c).
+\end{aligned}
+  \tag{70}
+\]
+These definitions are independent of the chosen $j\in I$.  More precisely,
+\[
+\boxed{
+  2^{a_j}Z_{j+1}(c)=3Z_j(c),
+  \qquad
+  \frac{Z_{j+1}(c)}{q_{j+1}}=\frac{Z_j(c)}{q_j},
+  \qquad
+  F_{j+1}(c)=F_j(c).}
+\tag{71}
+\]
+The reduced denominator of $\Lambda_I$ is exactly $3^{F_I}$.
+
+The anchor lies on a prescribed side of $c\mathcal K$:
+\[
+\boxed{
+  \Lambda_I-c\mathcal K
+  =\frac{c\theta_j-(c-1)m_j}{q_j},}
+\tag{72}
+\]
+and hence
+\[
+\begin{array}{c|c|c}
+c&\text{side}&\text{distance bound valid for every }j\in I\\ \hline
+1&\Lambda_I\geq\mathcal K&
+  0\leq\Lambda_I-\mathcal K<1/q_j,\\
+2&\Lambda_I<2\mathcal K&
+  0<2\mathcal K-\Lambda_I\leq m_j/q_j,\\
+3&\Lambda_I<3\mathcal K&
+  0<3\mathcal K-\Lambda_I\leq2m_j/q_j.
+\end{array}
+\tag{73}
+\]
+
+For each fixed $c\in\{1,2,3\}$ and each integer $F\geq0$, only finitely
+many color-$c$ runs have depth $F_I\leq F$.
+
+For a run $I$, put
+\[
+  \varepsilon_I:=
+  \begin{cases}
+    \displaystyle\frac1{\max_{j\in I}q_j},&c=1,\\[3mm]
+    \displaystyle\min_{j\in I}\frac{m_j}{q_j},&c=2,\\[3mm]
+    \displaystyle2\min_{j\in I}\frac{m_j}{q_j},&c=3.
+  \end{cases}
+  \tag{74}
+\]
+If two color-$c$ runs $I,I'$ have distinct anchors, then
+\[
+\boxed{
+  3^{-\max\{F_I,F_{I'}\}}
+  \leq|\Lambda_I-\Lambda_{I'}|
+  <\varepsilon_I+\varepsilon_{I'}.}
+\tag{75}
+\]
+Moreover, $\varepsilon_I\to0$ along any sequence of runs whose initial
+indices tend to infinity.  Thus every infinite family of constant
+nonpositive-defect runs escapes through unbounded exact ternary depth.
+\end{theorem}
+
+\begin{proof}
+The definition of $c_j$ rewrites the ceiling recurrence as
+\[
+  2^{a_j}m_{j+1}=3m_j-c_j.
+  \tag{76}
+\]
+Multiplying the positive recurrence in (1) by $c_j=c$ and adding (76)
+proves the first identity in (71).  Division by
+$2^{a_j}q_{j+1}=3q_j$ proves the second.  The first identity also gives
+\[
+  v_3(Z_{j+1}(c))=v_3(Z_j(c))+1,
+  \tag{77}
+\]
+which proves the third.  Cancellation in (70) shows that the exact reduced
+denominator is $3^{F_I}$.  Taking $2$-adic valuations in the first identity
+of (71) and iterating across the run gives
+\[
+  \sum_{j=s}^{t-1}a_j
+  =v_2(Z_s(c))-v_2(Z_t(c))
+  \leq v_2(Z_s(c)).
+\]
+Since every $a_j\geq1$, every constant-color run is finite.
+
+Using $e_j=m_j-\theta_j$ and $x_j+e_j=q_j\mathcal K$, we obtain
+\[
+\begin{aligned}
+  Z_j(c)
+  &=c(x_j+e_j)+m_j-ce_j\\
+  &=cq_j\mathcal K+c\theta_j-(c-1)m_j,
+\end{aligned}
+\]
+which proves (72).  The bounds in (73) follow from
+$0\leq\theta_j<1$ and $m_j\geq2$.
+
+We have
+\[
+  \frac{m_j}{q_j}
+  \leq\frac{e_j}{q_j}+\frac1{q_j}
+  \longrightarrow0
+  \tag{78}
+\]
+on the normalized ray.  Equations (72)--(73) therefore show that every
+sequence of late color-$c$ anchors converges to $c\mathcal K$.  In
+particular, all color-$c$ anchors lie in one bounded interval.
+
+Fix a depth bound $F$.  Only finitely many rationals in that interval have
+reduced denominator dividing $3^F$.  Fix one of them, say $R$.  If
+$R\neq c\mathcal K$, convergence to $c\mathcal K$ shows that $R$ occurs
+only finitely often.  If $R=c\mathcal K$, then either the equality is
+impossible because $c\mathcal K$ is irrational, or $c\mathcal K=u/v$ is
+rational in lowest terms.  In the latter case an occurrence would make
+\[
+  q_jc\mathcal K=\frac{u3^j}{v2^{A_j}}=Z_j(c)
+  \tag{79}
+\]
+an integer.  Its $2$-adic valuation tends to $-\infty$ as
+$A_j\to\infty$, so (79) also occurs only finitely often.  This proves
+bounded-depth finiteness.
+
+For two distinct anchors, their exact power-of-$3$ denominators give the
+lower bound in (75).  The corresponding line of (73), minimized over each
+run, gives the upper bound.  Finally, (78), together with $q_j\to\infty$
+in the color-$1$ case, proves $\varepsilon_I\to0$ for late runs.  If an
+infinite family had bounded depths, this would also contradict (75), in
+agreement with the preceding finiteness argument.
+\end{proof}
+
+\begin{corollary}[all divergent nonpositive mass escapes every run shell]
+On the normalized divergent ray, let $I(j)$ be the maximal constant-color
+run containing a nonpositive-defect index $j$.  For every integer $F\geq0$,
+\[
+\boxed{
+  \sum_{\substack{j\geq0:\ d_j\leq0\\F_{I(j)}>F}}
+  \frac1{m_j}=\infty.}
+\tag{80}
+\]
+Thus neither simple shadow fragments nor repeated shadow cycles can retain
+divergent reciprocal mass in a bounded exact ternary shell.  The remaining
+synchronized-shell problem is precisely to exclude divergent mass escaping
+through $F_I\to\infty$ along one fixed ordinary orbit.
+\end{corollary}
+
+\begin{proof}
+The total reciprocal mass on $d_j\leq0$ diverges.  By the theorem, only
+finitely many constant-color runs have depth at most $F$.  Every one of
+those runs is finite, so removing all of them subtracts a finite sum.  The
+remaining sum is (80) and still diverges.
+\end{proof}
+
+\begin{theorem}[internal switches force maximal run depth]
+Let two adjacent maximal nonpositive-defect runs meet at a state index
+$s\geq1$, and let their distinct colors be
+\[
+  c,c'\in\{1,2,3\}.
+  \tag{81}
+\]
+Let $\Lambda,\Lambda'$ and $F,F'$ be their anchors and depths from the
+universal run-shell theorem, with the primed run entering at $s$.  Then
+\[
+\boxed{
+  \Lambda'-\Lambda
+  =\frac{(c'-c)x_s}{q_s}
+  =\frac{(c'-c)2^{A_s}x_s}{3^s},}
+\tag{82}
+\]
+and the last fraction has reduced ternary denominator exactly $3^s$.
+More precisely,
+\[
+\boxed{F' =s,
+\qquad F\leq s-1.}
+\tag{83}
+\]
+Thus every late internal color switch places the newly entered run in the
+deepest possible shell at that index.  If the new run ends at $t$, then
+\[
+\boxed{
+  v_3(Z_j(c'))=j-s
+  \qquad(s\leq j\leq t).}
+\tag{83a}
+\]
+If it ends at another internal switch from $c'$ to $c''\neq c'$, put
+\[
+  r:=t-s,
+  \qquad
+  B:=\sum_{j=s}^{t-1}a_j.
+\]
+There is a positive integer $H$, not divisible by $3$, such that
+\[
+\boxed{
+  Z_s(c')=2^BH,
+  \qquad
+  Z_t(c')=3^rH.}
+\tag{83b}
+\]
+Moreover,
+\[
+  |c''-c'|=1\Longrightarrow H\text{ is odd},
+  \qquad
+  |c''-c'|=2\Longrightarrow H\text{ is even}.
+\tag{83c}
+\]
+\end{theorem}
+
+\begin{proof}
+At the common state,
+\[
+  Z_s(c')-Z_s(c)=(c'-c)x_s.
+  \tag{84}
+\]
+Division by $q_s$ proves (82).  The preceding positive recurrence gives
+\[
+  2^{a_{s-1}}x_s=3x_{s-1}+1\equiv1\pmod3,
+  \tag{85}
+\]
+so $3\nmid x_s$.  Also
+$c'-c\in\{-2,-1,1,2\}$, which is a unit modulo $3$.  The numerator in the
+last member of (82) is therefore a unit modulo $3$, proving the denominator
+claim.
+
+Let the exiting run begin at $p<s$.  Iteration of (77) through this nonempty
+run gives
+\[
+  v_3(Z_s(c))=v_3(Z_p(c))+s-p\geq1.
+\]
+Thus (84), together with the unit property of $(c'-c)x_s$, shows that
+$Z_s(c')$ is a unit modulo $3$.  The entering depth is therefore $F'=s$.
+The exiting depth is already defined at its initial state $p$, so
+$F\leq p\leq s-1$.  This proves (83).  Finally, iteration of (77) from the
+unit $Z_s(c')$ proves (83a).
+
+Iteration of the first identity in (71) through the entering run gives
+\[
+  2^BZ_t(c')=3^rZ_s(c').
+\]
+By (83a), $Z_t(c')=3^rH$ for a positive integer $H$ with $3\nmid H$.
+Cancellation gives $Z_s(c')=2^BH$, which proves (83b).  At the exit,
+$Z_t(c'')$ is even because it begins a color-$c''$ edge, and
+\[
+  Z_t(c'')-Z_t(c')=(c''-c')x_t.
+\]
+The state $x_t$ is odd.  Thus $Z_t(c')$, and hence $H$, is odd when the
+color difference is odd and even when it equals $2$ in absolute value.
+This proves (83c).
+\end{proof}
+
+\begin{corollary}[transition-rich versus entrance-mass dichotomy]
+On a normalized divergent ray, exactly one of the following two branches
+holds.
+
+\begin{enumerate}
+  \item There are infinitely many internal switches between colors in
+  $\{1,2,3\}$.  Then infinitely many adjacent run pairs satisfy the
+  maximal-depth law (83).
+
+  \item There are only finitely many such switches.  After deleting a
+  finite prefix, every maximal nonpositive-defect block is one entrance
+  run.  The divergent nonpositive reciprocal mass is then entrance-run
+  mass.  Hence the run-mass valuation budget forces divergence of the sum
+  of the preceding exponents or of the positive entrance-switch gains.
+\end{enumerate}
+
+In particular, no contradiction can follow from large run depth or large
+power-of-$3$ anchor denominator alone: branch $1$ produces maximal depth
+automatically.  A successful synchronized-shell proof must control
+reciprocal mass relative to anchor width in branch $1$, or close the
+preceding-exponent and switch-gain alternatives in branch $2$.
+\end{corollary}
+
+\begin{proof}
+If the first branch holds, the theorem applies at every internal switch.
+If it fails, only finitely many nonpositive blocks contain more than their
+first constant-color run.  Removing those finite blocks leaves only entrance
+runs.  Their total mass still diverges, and the stated alternatives are the
+run-mass valuation budget applied and summed over these runs.  The final
+assertion is the logical content of the two branches.
+\end{proof}
+
+\begin{theorem}[dyadic numerator law for a ternary run shell]
+Retain the normalized fixed-seed setup.  Let $I=[s,t]$ be the state
+interval of a constant nonpositive-defect run, with color
+$c\in\{1,2,3\}$ and at least one edge.  Put
+\[
+  B_I:=A_t-A_s,
+  \qquad
+  U_I:=v_2(Z_s(c)),
+  \qquad
+  V_I:=v_2(Z_t(c)).
+  \tag{86}
+\]
+For $s\leq j\leq t$, define
+\[
+  w_j:=\min\{j,v_3(Z_j(c))\},
+  \qquad
+  R_I:=\frac{2^{A_j}Z_j(c)}{3^{w_j}}.
+  \tag{87}
+\]
+Then $R_I$ is a positive integer independent of $j$, and
+\[
+\boxed{
+  \Lambda_I=\frac{R_I}{3^{F_I}},
+  \qquad
+  v_2(R_I)=A_j+v_2(Z_j(c)).}
+\tag{88}
+\]
+In particular,
+\[
+\boxed{
+  A_s+U_I=A_t+V_I,
+  \qquad
+  B_I=U_I-V_I.}
+\tag{89}
+\]
+
+Write
+\[
+  R_I=2^{A_t+V_I}\eta_I,
+  \qquad \eta_I\in\mathbb N\text{ odd}.
+  \tag{90}
+\]
+The exponent mass of the run has the exact shell decomposition
+\[
+\boxed{
+  B_I
+  =F_I\log_2 3-A_s+\log_2\Lambda_I
+   -V_I-\log_2\eta_I.}
+\tag{91}
+\]
+If
+\[
+  \kappa_1=\kappa_3:=\frac13,
+  \qquad
+  \kappa_2:=\frac12,
+  \tag{92}
+\]
+then
+\[
+\boxed{
+  \sum_{j=s}^{t-1}\frac1{m_j}
+  \leq\kappa_cB_I.}
+\tag{93}
+\]
+
+Discard a finite prefix so that $q_s\geq1$, and put
+$C:=3\mathcal K+1$.  Every remaining run satisfies
+\[
+\boxed{\begin{aligned}
+  B_I
+  &<\log_2(Cq_s)-(s-F_I)\log_2 3,\\
+  \sum_{j=s}^{t-1}\frac1{m_j}
+  &<\kappa_c\bigl(\log_2(Cq_s)
+        -(s-F_I)\log_2 3\bigr),\\
+  F_I
+  &>s-\log_3(Cq_s)
+   \geq s\log_3 2-\log_3 C.
+\end{aligned}}
+\tag{94}
+\]
+Thus linear escape in ternary depth is automatic on every late
+nonpositive-defect run.  The quantity not controlled by depth alone is the
+positive shell slack in the first line of (94).
+\end{theorem}
+
+\begin{proof}
+Equation (77) and the identity $A_{j+1}=A_j+a_j$ give
+\[
+  w_{j+1}=w_j+1,
+  \qquad
+  \frac{2^{A_{j+1}}Z_{j+1}(c)}{3^{w_{j+1}}}
+  =\frac{2^{A_j}Z_j(c)}{3^{w_j}}.
+\]
+This proves that $R_I$ is independent of $j$.  Since
+$F_I=j-w_j$, the anchor identity in (88) follows.  Division by a power of
+$3$ does not change a $2$-adic valuation, which proves the second identity
+in (88).  Evaluating it at the two endpoints proves (89), and (90) follows.
+
+We can compute the logarithm of $R_I$ in two ways:
+\[
+\begin{aligned}
+  \log_2R_I
+  &=F_I\log_2 3+\log_2\Lambda_I,\\
+  \log_2R_I
+  &=A_t+V_I+\log_2\eta_I
+   =A_s+B_I+V_I+\log_2\eta_I.
+\end{aligned}
+\]
+Their equality is exactly (91).
+
+There are at most $B_I$ indices in the run because every exponent is at
+least $1$.  On every displayed edge, parity in
+\[
+  2^{a_j}m_{j+1}=3m_j-c
+\]
+shows that $m_j$ is odd for $c\in\{1,3\}$ and even for $c=2$.
+Thus $m_j\geq3$ in the first case and $m_j\geq2$ in the second.  This proves
+(93).
+
+The side bounds (73) and $q_s\geq1$ give
+\[
+  0<\Lambda_I<C.
+\]
+Since $V_I\geq0$ and $\eta_I\geq1$, equation (91) now gives
+\[
+  0<B_I
+  <F_I\log_2 3-A_s+\log_2C.
+\]
+Using
+\[
+  A_s=s\log_2 3-\log_2q_s
+\]
+proves the first line of (94), and (93) proves the second.  Positivity of
+$B_I$ gives $F_I>s-\log_3(Cq_s)$.  Finally,
+$A_s\geq s$ implies $q_s\leq(3/2)^s$, and substitution proves the last
+inequality in (94).
+\end{proof}
+
+\begin{corollary}[the entrance-exponent alternative is automatic]
+Assume the finite-transition branch of the preceding dichotomy, and let
+$\mathcal E$ be the family of all sufficiently late entrance runs.  Then
+\[
+  |\mathcal E|=\infty,
+  \qquad
+  \sum_{I\in\mathcal E}a_{s_I-1}=\infty.
+  \tag{95}
+\]
+Consequently, divergence of the preceding-exponent sum in the run-mass
+valuation budget is automatic and cannot distinguish a divergent ray.  A
+necessary condition for the entrance-run mass to diverge is the sharper
+shell-slack law
+\[
+\boxed{
+  \sum_{I\in\mathcal E}
+  \bigl(\log_2(Cq_{s_I})
+       -(s_I-F_I)\log_2 3\bigr)=\infty.}
+\tag{96}
+\]
+Thus the finite-transition branch has been reduced to controlling this
+exact shell slack or to a strictly stronger compensated switch-gain bound.
+\end{corollary}
+
+\begin{proof}
+Every entrance run is finite.  Since its reciprocal mass is finite, the
+divergent total entrance-run mass requires infinitely many distinct entrance
+runs.  Their preceding indices are distinct and every accelerated exponent
+is at least $1$, which proves (95).  Summing the second inequality in (94)
+over $\mathcal E$ proves (96), because
+$\kappa_c\leq1/2$ for every $c\in\{1,2,3\}$.
+\end{proof}
+
+\begin{theorem}[rational barriers and logarithmic run transport]
+Retain the normalized fixed-seed setup, and define
+\[
+  h_j:=\frac{x_j}{q_j},
+  \qquad
+  g_j:=\mathcal K-h_j=\frac{e_j}{q_j},
+  \qquad
+  u_j:=\frac{m_j}{q_j}.
+  \tag{97}
+\]
+Then
+\[
+\boxed{\begin{aligned}
+  h_{j+1}-h_j&=g_j-g_{j+1}=\frac1{3q_j},\\
+  u_{j+1}-u_j&=-\frac{c_j}{3q_j},\\
+  g_j&\leq u_j<g_j+\frac1{q_j}<2g_j.
+\end{aligned}}
+\tag{98}
+\]
+At a fixed state, introduce the three candidate rational barriers
+\[
+  \beta_j(c):=h_j+\frac{u_j}{c}
+  =\frac{cx_j+m_j}{cq_j}
+  \qquad(c\in\{1,2,3\}).
+  \tag{99}
+\]
+They satisfy
+\[
+\boxed{
+  \beta_j(3)<\beta_j(2)<\mathcal K\leq\beta_j(1),}
+\tag{100}
+\]
+with exact gaps
+\[
+\begin{aligned}
+  \beta_j(1)-\mathcal K&=\frac{\theta_j}{q_j},\\
+  \mathcal K-\beta_j(2)&=\frac{2e_j-m_j}{2q_j},\\
+  \mathcal K-\beta_j(3)&=\frac{3e_j-m_j}{3q_j}.
+\end{aligned}
+\tag{101}
+\]
+
+Let $I=[s,t]$ be a color-$c$ nonpositive-defect run.  Its barrier
+\[
+  \beta_I:=\frac{\Lambda_I}{c}
+  \tag{102}
+\]
+is constant on the run, and
+\[
+\boxed{
+  u_j=c(\beta_I-h_j),
+  \qquad
+  \frac{u_{j+1}}{u_j}=1-\frac{c}{3m_j}.}
+\tag{103}
+\]
+Consequently,
+\[
+\boxed{
+  \frac2c\log\frac{\beta_I-h_s}{\beta_I-h_t}
+  \leq\sum_{j=s}^{t-1}\frac1{m_j}
+  <\frac3c\log\frac{\beta_I-h_s}{\beta_I-h_t}.}
+\tag{104}
+\]
+
+Two useful uniform consequences are
+\[
+\boxed{\begin{aligned}
+  c=3&\quad\Longrightarrow\quad
+  \sum_{j=s}^{t-1}\frac1{m_j}<\log2,\\
+  c=2&\quad\Longrightarrow\quad
+  \sum_{j=s}^{r-1}\frac1{m_j}<\frac32\log2,
+\end{aligned}}
+\tag{105}
+\]
+where in the second line $r$ is the first state of the run with $m_r=2$,
+or $r=t$ if no such state occurs.  After the first state with $m=2$, every
+remaining color-$2$ edge has exponent $1$ and remains at $m=2$.  Thus (105)
+bounds the entire color-$2$ run outside its optional terminal tower.  If a
+color-$2$ run ends at an internal switch, then the terminal tower is absent,
+$r=t$, and consequently
+\[
+\boxed{
+  \sum_{j=s}^{t-1}\frac1{m_j}<\frac32\log2.}
+\tag{105a}
+\]
+
+Finally, suppose that an internal switch at state $s$ changes the color from
+$c$ to $c'$.  The corresponding barrier jump obeys
+\[
+\boxed{
+  \beta_s(c')-\beta_s(c)
+  =u_s\left(\frac1{c'}-\frac1c\right),
+  \qquad
+  \frac{|\beta_s(c')-\beta_s(c)|}{m_s}
+  =\left|\frac1{c'}-\frac1c\right|\frac1{q_s}.}
+\tag{106}
+\]
+If $\mathcal S$ is the set of all internal nonpositive-color switches, then
+\[
+\boxed{
+  \sum_{s\in\mathcal S}
+  \frac{|\beta_s(c_s^+)-\beta_s(c_s^-)|}{m_s}
+  \leq2(\mathcal K-h_0)<\infty.}
+\tag{107}
+\]
+Hence the raw weighted barrier-jump charge is already summable.  Any
+remaining transition-rich divergence must be carried by the logarithmic
+barrier approaches in (104), not by the switch jumps in (106) themselves.
+\end{theorem}
+
+\begin{proof}
+Division of the positive recurrence by
+$2^{a_j}q_{j+1}=3q_j$ gives the first identity in (98).  The ceiling
+recurrence gives the second.  Since $m_j=e_j+\theta_j$ and
+$0\leq\theta_j<1<e_j$, the last line of (98) follows.
+
+Equation (99) and $u_j=m_j/q_j$ give the ordering of the three candidate
+barriers.  More precisely, $m_j=e_j+\theta_j$ gives (101).  The second and
+third gaps are positive because $m_j<e_j+1<2e_j<3e_j$.
+
+On a color-$c$ run, (71) says that $\Lambda_I$ is constant.  Equations
+(99) and (102) therefore give the first identity in (103).  The second line
+of (98) gives
+\[
+  \frac{u_{j+1}}{u_j}
+  =1-\frac{c}{3q_ju_j}
+  =1-\frac{c}{3m_j},
+\]
+which proves the second identity in (103).  Put
+$z_j:=c/(3m_j)$.  Parity in the ceiling recurrence gives
+$0<z_j\leq1/3$.  Hence
+\[
+  z_j< -\log(1-z_j)\leq\frac{z_j}{1-z_j}
+  \leq\frac32z_j.
+\]
+Sum this inequality and use (103).  The result is (104).
+
+Suppose first that $c=3$, and put
+$\delta:=3\mathcal K-\Lambda_I>0$.  Along the run,
+\[
+  u_j=3g_j-\delta.
+\tag{108}
+\]
+At the initial state, parity gives $m_s\geq3$.  Therefore
+\[
+  \frac{u_s}{g_s}=\frac{m_s}{e_s}
+  <\frac{m_s}{m_s-1}\leq\frac32.
+\]
+Equation (108) now gives $u_s<\delta$.  At the terminal state,
+$u_t\geq g_t$, so (108) gives $g_t\geq\delta/2$ and
+$u_t\geq\delta/2$.  Thus $u_s/u_t<2$, and the first line of (105) follows
+from the upper bound in (104).
+
+Now let $c=2$.  If the prefix in (105) is nonempty, then $m_s\geq4$, so
+\[
+  \frac{u_s}{g_s}=\frac{m_s}{e_s}
+  <\frac{m_s}{m_s-1}\leq\frac43.
+\]
+Put $\delta:=2\mathcal K-\Lambda_I>0$.  Since
+$u_j=2g_j-\delta$, the last inequality gives $u_s<2\delta$.  At the
+terminal state $r$ of the prefix, $u_r\geq g_r$ gives
+$u_r\geq\delta$.  Therefore $u_s/u_r<2$, and the second line of (105)
+follows from (104).  If $m_j=2$ on a color-$2$ edge, then
+\[
+  2^{a_j}m_{j+1}=4.
+\]
+Since $m_{j+1}\geq2$ and $a_j\geq1$, this forces
+$a_j=1$ and $m_{j+1}=2$.  This proves the terminal-tower assertion.
+If the run ends at an internal switch, the next color belongs to
+$\{1,3\}$.  Reduction of (76) modulo $2$ gives
+$m_t\equiv c_t\pmod2$, so $m_t$ is odd.  A color-$2$ tower would instead
+force $m_t=2$.  Hence no such tower occurs and $r=t$, proving (105a).
+
+At an internal switch the two barriers in (99) are evaluated at the same
+point $(h_s,u_s)$, which proves (106).  The largest possible value of
+$|1/c'-1/c|$ is $2/3$.  Summing the first identity in (98) gives
+\[
+  \sum_{j=0}^{\infty}\frac1{q_j}
+  =3(\mathcal K-h_0).
+\]
+The second identity in (106), summed over the subset $\mathcal S$, now
+proves (107).
+\end{proof}
+
+\begin{theorem}[fixed-ray carrier escape and collision law]
+Let $I=[s,t]$ be an internally bracketed color-$c$ run on the normalized
+divergent ray.  Put $r:=t-s$, and let $H$ be its carrier.  Then
+\[
+\boxed{
+  \frac{H}{m_t}
+  =\frac{1+c x_t/m_t}{3^r}.}
+\tag{109}
+\]
+In particular,
+\[
+  H\leq m_t
+  \quad\Longrightarrow\quad
+  r\log3\geq\log\left(1+\frac{cx_t}{m_t}\right)
+  >\log\frac{x_t}{m_t}.
+\tag{110}
+\]
+Consequently, for every fixed $R$, all sufficiently late internally
+bracketed runs of length at most $R$ satisfy $H>m_t$.
+
+Now let $I'=[t,u]$ be the next run and suppose that it also ends at an
+internal switch.  Write its color as $c'\neq c$, its exponent sum as
+\[
+  B':=\sum_{j=t}^{u-1}a_j,
+\]
+and its carrier as $H'$.  At the common state,
+\[
+\boxed{\begin{aligned}
+  (c'-c)x_t&=2^{B'}H'-3^rH,\\
+  (c'-c)m_t&=c'3^rH-c2^{B'}H'.
+\end{aligned}}
+\tag{111}
+\]
+If the adjacent carriers collide, $H'=H$, then
+\[
+\boxed{
+  \frac{m_t}{x_t}
+  =\frac{|c'3^r-c2^{B'}|}{|2^{B'}-3^r|}
+  >\frac1{\max\{2^{B'},3^r\}},}
+\tag{112}
+\]
+and hence
+\[
+  \max\{B'\log2,r\log3\}>\log\frac{x_t}{m_t}.
+\tag{113}
+\]
+Thus, for every fixed $R$, only finitely many adjacent carrier collisions
+can satisfy both $r\leq R$ and $B'\leq R$.  Every infinite collision family
+on one divergent ray must escape through unbounded run length or unbounded
+entering exponent sum.
+\end{theorem}
+
+\begin{proof}
+The terminal identity in (83b) is
+\[
+  cx_t+m_t=3^rH.
+\]
+Division by $3^rm_t$ proves (109), and (110) follows immediately.  Equations
+(32) and (78) give
+\[
+  \frac{m_t}{x_t}
+  =\frac{m_t/q_t}{x_t/q_t}\longrightarrow0,
+\]
+because $x_t/q_t\to\mathcal K>0$.  This proves the bounded-length
+consequence.
+
+At the common state, the terminal identity for $I$ and the initial identity
+for $I'$ are
+\[
+  cx_t+m_t=3^rH,
+  \qquad
+  c'x_t+m_t=2^{B'}H'.
+\]
+Subtraction gives the first line of (111).  Multiplying the first identity
+by $c'$, the second by $c$, and subtracting gives the second line.
+
+Suppose that $H'=H$.  The first line of (111) shows that
+$2^{B'}-3^r\neq0$, while the second shows that
+$c'3^r-c2^{B'}\neq0$.  After division, both factors $H$ and $c'-c$ cancel,
+which proves the equality in (112).  Its numerator is a nonzero integer, so
+its absolute value is at least $1$.  Its denominator is strictly smaller
+than $\max\{2^{B'},3^r\}$.  This proves the strict inequality in (112) and,
+after taking logarithms, (113).  The limit $m_t/x_t\to0$ proves the final
+finiteness assertion.
+\end{proof}
+
+\begin{theorem}[finite strict-barrier carrier counterexamples]
+Neither a terminal bound $H\geq m_t$ nor injectivity of the carriers of
+adjacent internally bracketed runs follows from the synchronized
+recurrences, the ceiling condition, and the strict-barrier inequalities.
+
+More precisely, the finite data
+\[
+\begin{array}{c|rrrr}
+j&0&1&2&3\\ \hline
+x_j&91&137&103&155\\
+m_j&48&71&53&78\\
+\theta_j&26/27&17/18&17/24&1/16
+\end{array}
+\qquad
+(a_0,a_1,a_2)=(1,2,1)
+\]
+give a synchronized real companion with color word $(2,1,3)$.  The middle
+color-$1$ run is internally bracketed and has carrier
+\[
+  x_1+m_1=208=2^2\cdot52,
+  \qquad
+  x_2+m_2=156=3\cdot52.
+\]
+Thus $H=52<m_2=53$.
+
+There is also a strict-barrier synchronized segment
+\[
+\begin{array}{c|rrrrrr}
+j&0&1&2&3&4&5\\ \hline
+x_j&27&41&31&47&71&107\\
+m_j&29&43&32&47&70&104\\
+\theta_j&1/2&3/4&9/16&11/32&33/64&35/128
+\end{array}
+\]
+with exponent word $(1,2,1,1,1)$ and color word $(1,1,2,1,2)$.
+Its two adjacent internally bracketed runs have colors $2$ and $1$, and
+both have carrier $47$:
+\[
+\begin{aligned}
+  2x_2+m_2&=94=2\cdot47,
+  &2x_3+m_3&=141=3\cdot47,\\
+  x_3+m_3&=94=2\cdot47,
+  &x_4+m_4&=141=3\cdot47.
+\end{aligned}
+\]
+Hence any carrier charging argument must use fixed-ray information beyond
+finite strict-barrier synchronization.
+\end{theorem}
+
+\begin{proof}
+For the first segment, direct calculation gives
+\[
+  2^{a_j}x_{j+1}=3x_j+1,
+  \qquad
+  2^{a_j}m_{j+1}=3m_j-c_j
+\]
+with $(c_0,c_1,c_2)=(2,1,3)$.  The displayed rounding errors satisfy
+\[
+  2^{a_j}\theta_{j+1}=3\theta_j+1-c_j,
+\]
+and lie in $[0,1)$.  Therefore $e_j:=m_j-\theta_j>1$ and subtraction proves
+$2^{a_j}e_{j+1}=3e_j-1$.  The cumulative exponents are $(1,3,4)$, so
+\[
+  2^1<3,
+  \qquad
+  2^3<3^2,
+  \qquad
+  2^4<3^3.
+\]
+The carrier calculation in the statement proves the first assertion.
+
+For the second segment, the same three direct identities hold with the
+displayed exponent, color, and rounding-error words.  Its cumulative
+exponents are $(1,3,4,5,6)$, and
+\[
+  2,8,16,32,64<3,9,27,81,243
+\]
+coordinatewise.  Thus this word is also a strict barrier.  The two carrier
+calculations prove the failure of local injectivity.
+\end{proof}
+
+\begin{theorem}[projective defect charge and zero-defect reduction]
+Retain the normalized fixed-seed setup, and define the projective rounding
+coordinate
+\[
+  p_j:=\frac{\theta_j}{m_j}.
+\tag{114}
+\]
+On every nonpositive-defect edge, with $c_j=1-d_j\in\{1,2,3\}$, we have
+\[
+\boxed{
+  p_{j+1}-p_j
+  =\frac{(1-c_j)m_j+c_j\theta_j}
+         {m_j(3m_j-c_j)}.}
+\tag{115}
+\]
+Consequently,
+\[
+\begin{array}{c|c}
+\text{edge type}&\text{projective charge}\\ \hline
+c_j=1&
+  0\leq p_{j+1}-p_j<\displaystyle\frac1{8m_j},\\[2mm]
+c_j=2,\ m_j\geq4&
+  \displaystyle\frac1{m_j}<5(p_j-p_{j+1}),\\[2mm]
+c_j=3&
+  \displaystyle\frac1{m_j}<2(p_j-p_{j+1}).
+\end{array}
+\tag{116}
+\]
+
+Let $\mathcal B$ be the family of maximal consecutive blocks of
+nonpositive-defect edges.  For $B=[\alpha,\beta)\in\mathcal B$, put
+\[
+\begin{aligned}
+  \mathcal Z_B&:=\{j\in B:c_j=1\},\\
+  \mathcal T_B&:=\{j\in B:c_j=2,\ m_j=2\},\\
+  \mathcal R_B&:=B\setminus(\mathcal Z_B\cup\mathcal T_B).
+\end{aligned}
+\tag{117}
+\]
+Then
+\[
+\boxed{
+  \sum_{j\in\mathcal R_B}\frac1{m_j}
+  \leq\frac5{m_\alpha}
+  +\frac58\sum_{j\in\mathcal Z_B}\frac1{m_j}.}
+\tag{118}
+\]
+The same inequality holds for a final infinite block, with the sums
+interpreted as monotone limits.
+
+Put
+\[
+  \mathcal E:=\{\alpha:[\alpha,\beta)\in\mathcal B\},
+  \qquad
+  \mathcal Z:=\bigcup_{B\in\mathcal B}\mathcal Z_B,
+  \qquad
+  \mathcal T:=\bigcup_{B\in\mathcal B}\mathcal T_B.
+\tag{119}
+\]
+Since the total nonpositive-defect reciprocal mass diverges, at least one of
+the following three series diverges:
+\[
+\boxed{
+  \sum_{j\in\mathcal E}\frac1{m_j},
+  \qquad
+  \sum_{j\in\mathcal Z}\frac1{m_j},
+  \qquad
+  \sum_{j\in\mathcal T}\frac1{m_j}.}
+\tag{120}
+\]
+
+Finally, let $I=[s,t]$ be a color-$1$ run with $\theta_s>0$.  Then
+\[
+\boxed{
+  \ell_I:=\log\frac{p_t}{p_s}
+  =\sum_{j=s}^{t-1}-\log\left(1-\frac1{3m_j}\right),
+  \qquad
+  2\ell_I\leq\sum_{j=s}^{t-1}\frac1{m_j}<3\ell_I.}
+\tag{121}
+\]
+Only finitely many color-$1$ runs on the normalized ray can have
+$\theta_s=0$.  Therefore the middle alternative in (120) is equivalent to
+\[
+  \sum_{I\text{ a color-}1\text{ run}}\ell_I=\infty.
+\tag{122}
+\]
+More generally, define
+\[
+  P_1(p):=p,
+  \qquad
+  P_2(p):=1-2p,
+  \qquad
+  P_3(p):=2-3p.
+\tag{123}
+\]
+These quantities are nonnegative on an edge of the corresponding color.
+Whenever $P_c(p_j)>0$, we have
+\[
+\boxed{
+  \frac{P_c(p_{j+1})}{P_c(p_j)}
+  =\left(1-\frac{c}{3m_j}\right)^{-1}.}
+\tag{124}
+\]
+Hence, for every color-$c$ run $I=[s,t]$ with $P_c(p_s)>0$,
+\[
+  L_I:=\log\frac{P_c(p_t)}{P_c(p_s)}
+  \qquad\Longrightarrow\qquad
+  \frac2cL_I\leq\sum_{j=s}^{t-1}\frac1{m_j}<\frac3cL_I.
+\tag{125}
+\]
+In particular, an $m=2$ tower of $K$ edges satisfies
+\[
+  \log\frac{P_2(p_{s+K})}{P_2(p_s)}=K\log\frac32,
+  \qquad
+  \sum_{j=s}^{s+K-1}\frac1{m_j}=\frac K2.
+\tag{126}
+\]
+Thus all divergent nonpositive mass is forced into block entrances,
+logarithmic amplification of $P_1$ on zero-defect runs, or logarithmic
+amplification of $P_2$ on terminal towers.
+\end{theorem}
+
+\begin{proof}
+The ceiling and rounding recurrences are
+\[
+  2^{a_j}m_{j+1}=3m_j-c_j,
+  \qquad
+  2^{a_j}\theta_{j+1}=3\theta_j+1-c_j.
+\]
+We divide the second identity by the first and subtract
+$p_j=\theta_j/m_j$.  This proves (115).
+
+If $c_j=1$, equation (115) gives
+\[
+  p_{j+1}-p_j=\frac{\theta_j}{m_j(3m_j-1)}.
+\]
+Parity gives $m_j\geq3$, and $0\leq\theta_j<1$, which proves the first
+line of (116).  If $c_j=2$, then
+\[
+  p_j-p_{j+1}=\frac{m_j-2\theta_j}{m_j(3m_j-2)}.
+\]
+For $m_j\geq4$, we have
+\[
+  \frac{1/m_j}{p_j-p_{j+1}}
+  =\frac{3m_j-2}{m_j-2\theta_j}
+  <\frac{3m_j-2}{m_j-2}\leq5.
+\]
+The function in the last member is decreasing for $m_j\geq4$.  Finally,
+if $c_j=3$, parity gives $m_j\geq3$, and
+\[
+  \frac{1/m_j}{p_j-p_{j+1}}
+  =\frac{3m_j-3}{2m_j-3\theta_j}
+  <\frac{3m_j-3}{2m_j-3}\leq2.
+\]
+This proves (116).
+
+Fix a block $B=[\alpha,\beta)$.  Let $U_B$ be the total increase of $p_j$
+on $\mathcal Z_B$, and let $D_B$ and $D_B^{\mathrm{tower}}$ be its total
+decreases on $\mathcal R_B$ and $\mathcal T_B$, respectively.  Telescoping
+over a finite initial part of the block gives
+\[
+  0\leq p_{\mathrm{end}}
+  =p_\alpha+U_B-D_B-D_B^{\mathrm{tower}}.
+\]
+Therefore $D_B\leq p_\alpha+U_B$.  We have
+\[
+  p_\alpha<\frac1{m_\alpha},
+  \qquad
+  U_B<\frac18\sum_{j\in\mathcal Z_B}\frac1{m_j}.
+\]
+The last two lines of (116), with the weaker common constant $5$, now prove
+(118).  Passing through finite initial parts proves the infinite-block
+case.  Summing (118) over $\mathcal B$ shows that convergence of all three
+series in (120) would force convergence on $\bigcup_B\mathcal R_B$ as well.
+This would contradict the divergent nonpositive-defect mass.  Hence (120)
+holds.
+
+On a color-$1$ edge with $p_j>0$, direct division gives
+\[
+  \frac{p_{j+1}}{p_j}
+  =\frac{3m_j}{3m_j-1}
+  =\left(1-\frac1{3m_j}\right)^{-1}.
+\]
+Multiplication along the run proves the identity in (121).  We also have
+\[
+  0<\frac1{3m_j}\leq\frac19,
+  \qquad
+  \frac1{3m_j}
+  <-\log\left(1-\frac1{3m_j}\right)
+  \leq\frac1{2m_j}.
+\]
+This proves the two-sided estimate.  If $\theta_s=0$, every color-$1$ edge
+preserves $\theta=0$, and the corresponding run anchor equals
+$\mathcal K$.  The argument surrounding (79) proves that this equality can
+occur only finitely many times on the normalized ray.  Removing those
+finitely many runs and summing (121) proves (122).
+
+It remains to prove the unified identity.  For $c=1$, equation (124) is the
+ratio already used in (121).  For $c=2$, we have
+\[
+  2^{a_j}(m_{j+1}-2\theta_{j+1})=3(m_j-2\theta_j),
+\]
+while for $c=3$ we have
+\[
+  2^{a_j}(2m_{j+1}-3\theta_{j+1})
+  =3(2m_j-3\theta_j).
+\]
+Division by the corresponding ceiling recurrence proves (124).  We sum
+its logarithm along a run and apply the inequality used in (104), which
+proves (125).  On an $m=2$ tower, every term in (124) equals $3/2$, and
+every reciprocal term equals $1/2$.  This proves (126).
+\end{proof}
+
+\begin{theorem}[threshold-reset identity for internal zero-defect runs]
+Retain the normalized fixed-seed setup.  Let $I=[s,t]$ be a maximal
+color-$1$ run with $\theta_s>0$.  Suppose that it is internally bracketed
+by nonpositive-defect edges of colors
+\[
+  c_-:=c_{s-1}\in\{2,3\},
+  \qquad
+  c_+:=c_t\in\{2,3\}.
+\tag{127}
+\]
+We define its entrance threshold residual and size-corrected reset depth by
+\[
+\begin{aligned}
+  \rho_I&:=3\theta_{s-1}-(c_--1)
+          =2^{a_{s-1}}\theta_s,\\
+  \Gamma_I&:=
+  \log\frac{3m_{s-1}-c_-}{m_t\rho_I}.
+\end{aligned}
+\tag{128}
+\]
+Then $\rho_I>0$ and
+\[
+\boxed{
+  p_s=\frac{\rho_I}{3m_{s-1}-c_-},
+  \qquad
+  \Gamma_I=\log\frac{m_s}{m_t\theta_s}.}
+\tag{129}
+\]
+The exact projective amplification from (121) satisfies
+\[
+\boxed{
+  \ell_I=\Gamma_I+\log\theta_t,
+  \qquad
+  0<\Gamma_I-\ell_I
+  \leq\log\frac3{c_+-1}.}
+\tag{130}
+\]
+Equality holds in the upper bound precisely when the edge following the
+run has $\theta_{t+1}=0$.
+
+Consequently, for every collection $\mathcal I$ of internally bracketed
+color-$1$ runs,
+\[
+  \sum_{I\in\mathcal I}\sum_{j=s(I)}^{t(I)-1}\frac1{m_j}=\infty
+  \quad\Longrightarrow\quad
+  \sum_{I\in\mathcal I}\ell_I=\infty
+  \quad\Longrightarrow\quad
+  \sum_{I\in\mathcal I}\Gamma_I=\infty.
+\tag{131}
+\]
+Thus any summable upper charge for the reset depths $\Gamma_I$ closes the
+internally bracketed part of the zero-defect branch.
+\end{theorem}
+
+\begin{proof}
+On the edge entering the run, the ceiling and rounding recurrences give
+\[
+  2^{a_{s-1}}m_s=3m_{s-1}-c_-,
+  \qquad
+  2^{a_{s-1}}\theta_s
+  =3\theta_{s-1}+1-c_-=\rho_I.
+\tag{132}
+\]
+The assumption $\theta_s>0$ proves $\rho_I>0$.  Dividing the two
+identities in (132) proves the first identity in (129), and substituting
+them in (128) proves the second.
+
+At the endpoints of the color-$1$ run, we have
+\[
+\begin{aligned}
+  \ell_I
+  &=\log\frac{p_t}{p_s}
+    =\log\frac{m_s\theta_t}{m_t\theta_s}\\
+  &=\Gamma_I+\log\theta_t.
+\end{aligned}
+\tag{133}
+\]
+The edge following the run has color $c_+$, so
+\[
+  2^{a_t}\theta_{t+1}=3\theta_t+1-c_+\geq0.
+\tag{134}
+\]
+Hence
+\[
+  \frac{c_+-1}{3}\leq\theta_t<1.
+\tag{135}
+\]
+Equations (133)--(135) prove (130), including its equality statement.
+Finally, (121) compares the reciprocal mass of each run with $\ell_I$,
+while (130) gives $\Gamma_I>\ell_I$.  Summation proves (131).
+\end{proof}
+
+\begin{theorem}[strict-barrier failure of local reset bounds]
+For every integer $K\geq1$, the exponent word
+\[
+  w_K:=\bigl(1,(1,2)^K,1\bigr)
+\tag{136}
+\]
+has a positive odd ordinary realization and a synchronized real companion
+segment with ceiling and color data
+\[
+\begin{aligned}
+  &(m_0,m_1,\ldots,m_{2K+2})
+    =\bigl(4,5,(7,5)^K,6\bigr),\\
+  &(c_0,c_1,\ldots,c_{2K+1})
+    =\bigl(2,1^{\,2K},3\bigr).
+\end{aligned}
+\tag{137}
+\]
+Its middle $2K$ edges form one internally bracketed color-$1$ run
+$I_K=[1,2K+1]$.  This run consists of $K$ laps of
+\[
+  5\xrightarrow{\,a=1\,}7
+   \xrightarrow{\,a=2\,}5
+\tag{138}
+\]
+and satisfies
+\[
+\boxed{
+\begin{aligned}
+  \sum_{j=1}^{2K}\frac1{m_j}&=\frac{12K}{35},\\
+  \ell_{I_K}&=K\log\frac98,\\
+  \rho_{I_K}&=\frac43\left(\frac89\right)^K,\\
+  \Gamma_{I_K}&=K\log\frac98+\log\frac32.
+\end{aligned}}
+\tag{139}
+\]
+Every prefix of $w_K$ obeys the strict-barrier inequality
+\[
+  2^{A_n}<3^n,
+  \qquad
+  A_n:=\sum_{j<n}a_j.
+\tag{140}
+\]
+
+In particular, the complete discrete boundary tuple
+\[
+  (c_-,a_{s-1},m_{s-1},m_s,m_t,c_+,a_t,m_{t+1})
+  =(2,1,4,5,5,3,1,6)
+\tag{141}
+\]
+is independent of $K$, while both the run mass and its projective
+amplification tend to infinity.  Therefore no finite-valued bound depending
+only on this boundary tuple, or on any fixed-width window of exponent,
+color, and ceiling data at the two boundaries, can control zero-defect
+mass or projective amplification on finite strict-barrier synchronized
+segments.  A valid bound must detect the threshold residual in (128), or
+use coherence along one fixed ordinary ray across different runs.
+\end{theorem}
+
+\begin{proof}
+We first construct the real companion.  Set
+\[
+  \theta_1:=\frac23\left(\frac89\right)^K,
+  \qquad
+  \theta_0:=\frac{1+2\theta_1}{3}.
+\tag{142}
+\]
+Use the ceiling path in (137).  The first edge satisfies
+\[
+  2\cdot5=3\cdot4-2,
+  \qquad
+  2\theta_1=3\theta_0-1.
+\tag{143}
+\]
+On each color-$1$ lap in (138), the ceiling identities are
+\[
+  2\cdot7=3\cdot5-1,
+  \qquad
+  4\cdot5=3\cdot7-1,
+\tag{144}
+\]
+and the corresponding two rounding updates multiply $\theta$ by
+$(3/2)(3/4)=9/8$.  Hence
+\[
+  \theta_{2K+1}=\left(\frac98\right)^K\theta_1=\frac23.
+\tag{145}
+\]
+The final color-$3$ edge satisfies
+\[
+  2\cdot6=3\cdot5-3,
+  \qquad
+  2\theta_{2K+2}=3\theta_{2K+1}-2=0.
+\tag{146}
+\]
+All rounding errors lie in $[0,1)$.  Indeed, before the second half of the
+last lap the error is $16/27$, after its first half it is $8/9$, and all
+earlier errors are smaller.  Also $1/3<\theta_0<1$.  Thus
+$e_j:=m_j-\theta_j>1$, and (143)--(146) prove the synchronized real
+recurrence.
+
+We next verify the strict barrier.  Put $\lambda:=\log_2 3$.  After the
+initial exponent and $k$ complete pairs, the barrier surplus is
+\[
+  \lambda(1+2k)-(1+3k)
+  =\lambda-1+(2\lambda-3)k>0.
+\tag{147}
+\]
+After the first exponent of the next pair, and also after the final extra
+exponent, it is
+\[
+  \lambda(2+2k)-(2+3k)
+  =2(\lambda-1)+(2\lambda-3)k>0.
+\tag{148}
+\]
+Here $\lambda>1$ follows from $3>2$, and $2\lambda>3$ follows from
+$3^2>2^3$.  Equations (147)--(148) cover every prefix and prove (140).
+
+For completeness, we prove that every finite positive exponent word
+$(a_0,\ldots,a_{N-1})$ has a positive odd ordinary realization.  Put
+\[
+  A_k:=\sum_{j<k}a_j,
+  \qquad
+  C_k:=\sum_{i=0}^{k-1}3^{k-1-i}2^{A_i}
+  \qquad(0\leq k\leq N).
+\tag{149}
+\]
+Iteration of the ordinary recurrence gives
+\[
+  2^{A_k}x_k=3^kx_0+C_k
+  \qquad(0\leq k\leq N).
+\tag{150}
+\]
+Since $3^N$ is invertible modulo $2^{A_N+1}$, there is a unique residue
+class $x_0$ modulo $2^{A_N+1}$ satisfying
+\[
+  3^Nx_0+C_N\equiv2^{A_N}\pmod{2^{A_N+1}}.
+\tag{151}
+\]
+The integer $C_N$ is odd, so this residue class is odd.  We take its least
+positive representative.
+
+We check all intermediate valuations.  For $k<N$, split $C_N$ at $k$ and
+reduce (151) modulo $2^{A_k+1}$.  The term with index $i=k$ is the only
+tail term not already divisible by $2^{A_k+1}$, and we obtain
+\[
+  3^{N-1-k}
+  \left(3(3^kx_0+C_k)+2^{A_k}\right)
+  \equiv0\pmod{2^{A_k+1}}.
+\tag{152}
+\]
+Multiplication by odd units does not change the unique nonzero class
+$2^{A_k}$ modulo $2^{A_k+1}$.  Therefore
+\[
+  3^kx_0+C_k\equiv2^{A_k}\pmod{2^{A_k+1}}.
+\tag{153}
+\]
+Together with (151), this proves that every quotient
+$x_k:=(3^kx_0+C_k)/2^{A_k}$ is a positive odd integer.  Consecutive
+instances of (150) give
+\[
+  2^{a_k}x_{k+1}=3x_k+1,
+\]
+with the prescribed exact exponent.  Applying this construction to $w_K$
+proves the ordinary realization asserted in the theorem.
+
+It remains to calculate the charges.  Each lap contributes
+$1/5+1/7=12/35$ to the reciprocal mass.  Its two rounding updates multiply
+$p$ by $9/8$, because the initial and terminal ceiling of a lap are both
+$5$.  This proves the first two identities in (139).  Equations
+(142)--(143) give
+\[
+  \rho_{I_K}=3\theta_0-1=2\theta_1
+  =\frac43\left(\frac89\right)^K.
+\tag{154}
+\]
+Finally, $m_s=m_t=5$ and (129) give
+\[
+  \Gamma_{I_K}
+  =\log\frac1{\theta_1}
+  =K\log\frac98+\log\frac32.
+\tag{155}
+\]
+This proves (139).  The tuple (141) is read directly from (136)--(137).
+For any fixed boundary-window width, taking $K$ larger than that width
+leaves the two discrete boundary windows unchanged while (139) grows
+without bound.  The claimed impossibility follows.
+\end{proof}
+
+\begin{theorem}[global logarithmic separation clock]
+Retain the normalized fixed-seed setup and define
+\[
+  \mathcal L_j:=\log\frac{q_j}{m_j}.
+\tag{156}
+\]
+For every edge, with $c_j:=1-d_j$, one has
+\[
+\boxed{
+  \mathcal L_{j+1}-\mathcal L_j
+  =\log\frac{3m_j}{3m_j-c_j}
+  =-\log\left(1+\frac{d_j-1}{3m_j}\right).}
+\tag{157}
+\]
+The sign of this increment is determined exactly by the defect:
+\[
+\begin{array}{c|c|c}
+d_j&c_j&\mathcal L_{j+1}-\mathcal L_j\\ \hline
+d_j\leq0&c_j\in\{1,2,3\}&>0\\
+d_j=1&c_j=0&=0\\
+d_j\geq2&c_j\leq-1&<0.
+\end{array}
+\tag{158}
+\]
+On a nonpositive-defect edge,
+\[
+\boxed{
+  \frac2{c_j}(\mathcal L_{j+1}-\mathcal L_j)
+  \leq\frac1{m_j}
+  <\frac3{c_j}(\mathcal L_{j+1}-\mathcal L_j).}
+\tag{159}
+\]
+Consequently, every consecutive nonpositive-defect block
+$B=[\alpha,\beta)$ satisfies
+\[
+\boxed{
+  \frac23(\mathcal L_\beta-\mathcal L_\alpha)
+  \leq\sum_{j=\alpha}^{\beta-1}\frac1{m_j}
+  <3(\mathcal L_\beta-\mathcal L_\alpha).}
+\tag{160}
+\]
+The same assertion holds for a final infinite block, using monotone
+limits.
+
+Let $I=[s,t]$ be a constant nonpositive-defect run of color
+$c\in\{1,2,3\}$, and let $\Lambda_I$ be its rational anchor from (70).
+Put
+\[
+  \Delta_I:=
+  \begin{cases}
+    \Lambda_I-\mathcal K,&c=1,\\
+    c\mathcal K-\Lambda_I,&c\in\{2,3\}.
+  \end{cases}
+\tag{161}
+\]
+Whenever $\Delta_I>0$, the projective potential in (123) has the exact
+factorization
+\[
+\boxed{
+  P_c(p_j)=\Delta_I\frac{q_j}{m_j}
+  =\Delta_I e^{\mathcal L_j}
+  \qquad(s\leq j\leq t).}
+\tag{162}
+\]
+In particular, the projective run gain in (125) is
+\[
+\boxed{L_I=\mathcal L_t-\mathcal L_s.}
+\tag{163}
+\]
+For an internally bracketed color-$1$ run with positive entrance rounding,
+the quantities in the threshold-reset theorem therefore satisfy
+\[
+\boxed{
+  \ell_I=\mathcal L_t-\mathcal L_s,
+  \qquad
+  \Gamma_I=\mathcal L_t-\mathcal L_s-\log\theta_t.}
+\tag{164}
+\]
+
+Define the accumulated nonpositive gain and positive-defect contraction by
+\[
+\begin{aligned}
+  \mathcal C_N
+  &:=\sum_{\substack{0\leq j<N\\d_j\leq0}}
+    -\log\left(1+\frac{d_j-1}{3m_j}\right),\\
+  \mathcal P_N
+  &:=\sum_{\substack{0\leq j<N\\d_j\geq2}}
+    \log\left(1+\frac{d_j-1}{3m_j}\right).
+\end{aligned}
+\tag{165}
+\]
+Then
+\[
+\boxed{
+  \mathcal L_N-\mathcal L_0
+  =\mathcal C_N-\mathcal P_N,}
+\tag{166}
+\]
+and
+\[
+  \frac23\mathcal C_N
+  \leq\sum_{\substack{0\leq j<N\\d_j\leq0}}\frac1{m_j}
+  \leq3\mathcal C_N.
+\tag{167}
+\]
+Moreover,
+\[
+\boxed{
+\begin{aligned}
+  &\log\frac{x_{j+1}/m_{j+1}}{x_j/m_j}\\
+  &\qquad=\mathcal L_{j+1}-\mathcal L_j
+  +\log\left(1+\frac1{3x_j}\right).
+\end{aligned}}
+\tag{168}
+\]
+Since $\sum_j1/x_j<\infty$, the last terms in (168) have a finite total.
+Thus
+\[
+\boxed{
+  \sum_{d_j\leq0}\frac1{m_j}=\infty
+  \quad\Longleftrightarrow\quad
+  \sum_{d_j\leq0}
+  \log\frac{x_{j+1}/m_{j+1}}{x_j/m_j}=\infty.}
+\tag{169}
+\]
+Finally, $m_j/q_j\to0$, so $\mathcal L_j\to\infty$.  Hence every
+normalized divergent ray obeys the strict drift law
+\[
+\boxed{\mathcal C_N-\mathcal P_N\longrightarrow\infty.}
+\tag{170}
+\]
+Therefore all divergent nonpositive reciprocal mass, including zero-defect
+cycle laps and terminal $m=2$ towers, is quantitatively equivalent to the
+positive variation of the single clock $\mathcal L_j$.  A fixed-ray closure
+must contradict (170), not merely bound one color in isolation.
+\end{theorem}
+
+\begin{proof}
+The ceiling recurrence is
+\[
+  2^{a_j}m_{j+1}=3m_j-c_j,
+\]
+while $q_{j+1}/q_j=3/2^{a_j}$.  Division proves (157), and the three signs
+in (158) follow immediately.
+
+Suppose that $d_j\leq0$.  Then $c_j\in\{1,2,3\}$.  Put
+\[
+  z:=\frac{c_j}{3m_j}.
+\]
+Parity in the ceiling recurrence gives $m_j\geq c_j$, and hence
+$0<z\leq1/3$.  The elementary estimates
+\[
+  z<-\log(1-z)\leq\frac{z}{1-z}\leq\frac32z
+\]
+now prove (159).  Summing over a block and using
+$1\leq c_j\leq3$ proves (160).
+
+Equation (72) gives
+\[
+  \Lambda_I-c\mathcal K
+  =\frac{c\theta_j-(c-1)m_j}{q_j}.
+\]
+For $c=1$, this says
+$P_1(p_j)=\theta_j/m_j=(\Lambda_I-\mathcal K)q_j/m_j$.
+For $c\in\{2,3\}$, it says
+\[
+  P_c(p_j)=(c-1)-cp_j
+  =(c\mathcal K-\Lambda_I)\frac{q_j}{m_j}.
+\]
+This proves (162).  Taking endpoint ratios proves (163), and (164) follows
+from (130).
+
+Equations (166) and (167) are obtained by summing (157) and (159), noting
+that a defect $d_j=1$ contributes zero.  Next, $h_j=x_j/q_j$ and (98) give
+\[
+  \frac{h_{j+1}}{h_j}=1+\frac1{3x_j}.
+\]
+Since
+\[
+  \log\frac{x_j}{m_j}=\mathcal L_j+\log h_j,
+\]
+equation (168) follows.  The inequality
+$\log(1+u)\leq u$ and the convergence of $\sum_j1/x_j$ show that the total
+correction in (168) is finite.  On every nonpositive edge, both terms on
+the right of (168) are positive.  Combining this observation with (167)
+proves (169).
+
+Finally, equation (78) gives $m_j/q_j\to0$.  Therefore
+$\mathcal L_j=\log(q_j/m_j)\to\infty$, and (166) proves (170).
+\end{proof}
+
+\begin{corollary}[upper-anchor defect-tail identity]
+For every state index $j$, the ordered defect tail converges and satisfies
+\[
+\boxed{
+  \frac{\theta_j}{q_j}
+  =\Omega_j-\mathcal K
+  =-\sum_{k=j}^{\infty}\frac{d_k}{3q_k}.}
+\tag{171}
+\]
+Let $I=[s,t]$ be an internally bracketed color-$1$ run as in the
+threshold-reset theorem.  Then
+\[
+\boxed{
+  \rho_I=q_{s-1}
+  \left(
+    \frac{c_+-1}{q_t}
+    -\sum_{k=t+1}^{\infty}\frac{d_k}{q_k}
+  \right).}
+\tag{172}
+\]
+Equivalently,
+\[
+\boxed{
+  \rho_I=q_{s-1}
+  \left(
+    \frac{c_+-1}{q_t}
+    +\frac{3\theta_{t+1}}{q_{t+1}}
+  \right).}
+\tag{173}
+\]
+Thus the entrance residual is exactly the exit threshold jump, transported
+back to the entering scale, together with the complete future defect tail.
+\end{corollary}
+
+\begin{proof}
+Equation (53) gives
+\[
+  \Omega_{k+1}-\Omega_k=\frac{d_k}{3q_k}.
+\]
+Also $\Omega_k-\mathcal K=\theta_k/q_k\to0$.  Telescoping from $j$ to
+$N$ and letting $N\to\infty$ proves (171), without any assertion of
+absolute convergence.
+
+On the run, $d_k=0$ for $s\leq k<t$, while
+$d_t=1-c_+=-(c_+-1)$.  Substitution in (171), followed by
+$\rho_I=3q_{s-1}(\Omega_s-\mathcal K)$ from (128)--(129), proves (172).
+Applying (171) at $t+1$ gives
+\[
+  \sum_{k=t+1}^{\infty}\frac{d_k}{q_k}
+  =-\frac{3\theta_{t+1}}{q_{t+1}},
+\]
+which proves (173).
+\end{proof}
+
+\end{document}

@@ -1,0 +1,138 @@
+=== start mode=lfail worker=1/2 timeout=600 budget=2400 2026-08-16 14:03:48
+families for this worker: ['R-d1-K1-c1', 'R-d1-K1-c12', 'R-d1-K2-c1', 'R-d1-K1-rR3', 'R-d1-K2-c12', 'R-d1-K1-c1rR3', 'R-d3-K1-plain', 'R-d1-K3-c12', 'R-d2-K1-c12', 'R-d4-K1-plain', 'R-d3-K1-c1', 'R-d2-K1-rR3', 'R-d2-K3-c1', 'R-d3-K3-plain', 'R-d4-K1-c1', 'R-d4-K2-plain', 'R-d3-K2-c1', 'R-d3-K1-rR3', 'R-d4-K3-plain', 'R-d2-K3-rR3', 'R-d2-K2-c1rR3', 'R-d3-K2-rR3', 'R-d2-K3-c1rR3', 'R-d3-K3-rR3']
+--- family R-d1-K1-c1 nvars 8
+   L=2 UNSAT |inst|=2 maxlen=1 rounds=1 0.6s
+   RESULT R-d1-K1-c1 L_fail = 2 history {2: 'UNSAT'}
+--- family R-d1-K1-c12 nvars 14
+   L=2 UNSAT |inst|=2 maxlen=1 rounds=1 0.1s
+   RESULT R-d1-K1-c12 L_fail = 2 history {2: 'UNSAT'}
+--- family R-d1-K2-c1 nvars 8
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.1s
+   L=3 UNSAT |inst|=6 maxlen=2 rounds=1 0.2s
+   RESULT R-d1-K2-c1 L_fail = 3 history {2: 'SAT', 3: 'UNSAT'}
+--- family R-d1-K1-rR3 nvars 20
+   L=2 UNSAT |inst|=2 maxlen=1 rounds=1 0.2s
+   RESULT R-d1-K1-rR3 L_fail = 2 history {2: 'UNSAT'}
+--- family R-d1-K2-c12 nvars 14
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.1s
+   L=3 UNSAT |inst|=6 maxlen=2 rounds=1 0.2s
+   RESULT R-d1-K2-c12 L_fail = 3 history {2: 'SAT', 3: 'UNSAT'}
+--- family R-d1-K1-c1rR3 nvars 32
+   L=2 UNSAT |inst|=2 maxlen=1 rounds=1 0.3s
+   RESULT R-d1-K1-c1rR3 L_fail = 2 history {2: 'UNSAT'}
+--- family R-d3-K1-plain nvars 33
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.4s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 0.8s
+   L=4 UNSAT |inst|=7 maxlen=2 rounds=1 5.1s
+   RESULT R-d3-K1-plain L_fail = 4 history {2: 'SAT', 3: 'SAT', 4: 'UNSAT'}
+--- family R-d1-K3-c12 nvars 14
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.2s
+   L=3 UNSAT |inst|=6 maxlen=2 rounds=1 0.3s
+   RESULT R-d1-K3-c12 L_fail = 3 history {2: 'SAT', 3: 'UNSAT'}
+--- family R-d2-K1-c12 nvars 52
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.1s
+   L=3 UNSAT |inst|=6 maxlen=2 rounds=1 0.2s
+   RESULT R-d2-K1-c12 L_fail = 3 history {2: 'SAT', 3: 'UNSAT'}
+--- family R-d4-K1-plain nvars 56
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.2s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.1s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 5.9s
+=== start mode=lfail worker=1/2 timeout=600 budget=2400 2026-08-16 15:08:00
+families for this worker: ['R-d1-K1-c1', 'R-d1-K1-c12', 'R-d1-K2-c1', 'R-d1-K1-rR3', 'R-d1-K2-c12', 'R-d1-K1-c1rR3', 'R-d3-K1-plain', 'R-d1-K3-c12', 'R-d2-K1-c12', 'R-d4-K1-plain', 'R-d3-K1-c1', 'R-d2-K1-rR3', 'R-d2-K3-c1', 'R-d3-K3-plain', 'R-d4-K1-c1', 'R-d4-K2-plain', 'R-d3-K2-c1', 'R-d3-K1-rR3', 'R-d4-K3-plain', 'R-d2-K3-rR3', 'R-d2-K2-c1rR3', 'R-d3-K2-rR3', 'R-d2-K3-c1rR3', 'R-d3-K3-rR3']
+skip R-d1-K1-c1 (done)
+skip R-d1-K1-c12 (done)
+skip R-d1-K2-c1 (done)
+skip R-d1-K1-rR3 (done)
+skip R-d1-K2-c12 (done)
+skip R-d1-K1-c1rR3 (done)
+skip R-d3-K1-plain (done)
+skip R-d1-K3-c12 (done)
+skip R-d2-K1-c12 (done)
+--- family R-d4-K1-plain nvars 56
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.8s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 0.8s
+   L=4 SAT |inst|=9 maxlen=3 rounds=3 4.7s
+   L=5 UNKNOWN |inst|=16 maxlen=4 rounds=4 683.4s
+   RESULT R-d4-K1-plain L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d3-K1-c1 nvars 60
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.8s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 0.7s
+   L=4 UNSAT |inst|=7 maxlen=2 rounds=1 1.4s
+   RESULT R-d3-K1-c1 L_fail = 4 history {2: 'SAT', 3: 'SAT', 4: 'UNSAT'}
+--- family R-d2-K1-rR3 nvars 64
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.5s
+   L=3 UNSAT |inst|=6 maxlen=2 rounds=1 0.6s
+   RESULT R-d2-K1-rR3 L_fail = 3 history {2: 'SAT', 3: 'UNSAT'}
+--- family R-d2-K3-c1 nvars 28
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.6s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.1s
+   L=4 SAT |inst|=10 maxlen=3 rounds=4 10.4s
+   L=5 UNSAT |inst|=22 maxlen=5 rounds=6 100.1s
+   RESULT R-d2-K3-c1 L_fail = 5 history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNSAT'}
+--- family R-d3-K3-plain nvars 33
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.9s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 2.3s
+   L=4 SAT |inst|=7 maxlen=2 rounds=1 14.4s
+   L=5 UNKNOWN |inst|=13 maxlen=4 rounds=3 624.8s
+   RESULT R-d3-K3-plain L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d4-K1-c1 nvars 104
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 1.5s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.0s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 3.1s
+   L=5 UNKNOWN |inst|=19 maxlen=4 rounds=5 671.2s
+   RESULT R-d4-K1-c1 L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d4-K2-plain nvars 56
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 1.3s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 3.3s
+   L=4 SAT |inst|=9 maxlen=3 rounds=3 28.8s
+   L=5 UNKNOWN |inst|=19 maxlen=4 rounds=5 1142.6s
+   RESULT R-d4-K2-plain L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d3-K2-c1 nvars 60
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 3.5s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 2.0s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 7.1s
+   L=5 UNKNOWN |inst|=22 maxlen=5 rounds=6 836.0s
+   RESULT R-d3-K2-c1 L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d3-K1-rR3 nvars 132
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 3.3s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 0.9s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 2.1s
+   L=5 UNSAT |inst|=28 maxlen=5 rounds=8 62.2s
+   RESULT R-d3-K1-rR3 L_fail = 5 history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNSAT'}
+--- family R-d4-K3-plain nvars 56
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 1.3s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 3.4s
+   L=4 SAT |inst|=9 maxlen=3 rounds=3 46.2s
+   L=5 UNKNOWN |inst|=13 maxlen=4 rounds=3 949.0s
+   RESULT R-d4-K3-plain L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d2-K3-rR3 nvars 64
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 19.7s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.8s
+   L=4 SAT |inst|=10 maxlen=3 rounds=4 10.3s
+   L=5 UNKNOWN |inst|=34 maxlen=5 rounds=10 1864.1s
+   RESULT R-d2-K3-rR3 L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d2-K2-c1rR3 nvars 112
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 6.1s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.2s
+   L=4 SAT |inst|=10 maxlen=3 rounds=3 4.5s
+   L=5 UNSAT |inst|=28 maxlen=5 rounds=8 87.2s
+   RESULT R-d2-K2-c1rR3 L_fail = 5 history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNSAT'}
+--- family R-d3-K2-rR3 nvars 132
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 1.1s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.8s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 5.5s
+   L=5 UNKNOWN |inst|=34 maxlen=5 rounds=10 1627.4s
+   RESULT R-d3-K2-rR3 L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+--- family R-d2-K3-c1rR3 nvars 112
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 1.8s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 0.7s
+   L=4 SAT |inst|=9 maxlen=3 rounds=2 2.7s
+   L=5 UNSAT |inst|=37 maxlen=6 rounds=11 454.3s
+   RESULT R-d2-K3-c1rR3 L_fail = 5 history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNSAT'}
+--- family R-d3-K3-rR3 nvars 132
+   L=2 SAT |inst|=2 maxlen=1 rounds=1 0.8s
+   L=3 SAT |inst|=6 maxlen=2 rounds=1 1.6s
+   L=4 SAT |inst|=8 maxlen=3 rounds=2 4.9s
+   L=5 UNKNOWN |inst|=28 maxlen=5 rounds=8 1789.7s
+   RESULT R-d3-K3-rR3 L_fail = None history {2: 'SAT', 3: 'SAT', 4: 'SAT', 5: 'UNKNOWN'}
+=== done 2026-08-16 18:13:09

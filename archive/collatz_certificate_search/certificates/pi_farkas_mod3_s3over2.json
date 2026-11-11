@@ -1,0 +1,72 @@
+{
+ "family": "mod3",
+ "K_states": 3,
+ "s": "3/2",
+ "N_hi": 8,
+ "N_fail": 8,
+ "eps_at_Nfail": -0.0,
+ "eps_at_Nfail_minus_1": 0.3991680053203935,
+ "exact_feasible_below": true,
+ "table_below": {
+  "0": [
+   28600429279,
+   98929944385
+  ],
+  "2": [
+   1,
+   1
+  ],
+  "1": [
+   238555820687,
+   441410629341
+  ]
+ },
+ "farkas": {
+  "ok": true,
+  "ok_lo": true,
+  "ok_true_rows": true,
+  "source": "vertex",
+  "support": [
+   5,
+   8
+  ],
+  "n_rows": 2,
+  "max_row": 8,
+  "t_interior": 0.3333333333333334,
+  "y": {
+   "8": [
+    1,
+    1
+   ],
+   "5": [
+    "7341996234030478677858964494771",
+    "14512910918803104587456652587888"
+   ]
+  },
+  "components_sign": {
+   "1": 1,
+   "2": 1,
+   "0": 1
+  }
+ },
+ "time": 0.06990718841552734,
+ "analytic_single_row": {
+  "m": 8,
+  "exact_ok": true,
+  "components": {
+   "1": [
+    "10141204801825835211973625643007",
+    "649037107316853453566312041152512"
+   ],
+   "2": [
+    "7341996234030478677858964494771",
+    "162259276829213363391578010288128"
+   ]
+  }
+ },
+ "battery": {
+  "skipped": "non-integer s (battery needs exact comparable values)"
+ },
+ "M": 3,
+ "analytic_row": 8
+}

@@ -1,0 +1,962 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\textwidth}{6.35in}
+\setlength{\oddsidemargin}{0.05in}
+\setlength{\evensidemargin}{0.05in}
+\setlength{\textheight}{8.75in}
+\setlength{\topmargin}{-0.25in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\{-1,0,1\}}
+\newcommand{\Rset}{\mathcal{R}}
+\newcommand{\Qset}{\mathcal{Q}}
+\newcommand{\Dset}{\mathcal{D}}
+\newcommand{\res}[2]{\left\langle #1\right\rangle_{#2}}
+
+\title{Round 3 on the proof front: exact critical carry renormalization}
+\author{Principia Math Collatz campaign}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We continue the pinned-carry branch of the zero-trace problem.  The main result is an exact renormalization for the critical change
+\[
+(k,L)\longmapsto(k+3,L+1).
+\]
+A pair of realization words has two integer coordinates: its carry and a complementary quotient.  Appending three forward symbols and prepending one backward symbol transforms these coordinates by two coupled affine carry equations.  When the new carry is zero and $L\ge3$, no modular wrap is possible in the first equation.  The new pinned fibre is therefore in bijection with a precisely described subset of the first $64^3$ old carry fibres, selected by one three-step forward test and one one-step backward test.  Each old pair has at most one pinned extension.
+
+We also prove a multi-block no-wrap theorem.  If $J$ critical blocks are stripped from a pinned pair and
+\[
+(64^3)^J<81^L,
+\]
+then all $J$ local injections synchronize: the old carry is the base-$64^3$ number formed by the $J$ local forward lift digits, and the complementary quotient has the corresponding base-$81$ expansion.  Applied to a pair of backward length $L_{\rm top}$, this synchronizes every fixed proportion below
+\[
+\frac{\log 81}{\log(81\cdot64^3)}=0.260472\ldots
+\]
+of the blocks.  Thus the local injectivity from the earlier framework does multiply for an initial positive fraction of the depth; the remaining obstruction is the first modular wrap.
+
+An explicit example shows why the scalar pinned count is not inductively closed.  A nonzero pair in carry $257792$, rather than carry zero, passes both local tests and produces a pinned pair at $(15,5)$.  Consequently a successful induction must control a decorated low-carry profile, not only $C_{k,L}(0)$.  No proof of the zero-trace conjecture, and no proof of the Collatz conjecture, is claimed.
+\end{abstract}
+
+\section{Chosen front and standing input}
+
+\textbf{Chosen front: P3-ZT-PINNED-CARRY, because the smallest plausible proof unit is now the exact synchronization of one critical $3$-forward/$1$-backward block, followed by a determination of where modular wrap first destroys that synchronization.}
+
+Let
+\[
+F(x)=
+\begin{cases}
+81x/64,&x\equiv0\pmod{64},\\
+(81x+1)/64,&x\equiv15\pmod{64},\\
+(81x-1)/64,&x\equiv49\pmod{64},
+\end{cases}
+\]
+with $F$ undefined in the other residue classes.  Let $G$ be its partial inverse,
+\[
+G(y)=
+\begin{cases}
+64y/81,&y\equiv0\pmod{81},\\
+(64y-1)/81,&y\equiv19\pmod{81},\\
+(64y+1)/81,&y\equiv62\pmod{81}.
+\end{cases}
+\]
+
+For a word
+\[
+w=(e_0,\ldots,e_{n-1})\in\E^n,
+\]
+put
+\[
+N_n(w)=\sum_{j=0}^{n-1}e_j81^{n-1-j}64^j.
+\]
+Let $R_n(w)\in[0,64^n)$ be its canonical starting value and let $Q_n(w)$ be the endpoint after $n$ steps.  Thus
+\[
+64^nQ_n(w)=81^nR_n(w)+N_n(w).
+\]
+Write
+\[
+\Rset_n=\{R_n(w):w\in\E^n\},
+\qquad
+\Qset_n=\{Q_n(w):w\in\E^n\}.
+\]
+For an integer $x$, let $\res{x}{m}$ denote its least residue in $[0,m)$.
+
+\begin{remark}[Results from Rounds 1 and 2 assumed here]
+Rounds 1 and 2 proved the existence and uniqueness of $R_n(w)$ and $Q_n(w)$, the injectivity of the two word maps, and the exact identity above.  They also proved the following carry interpretation.  For
+\[
+A=64^k,
+\qquad
+M=81^L,
+\]
+and a pair $(u,v)\in\E^k\times\E^L$, there is a unique carry
+\[
+c_{k,L}(u,v)\in[0,M)
+\]
+satisfying
+\[
+Q_L(v)-R_k(u)\equiv A c_{k,L}(u,v)\pmod M.
+\]
+If $C_{k,L}(c)$ counts pairs with carry $c$, then
+\[
+C_{k,L}(0)=N(k,L)+1,
+\]
+where $N(k,L)$ is the number of nonzero depth-$k$ zero-trace vertices starting a path of length at least $L$.  These statements are assumed in this round.
+\end{remark}
+
+\section{The local extension data}
+
+Put
+\[
+B=64^3.
+\]
+
+\begin{lemma}[Perturbation along a fixed word]
+\label{lem:perturb}
+Let $w\in\E^n$ and let $t\ge0$.  Then the integer
+\[
+R_n(w)+64^nt
+\]
+follows the same first $n$ branches as $R_n(w)$, and
+\[
+F^n\bigl(R_n(w)+64^nt\bigr)=Q_n(w)+81^nt.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $x_j=F^j(R_n(w))$.  We prove by induction that the perturbed orbit has value
+\[
+x_j+81^j64^{n-j}t
+\]
+after $j$ steps.  This is true at $j=0$.  For $j<n$, the perturbation term is divisible by $64$, so the two current values have the same residue modulo $64$ and use the same branch error $e_j$.  Therefore
+\begin{align*}
+F\bigl(x_j+81^j64^{n-j}t\bigr)
+&=\frac{81x_j+e_j}{64}+81^{j+1}64^{n-j-1}t\\
+&=x_{j+1}+81^{j+1}64^{n-j-1}t.
+\end{align*}
+At $j=n$ this gives the asserted endpoint.
+\end{proof}
+
+Let $u\in\E^k$, let $a\in\E^3$, let $v\in\E^L$, and let $d\in\E$.  Concatenation is written $ua$, while $dv$ means that $d$ is prepended to $v$.
+
+\begin{lemma}[The forward lift digit and the backward lift digit]
+\label{lem:lifts}
+Define
+\[
+t_k(u,a)=
+\res{\bigl(R_3(a)-Q_k(u)\bigr)81^{-k}}{B}
+\]
+and
+\[
+s_L(v,d)=
+\res{\bigl(d-64R_L(v)\bigr)64^{-(L+1)}}{81}.
+\]
+Then
+\[
+R_{k+3}(ua)=R_k(u)+64^k t_k(u,a)
+\]
+and
+\[
+Q_{L+1}(dv)=Q_L(v)+81^L s_L(v,d).
+\]
+For fixed $u$, the $27$ values $t_k(u,a)$ are distinct.  For fixed $v$, the three values $s_L(v,d)$ are distinct.
+\end{lemma}
+
+\begin{proof}
+The first $k$ symbols of $ua$ are $u$, so
+\[
+R_{k+3}(ua)=R_k(u)+64^kt
+\]
+for a unique $t\in[0,B)$.  Lemma \ref{lem:perturb} shows that the state after those $k$ steps is
+\[
+Q_k(u)+81^kt.
+\]
+It follows the final word $a$ precisely when it is congruent to $R_3(a)$ modulo $B$.  Since $81^k$ is invertible modulo $B$, this determines
+\[
+t=t_k(u,a).
+\]
+Injectivity of $a\mapsto R_3(a)$ gives distinctness.
+
+Put
+\[
+p=R_L(v),
+\qquad
+q=Q_L(v),
+\qquad
+N=N_L(v),
+\qquad
+M=81^L.
+\]
+The affine word identity gives
+\[
+64^Lq=M p+N.
+\]
+The numerator of the prepended word is
+\[
+N_{L+1}(dv)=dM+64N.
+\]
+Reducing the endpoint congruence for $dv$ modulo $M$ gives
+\[
+Q_{L+1}(dv)\equiv q\pmod M.
+\]
+Thus
+\[
+Q_{L+1}(dv)=q+Ms
+\]
+for a unique $s\in[0,81)$.  Substituting
+\[
+N=64^Lq-Mp
+\]
+into the endpoint congruence modulo $81M$ gives
+\begin{align*}
+64^{L+1}(q+Ms)
+&\equiv dM+64(64^Lq-Mp)\pmod{81M}.
+\end{align*}
+After cancellation of $64^{L+1}q$ and division by $M$,
+\[
+64^{L+1}s\equiv d-64p\pmod{81}.
+\]
+This is the stated formula.  Multiplication by the unit $64^{-(L+1)}$ preserves the distinctness of the three values of $d$.
+\end{proof}
+
+\section{The exact two-carry recursion}
+
+Fix $u\in\E^k$ and $v\in\E^L$.  Put
+\[
+r=R_k(u),
+\qquad
+q=Q_L(v),
+\qquad
+A=64^k,
+\qquad
+M=81^L.
+\]
+Let $c\in[0,M)$ and $h\in\Z$ be defined by
+\[
+r+Ac=q+Mh.
+\]
+Thus $c=c_{k,L}(u,v)$, while $h$ is the complementary quotient of the same Chinese-remainder lift.
+
+For extensions $ua$ and $dv$, write
+\[
+r'=R_{k+3}(ua),
+\qquad
+q'=Q_{L+1}(dv),
+\]
+and define $c'\in[0,81M)$ and $h'\in\Z$ by
+\[
+r'+ABc'=q'+81Mh'.
+\]
+
+\begin{theorem}[Exact block carry recursion]
+\label{thm:block-recursion}
+Let
+\[
+t=t_k(u,a),
+\qquad
+s=s_L(v,d).
+\]
+There is a unique integer $z$ such that
+\[
+Bc'=c-t+Mz
+\]
+and
+\[
+81h'=h-s+Az.
+\]
+Conversely, these two equations are equivalent to the equality of the old and new Chinese-remainder lifts.
+\end{theorem}
+
+\begin{proof}
+Lemma \ref{lem:lifts} gives
+\[
+r'=r+At,
+\qquad
+q'=q+Ms.
+\]
+Using
+\[
+r+Ac=q+Mh
+\]
+and
+\[
+r'+ABc'=q'+81Mh',
+\]
+we obtain
+\begin{align*}
+A(Bc'-c+t)
+&=M(81h'+s-h).
+\end{align*}
+Since
+\[
+\gcd(A,M)=1,
+\]
+there is a unique integer $z$ satisfying
+\[
+Bc'-c+t=Mz
+\]
+and
+\[
+81h'+s-h=Az.
+\]
+Rearranging gives the displayed recursion.  Reversing these algebraic steps proves the converse.
+\end{proof}
+
+\begin{corollary}[Pinned one-block synchronization]
+\label{cor:pinned-sync}
+Assume $L\ge3$.  Then the extension pair $(ua,dv)$ has new carry
+\[
+c'=0
+\]
+if and only if
+\[
+c=t_k(u,a)
+\]
+and
+\[
+h\equiv s_L(v,d)\pmod{81}.
+\]
+For a fixed old pair $(u,v)$, at most one choice of
+\[
+(a,d)\in\E^3\times\E
+\]
+produces a pinned extension.
+\end{corollary}
+
+\begin{proof}
+Here
+\[
+M=81^L>64^3=B.
+\]
+If $c'=0$, the first equation of Theorem \ref{thm:block-recursion} gives
+\[
+c-t=-Mz.
+\]
+Because
+\[
+-(B-1)\le c-t\le M-1
+\]
+and $M>B$, the only multiple of $M$ in this interval is $0$.  Hence
+\[
+c=t,
+\qquad
+z=0.
+\]
+The second equation then says
+\[
+h-s=81h',
+\]
+which is equivalent to the stated congruence.  The converse follows by setting
+\[
+z=0,
+\qquad
+h'=(h-s)/81.
+\]
+Distinctness of the local lift digits in Lemma \ref{lem:lifts} proves uniqueness of $a$ and $d$.
+\end{proof}
+
+Let
+\[
+\Dset_G=\{0,19,62\}
+\]
+be the domain of $G$ modulo $81$.
+
+\begin{theorem}[Dynamical form of critical renormalization]
+\label{thm:dynamical-renorm}
+Assume $L\ge3$.  Pinned pairs at parameters $(k+3,L+1)$ are in bijection with old pairs $(u,v)\in\E^k\times\E^L$ satisfying all three conditions
+\[
+0\le c_{k,L}(u,v)<B,
+\]
+\[
+Q_k(u)+81^k c_{k,L}(u,v)\bmod B\in\Rset_3,
+\]
+and
+\[
+R_L(v)+64^L h_{k,L}(u,v)\bmod81\in\Dset_G,
+\]
+where $h_{k,L}(u,v)$ is defined by
+\[
+R_k(u)+64^k c_{k,L}(u,v)
+=Q_L(v)+81^L h_{k,L}(u,v).
+\]
+The corresponding three-symbol block and one-symbol block are unique.
+\end{theorem}
+
+\begin{proof}
+By Corollary \ref{cor:pinned-sync}, a pinned extension requires
+\[
+c=t_k(u,a).
+\]
+Since $0\le t_k(u,a)<B$, this implies $c<B$.  The definition of $t_k(u,a)$ shows that such an $a$ exists precisely when
+\[
+Q_k(u)+81^kc\bmod B\in\Rset_3.
+\]
+Injectivity of the realization map makes $a$ unique.
+
+Similarly, the congruence
+\[
+h\equiv s_L(v,d)\pmod{81}
+\]
+and the formula in Lemma \ref{lem:lifts} are equivalent to
+\[
+64R_L(v)+64^{L+1}h\equiv d\pmod{81}.
+\]
+Put
+\[
+y=R_L(v)+64^Lh.
+\]
+The last congruence says that $64y-d$ is divisible by $81$.  There is a symbol $d\in\E$ with this property precisely when
+\[
+y\bmod81\in\{0,19,62\}=\Dset_G.
+\]
+The residue determines $d$ uniquely.  Corollary \ref{cor:pinned-sync} now gives both directions of the bijection.
+\end{proof}
+
+For $0\le c<B$, $\xi\in\Z/B\Z$, and $\eta\in\Z/81\Z$, define the decorated low-carry profile
+\[
+P_{k,L}(c,\xi,\eta)
+\]
+to be the number of pairs $(u,v)\in\E^k\times\E^L$ for which
+\[
+c_{k,L}(u,v)=c,
+\]
+\[
+Q_k(u)+81^kc\equiv\xi\pmod B,
+\]
+and
+\[
+R_L(v)+64^Lh_{k,L}(u,v)\equiv\eta\pmod{81}.
+\]
+
+\begin{corollary}[Exact decorated-profile formula]
+\label{cor:profile}
+For $L\ge3$,
+\[
+C_{k+3,L+1}(0)
+=
+\sum_{c=0}^{B-1}
+\sum_{\xi\in\Rset_3}
+\sum_{\eta\in\Dset_G}
+P_{k,L}(c,\xi,\eta).
+\]
+Consequently,
+\[
+C_{k+3,L+1}(0)
+\le
+\sum_{c=0}^{B-1}C_{k,L}(c),
+\]
+and
+\[
+N(k+3,L+1)
+\le
+\sum_{c=0}^{B-1}C_{k,L}(c)-1.
+\]
+\end{corollary}
+
+\begin{proof}
+The equality is Theorem \ref{thm:dynamical-renorm} with the accepted old pairs grouped by their three displayed residues.  Dropping the two local acceptance restrictions gives the first inequality.  The all-zero pair occurs once in the low-carry sum and once in the new pinned fibre.  Using
+\[
+C_{k+3,L+1}(0)=N(k+3,L+1)+1
+\]
+gives the second inequality.
+\end{proof}
+
+\begin{proposition}[The local masks have exact sizes]
+\label{prop:mask-sizes}
+For a fixed right word $u\in\E^k$, exactly $27$ values
+\[
+c\in[0,B)
+\]
+satisfy
+\[
+Q_k(u)+81^kc\bmod B\in\Rset_3.
+\]
+For a fixed left word $v\in\E^L$, exactly three residue classes
+\[
+h\pmod{81}
+\]
+satisfy
+\[
+R_L(v)+64^Lh\bmod81\in\Dset_G.
+\]
+The first local density is therefore
+\[
+\frac{27}{64^3},
+\]
+and the second is
+\[
+\frac{3}{81}=\frac1{27}.
+\]
+\end{proposition}
+
+\begin{proof}
+Multiplication by $81^k$ is a permutation of $\Z/B\Z$.  Hence
+\[
+c\longmapsto Q_k(u)+81^kc\pmod B
+\]
+is a bijection.  The set $\Rset_3$ has $3^3=27$ elements, giving the first count.
+
+Multiplication by $64^L$ is a permutation of $\Z/81\Z$.  Hence
+\[
+h\longmapsto R_L(v)+64^Lh\pmod{81}
+\]
+is a bijection.  The set $\Dset_G$ has three elements, giving the second count.
+\end{proof}
+
+\begin{remark}
+The two exact mask sizes are marginal statements.  They do not specify how the actual carry coordinates $(c,h)$ are distributed inside the product of the two masks, so they do not by themselves bound the joint sum in Corollary \ref{cor:profile}.
+\end{remark}
+
+\begin{proposition}[Periodicity of the local acceptance rule]
+\label{prop:periods}
+As a function of the decorated residue state, the right acceptance rule depends on $k$ only modulo $2^{14}$, and the left acceptance rule depends on $L$ only modulo $9$.
+\end{proposition}
+
+\begin{proof}
+We first prove
+\[
+81^{2^{14}}\equiv1\pmod{2^{18}}.
+\]
+For $j\ge0$, put
+\[
+x_j=81^{2^j}.
+\]
+Since
+\[
+\nu_2(x_0-1)=\nu_2(80)=4
+\]
+and $x_j\equiv1\pmod8$, one has
+\[
+\nu_2(x_j+1)=1.
+\]
+Therefore
+\[
+\nu_2(x_{j+1}-1)
+=
+\nu_2(x_j-1)+\nu_2(x_j+1)
+=
+\nu_2(x_j-1)+1.
+\]
+Induction gives
+\[
+\nu_2\bigl(81^{2^j}-1\bigr)=j+4.
+\]
+At $j=14$ the valuation is $18$, so multiplication by $81^k$ modulo
+\[
+B=2^{18}
+\]
+is periodic in $k$ with period $2^{14}$.
+
+The successive powers of $64$ modulo $81$ are
+\[
+64,46,28,10,73,55,37,19,1.
+\]
+Thus
+\[
+64^9\equiv1\pmod{81}.
+\]
+The two acceptance conditions in Theorem \ref{thm:dynamical-renorm} use only $81^k$ modulo $B$ and $64^L$ modulo $81$, proving the assertion.
+\end{proof}
+
+\section{Multi-block synchronization before the first wrap}
+
+Let $k,L,J\ge1$.  Begin with words
+\[
+u_0\in\E^k,
+\qquad
+v_0\in\E^L.
+\]
+For $1\le i\le J$, choose
+\[
+a_i\in\E^3,
+\qquad
+d_i\in\E,
+\]
+and define
+\[
+u_i=u_{i-1}a_i,
+\qquad
+v_i=d_iv_{i-1}.
+\]
+Let $c_i,h_i$ be the carry coordinates of $(u_i,v_i)$ at parameters
+\[
+(k+3i,L+i).
+\]
+Let
+\[
+t_i=t_{k+3(i-1)}(u_{i-1},a_i),
+\qquad
+s_i=s_{L+i-1}(v_{i-1},d_i).
+\]
+
+\begin{theorem}[No-wrap synchronization over several critical blocks]
+\label{thm:nowrap}
+Assume that the top pair is pinned,
+\[
+c_J=0,
+\]
+and that
+\[
+B^J<81^L.
+\]
+Then every intermediate wrap integer in Theorem \ref{thm:block-recursion} is zero.  More precisely,
+\[
+c_{i-1}=t_i+Bc_i
+\]
+and
+\[
+h_{i-1}=s_i+81h_i
+\]
+for every $1\le i\le J$.  Consequently,
+\[
+c_0=t_1+Bt_2+\cdots+B^{J-1}t_J
+\]
+and
+\[
+h_0=s_1+81s_2+\cdots+81^{J-1}s_J+81^Jh_J.
+\]
+In particular, the $J$ forward lift digits are recovered uniquely from the base-$B$ expansion of $c_0$, and the $J$ backward lift digits are recovered uniquely from $h_0$ modulo $81^J$.
+\end{theorem}
+
+\begin{proof}
+At the step from level $i-1$ to level $i$, Theorem \ref{thm:block-recursion} gives an integer $z_i$ such that
+\[
+Bc_i=c_{i-1}-t_i+81^{L+i-1}z_i.
+\]
+Equivalently,
+\[
+c_{i-1}=t_i+Bc_i-81^{L+i-1}z_i.
+\]
+We descend from $i=J$ to $i=1$.  We claim that after $J-i$ descents,
+\[
+0\le c_i\le B^{J-i}-1.
+\]
+At $i=J$ this is true because $c_J=0$.
+
+Assume it holds at level $i$.  Then
+\begin{align*}
+0
+&\le t_i+Bc_i\\
+&\le (B-1)+B(B^{J-i}-1)\\
+&=B^{J-i+1}-1\\
+&\le B^J-1\\
+&<81^L\\
+&\le81^{L+i-1}.
+\end{align*}
+Both $c_{i-1}$ and the integer $t_i+Bc_i$ therefore lie in
+\[
+[0,81^{L+i-1}).
+\]
+Their difference is a multiple of $81^{L+i-1}$, so they are equal.  Thus
+\[
+z_i=0,
+\qquad
+c_{i-1}=t_i+Bc_i,
+\]
+and the claimed bound continues to level $i-1$.
+
+The second equation of Theorem \ref{thm:block-recursion}, with $z_i=0$, gives
+\[
+h_{i-1}=s_i+81h_i.
+\]
+Iterating the two recurrences yields the displayed expansions.  Since
+\[
+0\le t_i<B
+\]
+and
+\[
+0\le s_i<81,
+\]
+ordinary uniqueness of positional expansions recovers the digits as stated.
+\end{proof}
+
+\begin{corollary}[A positive fraction of every long pinned trace is synchronized]
+\label{cor:fraction}
+Let a pinned pair have parameters $(K,L_{\rm top})$.  Let $J$ satisfy
+\[
+0\le J\le\min\left(\left\lfloor\frac K3\right\rfloor,L_{\rm top}\right)
+\]
+and
+\[
+(64^3)^J<81^{L_{\rm top}-J}.
+\]
+Then it may be stripped through $J$ critical blocks without any carry wrap.  Consequently, for every real number
+\[
+0<\theta<\frac{\log81}{\log(81\cdot64^3)},
+\]
+and all sufficiently large $L_{\rm top}$, the first
+\[
+J=\lfloor\theta L_{\rm top}\rfloor
+\]
+stripped blocks synchronize as in Theorem \ref{thm:nowrap}.  The limiting fraction is
+\[
+\frac{\log81}{\log(81\cdot64^3)}=0.260472\ldots.
+\]
+\end{corollary}
+
+\begin{proof}
+After stripping $J$ blocks, the remaining backward length is
+\[
+L=L_{\rm top}-J.
+\]
+The first assertion is Theorem \ref{thm:nowrap} with this value of $L$.
+
+The inequality
+\[
+(64^3)^J<81^{L_{\rm top}-J}
+\]
+is equivalent to
+\[
+J\log(64^3)<(L_{\rm top}-J)\log81,
+\]
+or
+\[
+\frac{J}{L_{\rm top}}
+<
+\frac{\log81}{\log81+\log(64^3)}.
+\]
+If $\theta$ is strictly below the right side, then
+\[
+J=\lfloor\theta L_{\rm top}\rfloor
+\]
+satisfies the inequality for every sufficiently large $L_{\rm top}$.  The decimal is the numerical value of the displayed exact constant.
+\end{proof}
+
+\section{An explicit off-zero source for a pinned extension}
+
+The next calculation shows that the old zero carry is not an inductively closed state.
+
+\begin{proposition}[A pinned extension arising from carry $257792$]
+\label{prop:offzero}
+Let
+\[
+\begin{aligned}
+u={}&(1,0,1,0,1,0,1,1,0,0,-1,0),\\
+v={}&(-1,0,-1,1),\\
+a={}&(0,-1,-1),\\
+d={}&1.
+\end{aligned}
+\]
+For the old pair $(u,v)$ at parameters $(12,4)$, the carry coordinates are
+\[
+c=257792
+\]
+and
+\[
+h=28280728077103985211.
+\]
+This carry is nonzero and satisfies
+\[
+c<64^3.
+\]
+The pair passes both local tests in Theorem \ref{thm:dynamical-renorm}; its unique extension $(ua,dv)$ is pinned at parameters $(15,5)$.  Its canonical start is
+\[
+Y=1217392611211961739383252815.
+\]
+\end{proposition}
+
+\begin{proof}
+The word numerators and canonical data are
+\[
+N_{12}(u)=2318912255527500481137,
+\]
+\[
+R_{12}(u)=4310860030160454133583,
+\]
+\[
+Q_{12}(u)=72815604730280023521600,
+\]
+\[
+N_4(v)=-601073,
+\]
+\[
+R_4(v)=6707377,
+\qquad
+Q_4(v)=17209684,
+\]
+and
+\[
+N_3(a)=-9280,
+\qquad
+R_3(a)=239680,
+\qquad
+Q_3(a)=485900.
+\]
+These values are certified by the exact identities
+\[
+64^{12}Q_{12}(u)-81^{12}R_{12}(u)=N_{12}(u),
+\]
+\[
+64^4Q_4(v)-81^4R_4(v)=N_4(v),
+\]
+and
+\[
+64^3Q_3(a)-81^3R_3(a)=N_3(a),
+\]
+together with the defining ranges of the canonical representatives.
+
+Put
+\[
+A=64^{12}=4722366482869645213696,
+\]
+\[
+M=81^4=43046721,
+\qquad
+B=64^3=262144.
+\]
+Direct integer multiplication gives
+\begin{align*}
+R_{12}(u)+A\cdot257792
+&=1217392611211961739383252815\\
+&=Q_4(v)+M\cdot28280728077103985211.
+\end{align*}
+Thus the old carry coordinates are the stated $c$ and $h$.  Also
+\[
+0<257792<262144=B.
+\]
+
+For the right local test,
+\[
+Q_{12}(u)+81^{12}c
+\equiv239680
+\equiv R_3(a)
+\pmod B.
+\]
+Hence
+\[
+t_{12}(u,a)=c.
+\]
+For the left local test,
+\[
+R_4(v)+64^4h\equiv19\pmod{81}.
+\]
+Since $19$ is the residue corresponding to the symbol $d=1$, the backward test is satisfied.  More explicitly,
+\[
+h\equiv9\pmod{81},
+\]
+so Lemma \ref{lem:lifts} gives
+\[
+s_4(v,1)=9
+\]
+and
+\[
+Q_5(dv)=Q_4(v)+9M=404630173.
+\]
+Theorem \ref{thm:dynamical-renorm} now gives the pinned extension.  Its right canonical start is
+\[
+R_{15}(ua)=R_{12}(u)+Ac=Y.
+\]
+Finally,
+\[
+Y-Q_5(dv)
+=81^5\cdot349144791075357842,
+\]
+so the pinning congruence modulo $81^5$ is also visible directly.
+\end{proof}
+
+\begin{corollary}[The old zero fibre is not a closed induction state]
+\label{cor:notclosed}
+The exact recursion for $C_{k+3,L+1}(0)$ cannot be obtained by retaining only old pairs of carry zero.  In particular, the contribution in Proposition \ref{prop:offzero} would be lost by such a recursion.
+\end{corollary}
+
+\begin{proof}
+The old pair in Proposition \ref{prop:offzero} has carry
+\[
+c=257792\ne0,
+\]
+but its extension has new carry zero.  Therefore off-zero old carry fibres can contribute to the new pinned fibre.
+\end{proof}
+
+\section{Assessment}
+
+This round produces a genuine one-block synchronization theorem.  The pinned fibre at $(k+3,L+1)$ is not an opaque intersection: for $L\ge3$ it is exactly the accepted part of the fixed old carry window
+\[
+0\le c<64^3,
+\]
+with one explicit three-step forward mask and one explicit one-step backward mask.  Every old pair has at most one pinned extension.  Corollary \ref{cor:profile} is therefore an exact critical renormalization, not a heuristic transfer.
+
+The multi-block theorem goes further.  The local injections multiply without loss until the first modular wrap.  For any pinned trace, a positive fraction approaching
+\[
+0.260472\ldots
+\]
+of its critical blocks is synchronized by ordinary positional expansions.  This is the strongest unconditional synchronization statement obtained so far in this branch.
+
+The result does not close the zero-trace conjecture.  Proposition \ref{prop:offzero} shows why the scalar target
+\[
+C_{k,L}(0)=1
+\]
+is not inductively closed: a new pinned solution may come from a nonzero old carry near the top of the fixed $64^3$ window.  After enough blocks are stripped, the inequality in Theorem \ref{thm:nowrap} fails, a nonzero wrap integer $z$ appears, and the base-$64^3$/base-$81$ digit synchronization can change discontinuously.  The first wrap, rather than the all-carry average or global carry injectivity, is now the exact live obstruction.
+
+No nontrivial Collatz cycle and no divergent Collatz trajectory is excluded by this round.  Even a complete proof of pinned carry repulsion would still settle only the recurrent $81/64$ subsystem; the global synchronization step connecting every hypothetical least Collatz counterexample to that subsystem remains open.
+
+\section{Next-round directive}
+
+Continue on branch \texttt{P3-ZT-PINNED-CARRY}.  Use Theorem \ref{thm:block-recursion} as the basic state evolution and treat the first nonzero wrap integer $z$ as the new target.  Do not launch the monolithic $(k,L)=(28,10)$ search yet: at the present cost it returns one bit after roughly $3^{22}$ streamed heads, while the computations below directly test the new proof mechanism.
+
+First finish and record the count-all runs for
+\[
+(23,8),(24,7),(24,8),(25,8),(25,9),
+\]
+including $N(k,L)$, $C_{k,L}(0)$, all recovered witnesses when the count is at most $1000$, split $h$, source and output SHA-256 digests, Python version, peak resident memory, and elapsed wall-clock time.  Preserve the already completed counts for $(20,7)$ through $(23,7)$ in the same format.
+
+Implement \texttt{compute/zt\_carry\_small.py} exactly as directed in Round 2.  Verify the full carry spectra for
+\[
+(4,2),(5,2),(6,2),(7,3),(8,3),(9,3),(10,3),
+\]
+the support size $5^L$, the signed multiplicity formula, the energy $19^L$, and the second-moment identity.  This is a cheap independent audit of every load-bearing identity from Round 2 and should be completed before deeper computation is booked.
+
+Then implement \texttt{compute/zt\_strip\_profile.py}.  For each pinned solution at
+\[
+(15,5),(20,7),(21,7),(22,7),(23,7),(24,7),(25,8),
+\]
+recover the complete right word and left word, not only the midpoint integer.  Strip successive $3$-symbol/$1$-symbol blocks.  At every level record
+\[
+(k_i,L_i,c_i,h_i,t_i,s_i,z_i),
+\]
+and verify the two equations
+\[
+64^3c_i=c_{i-1}-t_i+81^{L_{i-1}}z_i,
+\]
+\[
+81h_i=h_{i-1}-s_i+64^{k_{i-1}}z_i.
+\]
+For each solution record the first index at which $z_i\ne0$, the value and sign of that first wrap, the residues of the right endpoint modulo $64^3$, and the backward ancestor modulo $81$.  Verify Theorem \ref{thm:nowrap} on every solution by confirming $z_i=0$ throughout the range
+\[
+(64^3)^J<81^{L_{\rm top}-J}.
+\]
+
+Next build a count-only version of the decorated profile in Corollary \ref{cor:profile}.  For each predecessor cell
+\[
+(12,4),(17,6),(18,6),(19,6),(20,6),(21,6),(22,7),
+\]
+count old pairs with $0\le c<64^3$ in the four classes determined by whether the right three-step test and the left one-step test pass.  Record
+\[
+T_{00},T_{01},T_{10},T_{11},
+\]
+where
+\[
+T_{11}=C_{k+3,L+1}(0).
+\]
+Also record the right and left marginals and the exact covariance
+\[
+T_{11}(T_{00}+T_{01}+T_{10}+T_{11})
+-(T_{10}+T_{11})(T_{01}+T_{11}).
+\]
+Validate this profile by complete enumeration for every feasible pair with $k\le10$ and $L\le3$ before using meet-in-the-middle output.
+
+The theoretical task next round is to classify the first wrap.  Starting from Theorem \ref{thm:block-recursion}, prove the strongest true restriction on $z$ at the first index where it is nonzero.  The preferred target is a theorem that, in the critical region $k\le3L-2$, the first wrap cannot simultaneously satisfy the right set $\Rset_3$ and the left domain $\{0,19,62\}$.  If that statement is false, return the smallest exact counterexample with its complete word data and replace it by the strongest residue restriction surviving all computed wrap signatures.
+
+Edit \texttt{COLLATZ\_MAP.md} to record as proved in Round 3: the exact two-carry recursion, pinned one-block synchronization, the decorated-profile formula, the low-carry inequality, the periodic local masks, and the multi-block no-wrap theorem.  Record the explicit carry-$257792$ extension as the reason the old zero fibre is not an inductively closed state.  Rename the immediate obstruction from \texttt{pinned carry repulsion} to \texttt{first-wrap exclusion}, while retaining pinned carry repulsion as the branch's final finite target.
+
+\end{document}

@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+41. Christol-Cobham algebraicity trap
+
+**Speculative · P**
+
+Reduce an orbit-generating series modulo suitable primes. Algebraicity over a finite field would
+imply automaticity; automaticity in two independent bases would force periodic structure. The real
+work is deriving algebraicity from exact affine carries rather than assuming it.
+
+Take as long as you need.

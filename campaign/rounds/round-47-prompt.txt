@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+42. Aperiodic tilings of Collatz spacetime
+
+**Speculative · B**
+
+Build local Wang tiles whose horizontal direction performs binary iteration and whose vertical
+direction performs ternary conversion. Prove that every tiling with a finite-support boundary
+becomes periodic, or find an aperiodic finite-boundary tiling corresponding to an infinite orbit.
+
+Take as long as you need.

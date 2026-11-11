@@ -1,0 +1,16 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+3. Turn the q-analogue into a polynomialization theorem
+
+**Established/Hybrid · P**
+
+Under the known conjugacy Z_2 <-> F_2[[q]], positive integers become a special family of formal
+power series. Prove that every series in this family eventually becomes a polynomial, or enters
+the polynomial basin, under a carefully chosen conjugate q-map. Polynomial inputs already have
+terminating behavior in the natural analogue.
+
+The hoped-for invariant could be support entropy, gap growth, a valuation filtration, or a
+noetherian ideal attached to the coefficient sequence. This would be an astonishing proof:
+ordinary integer termination would follow from eventual finite support in a formal series.
+
+Take as long as you need.

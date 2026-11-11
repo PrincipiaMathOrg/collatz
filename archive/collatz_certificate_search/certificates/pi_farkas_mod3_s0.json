@@ -1,0 +1,135 @@
+{
+ "family": "mod3",
+ "K_states": 3,
+ "s": "0",
+ "N_hi": 8,
+ "N_fail": 5,
+ "eps_at_Nfail": -0.0,
+ "eps_at_Nfail_minus_1": 1.0,
+ "exact_feasible_below": true,
+ "table_below": {
+  "0": [
+   1,
+   1
+  ],
+  "2": [
+   1,
+   2
+  ],
+  "1": [
+   1,
+   1
+  ]
+ },
+ "farkas": {
+  "ok": true,
+  "ok_lo": true,
+  "ok_true_rows": true,
+  "source": "vertex",
+  "support": [
+   4,
+   5
+  ],
+  "n_rows": 2,
+  "max_row": 5,
+  "t_interior": 1.0,
+  "y": {
+   "5": [
+    1,
+    1
+   ],
+   "4": [
+    1,
+    1
+   ]
+  },
+  "components_sign": {
+   "1": 0,
+   "2": 0,
+   "0": 1
+  }
+ },
+ "time": 0.06547832489013672,
+ "analytic_single_row": {
+  "m": 8,
+  "exact_ok": true,
+  "components": {
+   "1": [
+    1,
+    1
+   ]
+  }
+ },
+ "battery": {
+  "ok": false,
+  "per_family": {
+   "F-A": [
+    0,
+    63
+   ],
+   "F-B": [
+    0,
+    63
+   ],
+   "F-C": [
+    0,
+    39
+   ],
+   "F-D": [
+    0,
+    6
+   ],
+   "F-E": [
+    1,
+    40
+   ],
+   "F-F": [
+    0,
+    7
+   ],
+   "F-G": [
+    0,
+    126
+   ],
+   "F-H": [
+    2,
+    0
+   ],
+   "F-I": [
+    0,
+    2
+   ],
+   "F-J": [
+    2,
+    0
+   ],
+   "F-K": [
+    0,
+    1
+   ]
+  },
+  "first_failure": {
+   "family": "F-A",
+   "member": {
+    "family": "F-A",
+    "m": 2,
+    "n": 3,
+    "word": [
+     1
+    ],
+    "map": [
+     3,
+     1
+    ]
+   },
+   "failure": [
+    "P pi > pi",
+    5,
+    "2",
+    "1/2"
+   ]
+  }
+ },
+ "M": 3,
+ "analytic_row": 8
+}

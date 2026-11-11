@@ -1,0 +1,5 @@
+odd_seeds=200000 steps=96
+checked_noncycle_powers=2248583 checked_strict=1637950 cycle_cases=6260328
+max_origin_square={"seed":"50331","s":10,"K":2,"word":"1,2,1,1,1,2,2,2,1,1"}
+closest_universal_bound={"seed":"7","j":0,"s":1,"K":2,"y":"7","word":"1","logSlack":3.4918530963296748,"isStrict":true}
+certificate_passed=true

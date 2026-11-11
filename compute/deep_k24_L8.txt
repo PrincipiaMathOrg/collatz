@@ -1,0 +1,5 @@
+k=24  conjectured bound floor((k+1)/3) = 8
+  k=24 L=8  m=32  h=17  head=3^17  tail=3^15
+  tail built: 14348907 gammas
+  l_24 >= 8 ?  False
+  => l_24 <= 7   (upper bound only; run without --L, or probe L=7, to establish the matching lower bound)

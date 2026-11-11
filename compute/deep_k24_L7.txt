@@ -1,0 +1,6 @@
+k=24  conjectured bound floor((k+1)/3) = 8
+  k=24 L=7  m=31  h=16  head=3^16  tail=3^15
+  tail built: 14348907 gammas
+  l_24 >= 7 ?  True
+     witness x = 1424800203566559394756282840425944669417472
+     direct-iteration check: PASS (survives 31 steps, F^7(x) < 64^24)

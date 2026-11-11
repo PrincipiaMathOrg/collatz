@@ -1,0 +1,18 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+4. A Cobham trap for counterexample carry streams
+
+**Hybrid · P**
+
+Base 2 determines the parity/seed side, while base 3 controls endpoint carries. Try to prove that
+the carry sequence of any infinite positive-integer counterexample is simultaneously describable
+by finite transducers in multiplicatively independent bases 2 and 3.
+
+A Cobham-Semenov-type rigidity theorem would then force eventual periodicity. Eventual
+periodicity should lead to a rational 2-adic point and, after imposing positivity and the affine
+identity, to a cycle equation.
+
+The whole Collatz transition relation is not base-2 automatic, so the target must be the highly
+restricted stream associated with a hypothetical counterexample, not the full relation.
+
+Take as long as you need.

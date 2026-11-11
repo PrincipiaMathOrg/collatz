@@ -1,0 +1,242 @@
+[
+ {
+  "q": "1/2",
+  "s": "0",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "1/2",
+  "s": "3/4",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "1/2",
+  "s": "1",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "1/2",
+  "s": "3/2",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "1/2",
+  "s": "2",
+  "L_fail": 3,
+  "row_m": 7,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "1/2",
+  "s": "3",
+  "L_fail": 4,
+  "row_m": 15,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "0",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "3/4",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "1",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "3/2",
+  "L_fail": 3,
+  "row_m": 7,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "2",
+  "L_fail": 4,
+  "row_m": 15,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "2/3",
+  "s": "3",
+  "L_fail": 6,
+  "row_m": 63,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "0",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "3/4",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "1",
+  "L_fail": 3,
+  "row_m": 7,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "3/2",
+  "L_fail": 4,
+  "row_m": 15,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "2",
+  "L_fail": 5,
+  "row_m": 31,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "3/4",
+  "s": "3",
+  "L_fail": 8,
+  "row_m": 255,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "0",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "3/4",
+  "L_fail": 5,
+  "row_m": 31,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "1",
+  "L_fail": 7,
+  "row_m": 127,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "3/2",
+  "L_fail": 10,
+  "row_m": 1023,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "2",
+  "L_fail": 14,
+  "row_m": 16383,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "9/10",
+  "s": "3",
+  "L_fail": 20,
+  "row_m": 1048575,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "0",
+  "L_fail": 2,
+  "row_m": 3,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "3/4",
+  "L_fail": 52,
+  "row_m": 4503599627370495,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "1",
+  "L_fail": 69,
+  "row_m": 590295810358705651711,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "3/2",
+  "L_fail": 104,
+  "row_m": 20282409603651670423947251286015,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "2",
+  "L_fail": 138,
+  "row_m": 348449143727040986586495598010130648530943,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ },
+ {
+  "q": "99/100",
+  "s": "3",
+  "L_fail": 207,
+  "row_m": 205688069665150755269371147819668813122841983204197482918576127,
+  "check": "2^{-s} > q^L exactly ((1/2)^p > q^(L*qden)); row m=2^L-1 violated by its even predecessor 2^{L+1}-2 alone",
+  "ok": true
+ }
+]

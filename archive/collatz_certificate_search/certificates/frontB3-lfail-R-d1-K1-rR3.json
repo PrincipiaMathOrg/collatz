@@ -1,0 +1,45 @@
+{
+ "mode": "lfail",
+ "family": "R-d1-K1-rR3",
+ "level": "R",
+ "dim": 1,
+ "K": 1,
+ "lab": "r",
+ "Rcap": 3,
+ "status": "UNSAT",
+ "time_s": 0.0,
+ "rounds": 1,
+ "bitwidth": 6,
+ "reason": null,
+ "refuting_instances": [
+  [
+   "0",
+   "2"
+  ],
+  [
+   "2",
+   "1"
+  ]
+ ],
+ "n_instances": 2,
+ "max_len": 1,
+ "claim": "no rank rho(w) = alpha^T M_{l1}...M_{lq} beta of this class (dimension 1, coefficients 0..1, letters r) satisfies rho(w) > rho(w') on all listed instances",
+ "L_fail": 2,
+ "history": {
+  "2": "UNSAT"
+ },
+ "L_reached": 2,
+ "exhaustive_check": "PASS",
+ "surviving_configs": 0,
+ "letters_used": [
+  "(2, '0')",
+  "(1, '2')",
+  "(0, '1')"
+ ],
+ "automata_used": [
+  0,
+  1,
+  2
+ ],
+ "class_size": 1048576
+}

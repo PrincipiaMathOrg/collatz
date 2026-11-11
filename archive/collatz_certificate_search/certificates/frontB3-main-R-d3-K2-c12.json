@@ -1,0 +1,14 @@
+{
+ "mode": "main",
+ "family": "R-d3-K2-c12",
+ "level": "R",
+ "dim": 3,
+ "K": 2,
+ "lab": "c12",
+ "Rcap": 3,
+ "status": "UNKNOWN",
+ "time_s": 3539.5,
+ "rounds": 16,
+ "bitwidth": 19,
+ "reason": "timeout"
+}

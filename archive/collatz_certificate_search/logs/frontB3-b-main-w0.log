@@ -1,0 +1,101 @@
+=== start mode=main worker=0/4 timeout=900 budget=3600 2026-08-16 14:03:44
+main pool: 11487 instances, max len 40
+families for this worker: ['R-d1-K1-plain', 'R-d1-K3-plain', 'R-d1-K3-c1', 'R-d2-K2-plain', 'R-d2-K3-plain', 'R-d1-K3-rR3', 'R-d3-K2-plain', 'R-d2-K2-c12', 'R-d3-K1-c12', 'R-d2-K3-c12', 'R-d4-K2-c1', 'R-d4-K3-c1']
+--- family R-d1-K1-plain nvars 5
+   RESULT R-d1-K1-plain UNSAT rounds 1 |inst| 12 maxlen 2 W 8 0.4s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11')]
+--- family R-d1-K3-plain nvars 5
+   RESULT R-d1-K3-plain UNSAT rounds 1 |inst| 12 maxlen 2 W 11 0.2s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11')]
+--- family R-d1-K3-c1 nvars 8
+   RESULT R-d1-K3-c1 UNSAT rounds 1 |inst| 12 maxlen 2 W 11 0.2s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11')]
+--- family R-d2-K2-plain nvars 16
+   round 1: |cur|=15 added [('011', '202')] (1.6s)
+   RESULT R-d2-K2-plain UNSAT rounds 2 |inst| 15 maxlen 3 W 13 10.5s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11'), ('011', '202'), ('021', '22'), ('101', '001')]
+--- family R-d2-K3-plain nvars 16
+   round 1: |cur|=15 added [('011', '202')] (9.0s)
+   round 2: |cur|=18 added [('002', '122')] (49.5s)
+   RESULT R-d2-K3-plain UNSAT rounds 3 |inst| 18 maxlen 3 W 19 304.9s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11'), ('011', '202'), ('101', '001'), ('102', '002'), ('002', '122'), ('022', '222'), ('121', '0122')]
+--- family R-d1-K3-rR3 nvars 20
+   RESULT R-d1-K3-rR3 UNSAT rounds 1 |inst| 12 maxlen 2 W 11 0.6s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11')]
+--- family R-d3-K2-plain nvars 33
+   round 1: |cur|=15 added [('011', '202')] (10.9s)
+   round 2: |cur|=18 added [('001', '12')] (45.5s)
+   round 3: |cur|=21 added [('102', '002')] (79.4s)
+   round 4: |cur|=24 added [('000', '112')] (159.4s)
+   round 5: |cur|=27 added [('121', '0122')] (214.2s)
+   round 6: |cur|=30 added [('212', '102')] (273.7s)
+=== start mode=main worker=0/4 timeout=900 budget=2700 2026-08-16 15:07:59
+main pool: 11487 instances, max len 40
+families for this worker: ['R-d1-K1-plain', 'R-d1-K3-plain', 'R-d1-K3-c1', 'R-d2-K2-plain', 'R-d2-K3-plain', 'R-d1-K3-rR3', 'R-d3-K2-plain', 'R-d2-K2-c12', 'R-d3-K1-c12', 'R-d2-K3-c12', 'R-d4-K2-c1', 'R-d4-K3-c1']
+skip R-d1-K1-plain (done)
+skip R-d1-K3-plain (done)
+skip R-d1-K3-c1 (done)
+skip R-d2-K2-plain (done)
+skip R-d2-K3-plain (done)
+skip R-d1-K3-rR3 (done)
+--- family R-d3-K2-plain nvars 33
+   round 1: |cur|=15 added [('010', '20')] (5.0s)
+   round 2: |cur|=18 added [('101', '001')] (12.4s)
+   round 3: |cur|=21 added [('120', '012')] (115.7s)
+   round 4: |cur|=24 added [('000', '112')] (707.3s)
+   round 5: |cur|=27 added [('001', '12')] (1187.1s)
+   RESULT R-d3-K2-plain UNKNOWN rounds 6 |inst| 27 maxlen 3 W 19 2102.9s timeout
+--- family R-d2-K2-c12 nvars 52
+   round 1: |cur|=15 added [('002', '122')] (2.8s)
+   round 2: |cur|=18 added [('022', '222')] (5.4s)
+   round 3: |cur|=21 added [('012', '21')] (8.6s)
+   round 4: |cur|=24 added [('001', '12')] (17.7s)
+   round 5: |cur|=27 added [('201', '022')] (32.4s)
+   round 6: |cur|=30 added [('222', '111')] (56.4s)
+   round 7: |cur|=33 added [('121', '0122')] (93.8s)
+   round 8: |cur|=36 added [('122', '02')] (172.8s)
+   RESULT R-d2-K2-c12 UNSAT rounds 9 |inst| 36 maxlen 4 W 15 267.1s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11'), ('002', '122'), ('011', '202'), ('020', '212'), ('022', '222'), ('100', '00'), ('101', '001'), ('012', '21'), ('110', '0022'), ('112', '011'), ('001', '12'), ('010', '20'), ('021', '22'), ('201', '022'), ('211', '101'), ('212', '102'), ('222', '111'), ('0010', '120'), ('0011', '1202'), ('121', '0122'), ('220', '1022'), ('0022', '1222'), ('122', '02'), ('0100', '200'), ('0101', '2002')]
+--- family R-d3-K1-c12 nvars 114
+   round 1: |cur|=15 added [('010', '20')] (1.4s)
+   round 2: |cur|=18 added [('020', '212')] (2.9s)
+   round 3: |cur|=21 added [('100', '00')] (5.2s)
+   round 4: |cur|=24 added [('110', '0022')] (7.7s)
+   RESULT R-d3-K1-c12 UNSAT rounds 5 |inst| 24 maxlen 3 W 13 12.0s 
+   core: [('0', '2'), ('1', ''), ('2', '1'), ('00', '12'), ('01', '2'), ('02', '22'), ('10', '0'), ('11', '01'), ('12', '02'), ('20', '022'), ('21', '1'), ('22', '11'), ('010', '20'), ('011', '202'), ('012', '21'), ('020', '212'), ('021', '22'), ('022', '222'), ('100', '00'), ('101', '001'), ('102', '002'), ('110', '0022'), ('111', '01'), ('112', '011')]
+--- family R-d2-K3-c12 nvars 52
+   round 1: |cur|=15 added [('010', '20')] (2.8s)
+   round 2: |cur|=18 added [('002', '122')] (7.2s)
+   round 3: |cur|=21 added [('020', '212')] (12.8s)
+   round 4: |cur|=24 added [('001', '12')] (22.1s)
+   round 5: |cur|=27 added [('202', '0222')] (33.2s)
+   round 6: |cur|=30 added [('100', '00')] (64.0s)
+   round 7: |cur|=33 added [('000', '112')] (104.8s)
+   round 8: |cur|=36 added [('220', '1022')] (228.2s)
+   round 9: |cur|=39 added [('0112', '2022')] (279.1s)
+   round 10: |cur|=42 added [('120', '012')] (521.3s)
+   round 11: |cur|=45 added [('0010', '120')] (1122.1s)
+   round 12: |cur|=48 added [('0000', '1112')] (1346.7s)
+   round 13: |cur|=51 added [('0200', '2112')] (2044.7s)
+   RESULT R-d2-K3-c12 UNKNOWN rounds 14 |inst| 51 maxlen 4 W 22 2967.9s timeout
+--- family R-d4-K2-c1 nvars 104
+   round 1: |cur|=15 added [('002', '122')] (19.1s)
+   round 2: |cur|=18 added [('102', '002')] (41.5s)
+   round 3: |cur|=21 added [('001', '12')] (94.3s)
+   round 4: |cur|=24 added [('112', '011')] (289.6s)
+   round 5: |cur|=27 added [('120', '012')] (976.4s)
+   round 6: |cur|=30 added [('101', '001')] (1425.0s)
+   round 7: |cur|=33 added [('000', '112')] (1916.5s)
+   round 8: |cur|=36 added [('210', '10')] (2206.0s)
+   round 9: |cur|=39 added [('0011', '1202')] (2763.7s)
+   RESULT R-d4-K2-c1 UNKNOWN rounds 9 |inst| 39 maxlen 4 W None 2763.7s budget
+--- family R-d4-K3-c1 nvars 104
+   round 1: |cur|=15 added [('001', '12')] (46.8s)
+   round 2: |cur|=18 added [('100', '00')] (140.6s)
+   round 3: |cur|=21 added [('012', '21')] (235.6s)
+   round 4: |cur|=24 added [('010', '20')] (263.8s)
+   round 5: |cur|=27 added [('111', '01')] (841.1s)
+   round 6: |cur|=30 added [('021', '22')] (1109.2s)
+   round 7: |cur|=33 added [('211', '101')] (1401.4s)
+   RESULT R-d4-K3-c1 UNKNOWN rounds 8 |inst| 33 maxlen 3 W 25 2327.2s timeout
+=== done 2026-08-16 18:02:03

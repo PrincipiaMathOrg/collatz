@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "assessment_rule": "Promising means that the program has an exact full-Collatz completion gate, substantial closed leverage, or a finite independently checkable certificate target. The bands are organizational judgments, not claims of community consensus or probabilities of success.",
+  "approaches": [
+    {
+      "id": "AP-RESIDUE-DESCENT",
+      "name": "Finite residue-cylinder descent certificates",
+      "priority_band": "A: finite-certificate frontier",
+      "classification": "stronger_than_collatz_certificate_route",
+      "retained_skeletons": ["SK-RDC"],
+      "primary_literature": ["LIT-TERRAS-1976", "LIT-MONKS-ETAL-2013", "LIT-APPLEGATE-LAGARIAS-2003", "LIT-BARINA-2025"],
+      "closed_leverage": ["THM-STOPPING-DESCENT-01", "THM-PARITY-CYLINDER-01", "THM-STRONG-SUFFICIENT-01", "THM-CYCLE-REDUCE-01"],
+      "completion_gate": "OPEN-DESCENT-COVER-01",
+      "why_promising": "A successful cover is finite, exact, and independently checkable; classical parity cylinders, modular hitting sets, and large verified ranges provide concrete pruning tools.",
+      "hard_boundary": "No theorem says that a finite universal cover exists, and long stopping-time examples defeat any unjustified shallow-depth assumption. The gate is stronger than Collatz."
+    },
+    {
+      "id": "AP-REWRITE-TERMINATION",
+      "name": "Proof-producing string-rewrite termination",
+      "priority_band": "A: finite-certificate frontier",
+      "classification": "equivalent_automation_route",
+      "retained_skeletons": ["SK-YAH"],
+      "primary_literature": ["LIT-YAH-2023"],
+      "closed_leverage": ["DEF-REWRITE-YAH-01", "THM-REWRITE-SIM-01", "THM-REWRITE-MACRO-01"],
+      "completion_gate": "OPEN-REWRITE-RELTERM-01",
+      "why_promising": "Ten-rule termination is already proved, and modern termination tools can emit finite certificates; the remaining obligation is sharply localized to one exceptional rule relative to the terminating subsystem.",
+      "hard_boundary": "After exact normalization, exceptional macrosteps are the accelerated Collatz map. Relative termination is therefore equivalent to Collatz unless a genuinely new global rank or transition invariant is found."
+    },
+    {
+      "id": "AP-SYNCHRONIZED-CARRY",
+      "name": "Same-orbit synchronization and carry rigidity",
+      "priority_band": "A: decomposed structural frontier",
+      "classification": "split_cycle_divergence_route",
+      "retained_skeletons": ["SK-TSC", "SK-FCD-HSCI"],
+      "primary_literature": ["LIT-TERRAS-1976", "LIT-ROZIER-TERRACOL-2026", "LIT-BERNSTEIN-LAGARIAS-1996", "LIT-FERNANDEZ-IBANEZ-2026"],
+      "closed_leverage": ["CERT-TARGET1-01", "THM-DIV-NORM-01", "THM-DIV-RETURN-01", "THM-DIV-DUAL-TAIL-01", "THM-DIV-CHARGE-01", "THM-CYCLE-COMPLEXITY-01", "THM-CYCLE-SINGLECLASS-01", "THM-CYCLE-BOUNDARY-WIND-01", "THM-CYCLE-WIND-CST-01", "THM-CYCLE-SHADOW-01", "NOGO-CYCLE-LATTICE-01"],
+      "completion_gate": ["OPEN-BTS-01", "OPEN-CYCLE-INT-01"],
+      "active_divergence_gate": ["OPEN-HSCI-SYNC-SHELL-01", "OPEN-HSCI-01"],
+      "why_promising": "This is the most developed internal program: exact affine dualities, certified finite sectors, cross-depth return constraints, a fixed dual-tail companion with opposite reciprocal-mass behavior, and strong cycle-complexity reductions expose the two remaining obstruction types separately.",
+      "hard_boundary": "Every successful local or fixed-window surrogate has countermodels. The active divergence subproblem OPEN-HSCI-SYNC-SHELL-01 must prove a summable bound for the nonpositive rounding-defect mass of the synchronized real companion; local floor-or-ceiling exact edges do not assemble into a long integer shadow. On the cycle side, strict positive full-boundary winding is a q=1-sensitive sufficient strengthening, but its all-depth sign law remains open."
+    },
+    {
+      "id": "AP-INVERSE-FIBER",
+      "name": "Stationary inverse-fiber extinction",
+      "priority_band": "B: exact structural equivalence",
+      "classification": "equivalent_induction_route",
+      "retained_skeletons": ["SK-INV"],
+      "primary_literature": ["LIT-WIRSCHING-1998", "LIT-KRASIKOV-LAGARIAS-2003"],
+      "closed_leverage": ["THM-FIBER-EQUIV-01", "THM-FIBER-ENV-01"],
+      "completion_gate": "OPEN-FIBER-EXT-01",
+      "why_promising": "It converts the full conjecture into one monotone-looking strong-induction target and supplies a finite affine envelope and Bellman decomposition at every fixed depth.",
+      "hard_boundary": "The exposed minimizing ancestor moves with depth. Controlling that moving minimum uniformly is exactly equivalent to Collatz; fixed-depth compactness does not close the gate."
+    },
+    {
+      "id": "AP-QSERIES-POLYNOMIALITY",
+      "name": "q-series conjugacy and polynomiality",
+      "priority_band": "B: exact algebraic equivalence",
+      "classification": "equivalent_conjugacy_route",
+      "retained_skeletons": ["SK-QPOLY"],
+      "primary_literature": ["LIT-MONKS-2025", "LIT-BERNSTEIN-LAGARIAS-1996"],
+      "closed_leverage": ["THM-QCONJUGACY-01"],
+      "completion_gate": "OPEN-QPOLY-01",
+      "why_promising": "The selected q-map has carry-free arithmetic and strict degree descent on every polynomial, while a genuine conjugacy transfers its dynamics exactly to the 2-adic Collatz system.",
+      "hard_boundary": "The natural coefficient map is not a conjugacy. Proving that the true conjugacy sends every positive integer to a polynomial is explicitly equivalent to Collatz."
+    },
+    {
+      "id": "AP-INVERSE-TREE-DENSITY",
+      "name": "Inverse trees and difference inequalities",
+      "priority_band": "C: enabling quantitative program",
+      "classification": "partial_density_input",
+      "retained_skeletons": ["SK-RDC", "SK-INV"],
+      "primary_literature": ["LIT-KRASIKOV-LAGARIAS-2003", "LIT-MONKS-ETAL-2013", "LIT-WIRSCHING-1998"],
+      "closed_leverage": ["THM-REVERSE-DENSITY-01", "THM-STRONG-SUFFICIENT-01"],
+      "completion_gate": "A deterministic uniformization theorem converting inverse-tree density or modular hitting into descent for every starting value.",
+      "why_promising": "It produces rigorous global lower bounds, exact modular graph constraints, and computable recurrences that can feed a certificate search or a minimal-counterexample argument.",
+      "hard_boundary": "Positive density, even density tending toward one, does not exclude one sparse exceptional orbit. This program is an input until it acquires a uniform completion lemma."
+    },
+    {
+      "id": "AP-STATISTICAL-DRIFT",
+      "name": "Probabilistic, ergodic, and almost-all drift",
+      "priority_band": "C: enabling statistical program",
+      "classification": "typical_behavior_input",
+      "retained_skeletons": [],
+      "primary_literature": ["LIT-TAO-2022", "LIT-KONTOROVICH-SINAI-2002", "LIT-LAGARIAS-WEISS-1992", "LIT-TERRAS-1976"],
+      "closed_leverage": ["THM-TAO-ALMOSTALL-01", "NOGO-TYPICAL-UNIFORM-01"],
+      "completion_gate": "A deterministic exceptional-set elimination theorem that applies to the fixed Collatz dynamics, not merely to a random model or almost every seed.",
+      "why_promising": "These results rigorously explain the negative average logarithmic drift and prove extremely strong typical-orbit behavior, suggesting what a global Lyapunov mechanism would need to capture.",
+      "hard_boundary": "Measure-zero and logarithmic-density-zero exceptional sets may still contain a divergent orbit or cycle. Random models do not supply the required same-orbit uniformity."
+    },
+    {
+      "id": "AP-CYCLE-DIOPHANTINE",
+      "name": "Cycle Diophantine bounds and combinatorics",
+      "priority_band": "C: mature half-problem",
+      "classification": "cycle_only_program",
+      "retained_skeletons": ["SK-TSC", "SK-FCD-HSCI"],
+      "primary_literature": ["LIT-BARINA-2025", "LIT-HERCHER-2023", "LIT-RHIN-1987", "LIT-SIMONS-DEWEGER-2005", "LIT-FERNANDEZ-IBANEZ-2026"],
+      "closed_leverage": ["THM-CYCLE-REDUCE-01", "THM-CYCLE-COMPLEXITY-01", "THM-CYCLE-SPACING-01", "THM-CYCLE-BOUNDARY-WIND-01", "THM-CYCLE-WIND-CST-01", "THM-CYCLE-SHADOW-01", "NOGO-CYCLE-LATTICE-01", "THM-FCD-REDUCE-01", "THM-FCD-ONECORNER-01", "THM-FCD-TWOCORNER-01", "THM-FCD-THREECORNER-01", "THM-FCD-FOURCORNER-01", "THM-FCD-CORNERGROWTH-01", "THM-FCD-SHARP-CORNERGROWTH-01", "THM-FCD-TERMINAL-FLUX-01", "NOGO-FCD-TERMINAL-PARITY-01", "NOGO-FCD-CENTERED-FILTER-01", "THM-FCD-PACKET-LIFT-01", "NOGO-FCD-EXACTNESS-CONTRACTION-01", "NOGO-FCD-LIFTED-LATTICE-01"],
+      "completion_gate": ["OPEN-CYCLE-INT-01", "OPEN-CYCLE-WIND-01", "OPEN-FCD-01"],
+      "why_promising": "It has the strongest explicit lower bounds and the richest exact finite exclusions, and reduces a hypothetical cycle to rigid valuation words, divisibility conditions, the exact full-boundary winding coordinate rho-Z=g kappa, and the absolute paired-shadow loss T. R104-R112 close one through four corners and sharpen the terminal-preserving cube to more than (s/O(log s))^1.505 vertices. R113-R114 audit why a tempting parity-centered compression fails, while R115 restores the lost terminal bit in an exact lifted packet container and makes every fixed-corner sector effectively finite.",
+      "hard_boundary": "Even total cycle exclusion leaves divergent orbits untouched. Existing word-independent congruence methods collapse to one denominator class. R110 shows that relative translated-lattice data loses the absolute anchor. R113 proves that canonical corner deletion can change terminal endpoint parity, invalidating the fixed next-inverse-bit and centered-filter reductions in R113-R114. R115 identifies the exact lift coordinate, but exactness-only packet contraction also has finite counterexamples. A valid contraction must use FCD color, and the full theorem must still control all weights and the absolute anchored carry."
+    }
+  ]
+}

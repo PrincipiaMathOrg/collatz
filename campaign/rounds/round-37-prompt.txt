@@ -1,0 +1,12 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+32. Electrical capacity of infinity
+
+**Speculative · P**
+
+Assign conductances to inverse-tree edges based on their multiplicative expansion. Prove that
+infinity has zero effective capacity relative to the component of 1, forcing recurrence toward the
+root. The challenge is converting a directed arithmetic graph into a network whose recurrence has
+pointwise dynamical meaning.
+
+Take as long as you need.

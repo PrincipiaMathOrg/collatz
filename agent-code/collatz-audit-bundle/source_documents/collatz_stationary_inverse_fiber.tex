@@ -1,0 +1,1687 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[colorlinks=true,
+            linkcolor=blue!45!black,
+            citecolor=blue!45!black,
+            urlcolor=blue!45!black]{hyperref}
+
+\allowdisplaybreaks
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Ztwo}{\mathbb Z_2}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vtwo}{v_2}
+\newcommand{\vthree}{v_3}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\angles}[1]{\left\langle #1\right\rangle}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\Col}{Col}
+
+\title[Stationary inverse-fiber extinction]
+{Stationary Inverse-Fiber Extinction and the Synchronization Obstruction\\
+in the Collatz Problem}
+
+\author{Anton Shakov}
+\address{Principia Math}
+\date{August 2026}
+
+\subjclass[2020]{11B83, 37P99, 11J87, 68Q42}
+\keywords{Collatz conjecture, paradoxical sequence, inverse fiber, parity vector,
+$2$-adic conjugacy, $3$-adic carry, Christoffel word, min-plus dynamics}
+
+\begin{document}
+
+\begin{abstract}
+We combine the paradoxical-sequence framework of Rozier and Terracol with
+exact affine, $2$-adic, $3$-adic, and inverse-tree descriptions of the
+Collatz map.  The central exact object is the least positive element
+\[
+M_r(n)=\min\set{y>0\text{ odd}:U^r(y)=U^r(n)}
+\]
+of the $r$-step inverse fiber above the actual accelerated endpoint of an
+odd integer $n$.  We prove that the Collatz conjecture is equivalent to the
+finite certificate condition $M_r(n)<n$ for some $r$ and every odd $n>1$.
+We then derive a finite-support characterization of positive integers in
+parity coordinates, a mixed dyadic--ternary corner criterion, a quantitative
+resonance theorem for primitive paradoxical blocks, an exact winding formula
+for adjacent parity transpositions, a barrier-preserving reduction to a
+mechanical extremal word, and an equal-slope carry criterion producing a
+smaller coalescing ancestor.
+
+These results isolate the remaining obstruction as a synchronization problem:
+a single positive ordinary integer would have to remain the least positive
+point in every finite inverse fiber while its left $2$-adic seed data, right
+$3$-adic endpoint data, and Archimedean order data stay compatible at all
+scales.  We formulate ten concrete research programs aimed at this
+obstruction, drawing on continued fractions, Ostrowski numeration, min-plus
+geometry, moving-target Diophantine approximation, $p$-adic interpolation,
+fractal uncertainty, autoconjugacy, and substitution cocycles.  No
+unconditional proof of the Collatz conjecture is claimed.  The final theorem
+proves Collatz conditional on one sharply stated stationary inverse-fiber
+extinction assertion, and also gives a two-lemma completion architecture
+through first-crossing descent and high-surplus carry innovation.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let
+\begin{equation}\label{eq:shortcut-map}
+T(n)=
+\begin{cases}
+ n/2,&n\equiv0\pmod2,\\[1mm]
+ (3n+1)/2,&n\equiv1\pmod2
+\end{cases}
+\end{equation}
+be the shortcut Collatz map.  The Collatz conjecture asserts that every
+positive integer eventually enters the cycle $1\leftrightarrow2$.  The
+conjecture has been computationally verified below $2^{71}$ by Barina
+\cite{Barina2025}, while Tao proved that almost every orbit, in logarithmic
+density, attains values below any prescribed function tending to infinity
+\cite{Tao2022}.  Neither result excludes one exceptional divergent orbit or
+one nontrivial positive cycle.
+
+Rozier and Terracol introduced the systematic study of \emph{paradoxical}
+finite Collatz segments: blocks whose multiplicative coefficient is below
+one even though the endpoint is not below the starting value
+\cite{RozierTerracol2025}.  Their work connects the finiteness of such blocks
+to the full Collatz problem and to the coefficient-stopping-time conjecture
+of Terras \cite{Terras1976}.  Subsequent work has investigated fixed-length
+paradoxical vectors \cite{Niu2026}, two-ended $2$-adic/$3$-adic searches
+\cite{Kramer2026}, and extremal parity words governed by Christoffel
+structures \cite{FernandezIbanez2026}.
+
+The purpose of the present paper is not to claim a proof, but to make the
+remaining global obstruction mathematically exact.  At finite depth, the
+symbolic dynamics are completely explicit:
+
+\begin{itemize}[leftmargin=2em]
+\item every parity or valuation word has an affine formula;
+\item every finite parity word determines one residue class modulo a power of
+      two;
+\item terminal endpoint conditions modulo powers of three are determined by
+      terminal valuation suffixes;
+\item every competing inverse path can be compared by an exact affine score.
+\end{itemize}
+
+The difficulty is the passage from ``every depth is realizable'' to ``one
+fixed positive ordinary integer realizes every depth.''  Every finite parity
+word occurs on a terminating orbit, so no bounded-prefix obstruction can
+separate a hypothetical counterexample from longer and longer terminating
+shadows.  The exceptional object would have to be a \emph{stationary inverse
+fiber minimum}: the same positive integer would remain the least positive
+ancestor of its actual endpoint at every depth.
+
+Our main exact theorem states that excluding such stationary minima is
+\emph{equivalent} to Collatz.  This gives the narrowest single completion
+target found in the present framework.
+
+\subsection*{Main contributions}
+
+The paper contains the following exact results.
+
+\begin{enumerate}[label=(\roman*),leftmargin=2.5em]
+\item We prove that Collatz is equivalent to stationary inverse-fiber
+      extinction: for every odd $n>1$, some finite endpoint of the orbit has a
+      smaller positive odd ancestor.
+\item We give a quantitative resonance theorem for primitive paradoxical
+      blocks.  A paradox with a large minimum forces an exceptionally accurate
+      upper rational approximation to $\log_2 3$ and nearly maximal affine
+      carry.
+\item We characterize the positive-integer image of the parity conjugacy by
+      finite support of an intrinsic inverse-carry sequence.  Inside the
+      coefficient barrier this becomes a mixed $2$-adic/$3$-adic corner
+      condition.
+\item We prove an adjacent-transposition winding identity.  Moving a parity
+      pattern $10$ to $01$ has a monotone real carry effect but a seed change
+      containing one binary wrap bit; this wrap bit is the precise obstruction
+      to transferring Christoffel carry extremality to descent.
+\item We prove that every primitive first-crossing word can be moved, through
+      barrier-preserving adjacent transpositions, to a canonical mechanical
+      word.
+\item We introduce an equal-slope carry spectrum and prove that one small
+      positive carry return gives a smaller positive coalescing ancestor.
+\item We formulate ten explicit attacks on synchronization and state the exact
+      theorem each would have to prove.
+\end{enumerate}
+
+\subsection*{Status}
+
+Several statements below are theorems and are proved in full.  The ten
+research programs are explicitly marked as open targets.  The Collatz
+conjecture remains conditional on stationary inverse-fiber extinction, or on
+the more structured pair of assertions called first-crossing descent and
+high-surplus carry innovation in Section~\ref{sec:completion}.
+
+\section{Affine word calculus}\label{sec:affine}
+
+\subsection{Shortcut parity words}
+
+Let
+\[
+w=(\eps_0,\ldots,\eps_{k-1})\in\set{0,1}^k,
+\qquad
+s_j=\sum_{i=0}^{j-1}\eps_i,
+\qquad s=s_k.
+\]
+Define
+\begin{equation}\label{eq:shortcut-carry-rec}
+C_0=0,
+\qquad
+C_{j+1}=3^{\eps_j}C_j+\eps_j2^j.
+\end{equation}
+
+\begin{lemma}[Affine parity-word identity]\label{lem:shortcut-affine}
+If $w$ is the first $k$ parity bits of $n$, then
+\begin{equation}\label{eq:shortcut-affine}
+2^kT^k(n)=3^sn+C(w),
+\end{equation}
+where $C(w)=C_k$.
+If the one-bits of $w$ occur at positions
+\[
+0\le d_1<\cdots<d_s<k,
+\]
+then
+\begin{equation}\label{eq:carry-one-positions}
+C(w)=\sum_{j=1}^{s}2^{d_j}3^{s-j}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{eq:shortcut-affine} follows by induction from
+\eqref{eq:shortcut-map}.  If $\eps_j=0$, neither the power of $3$ nor the
+carry changes.  If $\eps_j=1$, multiplication by $3$ sends the previous
+carry to $3C_j$, and the new $+1$ contributes $2^j$ after clearing the
+common denominator $2^{j+1}$.  Expanding the recurrence gives
+\eqref{eq:carry-one-positions}.
+\end{proof}
+
+\begin{lemma}[Parity cylinder]\label{lem:parity-cylinder}
+For every word $w\in\set{0,1}^k$ there is exactly one residue class modulo
+$2^k$ whose elements have parity prefix $w$.  Its canonical representative
+is
+\begin{equation}\label{eq:rho-shortcut}
+\rho(w)=\left[-3^{-s}C(w)\right]_{2^k},
+\qquad 0\le\rho(w)<2^k,
+\end{equation}
+where $[\cdot]_{2^k}$ denotes the least nonnegative representative.
+\end{lemma}
+
+\begin{proof}
+Reducing \eqref{eq:shortcut-affine} modulo $2^k$ gives the necessary
+congruence.  Conversely, the standard parity-vector bijection identifies
+$n\bmod2^k$ with the first $k$ parities of its orbit; equivalently, the
+recursion may be read backwards one bit at a time.
+\end{proof}
+
+The multiplicative coefficient of a prefix is
+\begin{equation}\label{eq:q-shortcut}
+q_j(w)=\frac{3^{s_j}}{2^j}.
+\end{equation}
+
+\subsection{Accelerated valuation words}
+
+On positive odd integers define the accelerated map
+\begin{equation}\label{eq:U-map}
+U(x)=\frac{3x+1}{2^{\vtwo(3x+1)}}.
+\end{equation}
+A valuation word is
+\[
+a=(a_0,\ldots,a_{r-1}),
+\qquad a_i\ge1.
+\]
+Put
+\[
+A_0=0,
+\qquad
+A_j=\sum_{i=0}^{j-1}a_i,
+\]
+and define
+\begin{equation}\label{eq:valuation-carry}
+D_0=0,
+\qquad
+D_{j+1}=3D_j+2^{A_j}.
+\end{equation}
+
+\begin{lemma}[Affine valuation-word identity]\label{lem:valuation-affine}
+If $a$ is the first $r$ accelerated valuations of an odd integer $x$, and
+$X=U^r(x)$, then
+\begin{equation}\label{eq:valuation-affine}
+2^{A_r}X=3^rx+D(a).
+\end{equation}
+If $a=uv$, then
+\begin{equation}\label{eq:valuation-concat}
+D(uv)=3^{|v|}D(u)+2^{A(u)}D(v).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Both statements follow immediately by induction and comparison of the
+constant terms under composition.
+\end{proof}
+
+\section{Primitive paradoxes and near-resonance}\label{sec:paradox}
+
+\begin{definition}[Paradoxical block]
+Let $x_i=T^i(x_0)$, and let a block have length $k$ and $s$ odd inputs.  It
+is paradoxical if
+\[
+\frac{3^s}{2^k}<1
+\qquad\text{but}\qquad
+x_k\ge x_0.
+\]
+It is \emph{primitive} if
+\begin{equation}\label{eq:primitive-barrier}
+\frac{3^{s_j}}{2^j}\ge1
+\qquad(0\le j<k),
+\end{equation}
+so that $k$ is the first coefficient crossing below one.
+\end{definition}
+
+Put
+\[
+\alpha=\log_2 3.
+\]
+
+\begin{theorem}[Primitive paradox resonance]\label{thm:primitive-resonance}
+Let $x_0,\ldots,x_k$ be a primitive paradoxical block, and suppose
+\[
+m=x_0=\min_{0\le i\le k}x_i.
+\]
+Let $s$ be the number of odd inputs, and let
+\[
+0\le d_1<\cdots<d_s<k
+\]
+be their positions.  Then
+\begin{equation}\label{eq:k-floor-alpha-s}
+k=\floor{\alpha s}+1,
+\end{equation}
+\begin{equation}\label{eq:odd-position-bound}
+d_j\le\floor{\alpha(j-1)}
+\qquad(1\le j\le s),
+\end{equation}
+and
+\begin{equation}\label{eq:resonance-bound}
+0<\frac{k}{s}-\alpha
+<\frac{1}{3m\log2}.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:minimum-carry-bound}
+m
+\le
+\frac{\displaystyle \frac13
+ \sum_{j=0}^{s-1}2^{-\{\alpha j\}}}
+{\displaystyle 2^{1-\{\alpha s\}}-1}
+<
+\frac{s}
+{3\log2\bigl(1-\{\alpha s\}\bigr)}.
+\end{equation}
+If
+\begin{equation}\label{eq:legendre-threshold}
+m>\frac{2s^2}{3\log2},
+\end{equation}
+then the reduced fraction associated with $k/s$ is an upper continued-fraction
+convergent of $\alpha$.
+\end{theorem}
+
+\begin{proof}
+At an odd input $x_i$,
+\[
+\frac{x_{i+1}}{x_i}
+=
+\frac32\left(1+\frac{1}{3x_i}\right),
+\]
+whereas an even input contributes $1/2$.  Therefore
+\begin{equation}\label{eq:product-correction}
+\frac{x_k}{x_0}
+=
+\frac{3^s}{2^k}
+\prod_{\substack{0\le i<k\\x_i\text{ odd}}}
+\left(1+\frac1{3x_i}\right).
+\end{equation}
+Set
+\[
+\delta=k\log2-s\log3.
+\]
+The final coefficient is below one, so $\delta>0$.  Since $x_k\ge x_0$ and
+$x_i\ge m$,
+\[
+\delta
+\le
+\sum_{x_i\text{ odd}}
+\log\left(1+\frac1{3x_i}\right)
+\le
+s\log\left(1+\frac1{3m}\right)
+<\frac{s}{3m}.
+\]
+Dividing by $s\log2$ proves \eqref{eq:resonance-bound}.
+
+The last step must be even; otherwise the coefficient would be multiplied by
+$3/2$ and could not cross from at least one to below one.  Hence
+\[
+2^{k-1}\le3^s<2^k,
+\]
+which proves \eqref{eq:k-floor-alpha-s}.
+
+Before the $j$th odd input, the block has length $d_j$ and has encountered
+$j-1$ odd inputs.  The primitive condition gives
+\[
+2^{d_j}\le3^{j-1},
+\]
+which is \eqref{eq:odd-position-bound}.
+
+By Lemma~\ref{lem:shortcut-affine},
+\[
+2^kx_k=3^sm+C(w).
+\]
+Since $x_k\ge m$,
+\begin{equation}\label{eq:defect-carry}
+(2^k-3^s)m\le C(w).
+\end{equation}
+Using \eqref{eq:odd-position-bound} in
+\eqref{eq:carry-one-positions},
+\[
+\begin{aligned}
+C(w)
+&\le
+\sum_{j=1}^s
+2^{\floor{\alpha(j-1)}}3^{s-j}\\
+&=
+3^{s-1}\sum_{j=0}^{s-1}2^{-\{\alpha j\}}.
+\end{aligned}
+\]
+Also, by \eqref{eq:k-floor-alpha-s},
+\[
+2^k-3^s
+=
+3^s\left(2^{1-\{\alpha s\}}-1\right).
+\]
+Combining these identities with \eqref{eq:defect-carry} gives the first
+bound in \eqref{eq:minimum-carry-bound}.  The second follows from
+\[
+2^u-1\ge u\log2
+\qquad(0\le u\le1)
+\]
+and the trivial estimate of the numerator by $s/3$.
+
+Finally, \eqref{eq:resonance-bound} and
+\eqref{eq:legendre-threshold} imply
+\[
+0<\frac{k}{s}-\alpha<\frac1{2s^2}.
+\]
+Legendre's continued-fraction criterion applies to the reduced fraction.
+\end{proof}
+
+\begin{proposition}[Harmonic correction bound]\label{prop:harmonic-correction}
+Suppose the block in Theorem~\ref{thm:primitive-resonance} is injective.
+Then
+\begin{equation}\label{eq:harmonic-drift}
+0<k\log2-s\log3
+\le
+\frac1{3m}
++
+\frac16\log\left(1+\frac{2s}{m}\right).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The odd inputs are distinct odd integers at least $m$.  Hence
+\[
+\sum_{x_i\text{ odd}}\frac1{x_i}
+\le
+\sum_{j=0}^{s-1}\frac1{m+2j}
+\le
+\frac1m+\frac12\log\left(1+\frac{2s}{m}\right).
+\]
+Apply $\log(1+u)\le u$ to \eqref{eq:product-correction}.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:primitive-resonance} explains why ``the starting value is
+large, so the $+1$ is negligible'' is not by itself a proof.  A large
+minimum forces an increasingly accurate near-resonance between $2^k$ and
+$3^s$, and continued fractions provide infinitely many such rational
+approximations.  The remaining information is arithmetic: the unique
+$2$-adic seed residue must land in the short Archimedean interval allowed by
+\eqref{eq:defect-carry}.
+\end{remark}
+
+\section{Inverse fibers and an exact reformulation of Collatz}\label{sec:fibers}
+
+For an odd positive integer $n$, define
+\begin{equation}\label{eq:Mr-def}
+M_r(n)=
+\min\set{y>0\text{ odd}:U^r(y)=U^r(n)}.
+\end{equation}
+The set is nonempty because it contains $n$.
+
+\begin{lemma}[Nested inverse minima]\label{lem:nested-minima}
+For every odd positive integer $n$,
+\begin{equation}\label{eq:Mr-monotone}
+M_{r+1}(n)\le M_r(n)\le n.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The upper bound is immediate.  If $y$ realizes $M_r(n)$, append the actual
+next valuation of the orbit of $n$ to the inverse word carrying $y$ to
+$U^r(n)$.  The same starting value then reaches $U^{r+1}(n)$ in $r+1$
+accelerated steps.  Thus $M_{r+1}(n)\le M_r(n)$.
+\end{proof}
+
+\begin{theorem}[Stationary inverse-fiber extinction]\label{thm:SFE-equivalence}
+The following are equivalent.
+\begin{enumerate}[label=(\roman*),leftmargin=2.3em]
+\item Every positive integer reaches $1$ under the Collatz map.
+\item For every odd $n>1$, there exists $r\ge1$ such that
+      \begin{equation}\label{eq:SFE}
+      M_r(n)<n.
+      \end{equation}
+\item No odd $n>1$ is the least positive member of every finite inverse fiber
+      above its own forward orbit.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Assume Collatz.  For an odd $n>1$, choose $r$ with $U^r(n)=1$.  Since
+$U^r(1)=1$, one has $M_r(n)=1<n$.
+
+Conversely, assume \eqref{eq:SFE}.  We prove by strong induction on odd $n$
+that every odd $n$ reaches $1$.  The case $n=1$ is trivial.  Let $n>1$ and
+assume every smaller positive odd integer reaches $1$.  Choose $r$ and
+$0<y<n$ with
+\[
+U^r(y)=U^r(n).
+\]
+By induction, $y$ reaches $1$; hence the common endpoint reaches $1$, and so
+does $n$.  Every positive even integer becomes odd after finitely many
+halvings.  This proves Collatz.
+\end{proof}
+
+\begin{definition}[Stationary Bellman code]
+An odd integer $n>1$ is a stationary Bellman code if
+\begin{equation}\label{eq:stationary-Bellman}
+M_r(n)=n
+\qquad(r\ge0).
+\end{equation}
+\end{definition}
+
+A least counterexample to Collatz would be a stationary Bellman code.  The
+entire problem is therefore reduced to excluding one positive integer that
+remains the least positive cost in every finite inverse tree.
+
+\section{Terminal locality and the exact local--global score}\label{sec:local-global}
+
+\begin{theorem}[Terminal $3$-adic locality]\label{thm:terminal-locality}
+Let a valuation word be written $a=uv$, where $|v|=\ell$, and let $X$ be the
+endpoint of any realization of $a$.  Then
+\begin{equation}\label{eq:terminal-locality}
+3^\ell\mid X+1
+\quad\Longleftrightarrow\quad
+3^\ell\mid D(v)+2^{A(v)}.
+\end{equation}
+Thus the condition $\vthree(X+1)\ge\ell$ depends only on the final $\ell$
+valuations.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:valuation-affine}, reducing the endpoint identity modulo
+$3^\ell$ gives
+\[
+3^\ell\mid X+1
+\quad\Longleftrightarrow\quad
+3^\ell\mid D(a)+2^{A(a)}.
+\]
+Using \eqref{eq:valuation-concat},
+\[
+D(a)+2^{A(a)}
+=
+3^\ell D(u)+2^{A(u)}\bigl(D(v)+2^{A(v)}\bigr).
+\]
+The factor $2^{A(u)}$ is invertible modulo $3^\ell$.
+\end{proof}
+
+Now let an actual word have the form
+\[
+a=u\tau,
+\qquad
+|u|=d,
+\quad A(u)=P,
+\quad |\tau|=k,
+\quad A(\tau)=T.
+\]
+Let $R$ be the starting value and
+\[
+Z=U^d(R).
+\]
+Consider a competing word $b$ of length $k$ and total exponent $B$, and put
+\[
+c=T-B.
+\]
+Compatibility with the same endpoint is equivalent to
+\begin{equation}\label{eq:local-compatibility}
+3^k\mid D(\tau)-2^cD(b).
+\end{equation}
+Define the local center
+\begin{equation}\label{eq:local-center}
+h(\tau,b)
+=
+\frac{D(\tau)-2^cD(b)}{3^k}
+\in\Z.
+\end{equation}
+
+\begin{proposition}[Local--global score]\label{prop:local-global-score}
+Let $Y$ be the competing ancestor along $b$.  Then
+\begin{equation}\label{eq:local-global-identity}
+2^cY=Z+h(\tau,b).
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:score-identity}
+Y-R
+=
+\frac{\Sigma(u,\tau,c)+h(\tau,b)}{2^c},
+\end{equation}
+where
+\begin{equation}\label{eq:prefix-surplus}
+\Sigma(u,\tau,c)=Z-2^cR.
+\end{equation}
+The compatibility term $h$ is determined by the terminal suffix and the
+competitor, whereas $\Sigma$ depends on the complete prefix and the actual
+starting value.
+\end{proposition}
+
+\begin{proof}
+The actual suffix equation is
+\[
+2^TX=3^kZ+D(\tau),
+\]
+and the competing inverse equation is
+\[
+3^kY=2^BX-D(b).
+\]
+Multiplying the second equation by $2^c$, substituting the first, and using
+\eqref{eq:local-center} gives \eqref{eq:local-global-identity}.  Subtracting
+$R$ gives \eqref{eq:score-identity}.
+\end{proof}
+
+If a terminal fiber with fixed $B$ is nonempty, let
+\[
+h_{\max}(\tau,B)=\max_b h(\tau,b).
+\]
+Then a smaller positive compatible ancestor exists whenever
+\begin{equation}\label{eq:score-negative}
+-R2^c<\Sigma(u,\tau,c)+h_{\max}(\tau,B)<0.
+\end{equation}
+The right inequality is the descent condition; the left inequality is
+positivity.  This is the exact synchronization score.
+
+\begin{remark}
+Terminal locality does not settle the sign of
+\eqref{eq:score-negative}.  The same terminal suffix and the same slope data
+can be attached to different prefixes whose Archimedean surpluses have
+opposite signs.  Any successful proof must retain both ends of the word.
+\end{remark}
+
+\section{The positive-integer image in parity coordinates}\label{sec:inverse-carry}
+
+Let $\eps=(\eps_0,\eps_1,\ldots)$ be an infinite binary sequence, and put
+\[
+s_k=\sum_{j=0}^{k-1}\eps_j.
+\]
+For every prefix define
+\begin{equation}\label{eq:rho-k}
+\rho_k
+=
+\left[
+-\sum_{j=0}^{k-1}
+\frac{\eps_j2^j}{3^{s_{j+1}}}
+\right]_{2^k},
+\qquad
+0\le\rho_k<2^k.
+\end{equation}
+The representatives are compatible, so there is a unique bit $b_k$ with
+\begin{equation}\label{eq:inverse-carry-bit}
+\rho_{k+1}=\rho_k+b_k2^k,
+\qquad b_k\in\set{0,1}.
+\end{equation}
+
+Let $C_k$ be the shortcut carry from \eqref{eq:shortcut-carry-rec}, and
+define the canonical endpoint
+\begin{equation}\label{eq:z-k}
+z_k=\frac{3^{s_k}\rho_k+C_k}{2^k}.
+\end{equation}
+
+\begin{proposition}[Intrinsic inverse-carry recursion]\label{prop:carry-recursion}
+Starting from $\rho_0=z_0=s_0=0$, one has
+\begin{equation}\label{eq:b-parity}
+b_k\equiv z_k+\eps_k\pmod2,
+\end{equation}
+\begin{equation}\label{eq:z-recursion}
+z_{k+1}
+=
+\frac{3^{\eps_k}z_k+\eps_k+b_k3^{s_{k+1}}}{2},
+\end{equation}
+and
+\begin{equation}\label{eq:z-range}
+0\le z_k<3^{s_k}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Replacing $\rho_k$ by $\rho_k+b2^k$ changes the endpoint after the first $k$
+steps from $z_k$ to $z_k+b3^{s_k}$.  This value must have parity $\eps_k$.
+Since $3^{s_k}$ is odd, this gives \eqref{eq:b-parity}.  Applying the next
+branch gives \eqref{eq:z-recursion}.
+
+The range follows by induction.  If $\eps_k=0$, the two possibilities are
+$z_{k+1}=z_k/2$ or $(z_k+3^{s_k})/2$.  If $\eps_k=1$, they are
+$(3z_k+1)/2$ or $(3z_k+1+3^{s_k+1})/2$; the parity restriction in each case
+ensures the strict upper bound $3^{s_{k+1}}$.
+\end{proof}
+
+\begin{theorem}[Finite-support characterization]\label{thm:finite-support}
+For an infinite parity sequence $\eps$, the following are equivalent.
+\begin{enumerate}[label=(\roman*),leftmargin=2.3em]
+\item The unique $2$-adic integer with parity sequence $\eps$ is a
+      nonnegative ordinary integer.
+\item $b_k=0$ for all sufficiently large $k$.
+\item $\rho_k$ is eventually constant.
+\item $\sup_k\rho_k<\infty$.
+\item $\rho_k/2^k\to0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:inverse-carry-bit} shows that $\rho_k$ is the partial
+binary expansion
+\[
+\rho_k=\sum_{j=0}^{k-1}b_j2^j.
+\]
+Thus eventual vanishing of $b_j$, eventual constancy of $\rho_k$, and
+boundedness of $\rho_k$ are equivalent.  Their common eventual value is the
+corresponding nonnegative ordinary integer.
+
+If $\rho_k$ is eventually constant then $\rho_k/2^k\to0$.  Conversely, if
+$b_k=1$ infinitely often, then at each such stage
+\[
+\frac{\rho_{k+1}}{2^{k+1}}\ge\frac12,
+\]
+so the ratio cannot tend to zero.
+\end{proof}
+
+\subsection{The mixed dyadic--ternary corner}
+
+Assume the coefficient barrier
+\begin{equation}\label{eq:shortcut-barrier}
+3^{s_k}\ge2^k
+\qquad(k\ge0).
+\end{equation}
+Put
+\begin{equation}\label{eq:Rk-carry}
+R_k=\frac{C_k}{3^{s_k}}
+=
+\sum_{j=0}^{k-1}
+\frac{\eps_j2^j}{3^{s_{j+1}}}.
+\end{equation}
+From \eqref{eq:z-k},
+\begin{equation}\label{eq:corner-identity}
+\frac{z_k}{3^{s_k}}
+=
+\frac{\rho_k+R_k}{2^k}.
+\end{equation}
+If $\eps_j=1$, the barrier gives
+\[
+\frac{2^j}{3^{s_{j+1}}}
+=
+\frac13\frac{2^j}{3^{s_j}}
+\le\frac13.
+\]
+Therefore
+\[
+0\le R_k\le\frac{s_k}{3}\le\frac{k}{3}.
+\]
+
+\begin{corollary}[Corner criterion]\label{cor:corner-criterion}
+Under the barrier \eqref{eq:shortcut-barrier},
+\begin{equation}\label{eq:corner-bound}
+0\le
+\frac{z_k}{3^{s_k}}-\frac{\rho_k}{2^k}
+\le
+\frac{k}{3\cdot2^k}.
+\end{equation}
+Consequently, the parity sequence comes from a nonnegative ordinary integer
+if and only if
+\begin{equation}\label{eq:corner-limit}
+\frac{z_k}{3^{s_k}}\longrightarrow0.
+\end{equation}
+\end{corollary}
+
+\subsection{Divergent orbits and high surplus}
+
+The following reduction uses the orbit-sparsity theorem of Garcia and Tal
+\cite{GarciaTal1999}.
+
+\begin{proposition}[Barrier normalization of divergence]\label{prop:barrier-normalization}
+If a positive shortcut Collatz orbit is nonperiodic and does not reach the
+trivial cycle, then it tends to infinity.  Along such an orbit,
+\[
+\sum_{j\ge0}\frac1{x_j}<\infty.
+\]
+Consequently, if the orbit is divergent, its coefficient sequence has a
+global minimum; after shifting to a time of global minimum, the relative
+coefficient sequence satisfies
+\begin{equation}\label{eq:shifted-barrier}
+q_k\ge1
+\qquad(k\ge0),
+\end{equation}
+and
+\begin{equation}\label{eq:q-to-infty}
+q_k\longrightarrow\infty.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+A nonperiodic deterministic orbit has no repeated value, hence eventually
+leaves every finite interval.  Garcia and Tal prove a power-saving upper
+bound for the number of points of a divergent orbit in an interval.  Summing
+that estimate over dyadic shells gives convergence of the reciprocal sum.
+
+As in \eqref{eq:product-correction},
+\[
+\frac{x_k}{x_0}
+=q_k
+\prod_{\substack{0\le j<k\\x_j\text{ odd}}}
+\left(1+\frac1{3x_j}\right).
+\]
+The reciprocal-sum convergence implies convergence of the product to a
+finite positive limit.  Since $x_k\to\infty$, one obtains $q_k\to\infty$.
+The positive sequence $q_k$ therefore attains a global minimum.  Shifting to
+a minimizing time gives \eqref{eq:shifted-barrier} and
+\eqref{eq:q-to-infty}.
+\end{proof}
+
+Put
+\begin{equation}\label{eq:theta}
+\theta=\log_3 2
+\end{equation}
+and define the critical surplus
+\begin{equation}\label{eq:critical-surplus}
+e_k=s_k-\ceil{\theta k}.
+\end{equation}
+Under the barrier, $e_k\ge0$, and
+\begin{equation}\label{eq:q-surplus}
+q_k
+=
+3^{e_k}
+\frac{3^{\ceil{\theta k}}}{2^k},
+\qquad
+1\le
+\frac{3^{\ceil{\theta k}}}{2^k}
+<3.
+\end{equation}
+
+\begin{corollary}[High-surplus necessity]\label{cor:high-surplus}
+A divergent orbit shifted into the barrier satisfies
+\begin{equation}\label{eq:e-to-infty}
+e_k\longrightarrow\infty.
+\end{equation}
+At the same time, because the parity sequence comes from one positive
+ordinary integer, its inverse-carry bits satisfy
+\begin{equation}\label{eq:b-eventual-zero}
+b_k=0
+\quad\text{for all sufficiently large }k.
+\end{equation}
+\end{corollary}
+
+Thus the divergence half of Collatz is reduced to excluding the coexistence
+\[
+e_k\to\infty
+\qquad\text{and}\qquad
+b_k=0\text{ eventually}.
+\]
+
+\section{Transposition winding and mechanical extremizers}\label{sec:winding}
+
+The unordered-majorization order used by Rozier and Terracol moves one-bits
+left or right by adjacent transpositions.  Real affine carries respond
+monotonically to these moves, but the canonical $2$-adic seed can wrap around
+its modulus.  The following identity records that wrap exactly.
+
+\begin{lemma}[Adjacent-transposition winding]\label{lem:winding}
+Let
+\[
+w=u10v,
+\qquad
+w'=u01v,
+\]
+where
+\[
+|u|=i,
+\qquad
+\wt(u)=p,
+\qquad
+\wt(v)=t.
+\]
+Let both words have total length $k$ and weight
+\[
+s=p+t+1.
+\]
+Then
+\begin{equation}\label{eq:carry-transposition}
+C(w')-C(w)=2^i3^t.
+\end{equation}
+Let $a$ be the least positive odd representative satisfying
+\begin{equation}\label{eq:a-transposition}
+a\equiv3^{-(p+1)}\pmod{2^{k-i}},
+\qquad
+1\le a<2^{k-i}.
+\end{equation}
+Then
+\begin{equation}\label{eq:rho-transposition}
+\rho(w')
+=
+\rho(w)-2^ia+\eta2^k,
+\qquad
+\eta\in\set{0,1},
+\end{equation}
+where
+\begin{equation}\label{eq:eta-wrap}
+\eta=1
+\quad\Longleftrightarrow\quad
+\rho(w)<2^ia.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The moved one contributes $2^i3^t$ in $w$ and $2^{i+1}3^t$ in $w'$, while
+all other contributions are unchanged.  This proves
+\eqref{eq:carry-transposition}.
+
+By Lemma~\ref{lem:parity-cylinder},
+\[
+\rho(w')-\rho(w)
+\equiv
+-3^{-s}\bigl(C(w')-C(w)\bigr)
+\equiv
+-2^i3^{-(p+1)}
+\pmod{2^k}.
+\]
+Factoring out $2^i$ gives \eqref{eq:rho-transposition}.  Since both
+representatives lie in $[0,2^k)$, at most one wrap by $2^k$ occurs, and the
+criterion is \eqref{eq:eta-wrap}.
+\end{proof}
+
+Define the endpoint of the canonical realization by
+\[
+Z(w)=T^k(\rho(w))
+\]
+and the first-crossing descent margin
+\begin{equation}\label{eq:J-def}
+J(w)=\bigl(2^k-3^s\bigr)\rho(w)-C(w).
+\end{equation}
+Then
+\begin{equation}\label{eq:J-endpoint}
+J(w)=2^k\bigl(\rho(w)-Z(w)\bigr).
+\end{equation}
+Hence $J(w)>0$ is exactly descent of the least positive realization.
+
+\begin{corollary}[Winding cocycle for descent]\label{cor:winding-cocycle}
+Under the transposition in Lemma~\ref{lem:winding},
+\begin{equation}\label{eq:J-transposition}
+J(w')-J(w)
+=
+\bigl(2^k-3^s\bigr)\bigl(-2^ia+\eta2^k\bigr)
+-2^i3^t.
+\end{equation}
+\end{corollary}
+
+The deterministic carry term is favorable, but the binary winding term
+$\eta2^k$ can reverse its effect.  This is the finite version of the
+local--global obstruction.
+
+\subsection{Barrier-preserving reduction to the latest-one word}
+
+Let a primitive first-crossing word have one-positions
+\[
+d_1<\cdots<d_s.
+\]
+Define
+\begin{equation}\label{eq:latest-one-positions}
+D_j=\floor{\alpha(j-1)},
+\qquad
+\alpha=\log_2 3.
+\end{equation}
+
+\begin{theorem}[Barrier-preserving transposition chain]\label{thm:mechanical-chain}
+Every primitive first-crossing word can be transformed into the word whose
+one-positions are $D_1,\ldots,D_s$ by finitely many adjacent moves
+\[
+10\longmapsto01.
+\]
+Every intermediate word remains a primitive first-crossing word of the same
+length and weight.
+\end{theorem}
+
+\begin{proof}
+The position bound \eqref{eq:odd-position-bound} gives $d_j\le D_j$.  Move
+the ones from right to left.  Suppose the $j$th one is moved from position
+$i$ to $i+1$, where $i+1\le D_j$.  The only prefix whose one-count is
+reduced is the prefix of length $i+1$; after the move it contains $j-1$
+ones.  Since
+\[
+i+1\le D_j\le\alpha(j-1),
+\]
+one has
+\[
+2^{i+1}\le3^{j-1}.
+\]
+Thus the coefficient barrier remains valid.  The total length and total
+weight are unchanged, so the final crossing remains unchanged.
+\end{proof}
+
+Theorem~\ref{thm:mechanical-chain} and Corollary~\ref{cor:winding-cocycle}
+reduce first-crossing descent to an accumulated winding estimate along a
+finite path to a mechanical extremizer.  The real carry order is understood;
+the remaining datum is the sequence of wrap bits $\eta$.
+
+\section{Equal-slope carry returns}\label{sec:equal-slope}
+
+For a shortcut word $w$ of length $k$ and weight $s$, define its equal-slope
+carry spectrum
+\begin{equation}\label{eq:carry-spectrum}
+\mathcal K_{k,s}(w)
+=
+\set{
+\frac{C(v)-C(w)}{3^s}:
+\begin{array}{l}
+|v|=k,\ \wt(v)=s,\\
+C(v)\equiv C(w)\pmod{3^s}
+\end{array}
+}.
+\end{equation}
+
+\begin{theorem}[Equal-slope coalescence]\label{thm:equal-slope}
+Let $w$ be the actual first $k$ parity bits of a positive integer $n$, let
+$s=\wt(w)$, and put $X=T^k(n)$.  Suppose there is a word $v$ of length $k$
+and weight $s$, and an integer $d$ satisfying
+\begin{equation}\label{eq:equal-slope-difference}
+C(v)=C(w)+d3^s,
+\qquad
+1\le d<n.
+\end{equation}
+Then $y=n-d$ is positive, its first $k$ parity bits are $v$, and
+\begin{equation}\label{eq:equal-slope-coalesce}
+T^k(y)=X.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Using \eqref{eq:equal-slope-difference},
+\[
+3^sy+C(v)
+=3^s(n-d)+C(w)+d3^s
+=3^sn+C(w)
+=2^kX.
+\]
+Thus $y$ satisfies the canonical congruence for the word $v$ and reaches the
+same endpoint.  Lemma~\ref{lem:parity-cylinder} gives exactness of the parity
+prefix.
+\end{proof}
+
+\begin{corollary}[Equal-slope stationary extinction criterion]
+If every nonterminating positive orbit beginning at $n>1$ has an actual
+prefix $w$ for which
+\begin{equation}\label{eq:equal-slope-spectrum-target}
+\mathcal K_{k,s}(w)\cap\set{1,\ldots,n-1}\ne\varnothing,
+\end{equation}
+then Collatz holds.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:equal-slope} supplies a smaller positive coalescing ancestor;
+Theorem~\ref{thm:SFE-equivalence} finishes the proof.
+\end{proof}
+
+Unlike an asymptotic slope comparison, the criterion
+\eqref{eq:equal-slope-difference} is pointwise and integer-exact.  Its
+remaining difficulty is recurrence: such a carry return need not occur at
+every depth, and the desired theorem must force one occurrence along every
+positive stationary ray.
+
+\section{Ten research programs for synchronization}\label{sec:programs}
+
+This section records ten routes to stationary inverse-fiber extinction.  Each
+subsection states an exact target strong enough to imply a full proof, then
+identifies the obstruction left by current methods.
+
+\subsection{Program I: winding coercivity along mechanical chains}
+
+For a barrier-preserving chain
+\[
+w=w_0\to w_1\to\cdots\to w_N=w_{\mathrm{mech}},
+\]
+let $\eta_j$ be the winding bit of the $j$th transposition.  Iterating
+\eqref{eq:J-transposition} gives an exact additive cocycle for $J(w_N)-J(w)$.
+
+\begin{problem}[Winding-coercivity theorem]\label{prob:winding-coercivity}
+Prove that every nontrivial primitive first-crossing word $w$ realized by the
+stabilized residue of one positive ordinary integer satisfies
+\begin{equation}\label{eq:winding-coercive-target}
+J(w)>0.
+\end{equation}
+Equivalently, prove that the cumulative positive wrap contribution cannot
+overcome the deterministic nonwrap and carry losses in
+\eqref{eq:J-transposition}.
+\end{problem}
+
+A proof would establish first-crossing descent and hence Terras's
+coefficient-stopping-time assertion.  The central subproblem is to show that
+large-weight transpositions cannot wrap too often on a stationary
+positive-integer ray.  Mechanical and Christoffel extremizers supply the
+correct endpoint of the chain \cite{FernandezIbanez2026}; the new arithmetic
+content must control the winding bits.
+
+\subsection{Program II: equal-slope carry recurrence}
+
+For the actual prefix $w_k(n)$ define
+\[
+\mathcal K_k(n)=\mathcal K_{k,s_k}(w_k(n)).
+\]
+
+\begin{problem}[Equal-slope carry recurrence]\label{prob:equal-slope-recurrence}
+Prove that every nonterminating odd orbit beginning at $n>1$ has some depth
+$k$ for which
+\begin{equation}\label{eq:equal-slope-recurrence}
+\mathcal K_k(n)\cap\set{1,\ldots,n-1}\ne\varnothing.
+\end{equation}
+\end{problem}
+
+By Theorem~\ref{thm:equal-slope}, this is a direct proof of stationary
+inverse-fiber extinction.  Adjacent transpositions generate carry changes of
+the form $2^i3^t$; one seeks a structured signed combination equal to
+$d3^s$ with $1\le d<n$.  The divisibility is triangular and $3$-adic, so a
+promising organization is to choose swaps from the terminal end and correct
+one ternary digit at a time.
+
+Ordinary sum--product expansion does not directly apply: a single survivor
+ray is graph-like and each fixed branch is $3$-adically contracting.  The
+missing result is ray-dependent recurrence, not uniform expansion of the
+whole residue language.
+
+\subsection{Program III: Ostrowski surplus return sections}
+
+Let
+\[
+e_k=s_k-\ceil{\theta k},
+\qquad \theta=\log_3 2,
+\]
+and define the first activation time of surplus level $j$ by
+\begin{equation}\label{eq:tau-j}
+\tau_j=\min\set{k:e_k\ge j}.
+\end{equation}
+The blocks $[\tau_j,\tau_{j+1})$ are surplus return blocks over the Sturmian
+critical scaffold of slope $\theta$.
+
+\begin{problem}[Surplus-block carry innovation]\label{prob:surplus-innovation}
+Prove that there is an absolute $L$ such that, for every barrier sequence and
+every sufficiently large $j$, either
+\begin{equation}\label{eq:surplus-carry-window}
+b_k=1
+\quad\text{for some }\tau_j\le k<\tau_{j+1}+L,
+\end{equation}
+or the corresponding marked surplus block belongs to a finite exceptional
+family whose infinite concatenations represent eventually periodic negative
+$2$-adic seeds.
+\end{problem}
+
+A divergent barrier orbit has $e_k\to\infty$ by
+Corollary~\ref{cor:high-surplus}.  Thus repeated innovation would contradict
+eventual vanishing of the $b_k$.  The continued fraction of $\theta$ and
+Ostrowski numeration provide canonical return blocks; the desired theorem
+must show that each new unit of surplus consumes a new high binary carry,
+unless the code collapses into a periodic nonpositive sector.
+
+\subsection{Program IV: a corner-escape Lyapunov function}
+
+Normalize
+\begin{equation}\label{eq:normalized-corner-state}
+u_k=\frac{\rho_k}{2^k},
+\qquad
+v_k=\frac{z_k}{3^{s_k}},
+\qquad
+r_k=\frac{2^k}{3^{s_k}}.
+\end{equation}
+Then
+\begin{equation}\label{eq:u-dynamics}
+u_{k+1}=\frac{u_k+b_k}{2},
+\end{equation}
+\begin{equation}\label{eq:v-dynamics}
+v_{k+1}
+=
+\frac{v_k+b_k}{2}
++
+\frac{\eps_k}{2\cdot3^{s_{k+1}}},
+\end{equation}
+and
+\begin{equation}\label{eq:r-dynamics}
+r_{k+1}=\frac{2r_k}{3^{\eps_k}}.
+\end{equation}
+A divergent positive barrier orbit would approach the forbidden corner
+\[
+(u_k,v_k,r_k)\to(0,0,0)
+\]
+with $b_k=0$ eventually.
+
+\begin{problem}[Corner-escape theorem]\label{prob:corner-escape}
+Construct a coercive function
+\[
+\mathcal L(u,v,r,e,\phi),
+\qquad
+\phi=\{\theta k\},
+\]
+and constants $L,\delta>0$ such that every admissible length-$L$ block with
+$b=0$ and $r\le1$ either violates the barrier or satisfies
+\begin{equation}\label{eq:Lyapunov-increase}
+\mathcal L_{k+L}\ge\mathcal L_k+\delta.
+\end{equation}
+The function must be bounded above on trajectories approaching
+$(0,0,0)$.
+\end{problem}
+
+No one-step linear Lyapunov function is expected: the irrational phase of
+the critical line is essential.  A successful function must retain an
+unbounded state such as surplus, Ostrowski phase, or min-plus exposure gap;
+bounded-memory potentials cannot distinguish a stationary ray from
+terminating finite shadows.
+
+\subsection{Program V: two-place separation of the plus orbit and minus shadow}
+
+For a divergent positive barrier orbit, the same parity labels generate a
+positive real ``minus'' shadow
+\begin{equation}\label{eq:minus-shadow}
+a_{t+1}
+=
+\begin{cases}
+a_t/2,&\eps_t=0,\\[1mm]
+(3a_t-1)/2,&\eps_t=1,
+\end{cases}
+\end{equation}
+while the integer orbit satisfies
+\begin{equation}\label{eq:plus-orbit}
+x_{t+1}
+=
+\begin{cases}
+x_t/2,&\eps_t=0,\\[1mm]
+(3x_t+1)/2,&\eps_t=1.
+\end{cases}
+\end{equation}
+The shadow series is positive in $\R$ and represents $-x_t$ in $\Q_2$.
+Moreover $a_t/x_t\to0$.
+
+\begin{lemma}[Pure multiplicative sum]\label{lem:pure-sum}
+If $S_t=x_t+a_t$, then
+\begin{equation}\label{eq:pure-sum-dynamics}
+S_{t+1}
+=
+\begin{cases}
+S_t/2,&\eps_t=0,\\[1mm]
+3S_t/2,&\eps_t=1,
+\end{cases}
+\end{equation}
+so $S_t=q_tS_0$.
+\end{lemma}
+
+\begin{proof}
+The $+1$ and $-1$ cancel on odd steps; the even case is immediate.
+\end{proof}
+
+\begin{problem}[Two-place shadow separation]\label{prob:two-place-separation}
+Prove that no positive integer trajectory $x_t$, positive real trajectory
+$a_t>1$, and common label sequence $\eps_t$ can satisfy
+\eqref{eq:minus-shadow}--\eqref{eq:plus-orbit},
+\[
+q_t\ge1,
+\qquad q_t\to\infty,
+\qquad \frac{a_t}{x_t}\to0,
+\]
+while every finite truncation of the shadow remains congruent to $-x_t$
+modulo the corresponding power of two.
+\end{problem}
+
+This is an adelic separation problem.  Standard product-formula arguments do
+not suffice because rational sequences may converge to unrelated limits at
+different places.  One must derive additional algebraicity, recurrence, or
+height control from the shared parity labels.
+
+\subsection{Program VI: tropical curvature of the inverse-shadow envelope}
+
+Fix an endpoint parameterization $X=3^rs-y$.  Every positive accelerated
+$3x-1$ shadow word $v$ gives an affine line
+\begin{equation}\label{eq:shadow-line}
+\ell_v(s)=2^{A(v)}s-\mu_0(v),
+\end{equation}
+whose positive values are exactly the positive inverse ancestors of $X$.
+Define the positive lower envelope
+\begin{equation}\label{eq:lower-envelope}
+E_r(s)=\min\set{\ell_v(s):\ell_v(s)>0,\ |v|=r}.
+\end{equation}
+At the actual parameter $s_r$,
+\[
+E_r(s_r)=M_r(n).
+\]
+
+\begin{problem}[Tropical exposure extinction]\label{prob:tropical-extinction}
+Prove that no fixed positive line value $n>1$ can remain the exposed positive
+minimum at the actual nested parameters for every depth.  Equivalently, if
+$w_r$ is the actual inverse word, prove that for some $r$ there is a
+competitor $v$ with
+\begin{equation}\label{eq:tropical-target}
+0<\ell_v(s_r)<\ell_{w_r}(s_r)=n.
+\end{equation}
+\end{problem}
+
+This is exactly stationary inverse-fiber extinction in min-plus coordinates.
+The hoped-for mechanism is cumulative curvature: an expanding family of
+lines with different dyadic slopes should force a crossing near the actual
+parameter.  Finite examples with large descent cutoffs show that no uniform
+one-scale curvature constant exists; the theorem must be seed-dependent and
+infinitary.
+
+\subsection{Program VII: a moving-target Subspace Theorem}
+
+Nested accelerated blocks give identities
+\begin{equation}\label{eq:nested-trajectory-identity}
+2^{A_{j,\ell}}x_{t_j+\ell}
+-3^\ell x_{t_j}
+=C_{j,\ell}.
+\end{equation}
+The carry is itself a sum of mixed powers of two and three.  A stationary
+minimum supplies infinitely many related identities along one orbit.
+Moving-target versions of Schmidt's Subspace Theorem allow the defining
+forms to vary provided their height is small compared with the points
+\cite{ZhaoLi2026}.
+
+\begin{problem}[Nested small-form amplification]\label{prob:subspace-amplification}
+Show that stationary inverse-fiber minimality forces infinitely many block
+vectors $\mathbf X_j$ and moving linear forms $L_{v,i}^{(j)}$ satisfying
+\begin{equation}\label{eq:subspace-inequality}
+\prod_{v,i}
+\frac{\abs{L_{v,i}^{(j)}(\mathbf X_j)}_v}
+{\|\mathbf X_j\|_v}
+\le H(\mathbf X_j)^{-\delta}
+\end{equation}
+for a fixed $\delta>0$, with target-form height
+$o(h(\mathbf X_j))$.  Classify the resulting rational subspaces and show
+that each forces either periodicity or a smaller coalescing ancestor.
+\end{problem}
+
+The missing preliminary step is amplification.  One trajectory identity is
+exact but not unusually small relative to all of its coordinates; the proof
+must manufacture several independent small forms from repeated near-returns,
+marked carries, or nested endpoint comparisons.
+
+\subsection{Program VIII: return-block $p$-adic interpolation}
+
+A fixed block $w$ acts affinely on its realization class:
+\begin{equation}\label{eq:block-affine-map}
+F_w(x)=\lambda_wx+\beta_w.
+\end{equation}
+If the same marked block recurs, then
+\begin{equation}\label{eq:block-iterate}
+F_w^m(x)
+=
+\lambda_w^m x
++
+\beta_w\frac{\lambda_w^m-1}{\lambda_w-1}.
+\end{equation}
+For primes $p\nmid6$, suitable powers of $\lambda_w$ may be close to one
+$p$-adically, allowing interpolation of $m\mapsto F_w^m(x)$.
+
+\begin{problem}[Marked recurrent-block theorem]\label{prob:padic-recurrence}
+Prove that every positive stationary barrier ray contains one marked block
+\[
+(w,\rho\bmod2^a,z\bmod3^b,e\bmod m)
+\]
+recurring infinitely often in a form governed by a single $p$-adically
+interpolable affine map.  Show that stationary minimality forces an
+associated analytic descent function to have infinitely many zeros or a
+fixed sign at infinitely many integers; use $p$-adic zero-counting to force
+an identity, and classify the identity as periodic or descending.
+\end{problem}
+
+The obstacle is recurrence in the full marked state, not interpolation
+itself.  Symbolic recurrence alone does not synchronize the seed residue,
+endpoint phase, surplus level, and Bellman exposure status.
+
+\subsection{Program IX: a gapped cross-prime fractal uncertainty principle}
+
+A direct dyadic seed cylinder and ternary endpoint cylinder are exact affine
+images, so naive independence is false.  Insert a middle gap of length $g$
+and sum over admissible middle words.  This gives a transfer operator
+\[
+K_g:\ell^2(S_a)\longrightarrow\ell^2(E_b)
+\]
+between conditioned seed and endpoint residue sets.
+
+\begin{problem}[Gapped arithmetic FUP]\label{prob:FUP}
+After removing periodic structured sectors, prove constants $c>0$ and
+$g_0$ for which
+\begin{equation}\label{eq:FUP-target}
+\left\|
+\one_{E_b}K_g\one_{S_a}
+\right\|_{2\to2}
+\le e^{-cg}
+\qquad(g\ge g_0)
+\end{equation}
+uniformly in the boundary data arising from positive stationary rays.
+\end{problem}
+
+An iterated stationary atom would retain unit mass through every scale,
+contradicting \eqref{eq:FUP-target}.  Discrete Cantor-set uncertainty theory
+suggests multiscale porosity and the exclusion of distributed spectral pairs
+as the relevant hypotheses \cite{LaiShi2025}.  The unresolved Collatz input
+is component-sensitive amplification: one exceptional ray must generate a
+large enough family of neighboring competitors for an uncertainty estimate
+to act on it.
+
+\subsection{Program X: autoconjugacy, complementary drift, and Cobham rigidity}
+
+The nontrivial $2$-adic autoconjugacy of Monks and Yazinski complements parity
+bits \cite{MonksYazinski2004}.  A high-density barrier path is paired with a
+low-density path having strongly contracting real drift, but its paired
+$2$-adic seed need not be a positive ordinary integer.
+
+\begin{problem}[Complement-and-repair synchronization]\label{prob:autoconjugacy-repair}
+For every positive stationary barrier seed $n>1$, prove that some complemented
+prefix can be modified by a terminal $3$-adically compatible correction to
+produce a positive integer $y<n$ whose orbit reaches the actual endpoint of
+$n$.
+\end{problem}
+
+One possible route is to prove that the original and complementary carry
+streams admit finite-state or substitutive descriptions in multiplicatively
+independent numeration systems.  Cobham-type rigidity would then force
+eventual periodicity \cite{BustosFokkinkYassawi2025}.  Substitution cocycle
+methods may provide a parallel Lyapunov criterion \cite{Solomyak2025}.  The
+present gap is prior to those theorems: neither automaticity nor strong
+irreducibility of the relevant joint carry cocycle has been established.
+
+\section{Conditional completion theorems}\label{sec:completion}
+
+Theorem~\ref{thm:SFE-equivalence} already gives the narrowest one-statement
+completion criterion.  We record a second architecture that separates
+finite coefficient crossings from infinite barrier rays.
+
+\begin{conjecture}[First-crossing descent]\label{conj:FCD}
+For every positive integer $n>1$, if $k$ is the first time for which
+\[
+q_k(n)<1,
+\]
+then
+\begin{equation}\label{eq:FCD}
+T^k(n)<n.
+\end{equation}
+\end{conjecture}
+
+This is Terras's coefficient-stopping-time assertion in the present notation.
+
+\begin{conjecture}[High-surplus carry innovation]\label{conj:HSCI}
+Every infinite binary sequence satisfying
+\begin{equation}\label{eq:HSCI-hyp}
+s_k\ge\ceil{k\log_3 2}
+\qquad(k\ge0)
+\end{equation}
+and
+\begin{equation}\label{eq:HSCI-surplus}
+s_k-\ceil{k\log_3 2}\longrightarrow\infty
+\end{equation}
+has infinitely many inverse-carry bits $b_k=1$.
+\end{conjecture}
+
+\begin{theorem}[Two-lemma conditional proof of Collatz]\label{thm:FCD-HSCI}
+Conjectures~\ref{conj:FCD} and \ref{conj:HSCI} imply the Collatz conjecture.
+\end{theorem}
+
+\begin{proof}
+Suppose Collatz is false and let $n>1$ be the least positive integer whose
+orbit does not reach the trivial cycle.
+
+If $q_k(n)<1$ for some $k$, choose the first such $k$.  By
+Conjecture~\ref{conj:FCD},
+\[
+T^k(n)<n.
+\]
+The smaller integer lies on the nonterminating orbit of $n$, contradicting
+minimality.
+
+It remains that $q_k(n)\ge1$ for every $k$.  A bounded nonterminating orbit is
+periodic.  But for a positive cycle, the affine cycle equation has positive
+carry, hence the coefficient over one full period is strictly below one;
+this would put us in the first case.  Thus the orbit of $n$ is divergent.
+
+By Proposition~\ref{prop:barrier-normalization} and
+Corollary~\ref{cor:high-surplus}, its critical surplus tends to infinity.
+Since its parity sequence comes from the fixed positive integer $n$,
+Theorem~\ref{thm:finite-support} says that $b_k=0$ eventually.  This
+contradicts Conjecture~\ref{conj:HSCI}.
+\end{proof}
+
+\begin{remark}
+The two conjectures divide the full problem cleanly.  First-crossing descent
+handles every orbit whose coefficient ever falls below one, including every
+positive cycle.  High-surplus carry innovation handles the remaining
+infinite coefficient-barrier trajectories.  Stationary inverse-fiber
+extinction is logically narrower as a single statement because it treats
+both cases by one finite coalescence certificate.
+\end{remark}
+
+\section{What a successful synchronization proof must retain}
+
+The preceding analysis gives several no-go principles.
+
+\begin{enumerate}[label=(\roman*),leftmargin=2.5em]
+\item \textbf{Finite-prefix recognition is insufficient.}
+Every finite parity word is realized by positive integers, and can be
+extended to a terminating orbit.  A counterexample can only be excluded by
+using nestedness for one fixed seed.
+
+\item \textbf{Terminal $3$-adic compatibility is insufficient.}
+The suffix decides whether a competitor exists, but the prefix surplus
+decides whether it is smaller and positive.
+
+\item \textbf{Real drift is insufficient.}
+Near-resonances between powers of two and three permit long paradoxical
+behavior, as quantified by Theorem~\ref{thm:primitive-resonance}.
+
+\item \textbf{Average entropy is insufficient.}
+An exponentially sparse language may still contain one infinite stationary
+ray.
+
+\item \textbf{Naive cross-prime independence is false.}
+Seed and endpoint cylinders are linked by exact affine identities.
+
+\item \textbf{Ordinary approximate spectral gaps are insufficient.}
+Arbitrarily long terminating shadows reproduce every finite parity pattern;
+a norm supremum can choose a different seed at each depth and forget
+stationarity.
+\end{enumerate}
+
+A successful invariant must therefore retain three pieces simultaneously:
+
+\begin{equation}\label{eq:three-ends}
+\boxed{
+\begin{array}{c}
+\text{left-end }2\text{-adic seed stabilization},\\
+\text{right-end }3\text{-adic endpoint compatibility},\\
+\text{Archimedean order between competing starts}.
+\end{array}}
+\end{equation}
+
+The local--global score, transposition winding cocycle, equal-slope carry
+spectrum, mixed corner dynamics, and tropical lower envelope are five
+coordinate systems for this same three-part obstruction.
+
+\section{Conclusion}
+
+The present paper does not prove the Collatz conjecture.  It replaces a broad
+request for ``global synchronization'' by one exact finite certificate:
+
+\begin{equation}\label{eq:final-target}
+\boxed{
+\forall n>1\text{ odd}\quad
+\exists r\ge1\quad
+M_r(n)<n.
+}
+\end{equation}
+
+By Theorem~\ref{thm:SFE-equivalence}, \eqref{eq:final-target} is equivalent
+to Collatz.  It says that no positive integer other than $1$ can remain the
+least positive point in every finite inverse fiber above its own orbit.
+
+On the divergent branch, the obstruction becomes even more concrete.  A
+counterexample shifted into the coefficient barrier would have to satisfy
+simultaneously
+\[
+e_k\to\infty
+\qquad\text{and}\qquad
+b_k=0\text{ eventually}.
+\]
+Thus unbounded surplus above the critical mechanical word would coexist with
+a finite-support inverse-carry stream.  Conjecture~\ref{conj:HSCI} asserts
+that this is impossible.
+
+The most direct arithmetic certificate found here is the equal-slope carry
+return
+\[
+C(v)-C(w)=d3^s,
+\qquad
+1\le d<n,
+\]
+which immediately produces the smaller coalescing ancestor $n-d$.  The most
+direct combinatorial obstruction is the winding bit in
+\[
+\rho(u01v)
+=
+\rho(u10v)-2^ia+\eta2^k.
+\]
+Christoffel and mechanical extremality control the real carry; controlling
+the accumulated wraps would control descent.
+
+The remaining theorem is therefore not a generic entropy, compactness, or
+finite-state statement.  It is a cross-prime, two-ended, finite-input
+rigidity theorem for one stationary arithmetic ray.
+
+\begin{thebibliography}{99}
+
+\bibitem{Barina2025}
+D.~Barina,
+\emph{Improved verification limit for the convergence of the Collatz conjecture},
+J. Supercomput. \textbf{81} (2025), Article 810.
+
+\bibitem{BustosFokkinkYassawi2025}
+\'{A}.~Bustos-Gajardo, R.~Fokkink, and R.~Yassawi,
+\emph{Cobham's theorem for the Gaussian integers},
+arXiv:2510.01440, 2025.
+
+\bibitem{FernandezIbanez2026}
+C.~Fern\'andez and S.~Ib\'a\~nez,
+\emph{Christoffel words as extremal structures in Collatz dynamics},
+arXiv:2607.24844, 2026.
+
+\bibitem{GarciaTal1999}
+M.~V.~P. Garcia and F.~A. Tal,
+\emph{A note on the generalized $3n+1$ problem},
+Acta Arith. \textbf{90} (1999), no.~3, 245--250.
+
+\bibitem{Kramer2026}
+O.~Kramer,
+\emph{Adaptive search in Collatz exponent-code space via $2$-adic and $3$-adic constraints},
+arXiv:2607.10041, 2026.
+
+\bibitem{Lagarias1985}
+J.~C. Lagarias,
+\emph{The $3x+1$ problem and its generalizations},
+Amer. Math. Monthly \textbf{92} (1985), no.~1, 3--23.
+
+\bibitem{LaiShi2025}
+C.-K.~Lai and R.~Shi,
+\emph{When is the fractal uncertainty principle for discrete Cantor sets most uncertain?},
+arXiv:2501.00864, 2025.
+
+\bibitem{Monks2025}
+K.~G. Monks,
+\emph{On $q$-analogs of the $3x+1$ dynamical system},
+J. Integer Seq. \textbf{28} (2025), Article 25.6.8.
+
+\bibitem{MonksYazinski2004}
+K.~G. Monks and J.~Yazinski,
+\emph{The autoconjugacy of the $3x+1$ function},
+Discrete Math. \textbf{275} (2004), 219--236.
+
+\bibitem{Niu2026}
+T.~Niu,
+\emph{Parity vectors and paradoxical sequences in the accelerated Collatz map},
+arXiv:2605.13886, 2026.
+
+\bibitem{RozierTerracol2025}
+O.~Rozier and C.~Terracol,
+\emph{Paradoxical behavior in Collatz sequences},
+arXiv:2502.00948v5, 2025.
+
+\bibitem{Solomyak2025}
+B.~Solomyak,
+\emph{On the Lyapunov spectrum of the twisted cocycle for substitutions},
+arXiv:2502.14308, 2025.
+
+\bibitem{Tao2022}
+T.~Tao,
+\emph{Almost all orbits of the Collatz map attain almost bounded values},
+Forum Math. Pi \textbf{10} (2022), e12.
+
+\bibitem{Terras1976}
+R.~Terras,
+\emph{A stopping time problem on the positive integers},
+Acta Arith. \textbf{30} (1976), no.~3, 241--252.
+
+\bibitem{YolcuAaronsonHeule2023}
+E.~Yolcu, S.~Aaronson, and M.~J.~H. Heule,
+\emph{An automated approach to the Collatz conjecture},
+J. Autom. Reason. \textbf{67} (2023), Article 15.
+
+\bibitem{ZhaoLi2026}
+G.~Zhao and Y.~Li,
+\emph{On a theorem of Schmidt's subspace theory with moving targets},
+arXiv:2603.01627, 2026.
+
+\end{thebibliography}
+
+\end{document}

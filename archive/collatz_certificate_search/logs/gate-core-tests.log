@@ -1,0 +1,37 @@
+PASS (a) affine identity 2^{A_j} U^j n = 3^j n + C_j, 2000 seeds x depth 25  -- 0 failures
+PASS (b) r55 Prop 1: r(w) formula, realization set, ray U^k(n)=y_k+t 3^k 2^{A_j+1-A_k} (27 length-3 + 60 length-6 words, t in {0,1,3,7})  -- []
+PASS (b') r55: r(1^j) = 2^{j+1}-1, U^k = 3^k 2^{j+1-k} - 1, j <= 15
+PASS (c) r50 Prop 4 on all 81 length-4 words: r2 positive odd < 2^{A+1}, realizes w, endpoint r3, r2 + t 2^{A+1} <-> r3 + t 2 3^k  -- []
+PASS (d) r71 F-D L=1..6: q_L odd integer, n_j odd, T(n_j)=n_{j+1}, T(n_L)=2^{3^L}, seeds terminate  -- first two members [3, 5, 8] and [151, 227, 341, 512]
+PASS (d') first members are 3->5->8 and 151->227->341->512
+PASS (e) r69 Thm 2: N_L = 2 3^{L-1}-1, x_j = 3^j 2^{L-j}-1, T(x_j)=x_{j+1}, increasing, x_{L-1} = N_L, x_L = 3^L-1 > N_L, L=2..39
+PASS (e') r69 s7: J(2^L-1) = 3^L-1 for L=1..39
+PASS (e'') r69: 31->47->71->107->161->242; T(x)+1 <= (3/2)(x+1) with equality iff x odd, x<=200000
+PASS (f) r51 Lemma 2, A=C=2: U-word of P is exactly (2,1^{k-1},2,2) and N = U^{k+2}(P), k in {5,9,13,17,21,25}  -- k=5: P=41 N=91
+PASS (f') r51: at k=145, P = N mod 2^6 and mod 3^3, and the word is still (2,1^144,2,2)  -- v2(P-N)=6 v3(P-N)=3
+PASS (f'') r51 DISCREPANCY CHECK: the RESULTS list 145,1009,...,5329 (period 864) is the set with P = N mod 2^4 and 3^3; the mod-2^6-and-3^3 agreement has period 3456: k = 145, 3601, 7057, 10513  -- mod(2^4,3^3): [145, 1009, 1873, 2737, 3601, 4465, 5329] ; mod(2^6,3^3): [145, 3601, 7057, 10513]
+PASS (g) r63 eq (45): rescue count m(w) = brute-force seed count for all 142 first-crossing words k<=14 (141 excluding the k=1 even word)  -- per k: {1: 1, 2: 1, 4: 1, 5: 2, 7: 3, 8: 7, 10: 12, 12: 30, 13: 85}; live words: {(1, 0): [1]}
+PASS (g') the only live first crossing for k<=14 is the trivial (1,0) with seed 1 (y=0, exact return)
+PASS (g'') DFS non-crossing counts agree with the lattice-path DP for all k<=30  -- k=30: 12771274
+PASS (g3) live first-crossing words up to depth 30: only the trivial one (k=2, seed 1)  -- first-crossing words per k: [1, 1, 0, 1, 2, 0, 3, 7, 0, 12, 0, 30, 85, 0, 173, 476, 0, 961, 0, 2652, 8045, 0, 17637, 51033, 0, 108950, 312455, 0, 663535, 0]; total 1166059
+PASS (g4) exact #B_k (DFS + rescued seeds) equals brute force over all n < 2^k for k<=18  -- #B_k k=1..18: [1, 2, 3, 4, 5, 9, 14, 20, 39, 65, 129, 227, 368, 735, 1296, 2115, 4229, 7496]
+PASS (g5) 2^{-k} #B_k <= (0.9659065533)^k for k<=30 (rational upper bound of rho_bulk)  -- max ratio = 0.535920; #B_30 = 12771275
+   (g) time 23.4s
+PASS (h) r58: w=(1^12,9): D=2^21-3^13=502829 prime, C=3^13-2^13=1586131, gcd=1, rational cycle closes with the exact valuation word, all 13 points > 3  -- x = 1586131/502829, min = 1586131/502829
+PASS (h') r58: (1,1,3) gives 19/5 -> 31/5 -> 49/5 -> 19/5
+PASS (h'') r58 rigidity q r_m = p mod 2^{mA} for (1,1,3)^m, m<=4
+PASS (i) r43: w1,w2 length 22, total 34, strict barrier 2^{A_t}<3^t, C_{w2}-C_{w1} = 4 3^22 = 125524238436, identical endpoint class mod 3^22  -- least realizers 22528613375, 22528613371
+PASS (i') r43: seeds 22528613375 (w1) and 22528613371 (w2) share the endpoint, n2 = n1 - 4  -- common endpoint 41151172439
+PASS (i'') r60: w1=(1^15,2,3,1,3), w2 length 19, barrier A_k <= floor(k log2 3), B(w1)=1183691739, B(w2)=5832737607, difference 4 3^19, both = 21430272 mod 3^19 (B = C + 2^A)
+PASS (i3) r60: 1^r is exactly 1-terminal (B = 3^r) for r <= 24, and no other barrier word of length <= 14 is
+PASS (j) r67 Thm 9.1: pi = (1/3)^tau satisfies P pi <= pi on 3 <= m <= 100000 exactly in rationals  -- first violations []
+PASS (j') (P pi)(m)/pi(m) <= 2q = 2/3 on m <= 20000  -- max ratio 2/3
+PASS (j'') r67: #{n < 300000 : tau(n) = r} <= 2^{r+1} for every r  -- max ratio 3/4 (~0.750), max tau 277
+PASS (k) r70 s8: three descent steps (even -> n/2; n=1 mod 4 -> (3n+1)/4 < n; n=2 mod 3 -> odd (2n-1)/3 < n maps to n) verified n<=100000; surviving residues mod 12 = {3,7}  -- residues [3, 7]
+PASS (k') r68 Prop 3: [K even, K=2 mod 3, (2K-1)/3 = 2 mod 3] <=> K = 8 mod 18 on 3<=K<=100000; T(odd K)>K; 2a > K for a=(2K-1)/3
+PASS (x1) F-K: 47 -> 61 is a proper-barrier U-segment of length 33 (A=52), barrier breaks at 34, h = 13, gain U^33(47) - 47 = 14; not 1-terminal (r60 Delta = B/3^r - 1 non-integer)  -- r60 Delta = 12388269702305648/5559060566555523
+PASS (x2) 1-terminal barrier words of length <= 14 (81117 barrier words scanned): only 1^r (Delta = 0 = h); 0 < Delta < h holds on every NONTRIVIAL one (vacuously: there are 0)  -- 1-terminal: [(1, Fraction(0, 1), 0), (2, Fraction(0, 1), 0), (3, Fraction(0, 1), 0)]
+PASS (x3) battery generates all members without assertion failure  -- 352 members
+PASS (x4) run_battery rejects V(n)=n (potential) and pi=1/n^2 (P pi <= pi) as expected  -- failures per family: {'F-A': 63, 'F-B': 63, 'F-C': 39, 'F-D': 6, 'F-E': 41, 'F-F': 7, 'F-G': 126, 'F-H': 2, 'F-I': 2, 'F-J': 0, 'F-K': 1}
+
+34/34 PASS  (31.6s)

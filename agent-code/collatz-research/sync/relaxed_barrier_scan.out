@@ -1,0 +1,5 @@
+cap=265721 step_cap=100000
+counts={"hit_1":1,"relaxed_barrier_failure":132853,"cycle":6}
+hits=[[1,0]]
+longest={"steps":101,"seed":249189,"status":"relaxed_barrier_failure"}
+certificate_passed=true

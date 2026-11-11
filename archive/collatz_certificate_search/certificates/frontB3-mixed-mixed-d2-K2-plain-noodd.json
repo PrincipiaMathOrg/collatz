@@ -1,0 +1,78 @@
+{
+ "mode": "mixed",
+ "family": "mixed-d2-K2-plain-noodd",
+ "level": "mixed",
+ "dim": 2,
+ "K": 2,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "SAT",
+ "time_s": 434.6,
+ "rounds": 13,
+ "bitwidth": 15,
+ "reason": null,
+ "odd_rule_included": false,
+ "params": {
+  "('alpha', 0)": [
+   1,
+   1
+  ],
+  "('beta', 0)": [
+   1,
+   0
+  ],
+  "('M', 0, 'f')": [
+   [
+    1,
+    0
+   ],
+   [
+    1,
+    1
+   ]
+  ],
+  "('M', 0, 't')": [
+   [
+    1,
+    0
+   ],
+   [
+    1,
+    1
+   ]
+  ],
+  "('M', 0, '0')": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ],
+  "('M', 0, '1')": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ],
+  "('M', 0, '2')": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ "instances_used": 57,
+ "exact_check_first_violation": null,
+ "n_checked": 1085768
+}

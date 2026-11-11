@@ -1,0 +1,802 @@
+[
+ {
+  "approach": 1,
+  "round": 6,
+  "front": "proof",
+  "title": "Adelic two-ended renormalization of valuation words",
+  "chars": 985,
+  "sha256": "33a876559a65df085e29fdf1b3fcb246ec0f5f78100eb49675a577810dabb1e8"
+ },
+ {
+  "approach": 2,
+  "round": 7,
+  "front": "proof",
+  "title": "Furstenberg-style (x2, x3) measure rigidity",
+  "chars": 794,
+  "sha256": "35d7e5d2c970bb1e925f0a0f303983d654778cbdbfdb20260e1e8cd0bc8b3497"
+ },
+ {
+  "approach": 3,
+  "round": 8,
+  "front": "proof",
+  "title": "Turn the q-analogue into a polynomialization theorem",
+  "chars": 797,
+  "sha256": "f873bc4b9e2de0f320ef2d5888194cea00c48ae1e7cd63896fbef22b2e87fbf4"
+ },
+ {
+  "approach": 4,
+  "round": 9,
+  "front": "proof",
+  "title": "A Cobham trap for counterexample carry streams",
+  "chars": 837,
+  "sha256": "d52a1467bf5f79712bb9d05e7179fc21b1178bf02abf99d94dc4b9fee7b7a1a8"
+ },
+ {
+  "approach": 5,
+  "round": 10,
+  "front": "proof",
+  "title": "Prove simplicity or irreducibility of the Collatz C*-algebra",
+  "chars": 687,
+  "sha256": "3fcd3b26daa2f76f0570620c8c877ffe9bda9474df4435e8f17f781b8edce322"
+ },
+ {
+  "approach": 6,
+  "round": 11,
+  "front": "proof",
+  "title": "Sheaf cohomology for gluing modular Lyapunov functions",
+  "chars": 677,
+  "sha256": "7037adcad8da942aca92c8806cad409cccb30b656c6f2bb13099625224ca82b5"
+ },
+ {
+  "approach": 7,
+  "round": 12,
+  "front": "proof",
+  "title": "Compute the K-theory of the Collatz orbit groupoid",
+  "chars": 670,
+  "sha256": "1d093f39005a10fa6bd4d38435defbf57cd356644625c747c3de449b7fb9a343"
+ },
+ {
+  "approach": 8,
+  "round": 13,
+  "front": "proof",
+  "title": "Thermodynamic formalism with an arithmetic integrality potential",
+  "chars": 669,
+  "sha256": "04292b98c2c80db629338320f78320c5a3c3898bd06aa49cb75fe906f290fcec"
+ },
+ {
+  "approach": 9,
+  "round": 14,
+  "front": "proof",
+  "title": "An o-minimal rational-point explosion theorem",
+  "chars": 676,
+  "sha256": "05f1526d9021c1b78c2be7bf5c3cb223786edc98d972ae3c1209bedc6ef67077"
+ },
+ {
+  "approach": 10,
+  "round": 15,
+  "front": "proof",
+  "title": "A canonical height on a parity orbifold",
+  "chars": 669,
+  "sha256": "30cb70d614d880f708403afa69a8feb51fd373561bbd8b82874bca24b7ef0062"
+ },
+ {
+  "approach": 11,
+  "round": 16,
+  "front": "proof",
+  "title": "Arithmetic Conley index at infinity",
+  "chars": 547,
+  "sha256": "17be451e4ae82e8b6d57ca0e8c80804f3ae5675ac74192b365da76a55819f903"
+ },
+ {
+  "approach": 12,
+  "round": 17,
+  "front": "proof",
+  "title": "Proof-theoretic ordinal descent",
+  "chars": 716,
+  "sha256": "b364f536817d1af0fd4d221b85e8da5337b1d30eb589cdd975cb5efb19ced94e"
+ },
+ {
+  "approach": 13,
+  "round": 18,
+  "front": "proof",
+  "title": "Exact arithmetic optimal transport extending Tao",
+  "chars": 645,
+  "sha256": "7978594df0271c7c8b9727d21e89c8097d663b78b400200074575c87e54d53ae"
+ },
+ {
+  "approach": 14,
+  "round": 19,
+  "front": "proof",
+  "title": "Mixed 2-adic/3-adic Kakeya or decoupling",
+  "chars": 623,
+  "sha256": "4c959dca00ed5ac7f8f345f396be34728bb160ec9c960626f97f286088c1b1ab"
+ },
+ {
+  "approach": 15,
+  "round": 20,
+  "front": "proof",
+  "title": "Lee-Yang zeros of a Collatz partition function",
+  "chars": 641,
+  "sha256": "0496a7332c205f9c5921e245aef0f003fa36070c38db60592920793a0ae59da7"
+ },
+ {
+  "approach": 16,
+  "round": 21,
+  "front": "proof",
+  "title": "A quantum-graph trace formula for cycles and escape",
+  "chars": 615,
+  "sha256": "8aa9e232f346e42405e73d729f6236e282d57b500949c3996b5e63d04e114b9e"
+ },
+ {
+  "approach": 17,
+  "round": 22,
+  "front": "proof",
+  "title": "Tropicalize the cycle and near-cycle equations",
+  "chars": 585,
+  "sha256": "f7e65aa65e6a7bd83116d3b6bc9515beb9fb2c247633451cdd454558b25b852a"
+ },
+ {
+  "approach": 18,
+  "round": 23,
+  "front": "proof",
+  "title": "A Kolmogorov-complexity contradiction",
+  "chars": 667,
+  "sha256": "9d1620c7afa1a519b080b418241a84bc72487bbbd4382e0f155552e458a66cc3"
+ },
+ {
+  "approach": 19,
+  "round": 24,
+  "front": "proof",
+  "title": "Terminal-suffix transducer with a vanishing joint spectral radius",
+  "chars": 743,
+  "sha256": "72be42229316492f5cd56b34ab9a0eaf2d677bab616e81ec1e43e48b20397ec9"
+ },
+ {
+  "approach": 20,
+  "round": 25,
+  "front": "proof",
+  "title": "Ultraproduct rigidity of minimal counterexamples",
+  "chars": 729,
+  "sha256": "c59a01bf3c8db6dd5334ec4627c8b6ecd81531145d5b7b42873d095e40e182be"
+ },
+ {
+  "approach": 21,
+  "round": 26,
+  "front": "proof",
+  "title": "Additive-combinatorial inverse theorem for growth words",
+  "chars": 514,
+  "sha256": "f83c29eff3e7f7ef9cdf8ba58a56f53ba12ed8e23bd6ee5caaa8b1fd3a3d15dc"
+ },
+ {
+  "approach": 22,
+  "round": 27,
+  "front": "proof",
+  "title": "Entropy decrement plus arithmetic rigidity",
+  "chars": 484,
+  "sha256": "7ded2648944dee3e1f0ee5b31bfcd6b178033ff1d359711035fce5c5d75b7030"
+ },
+ {
+  "approach": 23,
+  "round": 28,
+  "front": "proof",
+  "title": "A pointwise Bellman function",
+  "chars": 411,
+  "sha256": "0eae5af7872ae84ac39189945679468c66e6763194d3b61f029d756906c3f726"
+ },
+ {
+  "approach": 24,
+  "round": 29,
+  "front": "proof",
+  "title": "Sum-of-squares Lyapunov certificates",
+  "chars": 448,
+  "sha256": "6a525647366335323a27f550c4d52f7b79eade8a36225dd201f2047d88505310"
+ },
+ {
+  "approach": 25,
+  "round": 30,
+  "front": "proof",
+  "title": "Counterexample-guided abstraction refinement",
+  "chars": 594,
+  "sha256": "a037ac4c3b8889f3d95cc941c995c72ebf5f8f8df83bed5a638c208335232109"
+ },
+ {
+  "approach": 26,
+  "round": 31,
+  "front": "proof",
+  "title": "A genuinely new reduction order for mixed binary-ternary rewriting",
+  "chars": 479,
+  "sha256": "09fc05617bef80bb29b080264ae56f4c976682b053f6996988461b10f1eae37e"
+ },
+ {
+  "approach": 27,
+  "round": 32,
+  "front": "proof",
+  "title": "Digit-block ordinals below epsilon_0",
+  "chars": 386,
+  "sha256": "e73c355aad3721e9e20b116096cd572d18291b5ddaf87190141f3708ab5011b0"
+ },
+ {
+  "approach": 28,
+  "round": 33,
+  "front": "proof",
+  "title": "Well-structured transition systems",
+  "chars": 458,
+  "sha256": "9b54abab0c305c0038eba43e8031640d1d8d17c72b4f8b61fb64b0e50f004a8b"
+ },
+ {
+  "approach": 29,
+  "round": 34,
+  "front": "proof",
+  "title": "Cellular-automaton nilpotency",
+  "chars": 458,
+  "sha256": "2b9e69fb64eeea864f46b5fa27685e8e94b870eb61e7d448e3f83ed9d6b0ea77"
+ },
+ {
+  "approach": 30,
+  "round": 35,
+  "front": "proof",
+  "title": "Base-6 carry particles",
+  "chars": 454,
+  "sha256": "f7434e80e81a1083c3ef9fda86ddfdd9a85ee694f9a8576b51c03bac2473843b"
+ },
+ {
+  "approach": 31,
+  "round": 36,
+  "front": "proof",
+  "title": "Rotor-router inverse branching",
+  "chars": 427,
+  "sha256": "4bed138ac4d969e35b0503fbd364c4f0df85aacecb7b557ae049a1ee7b27a93f"
+ },
+ {
+  "approach": 32,
+  "round": 37,
+  "front": "proof",
+  "title": "Electrical capacity of infinity",
+  "chars": 483,
+  "sha256": "4b8779a78b9a91c87c84d0095f080c1b0b8888cec74711983c78c012f8d4d48d"
+ },
+ {
+  "approach": 33,
+  "round": 38,
+  "front": "proof",
+  "title": "Sandpile stabilization",
+  "chars": 367,
+  "sha256": "06e2d6641d13d46bfffd691c3dee2ed2c266bf4d4433f18fe275582cf4784567"
+ },
+ {
+  "approach": 34,
+  "round": 39,
+  "front": "proof",
+  "title": "Directed-polymer free energy",
+  "chars": 406,
+  "sha256": "3811a478ebcd4586faad6db35a2ad681806f5ff5eb86453ff641add10479590e"
+ },
+ {
+  "approach": 35,
+  "round": 40,
+  "front": "proof",
+  "title": "Dependent percolation domination",
+  "chars": 395,
+  "sha256": "9de8fe436924e7f7b42cbc6abf82ebd39a6c51be7b800552a6d5350d7ad0000a"
+ },
+ {
+  "approach": 36,
+  "round": 41,
+  "front": "proof",
+  "title": "An algorithmic Lovasz local lemma",
+  "chars": 394,
+  "sha256": "430d5a68180a318e07cd2016a6f243d1e52e106249728c71b2e4799b72d65d37"
+ },
+ {
+  "approach": 37,
+  "round": 42,
+  "front": "proof",
+  "title": "Coding-theoretic minimum distance",
+  "chars": 362,
+  "sha256": "56170742e0a2d927dc786a1ff7729c2cea63582fc70131810aee3f4cf9fbc2ee"
+ },
+ {
+  "approach": 38,
+  "round": 43,
+  "front": "proof",
+  "title": "List decoding of valuation profiles",
+  "chars": 450,
+  "sha256": "b6a266c0516e096ade8cb5fb6d40fc62508bc01ae93d83d55617391cfbf6b833"
+ },
+ {
+  "approach": 39,
+  "round": 44,
+  "front": "proof",
+  "title": "An information-capacity bound",
+  "chars": 485,
+  "sha256": "c32645437e77ddd1a47b6d7077b524265b6a48551fb953f9b71d896a9a4e2a0b"
+ },
+ {
+  "approach": 40,
+  "round": 45,
+  "front": "proof",
+  "title": "Mahler-function transcendence of parity series",
+  "chars": 471,
+  "sha256": "37c994f2afde9370ebef4ad361e34b6f026ba8f4db4fce00b53c54bcdfe228de"
+ },
+ {
+  "approach": 41,
+  "round": 46,
+  "front": "proof",
+  "title": "Christol-Cobham algebraicity trap",
+  "chars": 442,
+  "sha256": "d04a11f119f45999ce358a9907a96ee30b6dccfbe77559840eeb4e901c62174a"
+ },
+ {
+  "approach": 42,
+  "round": 47,
+  "front": "proof",
+  "title": "Aperiodic tilings of Collatz spacetime",
+  "chars": 457,
+  "sha256": "9273b58ae5fa639a67376b66f3e5abd1d15786228ceb47106865cd6946bccecc"
+ },
+ {
+  "approach": 43,
+  "round": 48,
+  "front": "proof",
+  "title": "A topological-entropy gap",
+  "chars": 523,
+  "sha256": "4ec92fd57b4975da3660e793576c9fcbf72799ca5697fcee46dcde4aa1603b02"
+ },
+ {
+  "approach": 44,
+  "round": 49,
+  "front": "proof",
+  "title": "Schmidt-game avoidance in Z_2",
+  "chars": 451,
+  "sha256": "9e0b4cf2c9a4c65145dadc63b39fb8fff6d6ade6a7a0eb131e0a7f6923a594e2"
+ },
+ {
+  "approach": 45,
+  "round": 50,
+  "front": "proof",
+  "title": "Arithmetic fractal intersection",
+  "chars": 408,
+  "sha256": "f00c1373d6ae1174bdc4c0e6713a63665dab5a59f87a5e02d8a5d9c1c8d68219"
+ },
+ {
+  "approach": 46,
+  "round": 51,
+  "front": "proof",
+  "title": "An adelic product-formula Lyapunov height",
+  "chars": 396,
+  "sha256": "f1304a200cb6a4bea3e201959e92e60294a06195e6f8d17f579c370753bdfaa6"
+ },
+ {
+  "approach": 47,
+  "round": 52,
+  "front": "proof",
+  "title": "Vojta or abc for uniform near-cycle exclusion",
+  "chars": 454,
+  "sha256": "78895d4c7d50fe07cddd2db62d2bc7f3fc5ea47e0de41eeaaad1e5511285e15d"
+ },
+ {
+  "approach": 48,
+  "round": 53,
+  "front": "proof",
+  "title": "The Subspace Theorem for trajectory identities",
+  "chars": 467,
+  "sha256": "9c3d5e04b47d2edd4ac0a68e2b9ac11d057e63f2af4c2b4664495b0559a91a21"
+ },
+ {
+  "approach": 49,
+  "round": 54,
+  "front": "proof",
+  "title": "Baker theory for repeated approximate returns",
+  "chars": 476,
+  "sha256": "4c251f54177e307eaddbc6acd2ee3409f0b75a56e9cb83cd945988f4fb665c7f"
+ },
+ {
+  "approach": 50,
+  "round": 55,
+  "front": "proof",
+  "title": "Geometry-of-numbers exclusion cones",
+  "chars": 417,
+  "sha256": "d61de5a21b7d42530b4678e1e94015b6bf8c76428147e68279779be0d802dffd"
+ },
+ {
+  "approach": 51,
+  "round": 56,
+  "front": "proof",
+  "title": "Automorphic dynamics of the affine branch semigroup",
+  "chars": 382,
+  "sha256": "65c5e4ca2a34724ef32142dbdec309ae2e92a54a92e1c6d6b4da96615bdb06ff"
+ },
+ {
+  "approach": 52,
+  "round": 57,
+  "front": "proof",
+  "title": "Property-tau for Collatz residue graphs",
+  "chars": 447,
+  "sha256": "ef92668f6eff377bfcd064524455d325a0ff959d6540cfd0d2a131ca71fd3d29"
+ },
+ {
+  "approach": 53,
+  "round": 58,
+  "front": "proof",
+  "title": "A thin-group affine sieve",
+  "chars": 407,
+  "sha256": "c79cd6db4be5553112ad2822ffcf16d00571718dee6b97fe0259c1277e41ca03"
+ },
+ {
+  "approach": 54,
+  "round": 59,
+  "front": "proof",
+  "title": "Bourgain-Gamburd flattening for branch products",
+  "chars": 401,
+  "sha256": "8f202870a7d89df71a7471e0cb8c4e352466ca59ed46cf24baac9eaf5c26a529"
+ },
+ {
+  "approach": 55,
+  "round": 60,
+  "front": "proof",
+  "title": "Sum-product growth modulo 3^r",
+  "chars": 414,
+  "sha256": "1b4d5ac7269266f675c08f398840a989928898891744a9aa760d14f4247d421a"
+ },
+ {
+  "approach": 56,
+  "round": 61,
+  "front": "proof",
+  "title": "A cross-prime uncertainty principle",
+  "chars": 424,
+  "sha256": "c79d660cad5f8e84551ab17247a24818487f7b6981e1dd2ca517168543b78f5c"
+ },
+ {
+  "approach": 57,
+  "round": 62,
+  "front": "proof",
+  "title": "2-adic Haar-wavelet diagonalization",
+  "chars": 375,
+  "sha256": "127e56babd7a216e2bdf88c34b3dd62af6434a0db35128199dc3ea5f063dab62"
+ },
+ {
+  "approach": 58,
+  "round": 63,
+  "front": "proof",
+  "title": "Ruelle-Perron-Frobenius theory for exact survivors",
+  "chars": 419,
+  "sha256": "c03b4dc0022fac3c6b339c22d461a11b110d786d4e09a0877ebad5ca66bd3f36"
+ },
+ {
+  "approach": 59,
+  "round": 64,
+  "front": "proof",
+  "title": "A coercive Koopman eigenfunction",
+  "chars": 472,
+  "sha256": "d1ef3f0f07aad260ce3b05615cc46b95beba7c429be2f32f3cb264f8ec2232cc"
+ },
+ {
+  "approach": 60,
+  "round": 65,
+  "front": "proof",
+  "title": "Dirichlet series of exceptional seeds",
+  "chars": 430,
+  "sha256": "c62501209fdf39e5225736fdeb6c1e955f9cbdac8bb3ac97f4b01377c8da6def"
+ },
+ {
+  "approach": 61,
+  "round": 66,
+  "front": "proof",
+  "title": "Natural boundaries as a disproof detector",
+  "chars": 485,
+  "sha256": "e29192d4cf14e7970156cdc4b180a834d7ed0f74f06a45984ea814e973fbc814"
+ },
+ {
+  "approach": 62,
+  "round": 67,
+  "front": "proof",
+  "title": "A dynamical zeta function with only the trivial Euler factor",
+  "chars": 445,
+  "sha256": "2ea50f38908b2d782a7712cdda6caf0935a81e0009f68f3295294c4937ade00f"
+ },
+ {
+  "approach": 63,
+  "round": 68,
+  "front": "proof",
+  "title": "A uniform determinant involution",
+  "chars": 419,
+  "sha256": "07723d73b04e136bc985c5a651787aedd5f04521a83d1883e1f02c49b0cd4119"
+ },
+ {
+  "approach": 64,
+  "round": 69,
+  "front": "proof",
+  "title": "Uniform nilpotency after removing the trivial basin",
+  "chars": 409,
+  "sha256": "7703b7d5e9f5ebd2f6690486fb1d8fde74c1772b046f5706c4fb38f14e67b9dc"
+ },
+ {
+  "approach": 65,
+  "round": 70,
+  "front": "proof",
+  "title": "Compute the operator commutant directly",
+  "chars": 418,
+  "sha256": "53c1704e8815eb43304fdc241193b082bc20f509203385fb1dc8e222bd9afbc5"
+ },
+ {
+  "approach": 66,
+  "round": 71,
+  "front": "proof",
+  "title": "Exclude peripheral spectrum of a weighted Collatz shift",
+  "chars": 466,
+  "sha256": "49d5e28393e30848f25d11340130053f69c6c292c45529cfbc71019bbb3b9dd4"
+ },
+ {
+  "approach": 67,
+  "round": 72,
+  "front": "proof",
+  "title": "Fredholm determinant and trace cancellation",
+  "chars": 404,
+  "sha256": "4a54743a68e0a4abd23873ae2ff690b4b7c6a0e53743cdcb98a8e831afc544e6"
+ },
+ {
+  "approach": 68,
+  "round": 73,
+  "front": "proof",
+  "title": "Numen-integrality exclusion",
+  "chars": 460,
+  "sha256": "a665cf89601307c4ed3f8ad66c7682eb75d903ed6661423eb113234678190e95"
+ },
+ {
+  "approach": 69,
+  "round": 74,
+  "front": "proof",
+  "title": "A 2-3 Tauberian decorrelation theorem",
+  "chars": 408,
+  "sha256": "e25e8c7d6a5ac00a4922ae2f3a0e28c4aca9cd59d720ad6cba7a0ab8ecb0ca19"
+ },
+ {
+  "approach": 70,
+  "round": 75,
+  "front": "proof",
+  "title": "Grobner bases for q-series carry ideals",
+  "chars": 408,
+  "sha256": "089248cecc01e041613402d1407a6f00e71e5c4f14d4d26d7ff4fe55e5b7d3e0"
+ },
+ {
+  "approach": 71,
+  "round": 76,
+  "front": "proof",
+  "title": "Characterize the positive-integer image of the parity conjugacy",
+  "chars": 429,
+  "sha256": "f9040d23ec727d444269bdaab8aec268a0efe606a5ed1005dff8ff064220b659"
+ },
+ {
+  "approach": 72,
+  "round": 77,
+  "front": "proof",
+  "title": "Use the Collatz autoconjugacy to pair hard and easy paths",
+  "chars": 436,
+  "sha256": "1316c4e57872d894ea29dc6853d268b66a03f4e8065a6b7c0ea74f9a6119fe4a"
+ },
+ {
+  "approach": 73,
+  "round": 78,
+  "front": "proof",
+  "title": "A forbidden-lift theorem for de Bruijn paths",
+  "chars": 388,
+  "sha256": "2ba874d811aaf99fceb9b97073b7d6039152b5558de34d7bc59efb7e0832b333"
+ },
+ {
+  "approach": 74,
+  "round": 79,
+  "front": "proof",
+  "title": "A higher-dimensional sofic certificate",
+  "chars": 402,
+  "sha256": "99439a63eeb8bd2da5a5edeb541ed223d8da713a1e12da385a1ad080fc838c88"
+ },
+ {
+  "approach": 75,
+  "round": 80,
+  "front": "proof",
+  "title": "Finite residue-class descent induction",
+  "chars": 332,
+  "sha256": "451eed50ce084c43448c381eb2a5cec90220527a378a829e135f64edef39ac0f"
+ },
+ {
+  "approach": 76,
+  "round": 81,
+  "front": "proof",
+  "title": "Strongly sufficient arithmetic progressions",
+  "chars": 469,
+  "sha256": "c55a0ec98eba1425eeef23c11223bfe86c5f510d177c2b7d8c8a3f68adcd7b71"
+ },
+ {
+  "approach": 77,
+  "round": 82,
+  "front": "proof",
+  "title": "Uniform inverse-tree coverage",
+  "chars": 368,
+  "sha256": "682c49018ea7456c5b787adc07f5d9f029d55a17cf310cc2b7afc338257e3dfa"
+ },
+ {
+  "approach": 78,
+  "round": 83,
+  "front": "proof",
+  "title": "Push difference inequalities to a coverage theorem",
+  "chars": 407,
+  "sha256": "edae51f37ad14a9bd243e489f8505ba5976c34cf28f332578988629fac9f216b"
+ },
+ {
+  "approach": 79,
+  "round": 84,
+  "front": "proof",
+  "title": "An exact self-similarity equation for the exceptional set",
+  "chars": 458,
+  "sha256": "9cfd7a79793b2ef0df00a7f6c82b248bf0dfa1687fe89eed33e20d970c45f690"
+ },
+ {
+  "approach": 80,
+  "round": 85,
+  "front": "proof",
+  "title": "Uniformize Tao's transport theorem over every cylinder",
+  "chars": 470,
+  "sha256": "f5930fcc0cd7327ce5e5a4236ea03d20643ded5878b2d067492380e23339ca99"
+ },
+ {
+  "approach": 81,
+  "round": 86,
+  "front": "proof",
+  "title": "Replicate one counterexample into many",
+  "chars": 408,
+  "sha256": "64c8bfc9c71af5e77c0e6f453d5b128c923aec9024c419570ec148c908f5fc79"
+ },
+ {
+  "approach": 82,
+  "round": 87,
+  "front": "proof",
+  "title": "Uniform large deviations for realizable paths",
+  "chars": 373,
+  "sha256": "b0c68df5283d923cff3ae125a4b561d5a6d2379fe4c064da72a1b6d737f14dd6"
+ },
+ {
+  "approach": 83,
+  "round": 88,
+  "front": "proof",
+  "title": "Deterministic renewal discrepancy",
+  "chars": 353,
+  "sha256": "0fd100c96dc6aa4d08805c68be91bcb7ac79fb6c949419c0d8b5d240008ab54a"
+ },
+ {
+  "approach": 84,
+  "round": 89,
+  "front": "proof",
+  "title": "Benford rigidity for every infinite orbit",
+  "chars": 430,
+  "sha256": "fd07bbfd2b3b1bd0c4252f7b4f9f5c6d75c13e4570ba110e72cfc49565361566"
+ },
+ {
+  "approach": 85,
+  "round": 90,
+  "front": "proof",
+  "title": "Rigorous renormalization of stopping-time distributions",
+  "chars": 403,
+  "sha256": "2d3ecddbdcb02208b839d8c796e6e7ed2188a7ccd603c3dd3a2257550992d738"
+ },
+ {
+  "approach": 86,
+  "round": 91,
+  "front": "proof",
+  "title": "Cycle-word enumeration plus LLL",
+  "chars": 351,
+  "sha256": "98724990a186d3068ab5c807971448131752ec518ccc5018fc2c11344c34dae6"
+ },
+ {
+  "approach": 87,
+  "round": 92,
+  "front": "proof",
+  "title": "Continued fractions for log_2 3",
+  "chars": 346,
+  "sha256": "9adcdd1cee1f7d56f15d371bedbd73b68e8c29323eb319e408b2d227cddfe943"
+ },
+ {
+  "approach": 88,
+  "round": 93,
+  "front": "proof",
+  "title": "Uniform local-minimum classification",
+  "chars": 395,
+  "sha256": "0bd5c31b0a68f08c049e01bd490c53da55ccf3f39f48a020eeb2434e6753ac35"
+ },
+ {
+  "approach": 89,
+  "round": 94,
+  "front": "proof",
+  "title": "Conditional abc-assisted cycle bounds",
+  "chars": 369,
+  "sha256": "13674b05bd6cbe8275942336d3c292dd729eee1fbf5e28c10ae1b446a766bb18"
+ },
+ {
+  "approach": 90,
+  "round": 95,
+  "front": "disproof",
+  "title": "Verification through 2^75 or 2^77",
+  "chars": 427,
+  "sha256": "b99c2b0de2b998615079247317d770025cb8c920fa1c29c593d7cf29d461ed10"
+ },
+ {
+  "approach": 91,
+  "round": 96,
+  "front": "proof",
+  "title": "Proof-producing exhaustive verification",
+  "chars": 449,
+  "sha256": "625430f7bb92e0a277b1feacaa3808cbcbfbe50c965e7a34fd2fd7117d6f139e"
+ },
+ {
+  "approach": 92,
+  "round": 97,
+  "front": "disproof",
+  "title": "Branch-and-bound search for a divergent exponent word",
+  "chars": 430,
+  "sha256": "5d967cdaf68f8efcdb9edb0add53449df4c3117b9a3140f81d601eabc0211f8b"
+ },
+ {
+  "approach": 93,
+  "round": 98,
+  "front": "proof",
+  "title": "SAT/SMT search for exact barrier survivors",
+  "chars": 423,
+  "sha256": "150de9aa40b8b15c3391827cb23109e435aa4fbd2d99be6d988da3ba149c02d1"
+ },
+ {
+  "approach": 94,
+  "round": 99,
+  "front": "disproof",
+  "title": "MILP or CP-SAT cycle search",
+  "chars": 354,
+  "sha256": "c3996ffeb34c66a7b61409cbf71f8d46a0ed4154ec8613fab01016d149b7c201"
+ },
+ {
+  "approach": 95,
+  "round": 100,
+  "front": "disproof",
+  "title": "Meet-in-the-middle affine composition",
+  "chars": 373,
+  "sha256": "4640b4d9720f2ccdf07552c2a0209d1396648cd2538931058c017a758cf435aa"
+ },
+ {
+  "approach": 96,
+  "round": 101,
+  "front": "proof",
+  "title": "Distributed inverse-tree enumeration",
+  "chars": 351,
+  "sha256": "200a200b05cf32704f449c57cce3f0d2210fc840b4d5302447dbbb7c21469715"
+ },
+ {
+  "approach": 97,
+  "round": 102,
+  "front": "disproof",
+  "title": "Extreme-trajectory anomaly detection",
+  "chars": 483,
+  "sha256": "138299f78549096a560c86bc0c228cce6ea6cc14c7904b2916de72cd5465012c"
+ },
+ {
+  "approach": 98,
+  "round": 103,
+  "front": "proof",
+  "title": "Classify the qx+1 phase diagram",
+  "chars": 443,
+  "sha256": "1d16a3fdc541c81fe983ab6cc7bf4cca97c13195cb7083fa0769221808c7eab3"
+ },
+ {
+  "approach": 99,
+  "round": 104,
+  "front": "proof",
+  "title": "Classify every failure mechanism in neighboring systems",
+  "chars": 605,
+  "sha256": "a3868ad6b41b210e38a540ef644bd421ffb4b9dd0a54120ddd801bcdb6392549"
+ },
+ {
+  "approach": 100,
+  "round": 105,
+  "front": "proof",
+  "title": "Classical modular casework",
+  "chars": 479,
+  "sha256": "8f1b9c7136b245c1ee130431c48ec516876d96f44fc169833eddf0a0d67565ec"
+ }
+]

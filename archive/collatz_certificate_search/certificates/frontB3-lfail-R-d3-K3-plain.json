@@ -1,0 +1,22 @@
+{
+ "mode": "lfail",
+ "family": "R-d3-K3-plain",
+ "level": "R",
+ "dim": 3,
+ "K": 3,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "UNKNOWN",
+ "time_s": 624.8,
+ "rounds": 3,
+ "bitwidth": 23,
+ "reason": "timeout",
+ "L_fail": null,
+ "history": {
+  "2": "SAT",
+  "3": "SAT",
+  "4": "SAT",
+  "5": "UNKNOWN"
+ },
+ "L_reached": 5
+}

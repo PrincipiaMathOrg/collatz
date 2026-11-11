@@ -1,0 +1,600 @@
+family              K     s  N_fail   cert   rows  maxrow  exact<  analytic  an_ok battery1st       file
+mod2                2     0       5   True      1       5    True         5   True F-A m=5          pi_farkas_mod2_s0.json
+mod2                2   3/4       5   True      2       5    True         5   True n/a              pi_farkas_mod2_s3over4.json
+mod2                2     1       5   True      2       5    True         5   True F-A m=5          pi_farkas_mod2_s1.json
+mod2                2   3/2       5   True      2       5    True         5   True n/a              pi_farkas_mod2_s3over2.json
+mod2                2     2       5   True      2       5    True         5   True F-A m=5          pi_farkas_mod2_s2.json
+mod2                2     3       5   True      2       5    True         5   True F-A m=5          pi_farkas_mod2_s3.json
+mod3                3     0       5   True      2       5    True         8   True F-A m=5          pi_farkas_mod3_s0.json
+mod3                3   3/4       8   True      2       8    True         8   True n/a              pi_farkas_mod3_s3over4.json
+mod3                3     1       8   True      2       8    True         8   True F-A m=8          pi_farkas_mod3_s1.json
+mod3                3   3/2       8   True      2       8    True         8   True n/a              pi_farkas_mod3_s3over2.json
+mod3                3     2       8   True      2       8    True         8   True F-A m=8          pi_farkas_mod3_s2.json
+mod3                3     3       8   True      2       8    True         8   True F-A m=8          pi_farkas_mod3_s3.json
+mod4                4     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_mod4_s0.json
+mod4                4   3/4       8   True      3       8    True        11   True n/a              pi_farkas_mod4_s3over4.json
+mod4                4     1       8   True      4       8    True        11   True F-A m=8          pi_farkas_mod4_s1.json
+mod4                4   3/2       8   True      4       8    True        11   True n/a              pi_farkas_mod4_s3over2.json
+mod4                4     2      11   True      1      11    True        11   True F-A m=11         pi_farkas_mod4_s2.json
+mod4                4     3      11   True      1      11    True        11   True F-A m=11         pi_farkas_mod4_s3.json
+mod6                6     0       8   True      4       8    True        17   True F-A m=8          pi_farkas_mod6_s0.json
+mod6                6   3/4      11   True      5      11    True        17   True n/a              pi_farkas_mod6_s3over4.json
+mod6                6     1      11   True      4      11    True        17   True F-A m=11         pi_farkas_mod6_s1.json
+mod6                6   3/2      11   True      4      11    True        17   True n/a              pi_farkas_mod6_s3over2.json
+mod6                6     2      11   True      4      11    True        17   True F-A m=11         pi_farkas_mod6_s2.json
+mod6                6     3      11   True      4      11    True        17   True F-A m=11         pi_farkas_mod6_s3.json
+mod8                8     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_mod8_s0.json
+mod8                8   3/4       8   True      5       8    True        23   True n/a              pi_farkas_mod8_s3over4.json
+mod8                8     1      10   True      6      10    True        23   True F-A m=11         pi_farkas_mod8_s1.json
+mod8                8   3/2      11   True      7      11    True        23   True n/a              pi_farkas_mod8_s3over2.json
+mod8                8     2      17   True      6      17    True        23   True F-A m=17         pi_farkas_mod8_s2.json
+mod8                8     3      17   True      3      17    True        23   True F-A m=17         pi_farkas_mod8_s3.json
+mod9                9     0      11   True      6      11    True        26   True F-A m=11         pi_farkas_mod9_s0.json
+mod9                9   3/4      20   True      5      20    True        26   True n/a              pi_farkas_mod9_s3over4.json
+mod9                9     1      20   True      5      20    True        26   True F-A m=26         pi_farkas_mod9_s1.json
+mod9                9   3/2      20   True      5      20    True        26   True n/a              pi_farkas_mod9_s3over2.json
+mod9                9     2      20   True      5      20    True        26   True F-A m=26         pi_farkas_mod9_s2.json
+mod9                9     3      20   True      5      20    True        26   True F-A m=26         pi_farkas_mod9_s3.json
+mod12              12     0       8   True      5       8    True        35   True F-A m=8          pi_farkas_mod12_s0.json
+mod12              12   3/4      17   True      4      17    True        35   True n/a              pi_farkas_mod12_s3over4.json
+mod12              12     1      17   True      4      17    True        35   True F-A m=17         pi_farkas_mod12_s1.json
+mod12              12   3/2      17   True      7      17    True        35   True n/a              pi_farkas_mod12_s3over2.json
+mod12              12     2      26   True      4      26    True        35   True F-A m=26         pi_farkas_mod12_s2.json
+mod12              12     3      26   True      4      26    True        35   True F-A m=26         pi_farkas_mod12_s3.json
+mod16              16     0      10   True      6      10    True        47   True F-A m=11         pi_farkas_mod16_s0.json
+mod16              16   3/4      20   True      8      20    True        47   True n/a              pi_farkas_mod16_s3over4.json
+mod16              16     1      26   True     11      26    True        47   True F-A m=26         pi_farkas_mod16_s1.json
+mod16              16   3/2      26   True     13      26    True        47   True n/a              pi_farkas_mod16_s3over2.json
+mod16              16     2      26   True     14      26    True        47   True F-A m=26         pi_farkas_mod16_s2.json
+mod16              16     3      26   True     14      26    True        47   True F-A m=26         pi_farkas_mod16_s3.json
+mod18              18     0      20   True      7      20    True        53   True F-A m=26         pi_farkas_mod18_s0.json
+mod18              18   3/4      26   True     11      26    True        53   True n/a              pi_farkas_mod18_s3over4.json
+mod18              18     1      26   True      9      26    True        53   True F-A m=26         pi_farkas_mod18_s1.json
+mod18              18   3/2      29   True      8      29    True        53   True n/a              pi_farkas_mod18_s3over2.json
+mod18              18     2      29   True      8      29    True        53   True F-A m=35         pi_farkas_mod18_s2.json
+mod18              18     3      29   True      7      29    True        53   True F-A m=35         pi_farkas_mod18_s3.json
+mod24              24     0      16   True      7      16    True        71   True F-A m=17         pi_farkas_mod24_s0.json
+mod24              24   3/4      26   True     11      26    True        71   True n/a              pi_farkas_mod24_s3over4.json
+mod24              24     1      26   True     13      26    True        71   True F-A m=26         pi_farkas_mod24_s1.json
+mod24              24   3/2      35   True      8      35    True        71   True n/a              pi_farkas_mod24_s3over2.json
+mod24              24     2      38   True     12      38    True        71   True F-A m=53         pi_farkas_mod24_s2.json
+mod24              24     3      38   True      8      38    True        71   True F-A m=53         pi_farkas_mod24_s3.json
+mod27              27     0      22   True      6      22    True        80   True F-A m=26         pi_farkas_mod27_s0.json
+mod27              27   3/4      44   True     16      44    True        80   True n/a              pi_farkas_mod27_s3over4.json
+mod27              27     1      56   True      7      56    True        80   True F-A m=80         pi_farkas_mod27_s1.json
+mod27              27   3/2      56   True     11      56    True        80   True n/a              pi_farkas_mod27_s3over2.json
+mod27              27     2      56   True     11      56    True        80   True F-A m=80         pi_farkas_mod27_s2.json
+mod27              27     3      56   True     10      56    True        80   True F-A m=80         pi_farkas_mod27_s3.json
+mod32              32     0      20   True      9      20    True        95   True F-A m=26         pi_farkas_mod32_s0.json
+mod32              32   3/4      32   True     11      32    True        95   True n/a              pi_farkas_mod32_s3over4.json
+mod32              32     1      32   True     22      32    True        95   True F-A m=35         pi_farkas_mod32_s1.json
+mod32              32   3/2      44   True     23      44    True        95   True n/a              pi_farkas_mod32_s3over2.json
+mod32              32     2      44   True     25      44    True        95   True F-A m=53         pi_farkas_mod32_s2.json
+mod32              32     3      50   True     25      50    True        95   True F-A m=53         pi_farkas_mod32_s3.json
+mod36              36     0      20   True     10      20    True       107   True F-A m=26         pi_farkas_mod36_s0.json
+mod36              36   3/4      32   True     15      32    True       107   True n/a              pi_farkas_mod36_s3over4.json
+mod36              36     1      44   True     21      44    True       107   True F-A m=53         pi_farkas_mod36_s1.json
+mod36              36   3/2      47   True      5      47    True       107   True n/a              pi_farkas_mod36_s3over2.json
+mod36              36     2      47   True      5      47    True       107   True F-A m=53         pi_farkas_mod36_s2.json
+mod36              36     3      47   True      5      47    True       107   True F-A m=53         pi_farkas_mod36_s3.json
+mod48              48     0      26   True     15      26    True       143   True F-A m=26         pi_farkas_mod48_s0.json
+mod48              48   3/4      44   True     21      44    True       143   True n/a              pi_farkas_mod48_s3over4.json
+mod48              48     1      53   True     22      53    True       143   True F-A m=53         pi_farkas_mod48_s1.json
+mod48              48   3/2      71   True     21      71    True       143   True n/a              pi_farkas_mod48_s3over2.json
+mod48              48     2      71   True     25      71    True       143   True F-A m=80         pi_farkas_mod48_s2.json
+mod48              48     3      71   True      8      71    True       143   True F-A m=80         pi_farkas_mod48_s3.json
+mod54              54     0      44   True     27      44    True       161   True F-A m=53         pi_farkas_mod54_s0.json
+mod54              54   3/4      56   True     22      56    True       161   True n/a              pi_farkas_mod54_s3over4.json
+mod54              54     1      71   True     14      71    True       161   True F-A m=80         pi_farkas_mod54_s1.json
+mod54              54   3/2     101   True      9     101    True       161   True n/a              pi_farkas_mod54_s3over2.json
+mod54              54     2     101   True      9     101    True       161   True F-A m=107        pi_farkas_mod54_s2.json
+mod54              54     3     101   True     21     101    True       161   True F-A m=107        pi_farkas_mod54_s3.json
+mod64              64     0      34   True     23      34    True       191   True F-A m=35         pi_farkas_mod64_s0.json
+mod64              64   3/4      56   True     33      56    True       191   True n/a              pi_farkas_mod64_s3over4.json
+mod64              64     1      68   True     40      68    True       191   True F-A m=80         pi_farkas_mod64_s1.json
+mod64              64   3/2      71   True     41      71    True       191   True n/a              pi_farkas_mod64_s3over2.json
+mod64              64     2      80   True     49      80    True       191   True F-A m=80         pi_farkas_mod64_s2.json
+mod64              64     3      95   True     47      95    True       191   True F-A m=161        pi_farkas_mod64_s3.json
+mod72              72     0      40   True     24      40    True       215   True F-A m=53         pi_farkas_mod72_s0.json
+mod72              72   3/4      74   True     28      74    True       215   True n/a              pi_farkas_mod72_s3over4.json
+mod72              72     1      80   True     34      80    True       215   True F-A m=80         pi_farkas_mod72_s1.json
+mod72              72   3/2     107   True     23     107    True       215   True n/a              pi_farkas_mod72_s3over2.json
+mod72              72     2     110   True     20     110    True       215   True F-A m=161        pi_farkas_mod72_s2.json
+mod72              72     3     110   True     20     110    True       215   True F-A m=161        pi_farkas_mod72_s3.json
+mod96              96     0      50   True     34      50    True       287   True F-A m=53         pi_farkas_mod96_s0.json
+mod96              96   3/4      80   True     36      80    True       287   True n/a              pi_farkas_mod96_s3over4.json
+mod96              96     1      92   True     35      92    True       287   True F-A m=107        pi_farkas_mod96_s1.json
+mod96              96   3/2     107   True     17     107    True       287   True n/a              pi_farkas_mod96_s3over2.json
+mod96              96     2     107   True     21     107    True       287   True F-A m=107        pi_farkas_mod96_s2.json
+mod96              96     3     107   True     17     107    True       287   True F-A m=107        pi_farkas_mod96_s3.json
+mod108            108     0      56   True     37      56    True       323   True F-A m=80         pi_farkas_mod108_s0.json
+mod108            108   3/4      98   True     42      98    True       323   True n/a              pi_farkas_mod108_s3over4.json
+mod108            108     1     143   True     45     143    True       323   True F-A m=161        pi_farkas_mod108_s1.json
+mod108            108   3/2     161   True      6     161    True       323   True n/a              pi_farkas_mod108_s3over2.json
+mod108            108     2     161   True      6     161    True       323   True F-A m=161        pi_farkas_mod108_s2.json
+mod108            108     3     161   True      6     161    True       323   True F-A m=161        pi_farkas_mod108_s3.json
+mod128            128     0      66   True     40      66    True       383   True F-A m=80         pi_farkas_mod128_s0.json
+mod128            128   3/4     104   True     48     104    True       383   True n/a              pi_farkas_mod128_s3over4.json
+mod128            128     1     128   True     79     128    True       383   True F-A m=161        pi_farkas_mod128_s1.json
+mod128            128   3/2     161   True     81     161    True       383   True n/a              pi_farkas_mod128_s3over2.json
+mod128            128     2     161   True     87     161    True       383   True F-A m=161        pi_farkas_mod128_s2.json
+mod128            128     3     188   True     88     188    True       383   True F-A m=242        pi_farkas_mod128_s3.json
+mod144            144     0      74   True     45      74    True       431   True F-A m=80         pi_farkas_mod144_s0.json
+mod144            144   3/4     130   True     52     130    True       431   True n/a              pi_farkas_mod144_s3over4.json
+mod144            144     1     155   True     63     155    True       431   True F-A m=161        pi_farkas_mod144_s1.json
+mod144            144   3/2     161   True     26     161    True       431   True n/a              pi_farkas_mod144_s3over2.json
+mod144            144     2     161   True     27     161    True       431   True F-A m=161        pi_farkas_mod144_s2.json
+mod144            144     3     161   True     23     161    True       431   True F-A m=161        pi_farkas_mod144_s3.json
+mod216            216     0     112   True     64     112    True       647   True F-A m=161        pi_farkas_mod216_s0.json
+mod216            216   3/4     184   True     68     184    True       647   True n/a              pi_farkas_mod216_s3over4.json
+mod216            216     1     233   True     92     233    True       647   True F-A m=242        pi_farkas_mod216_s1.json
+mod216            216   3/2     233   True     52     233    True       647   True n/a              pi_farkas_mod216_s3over2.json
+mod216            216     2     233   True     22     233    True       647   True F-A m=242        pi_farkas_mod216_s2.json
+mod216            216     3     233   True     41     233    True       647   True F-A m=242        pi_farkas_mod216_s3.json
+mod256            256     0     130   True     60     130    True       767   True F-A m=161        pi_farkas_mod256_s0.json
+mod256            256   3/4     212   True    106     212    True       767   True n/a              pi_farkas_mod256_s3over4.json
+mod256            256     1     263   True    140     263    True       767   True F-A m=323        pi_farkas_mod256_s1.json
+mod256            256   3/2     314   True    120     314    True       767   True n/a              pi_farkas_mod256_s3over2.json
+mod256            256     2     329   True    110     329    True       767   True F-A m=728        pi_farkas_mod256_s2.json
+mod256            256     3     329   True    189     329    True       767   True F-A m=728        pi_farkas_mod256_s3.json
+mod288            288     0     148   True     74     148    True       863   True F-A m=161        pi_farkas_mod288_s0.json
+mod288            288   3/4     272   True     94     272    True       863   True n/a              pi_farkas_mod288_s3over4.json
+mod288            288     1     323   True    129     323    True       863   True F-A m=323        pi_farkas_mod288_s1.json
+mod288            288   3/2     350   True     92     350    True       863   True n/a              pi_farkas_mod288_s3over2.json
+mod288            288     2     350   True     43     350    True       863   True F-A m=485        pi_farkas_mod288_s2.json
+mod288            288     3     350   True     16     350    True       863   True F-A m=485        pi_farkas_mod288_s3.json
+mod432            432     0     226   True     86     226    True      1295   True F-A m=242        pi_farkas_mod432_s0.json
+mod432            432   3/4     418   True    188     418    True      1295   True n/a              pi_farkas_mod432_s3over4.json
+mod432            432     1     479   True    190     479    True      1295   True F-A m=485        pi_farkas_mod432_s1.json
+mod432            432   3/2     479   True     12     479    True      1295   True n/a              pi_farkas_mod432_s3over2.json
+mod432            432     2     479   True     13     479    True      1295   True F-A m=485        pi_farkas_mod432_s2.json
+mod432            432     3     479   True    232     479    True      1295   True F-A m=485        pi_farkas_mod432_s3.json
+mod512            512     0     260   True    133     260    True      1535   True F-A m=323        pi_farkas_mod512_s0.json
+mod512            512   3/4     476   True    190     476    True      1535   True n/a              pi_farkas_mod512_s3over4.json
+mod512            512     1     521   True    167     521    True      1535   True F-A m=728        pi_farkas_mod512_s1.json
+mod512            512   3/2     539   True     41     539    True      1535   True n/a              pi_farkas_mod512_s3over2.json
+mod512            512     2     539   True    308     539    True      1535   True F-A m=728        pi_farkas_mod512_s2.json
+mod512            512     3     539   True    331     539    True      1535   True F-A m=728        pi_farkas_mod512_s3.json
+mod864            864     0     434   True    114     434    True      2591   True F-A m=485        pi_farkas_mod864_s0.json
+mod864            864   3/4     796   True    290     796    True      2591   True n/a              pi_farkas_mod864_s3over4.json
+mod864            864     1     890   True    282     890    True      2591   True F-A m=971        pi_farkas_mod864_s1.json
+mod864            864   3/2     890   True    294     890    True      2591   True n/a              pi_farkas_mod864_s3over2.json
+mod864            864     2     899   True    380     899    True      2591   True F-A m=971        pi_farkas_mod864_s2.json
+mod864            864     3     911   True     23     911    True      2591   True F-A m=971        pi_farkas_mod864_s3.json
+mod1000          1000     0     528   True    149     528    True      2999   True F-A m=728        pi_farkas_mod1000_s0.json
+mod1000          1000   3/4     890   True    417     890    True      2999   True n/a              pi_farkas_mod1000_s3over4.json
+mod1000          1000     1     932   True    436     932    True      2999   True F-A m=971        pi_farkas_mod1000_s1.json
+mod1000          1000   3/2    1079   True    199    1079    True      2999   True n/a              pi_farkas_mod1000_s3over2.json
+mod1000          1000     2    1079   True    503    1079    True      2999   True F-A m=1457       pi_farkas_mod1000_s2.json
+mod1000          1000     3    1079   True    666    1079    True      2999   True F-A m=1457       pi_farkas_mod1000_s3.json
+mod1024          1024     0     522   True    175     522    True      3071   True F-A m=728        pi_farkas_mod1024_s0.json
+mod1024          1024   3/4     920   True    447     920    True      3071   True n/a              pi_farkas_mod1024_s3over4.json
+mod1024          1024     1    1031   True    181    1031    True      3071   True F-A m=1457       pi_farkas_mod1024_s1.json
+mod1024          1024   3/2    1079   True    421    1079    True      3071   True n/a              pi_farkas_mod1024_s3over2.json
+mod1024          1024     2    1079   True    490    1079    True      3071   True F-A m=1457       pi_farkas_mod1024_s2.json
+mod1024          1024     3    1079   True    587    1079    True      3071   True F-A m=1457       pi_farkas_mod1024_s3.json
+mod1296          1296     0     650   True    103     650    True      3887   True F-A m=728        pi_farkas_mod1296_s0.json
+mod1296          1296   3/4    1162   True    575    1162    True      3887   True n/a              pi_farkas_mod1296_s3over4.json
+mod1296          1296     1    1397   True    458    1397    True      3887   True F-A m=1457       pi_farkas_mod1296_s1.json
+mod1296          1296   3/2    1397   True    447    1397    True      3887   True n/a              pi_farkas_mod1296_s3over2.json
+mod1296          1296     2    1397   True    542    1397    True      3887   True F-A m=1457       pi_farkas_mod1296_s2.json
+mod1296          1296     3    1403   True     56    1403    True      3887   True F-A m=1457       pi_farkas_mod1296_s3.json
+mod1728          1728     0     866   True     85     866    True      5183   True F-A m=971        pi_farkas_mod1728_s0.json
+mod1728          1728   3/4    1538   True    717    1538    True      5183   True n/a              pi_farkas_mod1728_s3over4.json
+mod1728          1728     1    1775   True    752    1775    True      5183   True F-A m=2186       pi_farkas_mod1728_s1.json
+mod1728          1728   3/2    1775   True    552    1775    True      5183   True n/a              pi_farkas_mod1728_s3over2.json
+mod1728          1728     2    1775   True    775    1775    True      5183   True F-A m=2186       pi_farkas_mod1728_s2.json
+mod1728          1728     3    1775   True     49    1775    True      5183   True F-A m=2186       pi_farkas_mod1728_s3.json
+mod2048          2048     0    1026   True    404    1026    True      6143   True F-A m=1457       pi_farkas_mod2048_s0.json
+mod2048          2048   3/4    1898   True    772    1898    True      6143   True n/a              pi_farkas_mod2048_s3over4.json
+mod2048          2048     1    2096   True    979    2096    True      6143   True F-A m=2186       pi_farkas_mod2048_s1.json
+mod2048          2048   3/2    2177   True    551    2177    True      6143   True n/a              pi_farkas_mod2048_s3over2.json
+mod2048          2048     2    2177   True    787    2177    True      6143   True F-A m=2186       pi_farkas_mod2048_s2.json
+mod2048          2048     3    2177   True   1152    2177    True      6143   True -                pi_farkas_mod2048_s3.json
+v2cap1              2     0       5   True      1       5    True         5   True F-A m=5          pi_farkas_v2cap1_s0.json
+v2cap1              2   3/4       5   True      2       5    True         5   True n/a              pi_farkas_v2cap1_s3over4.json
+v2cap1              2     1       5   True      2       5    True         5   True F-A m=5          pi_farkas_v2cap1_s1.json
+v2cap1              2   3/2       5   True      2       5    True         5   True n/a              pi_farkas_v2cap1_s3over2.json
+v2cap1              2     2       5   True      2       5    True         5   True F-A m=5          pi_farkas_v2cap1_s2.json
+v2cap1              2     3       5   True      2       5    True         5   True F-A m=5          pi_farkas_v2cap1_s3.json
+v2cap2              3     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_v2cap2_s0.json
+v2cap2              3   3/4       8   True      3       8    True        11   True n/a              pi_farkas_v2cap2_s3over4.json
+v2cap2              3     1       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2cap2_s1.json
+v2cap2              3   3/2       8   True      3       8    True        11   True n/a              pi_farkas_v2cap2_s3over2.json
+v2cap2              3     2       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2cap2_s2.json
+v2cap2              3     3       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2cap2_s3.json
+v2cap3              4     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_v2cap3_s0.json
+v2cap3              4   3/4       8   True      3       8    True        23   True n/a              pi_farkas_v2cap3_s3over4.json
+v2cap3              4     1       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2cap3_s1.json
+v2cap3              4   3/2       8   True      3       8    True        23   True n/a              pi_farkas_v2cap3_s3over2.json
+v2cap3              4     2       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2cap3_s2.json
+v2cap3              4     3       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2cap3_s3.json
+v2cap4              5     0       8   True      1       8    True        47   True F-A m=8          pi_farkas_v2cap4_s0.json
+v2cap4              5   3/4       8   True      3       8    True        47   True n/a              pi_farkas_v2cap4_s3over4.json
+v2cap4              5     1       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2cap4_s1.json
+v2cap4              5   3/2       8   True      3       8    True        47   True n/a              pi_farkas_v2cap4_s3over2.json
+v2cap4              5     2       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2cap4_s2.json
+v2cap4              5     3       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2cap4_s3.json
+v2cap5              6     0       8   True      1       8    True        95   True F-A m=8          pi_farkas_v2cap5_s0.json
+v2cap5              6   3/4       8   True      3       8    True        95   True n/a              pi_farkas_v2cap5_s3over4.json
+v2cap5              6     1       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2cap5_s1.json
+v2cap5              6   3/2       8   True      3       8    True        95   True n/a              pi_farkas_v2cap5_s3over2.json
+v2cap5              6     2       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2cap5_s2.json
+v2cap5              6     3       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2cap5_s3.json
+v2cap6              7     0       8   True      1       8    True       191   True F-A m=8          pi_farkas_v2cap6_s0.json
+v2cap6              7   3/4       8   True      3       8    True       191   True n/a              pi_farkas_v2cap6_s3over4.json
+v2cap6              7     1       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2cap6_s1.json
+v2cap6              7   3/2       8   True      3       8    True       191   True n/a              pi_farkas_v2cap6_s3over2.json
+v2cap6              7     2       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2cap6_s2.json
+v2cap6              7     3       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2cap6_s3.json
+v2cap7              8     0       8   True      1       8    True       383   True F-A m=8          pi_farkas_v2cap7_s0.json
+v2cap7              8   3/4       8   True      3       8    True       383   True n/a              pi_farkas_v2cap7_s3over4.json
+v2cap7              8     1       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2cap7_s1.json
+v2cap7              8   3/2       8   True      3       8    True       383   True n/a              pi_farkas_v2cap7_s3over2.json
+v2cap7              8     2       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2cap7_s2.json
+v2cap7              8     3       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2cap7_s3.json
+v2cap8              9     0       8   True      1       8    True       767   True F-A m=8          pi_farkas_v2cap8_s0.json
+v2cap8              9   3/4       8   True      3       8    True       767   True n/a              pi_farkas_v2cap8_s3over4.json
+v2cap8              9     1       8   True      3       8    True       767   True F-A m=8          pi_farkas_v2cap8_s1.json
+v2cap8              9   3/2       8   True      3       8    True       767   True n/a              pi_farkas_v2cap8_s3over2.json
+v2cap8              9     2       8   True      3       8    True       767   True F-A m=8          pi_farkas_v2cap8_s2.json
+v2cap8              9     3       8   True      3       8    True       767   True F-A m=8          pi_farkas_v2cap8_s3.json
+v2pair1_1           4     0       5   True      1       5    True        11   True F-A m=5          pi_farkas_v2pair1_1_s0.json
+v2pair1_1           4   3/4       5   True      2       5    True        11   True n/a              pi_farkas_v2pair1_1_s3over4.json
+v2pair1_1           4     1       5   True      2       5    True        11   True F-A m=5          pi_farkas_v2pair1_1_s1.json
+v2pair1_1           4   3/2       5   True      2       5    True        11   True n/a              pi_farkas_v2pair1_1_s3over2.json
+v2pair1_1           4     2       5   True      2       5    True        11   True F-A m=5          pi_farkas_v2pair1_1_s2.json
+v2pair1_1           4     3       5   True      2       5    True        11   True F-A m=5          pi_farkas_v2pair1_1_s3.json
+v2pair1_2           6     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_v2pair1_2_s0.json
+v2pair1_2           6   3/4       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_2_s3over4.json
+v2pair1_2           6     1       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_2_s1.json
+v2pair1_2           6   3/2       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_2_s3over2.json
+v2pair1_2           6     2       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_2_s2.json
+v2pair1_2           6     3       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_2_s3.json
+v2pair2_1           6     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_v2pair2_1_s0.json
+v2pair2_1           6   3/4       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_1_s3over4.json
+v2pair2_1           6     1       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_1_s1.json
+v2pair2_1           6   3/2       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_1_s3over2.json
+v2pair2_1           6     2       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_1_s2.json
+v2pair2_1           6     3       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_1_s3.json
+v2pair1_3           8     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_v2pair1_3_s0.json
+v2pair1_3           8   3/4       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_3_s3over4.json
+v2pair1_3           8     1       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_3_s1.json
+v2pair1_3           8   3/2       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_3_s3over2.json
+v2pair1_3           8     2       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_3_s2.json
+v2pair1_3           8     3       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_3_s3.json
+v2pair3_1           8     0       8   True      1       8    True        47   True F-A m=8          pi_farkas_v2pair3_1_s0.json
+v2pair3_1           8   3/4       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_1_s3over4.json
+v2pair3_1           8     1       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_1_s1.json
+v2pair3_1           8   3/2       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_1_s3over2.json
+v2pair3_1           8     2       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_1_s2.json
+v2pair3_1           8     3       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_1_s3.json
+v2pair2_2           9     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_v2pair2_2_s0.json
+v2pair2_2           9   3/4       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_2_s3over4.json
+v2pair2_2           9     1       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_2_s1.json
+v2pair2_2           9   3/2       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_2_s3over2.json
+v2pair2_2           9     2       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_2_s2.json
+v2pair2_2           9     3       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_2_s3.json
+v2pair1_4          10     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_v2pair1_4_s0.json
+v2pair1_4          10   3/4       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_4_s3over4.json
+v2pair1_4          10     1       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_4_s1.json
+v2pair1_4          10   3/2       8   True      3       8    True        11   True n/a              pi_farkas_v2pair1_4_s3over2.json
+v2pair1_4          10     2       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_4_s2.json
+v2pair1_4          10     3       8   True      3       8    True        11   True F-A m=8          pi_farkas_v2pair1_4_s3.json
+v2pair4_1          10     0       8   True      1       8    True        95   True F-A m=8          pi_farkas_v2pair4_1_s0.json
+v2pair4_1          10   3/4       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_1_s3over4.json
+v2pair4_1          10     1       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_1_s1.json
+v2pair4_1          10   3/2       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_1_s3over2.json
+v2pair4_1          10     2       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_1_s2.json
+v2pair4_1          10     3       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_1_s3.json
+v2pair2_3          12     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_v2pair2_3_s0.json
+v2pair2_3          12   3/4       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_3_s3over4.json
+v2pair2_3          12     1       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_3_s1.json
+v2pair2_3          12   3/2       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_3_s3over2.json
+v2pair2_3          12     2       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_3_s2.json
+v2pair2_3          12     3       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_3_s3.json
+v2pair3_2          12     0       8   True      1       8    True        47   True F-A m=8          pi_farkas_v2pair3_2_s0.json
+v2pair3_2          12   3/4       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_2_s3over4.json
+v2pair3_2          12     1       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_2_s1.json
+v2pair3_2          12   3/2       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_2_s3over2.json
+v2pair3_2          12     2       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_2_s2.json
+v2pair3_2          12     3       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_2_s3.json
+v2pair5_1          12     0       8   True      1       8    True       191   True F-A m=8          pi_farkas_v2pair5_1_s0.json
+v2pair5_1          12   3/4       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_1_s3over4.json
+v2pair5_1          12     1       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_1_s1.json
+v2pair5_1          12   3/2       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_1_s3over2.json
+v2pair5_1          12     2       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_1_s2.json
+v2pair5_1          12     3       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_1_s3.json
+v2pair6_1          14     0       8   True      1       8    True       383   True F-A m=8          pi_farkas_v2pair6_1_s0.json
+v2pair6_1          14   3/4       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_1_s3over4.json
+v2pair6_1          14     1       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_1_s1.json
+v2pair6_1          14   3/2       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_1_s3over2.json
+v2pair6_1          14     2       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_1_s2.json
+v2pair6_1          14     3       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_1_s3.json
+v2pair2_4          15     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_v2pair2_4_s0.json
+v2pair2_4          15   3/4       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_4_s3over4.json
+v2pair2_4          15     1       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_4_s1.json
+v2pair2_4          15   3/2       8   True      3       8    True        23   True n/a              pi_farkas_v2pair2_4_s3over2.json
+v2pair2_4          15     2       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_4_s2.json
+v2pair2_4          15     3       8   True      3       8    True        23   True F-A m=8          pi_farkas_v2pair2_4_s3.json
+v2pair4_2          15     0       8   True      1       8    True        95   True F-A m=8          pi_farkas_v2pair4_2_s0.json
+v2pair4_2          15   3/4       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_2_s3over4.json
+v2pair4_2          15     1       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_2_s1.json
+v2pair4_2          15   3/2       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_2_s3over2.json
+v2pair4_2          15     2       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_2_s2.json
+v2pair4_2          15     3       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_2_s3.json
+v2pair3_3          16     0       8   True      1       8    True        47   True F-A m=8          pi_farkas_v2pair3_3_s0.json
+v2pair3_3          16   3/4       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_3_s3over4.json
+v2pair3_3          16     1       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_3_s1.json
+v2pair3_3          16   3/2       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_3_s3over2.json
+v2pair3_3          16     2       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_3_s2.json
+v2pair3_3          16     3       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_3_s3.json
+v2pair5_2          18     0       8   True      1       8    True       191   True F-A m=8          pi_farkas_v2pair5_2_s0.json
+v2pair5_2          18   3/4       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_2_s3over4.json
+v2pair5_2          18     1       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_2_s1.json
+v2pair5_2          18   3/2       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_2_s3over2.json
+v2pair5_2          18     2       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_2_s2.json
+v2pair5_2          18     3       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_2_s3.json
+v2pair3_4          20     0       8   True      1       8    True        47   True F-A m=8          pi_farkas_v2pair3_4_s0.json
+v2pair3_4          20   3/4       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_4_s3over4.json
+v2pair3_4          20     1       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_4_s1.json
+v2pair3_4          20   3/2       8   True      3       8    True        47   True n/a              pi_farkas_v2pair3_4_s3over2.json
+v2pair3_4          20     2       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_4_s2.json
+v2pair3_4          20     3       8   True      3       8    True        47   True F-A m=8          pi_farkas_v2pair3_4_s3.json
+v2pair4_3          20     0       8   True      1       8    True        95   True F-A m=8          pi_farkas_v2pair4_3_s0.json
+v2pair4_3          20   3/4       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_3_s3over4.json
+v2pair4_3          20     1       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_3_s1.json
+v2pair4_3          20   3/2       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_3_s3over2.json
+v2pair4_3          20     2       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_3_s2.json
+v2pair4_3          20     3       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_3_s3.json
+v2pair6_2          21     0       8   True      1       8    True       383   True F-A m=8          pi_farkas_v2pair6_2_s0.json
+v2pair6_2          21   3/4       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_2_s3over4.json
+v2pair6_2          21     1       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_2_s1.json
+v2pair6_2          21   3/2       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_2_s3over2.json
+v2pair6_2          21     2       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_2_s2.json
+v2pair6_2          21     3       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_2_s3.json
+v2pair5_3          24     0       8   True      1       8    True       191   True F-A m=8          pi_farkas_v2pair5_3_s0.json
+v2pair5_3          24   3/4       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_3_s3over4.json
+v2pair5_3          24     1       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_3_s1.json
+v2pair5_3          24   3/2       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_3_s3over2.json
+v2pair5_3          24     2       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_3_s2.json
+v2pair5_3          24     3       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_3_s3.json
+v2pair4_4          25     0       8   True      1       8    True        95   True F-A m=8          pi_farkas_v2pair4_4_s0.json
+v2pair4_4          25   3/4       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_4_s3over4.json
+v2pair4_4          25     1       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_4_s1.json
+v2pair4_4          25   3/2       8   True      3       8    True        95   True n/a              pi_farkas_v2pair4_4_s3over2.json
+v2pair4_4          25     2       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_4_s2.json
+v2pair4_4          25     3       8   True      3       8    True        95   True F-A m=8          pi_farkas_v2pair4_4_s3.json
+v2pair6_3          28     0       8   True      1       8    True       383   True F-A m=8          pi_farkas_v2pair6_3_s0.json
+v2pair6_3          28   3/4       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_3_s3over4.json
+v2pair6_3          28     1       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_3_s1.json
+v2pair6_3          28   3/2       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_3_s3over2.json
+v2pair6_3          28     2       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_3_s2.json
+v2pair6_3          28     3       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_3_s3.json
+v2pair5_4          30     0       8   True      1       8    True       191   True F-A m=8          pi_farkas_v2pair5_4_s0.json
+v2pair5_4          30   3/4       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_4_s3over4.json
+v2pair5_4          30     1       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_4_s1.json
+v2pair5_4          30   3/2       8   True      3       8    True       191   True n/a              pi_farkas_v2pair5_4_s3over2.json
+v2pair5_4          30     2       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_4_s2.json
+v2pair5_4          30     3       8   True      3       8    True       191   True F-A m=8          pi_farkas_v2pair5_4_s3.json
+v2pair6_4          35     0       8   True      1       8    True       383   True F-A m=8          pi_farkas_v2pair6_4_s0.json
+v2pair6_4          35   3/4       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_4_s3over4.json
+v2pair6_4          35     1       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_4_s1.json
+v2pair6_4          35   3/2       8   True      3       8    True       383   True n/a              pi_farkas_v2pair6_4_s3over2.json
+v2pair6_4          35     2       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_4_s2.json
+v2pair6_4          35     3       8   True      3       8    True       383   True F-A m=8          pi_farkas_v2pair6_4_s3.json
+word2               4     0       8   True      1       8    True        11   True F-A m=8          pi_farkas_word2_s0.json
+word2               4   3/4       8   True      3       8    True        11   True n/a              pi_farkas_word2_s3over4.json
+word2               4     1       8   True      4       8    True        11   True F-A m=8          pi_farkas_word2_s1.json
+word2               4   3/2       8   True      4       8    True        11   True n/a              pi_farkas_word2_s3over2.json
+word2               4     2      11   True      1      11    True        11   True F-A m=11         pi_farkas_word2_s2.json
+word2               4     3      11   True      1      11    True        11   True F-A m=11         pi_farkas_word2_s3.json
+word3               8     0       8   True      1       8    True        23   True F-A m=8          pi_farkas_word3_s0.json
+word3               8   3/4       8   True      5       8    True        23   True n/a              pi_farkas_word3_s3over4.json
+word3               8     1      10   True      6      10    True        23   True F-A m=11         pi_farkas_word3_s1.json
+word3               8   3/2      11   True      7      11    True        23   True n/a              pi_farkas_word3_s3over2.json
+word3               8     2      17   True      6      17    True        23   True F-A m=17         pi_farkas_word3_s2.json
+word3               8     3      17   True      3      17    True        23   True F-A m=17         pi_farkas_word3_s3.json
+word2_mod3^1       12     0       8   True      5       8    True        35   True F-A m=8          pi_farkas_word2_mod3^1_s0.json
+word2_mod3^1       12   3/4      17   True      4      17    True        35   True n/a              pi_farkas_word2_mod3^1_s3over4.json
+word2_mod3^1       12     1      17   True      4      17    True        35   True F-A m=17         pi_farkas_word2_mod3^1_s1.json
+word2_mod3^1       12   3/2      17   True      7      17    True        35   True n/a              pi_farkas_word2_mod3^1_s3over2.json
+word2_mod3^1       12     2      26   True      4      26    True        35   True F-A m=26         pi_farkas_word2_mod3^1_s2.json
+word2_mod3^1       12     3      26   True      4      26    True        35   True F-A m=26         pi_farkas_word2_mod3^1_s3.json
+word4              16     0      10   True      6      10    True        47   True F-A m=11         pi_farkas_word4_s0.json
+word4              16   3/4      20   True      8      20    True        47   True n/a              pi_farkas_word4_s3over4.json
+word4              16     1      26   True     11      26    True        47   True F-A m=26         pi_farkas_word4_s1.json
+word4              16   3/2      26   True     13      26    True        47   True n/a              pi_farkas_word4_s3over2.json
+word4              16     2      26   True     14      26    True        47   True F-A m=26         pi_farkas_word4_s2.json
+word4              16     3      26   True     14      26    True        47   True F-A m=26         pi_farkas_word4_s3.json
+word3_mod3^1       24     0      16   True      7      16    True        71   True F-A m=17         pi_farkas_word3_mod3^1_s0.json
+word3_mod3^1       24   3/4      26   True     11      26    True        71   True n/a              pi_farkas_word3_mod3^1_s3over4.json
+word3_mod3^1       24     1      26   True     13      26    True        71   True F-A m=26         pi_farkas_word3_mod3^1_s1.json
+word3_mod3^1       24   3/2      35   True      8      35    True        71   True n/a              pi_farkas_word3_mod3^1_s3over2.json
+word3_mod3^1       24     2      38   True     12      38    True        71   True F-A m=53         pi_farkas_word3_mod3^1_s2.json
+word3_mod3^1       24     3      38   True      8      38    True        71   True F-A m=53         pi_farkas_word3_mod3^1_s3.json
+word5              32     0      20   True      9      20    True        95   True F-A m=26         pi_farkas_word5_s0.json
+word5              32   3/4      32   True     11      32    True        95   True n/a              pi_farkas_word5_s3over4.json
+word5              32     1      32   True     22      32    True        95   True F-A m=35         pi_farkas_word5_s1.json
+word5              32   3/2      44   True     23      44    True        95   True n/a              pi_farkas_word5_s3over2.json
+word5              32     2      44   True     25      44    True        95   True F-A m=53         pi_farkas_word5_s2.json
+word5              32     3      50   True     25      50    True        95   True F-A m=53         pi_farkas_word5_s3.json
+word2_mod3^2       36     0      20   True     10      20    True       107   True F-A m=26         pi_farkas_word2_mod3^2_s0.json
+word2_mod3^2       36   3/4      32   True     15      32    True       107   True n/a              pi_farkas_word2_mod3^2_s3over4.json
+word2_mod3^2       36     1      44   True     21      44    True       107   True F-A m=53         pi_farkas_word2_mod3^2_s1.json
+word2_mod3^2       36   3/2      47   True      5      47    True       107   True n/a              pi_farkas_word2_mod3^2_s3over2.json
+word2_mod3^2       36     2      47   True      5      47    True       107   True F-A m=53         pi_farkas_word2_mod3^2_s2.json
+word2_mod3^2       36     3      47   True      5      47    True       107   True F-A m=53         pi_farkas_word2_mod3^2_s3.json
+word4_mod3^1       48     0      26   True     15      26    True       143   True F-A m=26         pi_farkas_word4_mod3^1_s0.json
+word4_mod3^1       48   3/4      44   True     21      44    True       143   True n/a              pi_farkas_word4_mod3^1_s3over4.json
+word4_mod3^1       48     1      53   True     22      53    True       143   True F-A m=53         pi_farkas_word4_mod3^1_s1.json
+word4_mod3^1       48   3/2      71   True     21      71    True       143   True n/a              pi_farkas_word4_mod3^1_s3over2.json
+word4_mod3^1       48     2      71   True     25      71    True       143   True F-A m=80         pi_farkas_word4_mod3^1_s2.json
+word4_mod3^1       48     3      71   True      8      71    True       143   True F-A m=80         pi_farkas_word4_mod3^1_s3.json
+word6              64     0      34   True     23      34    True       191   True F-A m=35         pi_farkas_word6_s0.json
+word6              64   3/4      56   True     33      56    True       191   True n/a              pi_farkas_word6_s3over4.json
+word6              64     1      68   True     40      68    True       191   True F-A m=80         pi_farkas_word6_s1.json
+word6              64   3/2      71   True     41      71    True       191   True n/a              pi_farkas_word6_s3over2.json
+word6              64     2      80   True     49      80    True       191   True F-A m=80         pi_farkas_word6_s2.json
+word6              64     3      95   True     47      95    True       191   True F-A m=161        pi_farkas_word6_s3.json
+word3_mod3^2       72     0      40   True     24      40    True       215   True F-A m=53         pi_farkas_word3_mod3^2_s0.json
+word3_mod3^2       72   3/4      74   True     28      74    True       215   True n/a              pi_farkas_word3_mod3^2_s3over4.json
+word3_mod3^2       72     1      80   True     34      80    True       215   True F-A m=80         pi_farkas_word3_mod3^2_s1.json
+word3_mod3^2       72   3/2     107   True     23     107    True       215   True n/a              pi_farkas_word3_mod3^2_s3over2.json
+word3_mod3^2       72     2     110   True     20     110    True       215   True F-A m=161        pi_farkas_word3_mod3^2_s2.json
+word3_mod3^2       72     3     110   True     20     110    True       215   True F-A m=161        pi_farkas_word3_mod3^2_s3.json
+word5_mod3^1       96     0      50   True     34      50    True       287   True F-A m=53         pi_farkas_word5_mod3^1_s0.json
+word5_mod3^1       96   3/4      80   True     36      80    True       287   True n/a              pi_farkas_word5_mod3^1_s3over4.json
+word5_mod3^1       96     1      92   True     35      92    True       287   True F-A m=107        pi_farkas_word5_mod3^1_s1.json
+word5_mod3^1       96   3/2     107   True     17     107    True       287   True n/a              pi_farkas_word5_mod3^1_s3over2.json
+word5_mod3^1       96     2     107   True     21     107    True       287   True F-A m=107        pi_farkas_word5_mod3^1_s2.json
+word5_mod3^1       96     3     107   True     17     107    True       287   True F-A m=107        pi_farkas_word5_mod3^1_s3.json
+word2_mod3^3      108     0      56   True     37      56    True       323   True F-A m=80         pi_farkas_word2_mod3^3_s0.json
+word2_mod3^3      108   3/4      98   True     42      98    True       323   True n/a              pi_farkas_word2_mod3^3_s3over4.json
+word2_mod3^3      108     1     143   True     45     143    True       323   True F-A m=161        pi_farkas_word2_mod3^3_s1.json
+word2_mod3^3      108   3/2     161   True      6     161    True       323   True n/a              pi_farkas_word2_mod3^3_s3over2.json
+word2_mod3^3      108     2     161   True      6     161    True       323   True F-A m=161        pi_farkas_word2_mod3^3_s2.json
+word2_mod3^3      108     3     161   True      6     161    True       323   True F-A m=161        pi_farkas_word2_mod3^3_s3.json
+word7             128     0      66   True     40      66    True       383   True F-A m=80         pi_farkas_word7_s0.json
+word7             128   3/4     104   True     48     104    True       383   True n/a              pi_farkas_word7_s3over4.json
+word7             128     1     128   True     79     128    True       383   True F-A m=161        pi_farkas_word7_s1.json
+word7             128   3/2     161   True     81     161    True       383   True n/a              pi_farkas_word7_s3over2.json
+word7             128     2     161   True     87     161    True       383   True F-A m=161        pi_farkas_word7_s2.json
+word7             128     3     188   True     88     188    True       383   True F-A m=242        pi_farkas_word7_s3.json
+word4_mod3^2      144     0      74   True     45      74    True       431   True F-A m=80         pi_farkas_word4_mod3^2_s0.json
+word4_mod3^2      144   3/4     130   True     52     130    True       431   True n/a              pi_farkas_word4_mod3^2_s3over4.json
+word4_mod3^2      144     1     155   True     63     155    True       431   True F-A m=161        pi_farkas_word4_mod3^2_s1.json
+word4_mod3^2      144   3/2     161   True     26     161    True       431   True n/a              pi_farkas_word4_mod3^2_s3over2.json
+word4_mod3^2      144     2     161   True     27     161    True       431   True F-A m=161        pi_farkas_word4_mod3^2_s2.json
+word4_mod3^2      144     3     161   True     23     161    True       431   True F-A m=161        pi_farkas_word4_mod3^2_s3.json
+word6_mod3^1      192     0      98   True     60      98    True       575   True F-A m=107        pi_farkas_word6_mod3^1_s0.json
+word6_mod3^1      192   3/4     170   True     63     170    True       575   True n/a              pi_farkas_word6_mod3^1_s3over4.json
+word6_mod3^1      192     1     206   True     72     206    True       575   True F-A m=242        pi_farkas_word6_mod3^1_s1.json
+word6_mod3^1      192   3/2     242   True     77     242    True       575   True n/a              pi_farkas_word6_mod3^1_s3over2.json
+word6_mod3^1      192     2     242   True     52     242    True       575   True F-A m=242        pi_farkas_word6_mod3^1_s2.json
+word6_mod3^1      192     3     242   True    111     242    True       575   True F-A m=242        pi_farkas_word6_mod3^1_s3.json
+word3_mod3^3      216     0     112   True     64     112    True       647   True F-A m=161        pi_farkas_word3_mod3^3_s0.json
+word3_mod3^3      216   3/4     184   True     68     184    True       647   True n/a              pi_farkas_word3_mod3^3_s3over4.json
+word3_mod3^3      216     1     233   True     92     233    True       647   True F-A m=242        pi_farkas_word3_mod3^3_s1.json
+word3_mod3^3      216   3/2     233   True     52     233    True       647   True n/a              pi_farkas_word3_mod3^3_s3over2.json
+word3_mod3^3      216     2     233   True     22     233    True       647   True F-A m=242        pi_farkas_word3_mod3^3_s2.json
+word3_mod3^3      216     3     233   True     41     233    True       647   True F-A m=242        pi_farkas_word3_mod3^3_s3.json
+word8             256     0     130   True     60     130    True       767   True F-A m=161        pi_farkas_word8_s0.json
+word8             256   3/4     212   True    106     212    True       767   True n/a              pi_farkas_word8_s3over4.json
+word8             256     1     263   True    140     263    True       767   True F-A m=323        pi_farkas_word8_s1.json
+word8             256   3/2     314   True    120     314    True       767   True n/a              pi_farkas_word8_s3over2.json
+word8             256     2     329   True    110     329    True       767   True F-A m=728        pi_farkas_word8_s2.json
+word8             256     3     329   True    189     329    True       767   True F-A m=728        pi_farkas_word8_s3.json
+word5_mod3^2      288     0     148   True     74     148    True       863   True F-A m=161        pi_farkas_word5_mod3^2_s0.json
+word5_mod3^2      288   3/4     272   True     94     272    True       863   True n/a              pi_farkas_word5_mod3^2_s3over4.json
+word5_mod3^2      288     1     323   True    129     323    True       863   True F-A m=323        pi_farkas_word5_mod3^2_s1.json
+word5_mod3^2      288   3/2     350   True     92     350    True       863   True n/a              pi_farkas_word5_mod3^2_s3over2.json
+word5_mod3^2      288     2     350   True     43     350    True       863   True F-A m=485        pi_farkas_word5_mod3^2_s2.json
+word5_mod3^2      288     3     350   True     16     350    True       863   True F-A m=485        pi_farkas_word5_mod3^2_s3.json
+word7_mod3^1      384     0     196   True    101     196    True      1151   True F-A m=242        pi_farkas_word7_mod3^1_s0.json
+word7_mod3^1      384   3/4     362   True     95     362    True      1151   True n/a              pi_farkas_word7_mod3^1_s3over4.json
+word7_mod3^1      384     1     395   True    144     395    True      1151   True F-A m=485        pi_farkas_word7_mod3^1_s1.json
+word7_mod3^1      384   3/2     395   True    167     395    True      1151   True n/a              pi_farkas_word7_mod3^1_s3over2.json
+word7_mod3^1      384     2     395   True    168     395    True      1151   True F-A m=485        pi_farkas_word7_mod3^1_s2.json
+word7_mod3^1      384     3     425   True    239     425    True      1151   True F-A m=485        pi_farkas_word7_mod3^1_s3.json
+word4_mod3^3      432     0     226   True     86     226    True      1295   True F-A m=242        pi_farkas_word4_mod3^3_s0.json
+word4_mod3^3      432   3/4     418   True    188     418    True      1295   True n/a              pi_farkas_word4_mod3^3_s3over4.json
+word4_mod3^3      432     1     479   True    190     479    True      1295   True F-A m=485        pi_farkas_word4_mod3^3_s1.json
+word4_mod3^3      432   3/2     479   True     12     479    True      1295   True n/a              pi_farkas_word4_mod3^3_s3over2.json
+word4_mod3^3      432     2     479   True     13     479    True      1295   True F-A m=485        pi_farkas_word4_mod3^3_s2.json
+word4_mod3^3      432     3     479   True    232     479    True      1295   True F-A m=485        pi_farkas_word4_mod3^3_s3.json
+word9             512     0     260   True    133     260    True      1535   True F-A m=323        pi_farkas_word9_s0.json
+word9             512   3/4     476   True    190     476    True      1535   True n/a              pi_farkas_word9_s3over4.json
+word9             512     1     521   True    167     521    True      1535   True F-A m=728        pi_farkas_word9_s1.json
+word9             512   3/2     539   True     41     539    True      1535   True n/a              pi_farkas_word9_s3over2.json
+word9             512     2     539   True    308     539    True      1535   True F-A m=728        pi_farkas_word9_s2.json
+word9             512     3     539   True    331     539    True      1535   True F-A m=728        pi_farkas_word9_s3.json
+word6_mod3^2      576     0     298   True     59     298    True      1727   True F-A m=323        pi_farkas_word6_mod3^2_s0.json
+word6_mod3^2      576   3/4     524   True    208     524    True      1727   True n/a              pi_farkas_word6_mod3^2_s3over4.json
+word6_mod3^2      576     1     587   True    240     587    True      1727   True F-A m=728        pi_farkas_word6_mod3^2_s1.json
+word6_mod3^2      576   3/2     593   True    153     593    True      1727   True n/a              pi_farkas_word6_mod3^2_s3over2.json
+word6_mod3^2      576     2     593   True    224     593    True      1727   True F-A m=728        pi_farkas_word6_mod3^2_s2.json
+word6_mod3^2      576     3     623   True    262     623    True      1727   True F-A m=728        pi_farkas_word6_mod3^2_s3.json
+word8_mod3^1      768     0     394   True     95     394    True      2303   True F-A m=485        pi_farkas_word8_mod3^1_s0.json
+word8_mod3^1      768   3/4     704   True    204     704    True      2303   True n/a              pi_farkas_word8_mod3^1_s3over4.json
+word8_mod3^1      768     1     839   True    341     839    True      2303   True F-A m=971        pi_farkas_word8_mod3^1_s1.json
+word8_mod3^1      768   3/2     839   True    151     839    True      2303   True n/a              pi_farkas_word8_mod3^1_s3over2.json
+word8_mod3^1      768     2     839   True    217     839    True      2303   True F-A m=971        pi_farkas_word8_mod3^1_s2.json
+word8_mod3^1      768     3     839   True    405     839    True      2303   True F-A m=971        pi_farkas_word8_mod3^1_s3.json
+word5_mod3^3      864     0     434   True    114     434    True      2591   True F-A m=485        pi_farkas_word5_mod3^3_s0.json
+word5_mod3^3      864   3/4     796   True    290     796    True      2591   True n/a              pi_farkas_word5_mod3^3_s3over4.json
+word5_mod3^3      864     1     890   True    282     890    True      2591   True F-A m=971        pi_farkas_word5_mod3^3_s1.json
+word5_mod3^3      864   3/2     890   True    294     890    True      2591   True n/a              pi_farkas_word5_mod3^3_s3over2.json
+word5_mod3^3      864     2     899   True    380     899    True      2591   True F-A m=971        pi_farkas_word5_mod3^3_s2.json
+word5_mod3^3      864     3     911   True     23     911    True      2591   True F-A m=971        pi_farkas_word5_mod3^3_s3.json
+word10           1024     0     522   True    175     522    True      3071   True F-A m=728        pi_farkas_word10_s0.json
+word10           1024   3/4     920   True    447     920    True      3071   True n/a              pi_farkas_word10_s3over4.json
+word10           1024     1    1031   True    181    1031    True      3071   True F-A m=1457       pi_farkas_word10_s1.json
+word10           1024   3/2    1079   True    421    1079    True      3071   True n/a              pi_farkas_word10_s3over2.json
+word10           1024     2    1079   True    490    1079    True      3071   True F-A m=1457       pi_farkas_word10_s2.json
+word10           1024     3    1079   True    587    1079    True      3071   True F-A m=1457       pi_farkas_word10_s3.json
+word7_mod3^2     1152     0     578   True    173     578    True      3455   True F-A m=728        pi_farkas_word7_mod3^2_s0.json
+word7_mod3^2     1152   3/4    1154   True    436    1154    True      3455   True n/a              pi_farkas_word7_mod3^2_s3over4.json
+word7_mod3^2     1152     1    1217   True    450    1217    True      3455   True F-A m=1457       pi_farkas_word7_mod3^2_s1.json
+word7_mod3^2     1152   3/2    1289   True    325    1289    True      3455   True n/a              pi_farkas_word7_mod3^2_s3over2.json
+word7_mod3^2     1152     2    1289   True    260    1289    True      3455   True F-A m=1457       pi_farkas_word7_mod3^2_s2.json
+word7_mod3^2     1152     3    1289   True     46    1289    True      3455   True F-A m=1457       pi_farkas_word7_mod3^2_s3.json
+word9_mod3^1     1536     0     770   True    185     770    True      4607   True F-A m=971        pi_farkas_word9_mod3^1_s0.json
+word9_mod3^1     1536   3/4    1388   True    530    1388    True      4607   True n/a              pi_farkas_word9_mod3^1_s3over4.json
+word9_mod3^1     1536     1    1577   True    624    1577    True      4607   True F-A m=2186       pi_farkas_word9_mod3^1_s1.json
+word9_mod3^1     1536   3/2    1577   True    212    1577    True      4607   True n/a              pi_farkas_word9_mod3^1_s3over2.json
+word9_mod3^1     1536     2    1577   True    573    1577    True      4607   True F-A m=2186       pi_farkas_word9_mod3^1_s2.json
+word9_mod3^1     1536     3    1577   True    916    1577    True      4607   True F-A m=2186       pi_farkas_word9_mod3^1_s3.json
+word6_mod3^3     1728     0     866   True     85     866    True      5183   True F-A m=971        pi_farkas_word6_mod3^3_s0.json
+word6_mod3^3     1728   3/4    1538   True    717    1538    True      5183   True n/a              pi_farkas_word6_mod3^3_s3over4.json
+word6_mod3^3     1728     1    1775   True    752    1775    True      5183   True F-A m=2186       pi_farkas_word6_mod3^3_s1.json
+word6_mod3^3     1728   3/2    1775   True    552    1775    True      5183   True n/a              pi_farkas_word6_mod3^3_s3over2.json
+word6_mod3^3     1728     2    1775   True    775    1775    True      5183   True F-A m=2186       pi_farkas_word6_mod3^3_s2.json
+word6_mod3^3     1728     3    1775   True     49    1775    True      5183   True F-A m=2186       pi_farkas_word6_mod3^3_s3.json
+word8_mod3^2     2304     0    1154   True     53    1154    True      6911   True F-A m=1457       pi_farkas_word8_mod3^2_s0.json
+word8_mod3^2     2304   3/4    2080   True    832    2080    True      6911   True n/a              pi_farkas_word8_mod3^2_s3over4.json
+word8_mod3^2     2304     1    2396   True    859    2396    True      6911   True F-A m=2915       pi_farkas_word8_mod3^2_s1.json
+word8_mod3^2     2304   3/2    2429   True    925    2429    True      6911   True n/a              pi_farkas_word8_mod3^2_s3over2.json
+word8_mod3^2     2304     2    2429   True   1016    2429    True      6911   True F-A m=2915       pi_farkas_word8_mod3^2_s2.json
+word8_mod3^2     2304     3    2429   True     53    2429    True      6911   True F-A m=2915       pi_farkas_word8_mod3^2_s3.json
+word10_mod3^1    3072     0    1538   True    306    1538    True      9215   True F-A m=2186       pi_farkas_word10_mod3^1_s0.json
+word10_mod3^1    3072   3/4    2648   True    928    2648    True      9215   True n/a              pi_farkas_word10_mod3^1_s3over4.json
+word10_mod3^1    3072     1    3149   True    994    3149    True      9215   True F-A m=4373       pi_farkas_word10_mod3^1_s1.json
+word10_mod3^1    3072   3/2    3158   True   1059    3158    True      9215   True n/a              pi_farkas_word10_mod3^1_s3over2.json
+word10_mod3^1    3072     2    3215   True   1575    3215    True      9215   True F-A m=4373       pi_farkas_word10_mod3^1_s2.json
+word10_mod3^1    3072     3    3266   True   1955    3266    True      9215   True F-A m=4373       pi_farkas_word10_mod3^1_s3.json
+
+N_fail / M for family (i):
+     M          s=0        s=3/4          s=1        s=3/2          s=2          s=3
+     2     5 (2.50)     5 (2.50)     5 (2.50)     5 (2.50)     5 (2.50)     5 (2.50)
+     3     5 (1.67)     8 (2.67)     8 (2.67)     8 (2.67)     8 (2.67)     8 (2.67)
+     4     8 (2.00)     8 (2.00)     8 (2.00)     8 (2.00)    11 (2.75)    11 (2.75)
+     6     8 (1.33)    11 (1.83)    11 (1.83)    11 (1.83)    11 (1.83)    11 (1.83)
+     8     8 (1.00)     8 (1.00)    10 (1.25)    11 (1.38)    17 (2.12)    17 (2.12)
+     9    11 (1.22)    20 (2.22)    20 (2.22)    20 (2.22)    20 (2.22)    20 (2.22)
+    12     8 (0.67)    17 (1.42)    17 (1.42)    17 (1.42)    26 (2.17)    26 (2.17)
+    16    10 (0.62)    20 (1.25)    26 (1.62)    26 (1.62)    26 (1.62)    26 (1.62)
+    18    20 (1.11)    26 (1.44)    26 (1.44)    29 (1.61)    29 (1.61)    29 (1.61)
+    24    16 (0.67)    26 (1.08)    26 (1.08)    35 (1.46)    38 (1.58)    38 (1.58)
+    27    22 (0.81)    44 (1.63)    56 (2.07)    56 (2.07)    56 (2.07)    56 (2.07)
+    32    20 (0.62)    32 (1.00)    32 (1.00)    44 (1.38)    44 (1.38)    50 (1.56)
+    36    20 (0.56)    32 (0.89)    44 (1.22)    47 (1.31)    47 (1.31)    47 (1.31)
+    48    26 (0.54)    44 (0.92)    53 (1.10)    71 (1.48)    71 (1.48)    71 (1.48)
+    54    44 (0.81)    56 (1.04)    71 (1.31)   101 (1.87)   101 (1.87)   101 (1.87)
+    64    34 (0.53)    56 (0.88)    68 (1.06)    71 (1.11)    80 (1.25)    95 (1.48)
+    72    40 (0.56)    74 (1.03)    80 (1.11)   107 (1.49)   110 (1.53)   110 (1.53)
+    96    50 (0.52)    80 (0.83)    92 (0.96)   107 (1.11)   107 (1.11)   107 (1.11)
+   108    56 (0.52)    98 (0.91)   143 (1.32)   161 (1.49)   161 (1.49)   161 (1.49)
+   128    66 (0.52)   104 (0.81)   128 (1.00)   161 (1.26)   161 (1.26)   188 (1.47)
+   144    74 (0.51)   130 (0.90)   155 (1.08)   161 (1.12)   161 (1.12)   161 (1.12)
+   216   112 (0.52)   184 (0.85)   233 (1.08)   233 (1.08)   233 (1.08)   233 (1.08)
+   256   130 (0.51)   212 (0.83)   263 (1.03)   314 (1.23)   329 (1.29)   329 (1.29)
+   288   148 (0.51)   272 (0.94)   323 (1.12)   350 (1.22)   350 (1.22)   350 (1.22)
+   432   226 (0.52)   418 (0.97)   479 (1.11)   479 (1.11)   479 (1.11)   479 (1.11)
+   512   260 (0.51)   476 (0.93)   521 (1.02)   539 (1.05)   539 (1.05)   539 (1.05)
+   864   434 (0.50)   796 (0.92)   890 (1.03)   890 (1.03)   899 (1.04)   911 (1.05)
+  1000   528 (0.53)   890 (0.89)   932 (0.93)  1079 (1.08)  1079 (1.08)  1079 (1.08)
+  1024   522 (0.51)   920 (0.90)  1031 (1.01)  1079 (1.05)  1079 (1.05)  1079 (1.05)
+  1296   650 (0.50)  1162 (0.90)  1397 (1.08)  1397 (1.08)  1397 (1.08)  1403 (1.08)
+  1728   866 (0.50)  1538 (0.89)  1775 (1.03)  1775 (1.03)  1775 (1.03)  1775 (1.03)
+  2048  1026 (0.50)  1898 (0.93)  2096 (1.02)  2177 (1.06)  2177 (1.06)  2177 (1.06)

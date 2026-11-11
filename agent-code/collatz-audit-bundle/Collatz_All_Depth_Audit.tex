@@ -1,0 +1,1487 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  citecolor=green!35!black,
+  urlcolor=blue!55!black,
+  pdftitle={All-Depth Target-One Barrier Exclusion for the Negative Collatz Shadow},
+  pdfauthor={Principia Math Collatz Project}
+}
+
+\setlist{nosep,leftmargin=2.1em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{certificate}[theorem]{Certificate}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Up}{U_{+}}
+\newcommand{\Um}{U_{-}}
+\newcommand{\Sp}{S_{+}}
+\newcommand{\Sm}{S_{-}}
+\newcommand{\vTwo}{v_2}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\eps}{\varepsilon}
+
+\lstdefinelanguage{Lean}{
+  morekeywords={import,open,namespace,end,section,def,abbrev,structure,inductive,
+  theorem,lemma,proposition,corollary,axiom,constant,noncomputable,example,
+  where,by,exact,apply,intro,have,show,from,let,if,then,else,match,with,
+  forall,exists,fun,True,False,Prop,Nat,List,Finset,Set,Rat},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]"
+}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!25},
+  showstringspaces=false,
+  tabsize=2
+}
+
+\title{\textbf{All-Depth Target-One Barrier Exclusion\\for the Negative Collatz Shadow}\\[0.4em]
+\large A rigorous audit of the theorem, its certificates, the current proof architectures, and the remaining synchronization problem}
+\author{Principia Math Collatz Project\\Technical audit prepared for Anton Shakov}
+\date{17 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Status.}  The principal result of this document is an all-depth,
+computer-assisted theorem about a constrained language for the accelerated
+$3x-1$ map.  The proof has an analytic part and a finite exact certificate.
+It is \emph{not} a proof of the Collatz conjecture.  The remaining debts are
+identified precisely in \cref{sec:frontier}.
+\end{minipage}}
+\end{center}
+
+\begin{abstract}
+For a positive valuation word $a=(a_0,\ldots,a_{r-1})$, define
+$A_k=\sum_{i<k}a_i$ and $C_0=0$, $C_{k+1}=3C_k+2^{A_k}$.
+We prove that
+\[
+  3^r\mid C_r+2^{A_r},\qquad
+  2^{A_k}<3^k\quad(1\le k\le r)
+\]
+forces $a_0=\cdots=a_{r-1}=1$.
+Equivalently, the all-ones words are the only target-$1$ terminal words that
+remain strictly on the expanding side of the coefficient barrier at every
+prefix for the accelerated negative map
+$\Um(m)=(3m-1)/2^{\vTwo(3m-1)}$.
+
+The proof has four ingredients.  Terminal divisibility reconstructs an exact
+positive $3x-1$ trajectory ending at $1$.  Equal-time translation on parity
+cylinders gives a sharp shell-injection bound for every finite simple
+negative shortcut trajectory.  This yields the universal reciprocal-mass
+estimate
+\[
+  \sum_i\frac1{3x_i-1}<10.789.
+\]
+The product formula along a barrier trajectory then bounds its initial seed
+by $3^{11}$ times its terminal target.  A complete scan of the odd seeds below
+$200000$, implemented independently in C++ and Python, leaves only the seed
+$1$.  The numerical shell sum through level $1000$, its analytic tail, every
+source file, every retained output, and cryptographic hashes are specified.
+
+We also audit the surrounding Collatz project.  We separate proved affine,
+locality, coalescence, inverse-fiber, and record-compression theorems from
+finite evidence, conditional completion criteria, and refuted or insufficient
+routes.  The target-$1$ terminal debt is closed; nonperiodic synchronization
+and positive-cycle exclusion are not.  The final appendices give Lean-oriented
+proof skeletons for the all-depth theorem and for three possible routes from
+the present frontier to the Collatz conjecture.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Scope, notation, and exact claim}\label{sec:scope}
+
+The classical Collatz map is
+\[
+ T(n)=\begin{cases}
+ n/2,&2\mid n,\\
+ 3n+1,&2\nmid n.
+ \end{cases}
+\]
+It is convenient to work on odd positive integers with the accelerated map
+\[
+ \Up(n)=\frac{3n+1}{2^{\vTwo(3n+1)}}.
+\]
+The auxiliary negative map is
+\[
+ \Um(m)=\frac{3m-1}{2^{\vTwo(3m-1)}}.
+\]
+The negative map is not a replacement for the positive Collatz dynamics.  It
+is a dual arithmetic shadow whose finite valuation words carry the same
+powers of $2$ and $3$, with the affine carry entering with the opposite sign.
+
+\begin{definition}[Valuation data]
+Let $a=(a_0,\ldots,a_{r-1})\in\N_{\ge1}^r$.  Put
+\[
+ A_0=0,\qquad A_k=\sum_{i=0}^{k-1}a_i,
+\]
+and define
+\[
+ C_0=0,\qquad C_{k+1}=3C_k+2^{A_k}.
+\]
+Thus
+\[
+ C_k=\sum_{i=0}^{k-1}3^{k-1-i}2^{A_i}.
+\]
+The word is called \emph{barrier-admissible} when
+\[
+ 2^{A_k}<3^k\qquad(1\le k\le r),                  \tag{1.1}
+\]
+and \emph{target-$y$ terminal}, for an odd positive integer $y$, when
+\[
+ 3^r\mid C_r+2^{A_r}y.                              \tag{1.2}
+\]
+\end{definition}
+
+The principal theorem is the following.
+
+\begin{theorem}[All-depth target-$1$ barrier exclusion]\label{thm:main}
+Let $a=(a_0,\ldots,a_{r-1})\in\N_{\ge1}^r$.  If
+\[
+ 3^r\mid C_r+2^{A_r}
+ \quad\text{and}\quad
+ 2^{A_k}<3^k\quad(1\le k\le r),
+\]
+then
+\[
+ a_0=a_1=\cdots=a_{r-1}=1.
+\]
+\end{theorem}
+
+The qualifier ``all-depth'' refers to the word length $r$: no upper bound on
+$r$ occurs in the statement.  The theorem is nevertheless computer-assisted,
+because its analytic argument compresses every possible length to a finite
+seed range and an exact finite scan settles that range.
+
+\section{Position relative to the literature and provenance}\label{sec:literature}
+
+The strongest unconditional global results remain far from pointwise
+totality.  Tao proved that the minimum of the Collatz orbit is below every
+function tending to infinity for logarithmic-density almost all starting
+values~\cite{Tao2022}.  Barina's current published computation verifies
+convergence for every starting value below $2^{71}$~\cite{Barina2025}.
+Krasikov and Lagarias proved a power-law lower bound for the number of
+starting values known to reach $1$~\cite{KrasikovLagarias2003}.  For cycles,
+Simons and de Weger developed strong Diophantine and computational bounds
+on the number of local minima~\cite{SimonsDeWeger2005}, and Hercher proved
+that a nontrivial positive Collatz cycle would have at least $92$ local
+minima~\cite{Hercher2023}.  This is the strongest peer-reviewed local-minimum
+bound located in the present audit.  A June 2026 independent preprint claims
+an exact computer-assisted extension excluding $m$-cycles with $m\le95$,
+conditional on the Barina verification bound and the Simons--de Weger
+inputs~\cite{Wang2026}; that certificate has not been independently audited
+here and is not used below.
+
+The present theorem has a different scope.  It classifies a constrained
+language in the negative $3x-1$ shadow.  It neither verifies additional
+ordinary positive seeds nor excludes a positive Collatz cycle.  In
+particular, it is not comparable by implication with the computational bound
+$2^{71}$ or Tao's almost-all theorem.
+
+The ingredients have recognizable ancestors.
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Affine word formulae, parity cylinders, and $2$-adic symbolic coding are
+part of the classical $3x+1$ literature; see Lagarias' survey
+\cite{Lagarias1985}, Wirsching's monograph~\cite{Wirsching1998}, and the
+Bernstein--Lagarias conjugacy~\cite{BernsteinLagarias1996}.
+\item Orbit sparsity and reciprocal-sum arguments are closely related to the
+work of Garcia and Tal on generalized $3n+1$ orbits~\cite{GarciaTal1999}.
+\item The mixed binary--ternary rewrite-system viewpoint comes from
+Yolcu, Aaronson, and Heule~\cite{YolcuAaronsonHeule2023}.
+\item The target-shadow formulation, terminal suffix locality, coalescing
+minima, and the equal-time shell injection were developed in the present
+Principia Math Collatz project.  The project direction and work ledger were
+maintained by Anton Shakov; derivations, audits, and executable certificates
+were developed with GPT-assisted mathematical exploration and then rechecked
+symbolically and computationally for this report.
+\end{enumerate}
+
+A targeted search of the standard surveys, the generalized Syracuse
+literature, the rewrite-system literature, and recent work on paradoxical or
+extremal words~\cite{RozierTerracol2025,FernandezIbanez2026,Kramer2026}
+did not locate a published theorem equivalent to \cref{thm:main}.  This is a
+search report, not a priority claim.  A formal priority claim would require a
+broader expert literature review and external peer verification.
+
+\section{Affine word calculus and terminal reconstruction}\label{sec:affine}
+
+\subsection{Positive and negative affine identities}
+
+\begin{proposition}[Affine identities]\label{prop:affine}
+Suppose $a=(a_0,\ldots,a_{r-1})$ is the exact valuation word of a positive
+accelerated trajectory $n_0,\ldots,n_r$ under $\Up$.  Then
+\[
+ 2^{A_k}n_k=3^k n_0+C_k\qquad(0\le k\le r).          \tag{3.1}
+\]
+If it is the exact valuation word of a positive accelerated trajectory
+$m_0,\ldots,m_r$ under $\Um$, then
+\[
+ 2^{A_k}m_k=3^k m_0-C_k\qquad(0\le k\le r),          \tag{3.2}
+\]
+or equivalently
+\[
+ 3^k m_0=2^{A_k}m_k+C_k.                              \tag{3.3}
+\]
+\end{proposition}
+
+\begin{proof}
+For the positive map,
+$2^{a_k}n_{k+1}=3n_k+1$.  Assuming \textup{(3.1)} at time $k$ and multiplying
+this recurrence by $2^{A_k}$ gives
+\[
+ 2^{A_{k+1}}n_{k+1}
+ =3(3^k n_0+C_k)+2^{A_k}
+ =3^{k+1}n_0+C_{k+1}.
+\]
+The negative identity follows identically from
+$2^{a_k}m_{k+1}=3m_k-1$.
+\end{proof}
+
+If words $u$ and $v$ are concatenated, their carries satisfy
+\[
+ C(uv)=3^{|v|}C(u)+2^{A(u)}C(v).                     \tag{3.4}
+\]
+This follows either from the defining sum or by composing the affine maps.
+
+\subsection{Terminal suffix locality}
+
+\begin{proposition}[Full terminal residue locality]\label{prop:locality}
+Let a positive $\Up$ trajectory have endpoint $X$, and let
+$v=(a_{j-r},\ldots,a_{j-1})$ be its last $r$ valuation exponents.  Put
+$B=A(v)$ and $C_v=C(v)$.  Then, for every integer $c$,
+\[
+ X\equiv c\pmod{3^r}
+ \quad\Longleftrightarrow\quad
+ C_v-2^B c\equiv0\pmod{3^r}.                         \tag{3.5}
+\]
+In particular,
+\[
+ 3^r\mid X+1
+ \quad\Longleftrightarrow\quad
+ 3^r\mid C_v+2^B.                                    \tag{3.6}
+\]
+\end{proposition}
+
+\begin{proof}
+If $Y$ is the positive odd state at the start of the suffix, then
+\[
+ 2^B X=3^rY+C_v.
+\]
+Reduction modulo $3^r$ and invertibility of $2^B$ modulo $3^r$ prove the
+claim.
+\end{proof}
+
+\subsection{Terminal divisibility reconstructs an exact trajectory}
+
+\begin{theorem}[Targeted terminal duality]\label{thm:duality}
+Let $a=(a_0,\ldots,a_{r-1})\in\N_{\ge1}^r$ and let $y$ be a positive odd
+integer.  The following are equivalent.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $3^r\mid C_r+2^{A_r}y$.
+\item There are positive odd integers $m_0,\ldots,m_r=y$ satisfying
+\[
+ 3m_i-1=2^{a_i}m_{i+1}\qquad(0\le i<r).              \tag{3.7}
+\]
+\end{enumerate}
+Every exponent in \textup{(3.7)} is then the exact $2$-adic valuation of
+$3m_i-1$.
+\end{theorem}
+
+\begin{proof}
+For $0\le i\le r$, let $D_i$ denote
+\[
+ D_i=C(a_i,\ldots,a_{r-1})
+      +2^{a_i+\cdots+a_{r-1}}y,
+\]
+with $D_r=y$.  Splitting off the first letter of a suffix gives
+\[
+ D_i=3^{r-i-1}+2^{a_i}D_{i+1}.                       \tag{3.8}
+\]
+Assume $3^{r-i}\mid D_i$.  Reducing \textup{(3.8)} modulo
+$3^{r-i-1}$ shows that $3^{r-i-1}\mid D_{i+1}$.  Starting from (i), this
+propagates divisibility to every suffix.  Define
+\[
+ m_i=\frac{D_i}{3^{r-i}}.
+\]
+Then \textup{(3.8)} becomes
+\[
+ 3m_i=1+2^{a_i}m_{i+1}.
+\]
+Backward induction from the positive odd integer $m_r=y$ shows that each
+$m_i$ is a positive odd integer: the numerator $1+2^{a_i}m_{i+1}$ is odd,
+and divisibility by $3$ has already been proved.  Consequently
+$3m_i-1=2^{a_i}m_{i+1}$ with $m_{i+1}$ odd, so the valuation is exactly
+$a_i$.  Conversely, iterating \textup{(3.7)} gives
+$3^rm_0=C_r+2^{A_r}y$.
+\end{proof}
+
+This theorem is the first decisive reduction: a formal congruence on a word
+is not merely necessary.  It produces an ordinary positive integer
+trajectory in the negative map.
+
+\section{Equal-time parity cylinders}\label{sec:equaltime}
+
+Define the negative shortcut map on nonnegative integers by
+\[
+ \Sm(x)=\begin{cases}
+ x/2,&x\equiv0\pmod2,\\
+ (3x-1)/2,&x\equiv1\pmod2.
+ \end{cases}                                          \tag{4.1}
+\]
+For $k\ge0$, let $s_k(x)$ be the number of odd inputs among
+$x,\Sm(x),\ldots,\Sm^{k-1}(x)$.
+
+\begin{lemma}[Parity cylinder]\label{lem:parity-cylinder}
+Congruence modulo $2^k$ determines the first $k$ parity bits of a shortcut
+trajectory.  Moreover, every binary word of length $k$ occurs for exactly one
+residue class modulo $2^k$.
+\end{lemma}
+
+\begin{proof}
+If $x\equiv y\pmod{2^k}$, then $x$ and $y$ have the same parity.  After one
+common branch, their images are congruent modulo $2^{k-1}$.  Induction gives
+the first assertion.
+
+For injectivity, suppose two residues have the same parity word, of weight
+$o$.  Following the common affine branch word gives
+\[
+ \Sm^k(x)-\Sm^k(y)=\frac{3^o}{2^k}(x-y).
+\]
+The left side is an integer and $3^o$ is odd, so $2^k\mid x-y$.  The two
+residues are equal.  There are $2^k$ residues and $2^k$ binary words, hence
+the map is bijective.
+\end{proof}
+
+\begin{lemma}[Equal-time translation]\label{lem:equal-time}
+For nonnegative integers $x,q,k$,
+\[
+ \Sm^k(x+q2^k)=\Sm^k(x)+q3^{s_k(x)}.                 \tag{4.2}
+\]
+\end{lemma}
+
+\begin{proof}
+The two initial values are congruent modulo $2^k$, so by
+\cref{lem:parity-cylinder} they follow the same first $k$ branches.  Their
+initial difference is $q2^k$.  Each step divides the difference by $2$, and
+each odd branch additionally multiplies it by $3$.  After $k$ steps the
+difference is $q3^{s_k(x)}$.
+\end{proof}
+
+For a fixed parity word of length $k$ and weight $o$, the corresponding
+affine formula has the form
+\[
+ 2^k\Sm^k(u)=3^o u-D,\qquad D\ge0.                   \tag{4.3}
+\]
+Therefore, whenever $0\le u<2^k$,
+\[
+ 0\le\Sm^k(u)<3^o.                                   \tag{4.4}
+\]
+The nonnegativity follows because the shortcut map preserves
+$\N\cup\{0\}$; the strict upper bound follows from $u<2^k$ and $D\ge0$.
+
+\section{Finite-orbit shell sparsity}\label{sec:shell}
+
+Let $x_0,x_1,\ldots,x_L$ be a positive $\Sm$ trajectory with no repeated
+state.  For $k\ge0$, put
+\[
+ N_k=\#\{i:2^k\le x_i<2^{k+1}\}.                    \tag{5.1}
+\]
+Define
+\[
+ B_k=\min_{0\le t\le k}
+ \left(
+   \sum_{o=t+1}^k\binom{k}{o}
+   +\sum_{o=0}^t3^o
+ \right).                                             \tag{5.2}
+\]
+
+\begin{theorem}[Shell sparsity]\label{thm:shell}
+For every $k\ge0$,
+\[
+ N_k\le\min\{2^k,B_k+k\}.                            \tag{5.3}
+\]
+\end{theorem}
+
+\begin{proof}
+The bound $N_k\le2^k$ is immediate because the shell
+$[2^k,2^{k+1})$ contains exactly $2^k$ integers.
+
+Fix $t\in\{0,\ldots,k\}$.  Temporarily discard the final $k$ positions of
+the trajectory.  Every remaining shell point has a unique representation
+\[
+ x_i=2^k+u_i,
+ \qquad0\le u_i<2^k.                                  \tag{5.4}
+\]
+By \cref{lem:parity-cylinder}, exactly $\binom{k}{o}$ residues $u$ have a
+first-$k$ parity word of weight $o$.  Hence the number of retained shell
+points whose weight exceeds $t$ is at most
+\[
+ \sum_{o=t+1}^k\binom{k}{o}.                          \tag{5.5}
+\]
+
+Now fix $o\le t$.  For a retained shell point of weight $o$, define its
+\emph{base endpoint} to be $\Sm^k(u_i)$.  By \textup{(4.4)}, the base endpoint
+is one of the $3^o$ integers in $[0,3^o)$.  We claim that, for fixed $o$, no
+two retained shell points have the same base endpoint.  Indeed, if
+$x_i=2^k+u_i$ and $x_j=2^k+u_j$ had the same weight and the same base
+endpoint, \cref{lem:equal-time} with $q=1$ would give
+\[
+ x_{i+k}=\Sm^k(u_i)+3^o
+        =\Sm^k(u_j)+3^o=x_{j+k}.
+\]
+Both future positions exist because the last $k$ positions were discarded.
+This contradicts nonrepetition.  Thus the number of retained points of
+weight $o$ is at most $3^o$.  Summing over $o\le t$, adding \textup{(5.5)},
+and restoring at most $k$ discarded positions gives
+\[
+ N_k\le
+ \sum_{o=t+1}^k\binom{k}{o}+\sum_{o=0}^t3^o+k.
+\]
+Minimizing over $t$ proves \textup{(5.3)}.
+\end{proof}
+
+The role of equal time is essential.  It turns a collision in a finite set
+of base endpoints into an actual repeated trajectory state.  Counting parity
+words alone would not provide this injection.
+
+\section{A universal reciprocal-mass constant}\label{sec:mass}
+
+Every point in the $k$th shell contributes at most
+$(3\cdot2^k-1)^{-1}$.  Therefore \cref{thm:shell} gives
+\[
+ \sum_{i=0}^{L}\frac1{3x_i-1}
+ \le
+ \sum_{k=0}^{\infty}
+ \frac{\min\{2^k,B_k+k\}}{3\cdot2^k-1}.              \tag{6.1}
+\]
+We now prove that the right side is below $10.789$.
+
+\subsection{The analytic tail}
+
+\begin{lemma}[Chernoff form for the binomial tail]\label{lem:chernoff}
+Let $1/2<p<1$ and let $t=\lfloor pk\rfloor$.  Then
+\[
+ \sum_{o=t+1}^k\binom{k}{o}
+ \le\left(p^{-p}(1-p)^{-(1-p)}\right)^k.             \tag{6.2}
+\]
+\end{lemma}
+
+\begin{proof}
+For $z>1$ and every $o>pk$, one has $z^o>z^{pk}$.  Hence
+\[
+ \sum_{o>pk}\binom{k}{o}
+ \le z^{-pk}\sum_{o=0}^k\binom{k}{o}z^o
+ =z^{-pk}(1+z)^k.
+\]
+The right side is minimized at $z=p/(1-p)$, which yields \textup{(6.2)}.
+\end{proof}
+
+Take $p=61/100$ and $t=\lfloor61k/100\rfloor$.  The exact integer
+inequalities
+\[
+ 3^{61}<2^{97},                                        \tag{6.3}
+\]
+\[
+ 100^{100}<2^{97}61^{61}39^{39}                       \tag{6.4}
+\]
+are equivalent to
+\[
+ 3^{61/100}<2^{97/100},
+ \qquad
+ p^{-p}(1-p)^{-(1-p)}<2^{97/100}.
+\]
+By \cref{lem:chernoff},
+\[
+ \sum_{o=t+1}^k\binom{k}{o}<2^{97k/100}.              \tag{6.5}
+\]
+Also,
+\[
+ \sum_{o=0}^t3^o=\frac{3^{t+1}-1}{2}
+ <\frac32 3^t
+ <\frac32 2^{97k/100}.                                \tag{6.6}
+\]
+Consequently
+\[
+ B_k<\frac52 2^{97k/100}.                              \tag{6.7}
+\]
+For $k\ge1001$,
+\[
+ \frac{B_k+k}{3\cdot2^k-1}
+ <\frac54 2^{-3k/100}+\frac{k}{2^{k+1}}.              \tag{6.8}
+\]
+Grouping the first series into blocks of $100$ terms gives
+\[
+ \begin{aligned}
+ \frac54\sum_{k=1001}^{\infty}2^{-3k/100}
+ &<\frac54\sum_{j=0}^{\infty}100\,2^{-30-3j}\\
+ &=\frac{1000}{7\cdot2^{30}}.
+ \end{aligned}                                        \tag{6.9}
+\]
+The standard differentiated geometric series gives
+\[
+ \sum_{k=1001}^{\infty}\frac{k}{2^{k+1}}
+ =\frac{1002}{2^{1001}}.                               \tag{6.10}
+\]
+Thus the exact tail bound is
+\[
+ \sum_{k=1001}^{\infty}
+ \frac{\min\{2^k,B_k+k\}}{3\cdot2^k-1}
+ <\frac{1000}{7\cdot2^{30}}+\frac{1002}{2^{1001}}
+ <1.331\times10^{-7}.                                  \tag{6.11}
+\]
+
+\subsection{The finite shell certificate}
+
+For $0\le k\le1000$, define
+\[
+ n_k=\min\{2^k,B_k+k\},
+ \qquad
+ u_k=\left\lceil
+ 10^{15}\frac{n_k}{3\cdot2^k-1}
+ \right\rceil.                                        \tag{6.12}
+\]
+The retained CSV certificate contains $(k,B_k,t_k,n_k,u_k)$ for every
+$k$, where $t_k$ is the first minimizing threshold in \textup{(5.2)}.
+An independent verifier rebuilds Pascal's triangle, recomputes every
+threshold, and checks every row.
+
+\begin{certificate}[Finite mass certificate]\label{cert:mass}
+The exact verified integer identity is
+\[
+ \sum_{k=0}^{1000}u_k
+ =10{,}788{,}901{,}977{,}820{,}654.                   \tag{6.13}
+\]
+Therefore
+\[
+ \sum_{k=0}^{1000}\frac{n_k}{3\cdot2^k-1}
+ \le10.788901977820654.                               \tag{6.14}
+\]
+Combining \textup{(6.11)} and \textup{(6.14)} gives the certified rational upper
+bound
+\[
+ 10.788902110866736\ldots<10.789.                     \tag{6.15}
+\]
+\end{certificate}
+
+No floating-point comparison enters the proof.  Decimal values in
+\textup{(6.14)}--\textup{(6.15)} are displays of exact rational inequalities.  The
+proof-relevant data are the integers in \textup{(6.3)}, \textup{(6.4)},
+\textup{(6.13)}, and the rational tail in \textup{(6.11)}.
+
+\begin{theorem}[Universal reciprocal mass]\label{thm:mass}
+Every finite positive simple trajectory
+$x_0,\ldots,x_L$ of the negative shortcut map satisfies
+\[
+ \sum_{i=0}^{L}\frac1{3x_i-1}<10.789.                 \tag{6.16}
+\]
+\end{theorem}
+
+\begin{proof}
+Combine \textup{(6.1)}, \cref{cert:mass}, and \textup{(6.11)}.
+\end{proof}
+
+\section{Fixed-target compression and proof of the main theorem}\label{sec:compression}
+
+\begin{theorem}[Fixed-target seed compression]\label{thm:compression}
+Let
+\[
+ m_0\longmapsto m_1\longmapsto\cdots\longmapsto m_r=y
+\]
+be an exact trajectory of $\Um$ on positive odd integers whose expansion to shortcut steps has no repeated state, with valuation
+word $a$ satisfying
+\[
+ 2^{A_j}<3^j\qquad(1\le j\le r).
+\]
+Then
+\[
+ m_0<e^{10.789}y<3^{11}y=177147y.                    \tag{7.1}
+\]
+\end{theorem}
+
+\begin{proof}
+Each accelerated step satisfies
+\[
+ \frac{m_{j+1}}{m_j}
+ =\frac{3m_j-1}{2^{a_j}m_j}
+ =\frac3{2^{a_j}}\left(1-\frac1{3m_j}\right).
+\]
+Multiplication gives
+\[
+ \frac{y}{m_0}
+ =\frac{3^r}{2^{A_r}}
+ \prod_{j=0}^{r-1}\left(1-\frac1{3m_j}\right).       \tag{7.2}
+\]
+The full barrier gives $3^r/2^{A_r}>1$, hence
+\[
+ \log\frac{m_0}{y}
+ <-\sum_{j=0}^{r-1}\log\left(1-\frac1{3m_j}\right). \tag{7.3}
+\]
+For $0<u<1$,
+\[
+ -\log(1-u)=\int_0^u\frac{\dd t}{1-t}
+ \le\frac{u}{1-u}.
+\]
+With $u=1/(3m_j)$,
+\[
+ -\log\left(1-\frac1{3m_j}\right)
+ \le\frac1{3m_j-1}.                                  \tag{7.4}
+\]
+Expand the accelerated trajectory into shortcut steps.  Before the terminal
+state this shortcut trajectory is simple, and the accelerated odd states are
+a subset of its states.  Thus \cref{thm:mass} gives
+\[
+ \log\frac{m_0}{y}<10.789.
+\]
+Finally $10.789<11$ and $e<3$ (for example, from the exponential series), so $e^{10.789}<3^{11}$.
+\end{proof}
+
+The final finite input is the following exact computation.
+
+\begin{certificate}[Target-$1$ seed scan]\label{cert:seed}
+Every odd seed $m_0$ with $1\le m_0<200000$ was followed under exact integer
+arithmetic until the first occurrence of one of the following mutually
+exclusive events:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the orbit reaches $1$;
+\item a state repeats;
+\item the strict accelerated barrier fails;
+\item the explicit step cap is reached; or
+\item a checked fixed-width operation would overflow.
+\end{enumerate}
+The C++ implementation returned
+\[
+ \begin{array}{lr}
+ \text{reaches }1&1\\
+ \text{repeated-state cycles}&2\\
+ \text{barrier failures}&99997\\
+ \text{step-cap survivors}&0\\
+ \text{overflows}&0.
+ \end{array}
+\]
+The unique terminal hit was $(m_0,r)=(1,0)$.  A separate Python
+implementation on the shortcut map, using arbitrary-precision integers,
+returned the same partition.
+\end{certificate}
+
+\begin{proof}[Proof of \cref{thm:main}]
+By \cref{thm:duality}, terminal divisibility reconstructs a positive exact
+trajectory
+\[
+ m_0\longmapsto\cdots\longmapsto m_r=1
+\]
+under $\Um$.  Let $\tau$ be the first index with $m_\tau=1$.  If
+$\tau>0$, then the trajectory up to $m_\tau$ has no repeated state: a repeat
+in a deterministic map would trap the orbit in a cycle and prevent a later
+first hit of $1$.  The prefix barrier remains valid.  Applying
+\cref{thm:compression} to this truncated path gives
+\[
+ 1<m_0<177147<200000.
+\]
+This contradicts \cref{cert:seed}, which has no such seed.  Hence
+$\tau=0$ and $m_0=1$.
+
+Now $3\cdot1-1=2$.  Since the next state is odd, the exact valuation is
+$a_0=1$ and $m_1=1$.  Repeating this argument proves
+$a_i=1$ and $m_i=1$ for every $i<r$.
+\end{proof}
+
+\section{Certificate specification and reproducibility}\label{sec:certificates}
+
+Only the certificates in this section are logical dependencies of
+\cref{thm:main}.  Earlier barrier-tree, order, and excursion computations are
+useful evidence but are not used in the proof.
+
+\subsection{Retained files and commands}
+
+The companion archive contains:
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+File & Function\\
+\midrule
+\texttt{mass\_certificate.py} & Computes every $B_k$ for $k\le1000$, the upward-rounded rational sum, and the exact analytic-tail inequalities.\\
+\texttt{mass\_shells\_k0\_1000.csv} & The 1001-row finite shell certificate.\\
+\texttt{verify\_mass\_csv.py} & Independent Pascal-row verifier for every CSV field and the total.\\
+\texttt{accelerated\_seed\_certificate.cpp} & Exact accelerated $\Um$ scan using checked \texttt{unsigned \_\_int128} multiplication and arbitrary-precision barrier powers.\\
+\texttt{shortcut\_seed\_certificate.py} & Independent shortcut scan using Python arbitrary-precision integers.\\
+\texttt{*.out} & Retained standard output for each run.\\
+\texttt{ENVIRONMENT.txt} & Python, compiler, and operating-system identifiers.\\
+\texttt{SHA256SUMS} & Cryptographic digest of every retained proof artifact.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The reproduction commands are
+\begin{Verbatim}[fontsize=\small,frame=single]
+python mass_certificate.py --K 1000 --csv mass_shells_k0_1000.csv
+python verify_mass_csv.py
+python shortcut_seed_certificate.py --cap 200000 --step-cap 100000
+g++ -O2 -std=c++20 -Wall -Wextra -Werror \
+  accelerated_seed_certificate.cpp -o accelerated_seed_certificate
+./accelerated_seed_certificate 200000 100000
+sha256sum -c SHA256SUMS
+\end{Verbatim}
+
+\subsection{Exact retained outputs}
+
+The mass computation reports
+\begin{Verbatim}[fontsize=\small,frame=single]
+scaled_upward_sum=10788901977820654
+check_3pow61_lt_2pow97=True
+check_entropy_integer_inequality=True
+tail_upper_decimal=1.330460820879255e-07
+certified_total_upper_decimal=10.788902110866736
+certified_total_lt_10_789=True
+\end{Verbatim}
+The independent CSV verifier reports
+\begin{Verbatim}[fontsize=\small,frame=single]
+rows_verified=1001
+scaled_upward_sum=10788901977820654
+certificate_passed=True
+\end{Verbatim}
+The shortcut and accelerated seed scans report, respectively,
+\begin{Verbatim}[fontsize=\small,frame=single]
+status_counts={'barrier_failure': 99997, 'cycle': 2, 'hit_1': 1}
+terminal_hits=[(1, 0)]
+longest_resolution_steps=132
+longest_resolution_seed=149345
+certificate_passed=True
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\small,frame=single]
+hit_1=1
+cycle=2
+barrier_failure=99997
+step_cap=0
+overflow=0
+longest_resolution_steps=83
+longest_resolution_seed=149345
+terminal_hits= (1,0)
+certificate_passed=True
+\end{Verbatim}
+The different longest-resolution lengths are expected: one program counts
+accelerated odd steps, while the other counts every shortcut step.
+
+\subsection{SHA--256 manifest}
+
+\begin{center}
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+File & SHA--256\\
+\midrule
+\texttt{mass\_certificate.py} & \texttt{8d83628d918c9828207be42beb26633b770722d4561c2db7e4e2afcb0856c7fa}\\
+\texttt{verify\_mass\_csv.py} & \texttt{76426c4f5400e98fcc31af15d119a54cbd5268d836291b2816429a841082759f}\\
+\texttt{shortcut\_seed\_certificate.py} & \texttt{615e0badd5b6ce48834b9541ab2e3d010526a5cdba5d24565cea0f284d06a45a}\\
+\texttt{accelerated\_seed\_certificate.cpp} & \texttt{4b9bfa5bca84fdd064f1fee0cb85e8ce74985fa06c6bb1dee98fe67ec91c4620}\\
+\texttt{mass\_shells\_k0\_1000.csv} & \texttt{3997b941ae24e59e262636d51ab5baa82b6262de0cd04f6a5812978e7ebea266}\\
+\texttt{mass\_certificate.out} & \texttt{8630b315ec64a84983041f428f804f48c56be27b3a122ab52ec593bd76acb21f}\\
+\texttt{verify\_mass\_csv.out} & \texttt{e7ceaab0085fd8f32368b26df80ff05709f203f95608687839f47e246d91c032}\\
+\texttt{shortcut\_seed\_certificate.out} & \texttt{efb67cb920fd8cc9a89e2a4410c1a8ab47dc6560d96f792709abf8b81fcb56f8}\\
+\texttt{accelerated\_seed\_certificate.out} & \texttt{30f5dd9f84454be45a7840b6a3a52f0edbfeccb42c4fb8e6cf9fdd42e86a3348}\\
+\texttt{ENVIRONMENT.txt} & \texttt{3df8386c359b194a6414fe70b80e4231b3cfd018f9c02924b2e7c07f356e353c}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Trust boundary}
+
+The finite theorem can be checked at several levels.
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item A reader may inspect the mathematical reduction and trust the retained
+executables and outputs.
+\item A reader may recompile and rerun both independent seed scans and both
+mass computations.
+\item A formalization can replace the CSV verifier and seed loops by
+\texttt{native\_decide}, while proving the analytic shell and tail lemmas in
+the Lean kernel.  A detailed skeleton appears in \cref{app:lean}.
+\end{enumerate}
+
+The theorem does not rely on probabilistic sampling, floating-point
+rounding, an unreported height cutoff, or an extrapolation in the word
+length.
+
+\section{What the theorem represents and what it does not}\label{sec:meaning}
+
+\subsection{A local language theorem of genuinely infinite depth}
+
+Before \cref{thm:main}, the project had an exact finite exclusion through
+word length $10^{10}$.  That result still left the logical possibility of a
+first nontrivial target-$1$ barrier word at a larger length.  The new argument
+changes the quantifier structure: arbitrary word length is converted into a
+uniform seed bound, and the finite scan is over seeds rather than lengths.
+This is why the theorem is genuinely all-depth.
+
+The key compression is not a generic property of symbolic languages.  It
+uses three features simultaneously:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item exact parity-cylinder translation at a common time;
+\item positivity of the negative affine carry, which bounds base endpoints;
+\item the multiplicative correction product along an exact $3x-1$ path.
+\end{enumerate}
+Removing any of these features destroys the present proof.
+
+\subsection{Consequence for positive Collatz suffixes}
+
+Combining \cref{prop:locality,thm:main} gives the following exact statement.
+
+\begin{corollary}[Rate-matched terminal suffixes]\label{cor:positive-suffix}
+Let a positive accelerated Collatz block of length $r$ have valuation word
+$v$, and suppose every relative prefix satisfies
+$2^{A_k(v)}<3^k$.  If its endpoint $X$ satisfies
+$3^r\mid X+1$, then $v=1^r$.
+\end{corollary}
+
+Thus every nontrivial barrier block has
+\[
+ v_3(X+1)<r.                                           \tag{9.1}
+\]
+The theorem classifies the exact $3$-adic target hit.  It does not prove that
+a hypothetical divergent positive orbit must produce such a hit.
+
+\subsection{Why positive cycles remain separate}
+
+If a positive accelerated cycle of length $r$ has total exponent $A$ and
+least point $x$, its full affine equation is
+\[
+ (2^A-3^r)x=C_r>0.                                    \tag{9.2}
+\]
+Hence $2^A>3^r$, opposite to the full barrier inequality in
+\cref{thm:main}.  No rotation of the theorem can simply erase this sign
+change.
+
+There is also an exact obstruction to ``pumping'' a positive cycle into the
+target-$1$ language.  Let a shortcut-cycle word $w$ have length $p$, odd
+weight $s$, $Q=2^p$, $P=3^s$, and cycle point $x$, so
+$C_w=(Q-P)x$.  For the $N$th power,
+\[
+ C_{w^N}=x(Q^N-P^N).
+\]
+Appending an all-odd word $1^L$ gives
+\[
+ C_{w^N1^L}+Q^N2^L
+ =3^L\bigl((x+1)Q^N-xP^N\bigr).                      \tag{9.3}
+\]
+Consequently $w^N1^L$ is target-$1$ terminal exactly when
+\[
+ P^N\mid x+1.                                         \tag{9.4}
+\]
+The number of admissible repetitions is therefore bounded by
+$v_3(x+1)/s$.  Periodic positive dynamics cannot be converted into
+arbitrarily deep target-$1$ words by this attachment.
+
+\section{Audit of the rigorous project ledger}\label{sec:ledger}
+
+This section consolidates the recent manuscripts, proof skeletons, and
+certificate reports.  The status labels are deliberately strict.
+
+\subsection{Established exact identities and reductions}
+
+\begin{theorem}[Two-ended gluing]\label{thm:gluing}
+Let $a$ label an exact negative trajectory
+$m_0\to\cdots\to m_r=y$, and let $A=A_r$.  For every positive even integer
+$s$ such that $n=2^As-m_0>0$, the same word is the exact positive valuation
+word from $n$ to
+\[
+ X=3^rs-y.                                             \tag{10.1}
+\]
+At intermediate times,
+\[
+ n_k=2^{A-A_k}3^ks-m_k.                                \tag{10.2}
+\]
+\end{theorem}
+
+\begin{proof}
+The formula holds at $k=0$.  If it holds at $k$, then
+\[
+ \begin{aligned}
+ 3n_k+1
+ &=2^{A-A_k}3^ks\cdot3-(3m_k-1)\\
+ &=2^{a_k}\bigl(2^{A-A_{k+1}}3^{k+1}s-m_{k+1}\bigr).
+ \end{aligned}
+\]
+The bracket is $n_{k+1}$.  Since $s$ is even and $m_{k+1}$ is odd, every
+$n_{k+1}$ is odd; hence the displayed power of $2$ is exact.
+\end{proof}
+
+This theorem parametrizes coalescing positive ancestors by negative shadows.
+It leads to the exact min-plus inverse-tree formulation used later.
+
+For a positive word prefix, put
+\[
+ q_j=\frac{3^j}{2^{A_j}},\qquad
+ \beta_j=\frac{C_j}{2^{A_j}},
+\]
+so that
+\[
+ x_j=q_jn+\beta_j.                                    \tag{10.3}
+\]
+When $q_j<1$, define
+\[
+ R_j=\frac{\beta_j}{1-q_j}
+ =\frac{C_j}{2^{A_j}-3^j}.                            \tag{10.4}
+\]
+Then
+\[
+ x_j-n=(1-q_j)(R_j-n).                                \tag{10.5}
+\]
+Thus a least-counterexample orbit that never falls below its start must have
+$R_j\ge n$ at every negative-coefficient prefix.
+
+\begin{proposition}[Block-threshold convexity]\label{prop:convexity}
+Let a prefix $u$ have multiplier $t<1$ and normalized carry $y$, and append a
+block $v$ with multiplier $Q<1$ and normalized carry $\gamma$.  Put
+\[
+ R(u)=\frac{y}{1-t},\qquad R(v)=\frac{\gamma}{1-Q}.
+\]
+Then
+\[
+ R(uv)=\lambda R(u)+(1-\lambda)R(v),
+ \qquad
+ \lambda=\frac{Q(1-t)}{1-Qt}\in(0,1).                \tag{10.6}
+\]
+\end{proposition}
+
+\begin{proof}
+The affine pair updates by
+\[
+ (t,y)\longmapsto(Qt,Qy+\gamma).
+\]
+Substitute $y=(1-t)R(u)$ and $\gamma=(1-Q)R(v)$ into
+$(Qy+\gamma)/(1-Qt)$.
+\end{proof}
+
+\begin{theorem}[Stationary inverse-fiber extinction]\label{thm:SFE}
+For an odd positive integer $n$, define
+\[
+ M_r(n)=\min\{z>0:z\text{ odd and }\Up^r(z)=\Up^r(n)\}. \tag{10.7}
+\]
+The Collatz conjecture is equivalent to
+\[
+ \forall n>1\text{ odd}\quad\exists r\ge1
+ \quad M_r(n)<n.                                      \tag{10.8}
+\]
+\end{theorem}
+
+\begin{proof}
+If $n$ reaches $1$ after $r$ accelerated steps, then the fixed point $1$ is
+an $r$-step ancestor of the same endpoint, so $M_r(n)=1<n$.
+Conversely, assume \textup{(10.8)}.  Strong induction on odd $n$ proves
+convergence.  Choose $r$ with $z=M_r(n)<n$.  By induction, $z$ reaches $1$.
+Since $z$ and $n$ have the same endpoint after $r$ accelerated steps, $n$
+also reaches $1$.
+\end{proof}
+
+This is the narrowest exact one-statement reformulation presently available
+in the project.  It absorbs both cycles and divergent orbits, but its forward
+inequality is not yet proved.
+
+\subsection{Divergent-orbit compression}
+
+Let $x_j=\Up^j(n)$ be a nonperiodic positive odd orbit with least value $n$.
+Set
+\[
+ h_j=\frac{x_j}{q_j}.
+\]
+From the affine recurrence,
+\[
+ h_{j+1}=h_j\left(1+\frac1{3x_j}\right).              \tag{10.9}
+\]
+Apart from a bounded initial contribution, the distinct odd endpoints lie in
+the two residue classes $1$ and $5$ modulo $6$.  Ordering the smallest
+possible values in those classes gives
+\[
+ \sum_{i<j}\frac1{x_i}\le\frac13\log j+O_n(1).       \tag{10.10}
+\]
+Therefore
+\[
+ \log\frac{h_j}{n}
+ \le\frac13\sum_{i<j}\frac1{x_i}
+ \le\frac19\log j+O_n(1),                            \tag{10.11}
+\]
+and hence
+\[
+ h_j\le K_nj^{1/9},\qquad
+ q_j\ge c_nj^{-1/9}.                                  \tag{10.12}
+\]
+Equivalently,
+\[
+ A_j\log2-j\log3\le\frac19\log j+O_n(1).             \tag{10.13}
+\]
+At a strict lower record of $q_j$, one has $q_j\le1$ and therefore
+\[
+ x_j=q_jh_j\le K_nj^{1/9}.                             \tag{10.14}
+\]
+Together with
+$C_j\equiv2^{A_j}x_j\pmod{3^j}$, this reduces record endpoints and exponent
+surplus to polynomially many possibilities.  The valuation word is uniquely
+recoverable from $(j,A_j,C_j)$ by repeatedly using
+\[
+ a_0=\vTwo(C_j-3^{j-1})                                \tag{10.15}
+\]
+and stripping the first letter.  This is the project's
+\emph{record-endpoint compression theorem}.
+
+A second exact input uses Garcia--Tal orbit sparsity: a nonperiodic orbit that
+does not reach the trivial cycle tends to infinity and has a convergent
+reciprocal sum.  The product corresponding to \textup{(10.9)} then converges,
+so $q_j\to\infty$.  After shifting to a global minimum of $q$, the relative
+coefficient sequence satisfies $q_j\ge1$ for every $j$ and tends to infinity.
+In the inverse-carry coordinates of the parity conjugacy, ordinary positive
+integers impose eventual finite support.  The divergence problem is thereby
+reduced to excluding the coexistence of unbounded critical surplus and an
+eventually zero inverse-carry stream.
+
+\subsection{Exact rewrite macrosemantics}
+
+The mixed binary--ternary rewrite system of
+Yolcu--Aaronson--Heule simulates Collatz~\cite{YolcuAaronsonHeule2023}.
+The project proved an elementary ordinal phase rank below $\omega^3$ for the
+ten nonexceptional rules and proved that their canonical normal form is the
+binary numeral for the odd part of the represented integer.  Consequently,
+one exceptional rewrite followed by complete normalization is exactly one
+accelerated $\Up$ step, independently of normalization order.  This removes
+syntactic nondeterminism but also exposes the limit of the approach: the
+quotient macrograph is the accelerated Collatz graph itself.  A termination
+proof for the complete rewrite system still requires a genuine arithmetic
+descent theorem.
+
+\subsection{Finite certificates retained as evidence but not used in
+\cref{thm:main}}
+
+\begin{longtable}{@{}p{0.27\textwidth}p{0.67\textwidth}@{}}
+\toprule
+Certificate & Exact finite conclusion\\
+\midrule
+\endfirsthead
+\toprule
+Certificate & Exact finite conclusion\\
+\midrule
+\endhead
+Previous target-$1$ word scan & The all-ones word was the only target-$1$ barrier word for every length $r\le10^{10}$.  Superseded by \cref{thm:main}.\\
+Barrier-order certificate & At depth $21$, $39{,}993{,}895$ barrier words were grouped by endpoint residue.  There were no equal-total-exponent collisions and no violations of the conjectured coalescing order; the minimum positive margin was $32$.\\
+Compressed charged-excursion scan & For every $3$-free quotient $q\le10^9$, except the known nondescending cycle states $q=2,8$, the first descent found within the cap obeyed the tested inequality $L\le2(q-Q^L(q))$; no violations occurred.\\
+Negative $d$-bound scan & For all odd seeds $m_0\le99{,}999{,}999$ whose negative orbit terminates at $1$, the tested inequality $2d\le m_0-1$ held, where $d$ counts exponents exceeding $1$.  This is evidence, not an all-seed proof.\\
+Barrier trees and suffix locality & Exact finite trees through the reported depths, and hundreds of thousands of suffix-locality comparisons, produced no mismatch.  These computations motivated the exact locality theorem but are no longer needed once it is proved symbolically.\\
+\bottomrule
+\end{longtable}
+
+\subsection{Exact no-go results and routes that were not completed}
+
+The project also made progress by proving that several attractive shortcuts
+cannot carry the missing conclusion in their proposed form.
+
+\begin{longtable}{@{}p{0.24\textwidth}p{0.70\textwidth}@{}}
+\toprule
+Route & Audited outcome\\
+\midrule
+\endfirsthead
+\toprule
+Route & Audited outcome\\
+\midrule
+\endhead
+Arbitrary target recurrence & False as a direct shortcut: the negative cycle $5\leftrightarrow7$ makes $(1,2)^N$ a nontrivial barrier word terminal at target $5$ for every $N$.  Target recurrence must exclude periodic negative shadows.\\
+Ordinary compactness & Two sufficiently close terminal prefixes for one target force the intervening block to be a negative-map cycle.  Thus bounded-gap or subexponential recurrence tends to return exactly the wrong periodic objects.\\
+Cycle pumping into target $1$ & Ruled out by \textup{(9.4)}: only finitely many repetitions can satisfy target-$1$ divisibility.\\
+Finite automata alone & Every finite parity word is realizable by a residue class modulo a power of $2$.  Any successful automaton must retain unbounded arithmetic carry or height information.\\
+Local thermodynamic potential & A continuous finite-memory ``integer-lift potential'' cannot distinguish ordinary positive integers from general $2$-adic parity sequences; the positive-integer lift is nonlocal.\\
+Cobham-style dual automaticity & The natural transducers act on value digits rather than the time index, and periodic cycles would already satisfy eventual automaticity.\\
+Abstract $C^*$-simplicity & The abstract algebra is already the relevant Cuntz algebra independently of Collatz; the meaningful concrete commutant reduces to functions constant on orbit components.\\
+Finite modular/K-theoretic approximations & Natural modular graphs and the full $2$-adic boundary lose the positive-integer lifting condition and take the same coarse value for systems with known nontrivial cycles.\\
+Canonical height & Natural polarization, Northcott, and product-formula requirements are incompatible with the powers-of-two basin and the local slopes; no coercive point-height of the proposed form exists.\\
+Pure entropy or random-word drift & Average negative drift does not imply a uniform theorem on the thin set of words realized by one fixed exceptional integer.  The missing step is a pointwise synchronization or inverse-fiber extinction statement.\\
+\bottomrule
+\end{longtable}
+
+These negative results are useful because they prevent the proof skeleton from
+silently replacing an ordinary-integer theorem by a statement about random or
+$2$-adic words.
+
+\section{The current proof frontier}\label{sec:frontier}
+
+The all-depth theorem closes one previously open component:
+\[
+ \boxed{\text{nontrivial target-$1$ terminal/barrier words do not exist}.}
+\]
+It does not close the two global debts.
+
+\subsection{Architecture A: terminal exclusion plus synchronization plus
+cycle exclusion}
+
+A sufficient proof architecture is
+\[
+ \begin{gathered}
+ \text{positive-cycle exclusion}\\
+ +\quad\text{nonperiodic synchronization}\\
+ +\quad\text{all-depth target-$1$ exclusion}\\
+ \Longrightarrow\quad\text{Collatz}.
+ \end{gathered}                                        \tag{11.1}
+\]
+The third line is \cref{thm:main}.  The other two are open.
+
+A granular synchronization theorem strong enough for \textup{(11.1)} would say:
+for a globally least unbounded counterexample $n$, there exist a block start
+$j$ and a length $r$ such that, with relative sums
+$B_k=A_{j+k}-A_j$,
+\[
+ 2^{B_k}<3^k\quad(1\le k\le r),                       \tag{11.2}
+\]
+\[
+ 3^r\mid x_{j+r}+1,                                   \tag{11.3}
+\]
+and the block word is not $1^r$.  By suffix locality, \textup{(11.3)} makes the
+word target-$1$ terminal; \cref{thm:main} then contradicts nontriviality.
+
+Each clause matters.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Barrier-block abundance alone gives \textup{(11.2)} for arbitrarily long
+blocks on a divergent orbit, but gives no $3$-adic endpoint condition.
+\item Generic $3$-adic recurrence can give endpoint congruences, but close
+repetitions can collapse to periodic negative shadows.
+\item An all-ones block satisfies both the barrier and the target condition,
+so synchronization must force nontriviality or provide an additional descent
+from long all-ones blocks.
+\item The synchronization must concern one fixed ordinary integer.  An
+average over seeds, or a statement for random parity words, is insufficient.
+\end{enumerate}
+
+The cycle debt is equally exact: exclude every primitive word $a$ and odd
+$x>1$ satisfying
+\[
+ (2^{A_r}-3^r)x=C_r                                   \tag{11.4}
+\]
+with all cyclic valuation constraints.  Hercher's $92$-local-minimum theorem is the strongest peer-reviewed
+structural lower bound verified in this audit.  The more recent conditional
+preprint claim through $m=95$ is recorded in \cref{sec:literature} but is not
+used.  No uniform classification of every possible number of minima is known.
+
+\subsection{Architecture B: stationary inverse-fiber extinction}
+
+By \cref{thm:SFE}, it is enough to prove the single statement
+\[
+ \boxed{
+ \forall n>1\text{ odd}\quad\exists r\ge1\quad M_r(n)<n.
+ }                                                       \tag{11.5}
+\]
+This formulation automatically handles both cycles and divergence.  It asks
+for a smaller positive ancestor that coalesces with the actual orbit after a
+finite time.  Through \cref{thm:gluing}, every candidate ancestor can be
+written as the cost of a negative shadow.  The exact missing theorem is that
+the positive minimum in this target-shadow min-plus tree cannot remain
+stationary forever.
+
+This is the logically narrowest completion target, but it is also equivalent
+to Collatz.  Its value is organizational: it tells every proposed method
+exactly which finite witness it must construct.
+
+\subsection{Architecture C: first crossing and high-surplus carry innovation}
+
+The stationary-inverse-fiber manuscript isolates a more structured pair of
+lemmas.
+
+\begin{conjecture}[First-crossing descent]\label{conj:FCD}
+Whenever the coefficient $q_j=3^j/2^{A_j}$ first crosses below $1$ along a
+positive ordinary orbit, the associated threshold/carry data produce either
+a smaller coalescing ancestor or a quantitatively controlled successor state
+in the normalized barrier regime.
+\end{conjecture}
+
+\begin{conjecture}[High-surplus carry innovation]\label{conj:HSCI}
+No infinite ordinary parity word can simultaneously have unbounded critical
+surplus in the normalized barrier regime and an eventually zero inverse-carry
+stream.  Equivalently, sufficiently high surplus forces a new nonzero binary
+lift digit or a smaller coalescing ancestor.
+\end{conjecture}
+
+Together with the exact coefficient-record dichotomy, these two statements
+imply Collatz.  They separate the finite first crossing from the infinite
+normalized tail.  Neither has been proved.
+
+\subsection{A practical hierarchy of the remaining tasks}
+
+The next work should be judged against the following checklist.
+
+\begin{enumerate}[label=\textbf{D\arabic*.}]
+\item \textbf{Formalize the all-depth theorem.}  Prove parity cylinders,
+shell injection, the Chernoff tail, and fixed-target compression in Lean;
+verify the finite data with \texttt{native\_decide}.  This does not advance
+the frontier mathematically, but removes implementation trust.
+\item \textbf{Decide the cycle route.}  Either prove a uniform local-minimum
+classification extending Hercher to every fixed number, or prove a different
+uniform exclusion of solutions to \textup{(11.4)}.
+\item \textbf{Upgrade barrier-block abundance to arithmetic endpoint
+synchronization.}  Control $v_3(x_{j+r}+1)$ at a rate proportional to $r$,
+not merely along a sparse average or a fixed modulus.
+\item \textbf{Exclude the all-ones escape.}  If rate-matched target hits can
+be all ones, prove that arbitrarily long such blocks force a smaller
+coalescing ancestor, periodicity, or eventual entry into the trivial basin.
+\item \textbf{Alternatively prove inverse-fiber saving directly.}  Show that
+an infinite positive slope-geodesic cannot remain within a bounded exponent
+loss of the minimum at every depth.
+\item \textbf{Preserve ordinary-integer lifting.}  Every compactness,
+entropy, spectral, or automata argument must retain both the eventually zero
+binary start lift and the terminal ternary carry.  Losing either one returns
+false $2$-adic countermodels.
+\end{enumerate}
+
+\section{Discussion and assessment}\label{sec:assessment}
+
+\subsection{Why this is genuine progress}
+
+The theorem removes an unbounded word-length quantifier from a central
+subproblem.  Previous computations could only move the cutoff.  The new
+shell argument proves that a terminal barrier path cannot begin arbitrarily
+high, regardless of its length.  That is a structural theorem, not a larger
+enumeration.
+
+It also exposes a reusable principle.  For every fixed odd target $y$, every
+simple target-$y$ barrier path begins below $177147y$.  Hence the entire
+nonperiodic target language for a fixed $y$ is finitely classifiable; only
+negative cycles can generate arbitrarily long periodic target shadows.  This
+sharpens the synchronization problem: a successful recurrence theorem must
+separate aperiodic target hits from periodic negative components.
+
+\subsection{Why it is not yet close enough to declare Collatz solved}
+
+The positive map does not automatically produce the negative target-$1$
+words excluded by the theorem.  The exact obstruction is cross-prime
+synchronization.  A positive ordinary start fixes an eventually constant
+binary lift.  A target-$1$ terminal suffix fixes a long ternary congruence at
+the endpoint.  The same valuation word must satisfy both constraints while
+remaining above the least positive orbit value.  No existing theorem cited
+here supplies that simultaneous pointwise statement.
+
+Cycles are not a technical afterthought.  Their full-period coefficient has
+the opposite sign, and periodic negative shadows are genuine counterexamples
+to naive arbitrary-target recurrence.  Any complete paper must either absorb
+cycles into a single inverse-fiber theorem or prove a separate uniform cycle
+exclusion.
+
+\subsection{Most promising exact targets}
+
+The three best-defined next targets are:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item stationary inverse-fiber extinction \textup{(11.5)};
+\item nontrivial rate-matched synchronization
+\textup{(11.2)}--\textup{(11.3)}, together with cycle exclusion;
+\item high-surplus carry innovation in the normalized divergent regime.
+\end{enumerate}
+The first is the cleanest equivalence, the second uses the new all-depth
+theorem most directly, and the third preserves the strongest quantitative
+compression already proved for divergent orbits.
+
+\appendix
+
+\section{Dependency graph for the all-depth theorem}\label{app:dependency}
+
+\begin{Verbatim}[fontsize=\small,frame=single]
+affine carry recursion
+        |
+        +--> terminal divisibility reconstructs exact U_- path
+        |
+parity-cylinder bijection
+        |
+        +--> equal-time translation
+                    |
+                    +--> shell injection N_k <= min(2^k,B_k+k)
+                                      |
+                    exact k<=1000 sum + analytic k>=1001 tail
+                                      |
+                    universal reciprocal mass < 10.789
+                                      |
+negative product formula + full barrier
+        |
+        +--> fixed-target seed compression m_0 < 3^11 y
+                                      |
+                    y=1 + exact odd seed scan below 200000
+                                      |
+                    only m_0=1
+                                      |
+                    all exponents are 1
+\end{Verbatim}
+
+No theorem below the seed scan depends on any prior finite word-depth bound.
+No synchronization or positive-cycle hypothesis enters the proof.
+
+\section{Pseudocode for the exact certificates}\label{app:pseudocode}
+
+\subsection{Mass certificate}
+
+\begin{lstlisting}[language=Python]
+SCALE = 10**15
+scaled_sum = 0
+for k in range(0, 1001):
+    binom = [C(k,o) for o in range(k+1)]
+    Bk = min(
+        sum(binom[o] for o in range(t+1,k+1))
+        + sum(3**o for o in range(0,t+1))
+        for t in range(k+1)
+    )
+    n = min(2**k, Bk + k)
+    u = ceil(SCALE*n / (3*2**k - 1))   # exact integer ceiling
+    scaled_sum += u
+assert scaled_sum == 10788901977820654
+assert 3**61 < 2**97
+assert 100**100 < 2**97 * 61**61 * 39**39
+assert scaled_sum/SCALE + 1000/(7*2**30) + 1002/2**1001 < 10.789
+\end{lstlisting}
+
+\subsection{Accelerated seed certificate}
+
+\begin{lstlisting}[language=C++]
+for (odd seed = 1; seed < 200000; seed += 2) {
+    m = seed; A = 0; seen = empty;
+    while (true) {
+        if (m == 1) classify(seed, HIT_ONE);
+        if (m in seen) classify(seed, CYCLE);
+        insert m into seen;
+        z = checked_exact_value(3*m - 1);
+        a = v2(z);
+        m = z >> a;
+        A += a; r += 1;
+        if (2^A >= 3^r) classify(seed, BARRIER_FAILURE);
+    }
+}
+assert counts == {HIT_ONE:1, CYCLE:2, BARRIER_FAILURE:99997};
+assert terminal_hits == {(1,0)};
+\end{lstlisting}
+
+The actual C++ certificate stores $2^A$ and $3^r$ in arbitrary-precision
+integers and computes $3m-1$ in a checked 128-bit temporary.  The independent
+Python shortcut scan does not share this implementation.
+
+\section{Lean-oriented proof and completion skeletons}\label{app:lean}
+
+The full pseudocode file \texttt{collatz\_proof\_skeleton.lean} accompanies
+this paper.  It is deliberately a blueprint rather than a claim of completed
+formalization.  The most important declarations are reproduced below.
+
+\lstinputlisting[language=Lean]{Collatz_Proof_Skeleton.lean}
+
+\begin{thebibliography}{99}
+
+\bibitem{Barina2025}
+D. Barina,
+\newblock Improved verification limit for the convergence of the Collatz conjecture,
+\newblock \emph{J. Supercomput.} \textbf{81} (2025), Article 810,
+\newblock doi:10.1007/s11227-025-07337-0.
+
+\bibitem{BernsteinLagarias1996}
+D. J. Bernstein and J. C. Lagarias,
+\newblock The $3x+1$ conjugacy map,
+\newblock \emph{Canad. J. Math.} \textbf{48} (1996), 1154--1169,
+\newblock doi:10.4153/CJM-1996-060-x.
+
+\bibitem{FernandezIbanez2026}
+C. Fern\'andez and S. Ib\'a\~nez,
+\newblock Christoffel words as extremal structures in Collatz dynamics,
+\newblock arXiv:2607.24844, 2026.
+
+\bibitem{GarciaTal1999}
+M. V. P. Garcia and F. A. Tal,
+\newblock A note on the generalized $3n+1$ problem,
+\newblock \emph{Acta Arith.} \textbf{90} (1999), 245--250.
+
+\bibitem{Hercher2023}
+C. Hercher,
+\newblock There are no Collatz $m$-cycles with $m\le91$,
+\newblock \emph{J. Integer Sequences} \textbf{26} (2023), Article 23.3.5.
+
+\bibitem{Kramer2026}
+O. Kramer,
+\newblock Adaptive search in Collatz exponent-code space via $2$-adic and $3$-adic constraints,
+\newblock arXiv:2607.10041, 2026.
+
+\bibitem{KrasikovLagarias2003}
+I. Krasikov and J. C. Lagarias,
+\newblock Bounds for the $3x+1$ problem using difference inequalities,
+\newblock \emph{Acta Arith.} \textbf{109} (2003), 237--258,
+\newblock doi:10.4064/aa109-3-4.
+
+\bibitem{Lagarias1985}
+J. C. Lagarias,
+\newblock The $3x+1$ problem and its generalizations,
+\newblock \emph{Amer. Math. Monthly} \textbf{92} (1985), 3--23.
+
+\bibitem{RozierTerracol2025}
+O. Rozier and C. Terracol,
+\newblock Paradoxical behavior in Collatz sequences,
+\newblock \emph{Discrete Math.} \textbf{349} (2026), 115167,
+\newblock doi:10.1016/j.disc.2026.115167.
+
+\bibitem{SimonsDeWeger2005}
+J. Simons and B. de Weger,
+\newblock Theoretical and computational bounds for $m$-cycles of the $3n+1$ problem,
+\newblock \emph{Acta Arith.} \textbf{117} (2005), 51--70,
+\newblock doi:10.4064/aa117-1-3.
+
+\bibitem{Tao2022}
+T. Tao,
+\newblock Almost all orbits of the Collatz map attain almost bounded values,
+\newblock \emph{Forum Math. Pi} \textbf{10} (2022), e12,
+\newblock doi:10.1017/fmp.2022.8.
+
+
+\bibitem{Wang2026}
+X. Wang,
+\newblock Non-existence of Collatz $m$-cycles for $m\le95$,
+\newblock independent preprint, June 2026,
+\newblock doi:10.5281/zenodo.21017296.
+
+\bibitem{Wirsching1998}
+G. J. Wirsching,
+\newblock \emph{The Dynamical System Generated by the $3n+1$ Function},
+\newblock Lecture Notes in Mathematics 1681, Springer, 1998.
+
+\bibitem{YolcuAaronsonHeule2023}
+E. Yolcu, S. Aaronson, and M. J. H. Heule,
+\newblock An automated approach to the Collatz conjecture,
+\newblock \emph{J. Autom. Reason.} \textbf{67} (2023), Article 15,
+\newblock doi:10.1007/s10817-022-09658-8.
+
+\end{thebibliography}
+
+\end{document}

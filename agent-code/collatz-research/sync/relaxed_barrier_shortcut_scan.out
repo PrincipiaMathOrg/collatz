@@ -1,0 +1,5 @@
+cap=265721 shortcut_cap=200000
+counts={"hit_1":1,"relaxed_barrier_failure":132853,"cycle":6}
+hits=[[1,0,0]]
+longest={"shortcutSteps":162,"acceleratedSteps":101,"seed":249189,"status":"relaxed_barrier_failure"}
+certificate_passed=true

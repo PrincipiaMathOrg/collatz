@@ -1,0 +1,77 @@
+=== start mode=mixed worker=0/3 timeout=900 budget=3600 2026-08-16 14:03:49
+mixed pool: 146440 instances, max len 47
+families for this worker: ['mixed-d1-K1-plain-noodd', 'mixed-d1-K2-plain-odd', 'mixed-d2-K1-plain-noodd', 'mixed-d2-K2-plain-odd', 'mixed-d2-K3-plain-noodd', 'mixed-d4-K1-plain-odd', 'mixed-d3-K3-plain-noodd', 'mixed-d4-K2-plain-odd']
+--- family mixed-d1-K1-plain-noodd nvars 7
+   RESULT mixed-d1-K1-plain-noodd UNSAT rounds 1 |inst| 21 maxlen 2 W 8 0.3s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('01', 't1'), ('02', 't2'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('t1', '2f'), ('t2', '2t'), ('tf', 't')]
+--- family mixed-d1-K2-plain-odd nvars 7
+   RESULT mixed-d1-K2-plain-odd UNSAT rounds 1 |inst| 26 maxlen 2 W 8 0.0s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('t', '2'), ('01', 't1'), ('02', 't2'), ('0t', '02'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', '22'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('ft', 'f2'), ('t1', '2f'), ('t2', '2t'), ('tf', 't'), ('tt', 't2')]
+--- family mixed-d2-K1-plain-noodd nvars 24
+   RESULT mixed-d2-K1-plain-noodd UNSAT rounds 1 |inst| 21 maxlen 2 W 8 0.5s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('01', 't1'), ('02', 't2'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('t1', '2f'), ('t2', '2t'), ('tf', 't')]
+--- family mixed-d2-K2-plain-odd nvars 24
+   RESULT mixed-d2-K2-plain-odd UNSAT rounds 1 |inst| 26 maxlen 2 W 13 2.0s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('t', '2'), ('01', 't1'), ('02', 't2'), ('0t', '02'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', '22'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('ft', 'f2'), ('t1', '2f'), ('t2', '2t'), ('tf', 't'), ('tt', 't2')]
+--- family mixed-d2-K3-plain-noodd nvars 24
+   round 1: |cur|=24 added [('0f2', '01f')] (6.3s)
+   round 2: |cur|=27 added [('0f1', '00t')] (20.5s)
+   round 3: |cur|=30 added [('10t', 'ff0t')] (37.1s)
+   round 4: |cur|=33 added [('2t2', '22t')] (57.2s)
+   round 5: |cur|=36 added [('f0t', '0ft')] (71.7s)
+   round 6: |cur|=39 added [('f2f', '1ff')] (97.2s)
+   round 7: |cur|=42 added [('t0t', '1tt')] (135.5s)
+   round 8: |cur|=45 added [('2t1', '22f')] (175.4s)
+   round 9: |cur|=48 added [('00f2', '001f')] (242.5s)
+   round 10: |cur|=51 added [('001', 't01')] (294.7s)
+   round 11: |cur|=54 added [('021', 't21')] (339.8s)
+   round 12: |cur|=57 added [('t1f', '2ff')] (386.5s)
+   round 13: |cur|=60 added [('f1f', '0tf')] (418.7s)
+   SAT on pool!  exact check on n<=20000 + F-A L<=40: None
+   RESULT mixed-d2-K3-plain-noodd SAT rounds 14 |inst| 60 maxlen 4 W 19 455.2s 
+--- family mixed-d4-K1-plain-odd nvars 88
+   RESULT mixed-d4-K1-plain-odd UNSAT rounds 1 |inst| 26 maxlen 2 W 13 46.7s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('t', '2'), ('01', 't1'), ('02', 't2'), ('0t', '02'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', '22'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('ft', 'f2'), ('t1', '2f'), ('t2', '2t'), ('tf', 't'), ('tt', 't2')]
+--- family mixed-d3-K3-plain-noodd nvars 51
+   round 1: |cur|=24 added [('11f', '11')] (57.8s)
+   round 2: |cur|=27 added [('0t1', '02f')] (120.8s)
+   round 3: |cur|=30 added [('0t2', '02t')] (204.4s)
+   round 4: |cur|=33 added [('00t', 't0t')] (242.4s)
+   round 5: |cur|=36 added [('101', 'ff01')] (296.1s)
+=== start mode=mixed worker=0/3 timeout=900 budget=2700 2026-08-16 15:08:01
+mixed pool: 146440 instances, max len 47
+families for this worker: ['mixed-d1-K1-plain-noodd', 'mixed-d1-K2-plain-odd', 'mixed-d2-K1-plain-noodd', 'mixed-d2-K2-plain-odd', 'mixed-d2-K3-plain-noodd', 'mixed-d4-K1-plain-odd', 'mixed-d3-K3-plain-noodd', 'mixed-d4-K2-plain-odd']
+skip mixed-d1-K1-plain-noodd (done)
+skip mixed-d1-K2-plain-odd (done)
+skip mixed-d2-K1-plain-noodd (done)
+skip mixed-d2-K2-plain-odd (done)
+skip mixed-d2-K3-plain-noodd (done)
+skip mixed-d4-K1-plain-odd (done)
+--- family mixed-d3-K3-plain-noodd nvars 51
+   round 1: |cur|=24 added [('0t1', '02f')] (18.9s)
+   round 2: |cur|=27 added [('002', 't02')] (53.7s)
+   round 3: |cur|=30 added [('f01', '0f1')] (122.1s)
+   round 4: |cur|=33 added [('0tf', 'ttf')] (218.3s)
+   round 5: |cur|=36 added [('0f2', '01f')] (327.4s)
+   round 6: |cur|=39 added [('101', 'ff01')] (434.6s)
+   round 7: |cur|=42 added [('01f', '01')] (544.3s)
+   round 8: |cur|=45 added [('01f', 't1f')] (661.2s)
+   round 9: |cur|=48 added [('122', 'ff22')] (763.8s)
+   round 10: |cur|=51 added [('2t1', '22f')] (1100.5s)
+   round 11: |cur|=54 added [('02f', '02')] (1225.7s)
+   round 12: |cur|=57 added [('211', 'ft11')] (1351.9s)
+   round 13: |cur|=60 added [('201', 'ft01')] (1746.4s)
+   round 14: |cur|=63 added [('f11', '0t1')] (1923.7s)
+   round 15: |cur|=66 added [('f2f', '1ff')] (2468.5s)
+   round 16: |cur|=69 added [('ff1', 'f0t')] (2990.8s)
+   RESULT mixed-d3-K3-plain-noodd UNKNOWN rounds 16 |inst| 69 maxlen 4 W None 2990.8s budget
+--- family mixed-d4-K2-plain-odd nvars 88
+   round 1: |cur|=29 added [('021', 't21')] (48.5s)
+   round 2: |cur|=32 added [('012', 't12')] (158.4s)
+   round 3: |cur|=35 added [('01f', '01')] (873.2s)
+   round 4: |cur|=38 added [('001', 't01')] (1205.9s)
+   round 5: |cur|=41 added [('00t', '002')] (1576.2s)
+   round 6: |cur|=44 added [('121', 'ff21')] (2098.6s)
+   round 7: |cur|=47 added [('002', 't02')] (2703.2s)
+   RESULT mixed-d4-K2-plain-odd UNKNOWN rounds 7 |inst| 47 maxlen 3 W None 2703.3s budget
+=== done 2026-08-16 16:43:15

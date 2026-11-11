@@ -1,0 +1,11 @@
+cap=200000
+hit_1=1
+cycle=2
+barrier_failure=99997
+step_cap=0
+overflow=0
+longest_resolution_steps=83
+longest_resolution_seed=149345
+largest_value_seen=3225281167
+terminal_hits= (1,0)
+certificate_passed=True

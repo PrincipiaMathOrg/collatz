@@ -1,0 +1,10 @@
+order=1 selected=0 driver_length=3 word_length=42 exponent=66 height=0 transitions=16 rho_bits=67
+order=2 selected=0 driver_length=9 word_length=114 exponent=180 height=0 transitions=54 rho_bits=181
+order=3 selected=0 driver_length=20 word_length=246 exponent=389 height=0 transitions=140 rho_bits=390
+order=4 selected=0 driver_length=40 word_length=486 exponent=769 height=1 transitions=253 rho_bits=766
+order=5 selected=0 driver_length=77 word_length=930 exponent=1472 height=2 transitions=484 rho_bits=1471
+order=6 selected=0 driver_length=147 word_length=1770 exponent=2802 height=3 transitions=885 rho_bits=2803
+representatives_strictly_increase=true
+strict_barrier=true maximum_decoder_depth_after_first_reset=1
+accelerated_and_shortcut_debruijn_factors=true
+certificate_passed=true

@@ -1,0 +1,1119 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1.12in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Up}{U_{+}}
+\newcommand{\Um}{U_{-}}
+\newcommand{\vtwo}{v_2}
+\newcommand{\vthree}{v_3}
+
+\title[Ordinal phases and marked carries]{Ordinal Phases and Marked Carries\\in a Mixed-Base Collatz Rewrite System}
+\author{Anton Shakov}
+\date{August 2026}
+
+\subjclass[2020]{11B83, 37P99, 68Q42}
+\keywords{Collatz conjecture, string rewriting, ordinal ranking, accelerated $3x-1$ map, mixed-radix carries}
+
+\begin{document}
+
+\begin{abstract}
+Yolcu, Aaronson and Heule encoded the shortcut Collatz map by an eleven-rule
+mixed binary--ternary rewriting system and proved termination of every
+one-rule-deleted subsystem.  We give a single elementary ordinal rank below
+$\omega^3$ orienting the ten rules other than the odd dynamic rule; this is a
+transparent reproof, not a stronger deletion theorem.  We prove the exact
+odd-to-odd macrosemantics of that rule and study exponent words satisfying the
+coefficient barriers $2^{A_k}<3^k$ and a terminal $3$-adic condition.
+Terminality is dual to a finite accelerated $3x-1$ trajectory.  A target-shadow
+parametrization turns all positive coalescing ancestors into a min--plus
+inverse tree, and every nontrivial target-$1$ terminal/barrier block admits an
+explicit smaller all-ones ancestor.  For a globally shortest nontrivial word
+we derive a marked ternary carry tower, nested $2$-adic valuations, and a
+logarithmic collision front.  The unmarked cyclic matrix has only the original
+scalar congruence.  Exact symbolic algebra proves that proper-power shadows
+and sufficiently long periodic shadows with a fixed exit satisfy the required
+charge bound; a remaining obstruction must be primitive or carry an unbounded
+adic exit debt.  Audited exact computation excludes a shortest word through
+length $10^{10}$.  These results do not prove the Collatz conjecture: the
+all-depth coloured-carry theorem or a quantitative synchronization theorem,
+and positive-cycle exclusion, remain open.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let
+\[
+ T(n)=\begin{cases}n/2,&2\mid n,\\(3n+1)/2,&2\nmid n.\end{cases}
+\]
+The Collatz conjecture asserts that every positive integer eventually reaches
+$1$.  Yolcu, Aaronson and Heule~\cite{YAH} constructed an eleven-rule string
+rewriting system on mixed binary--ternary representations whose termination
+on canonical strings is equivalent to this assertion.  Their work also gave
+automated matrix certificates for all one-rule-deleted subsystems.  Thus the
+ordinal interpretation below is not a stronger termination theorem; its value
+is that one transparent rank orients ten rules simultaneously and isolates the
+exceptional odd rule.
+
+The arithmetic part of the paper concerns the accelerated odd maps
+\[
+ \Up(n)=\frac{3n+1}{2^{\vtwo(3n+1)}},\qquad
+ \Um(m)=\frac{3m-1}{2^{\vtwo(3m-1)}}.
+\]
+The same affine carry occurs with opposite signs.  This gives an exact duality
+between terminal suffixes of positive Collatz trajectories and finite
+$\Um$-trajectories ending at $1$.  A shortest hypothetical nontrivial word is
+then reduced to a mixed ternary/dyadic carry problem.
+
+Three logical boundaries will be maintained throughout.  First, termination
+of the ten-rule subsystem is only relative progress; the remaining rule has
+the full accelerated Collatz semantics.  Second, exclusion of all nontrivial
+terminal/barrier words would not by itself connect an arbitrary unbounded
+positive orbit to such words.  Third, positive cycles have the opposite total
+coefficient sign and require a separate argument.
+
+Compared with the original ordinal-terminal manuscript, the present paper
+adds five layers.  It proves schedule-independent macrosemantics and the
+target-shadow/min--plus parametrization; constructs a quantitative coalescing
+diamond; replaces a loose carry estimate by the integral marked tower and its
+collision front; separates continuous, periodic, and genuinely aperiodic
+signed-return obstructions; and supplies larger independently audited exact
+certificates.  In particular, no improvement in ordinal height is presented
+as evidence for Collatz itself.
+
+\section{The rewrite phase and its macrosemantics}
+
+Write $\mathtt f(x)=2x$, $\mathtt t(x)=2x+1$, and
+$\mathtt d(x)=3x+d$ for $d\in\{0,1,2\}$.  Canonical strings have the form
+$\mathtt{/}u\mathtt{.}$, with $\mathtt{/}$ initializing the value $1$.
+The rules are
+\begin{align*}
+ \mathtt{f.}&\to\mathtt{.},&\mathtt{t.}&\to\mathtt{2.},\\
+ \mathtt{f0}&\to\mathtt{0f},&\mathtt{f1}&\to\mathtt{0t},&
+ \mathtt{f2}&\to\mathtt{1f},\\
+ \mathtt{t0}&\to\mathtt{1t},&\mathtt{t1}&\to\mathtt{2f},&
+ \mathtt{t2}&\to\mathtt{2t},\\
+ \mathtt{/0}&\to\mathtt{/t},&\mathtt{/1}&\to\mathtt{/ff},&
+ \mathtt{/2}&\to\mathtt{/ft}.
+\end{align*}
+Let $q(s)$ and $b(s)$ count ternary and binary symbols, and let $I(s)$ be
+the number of binary-before-ternary inversions.
+
+\begin{theorem}[Phase rank]\label{thm:phase}
+For a canonical string $s$, the ordinal
+\[
+ \Psi(s)=\omega^2q(s)+\omega I(s)+b(s)<\omega^3
+\]
+strictly decreases under every rule except
+$\mathtt{t.}\to\mathtt{2.}$.
+\end{theorem}
+
+\begin{proof}
+Each commutation rule removes one inversion while preserving $q$ and $b$.
+Each left-boundary rule removes a ternary symbol, so the decrease in the
+$\omega^2$ coefficient dominates all lower changes.  The rule
+$\mathtt{f.}\to\mathtt{.}$ removes a terminal binary symbol without changing
+$q$ or $I$.  The exceptional rule replaces a binary symbol by a ternary one
+and is deliberately not oriented.
+\end{proof}
+
+Let $R_0$ denote these ten rules.  Normalizing a canonical representation of
+an odd integer $n$ after one exceptional rule gives the canonical
+representation of $\Up(n)$; the number of terminal $\mathtt f$ erasures is
+$\vtwo(3n+1)-1$.  The following formulation records why this does not depend
+on a preferred rewrite schedule.
+
+\begin{proposition}[Canonical macrosemantics]\label{prop:macro}
+Every canonical string has a unique $R_0$-normal form: the binary canonical
+string representing the odd part of its value.  Between two consecutive
+applications of $\mathtt{t.}\to\mathtt{2.}$, the number of terminal
+$\mathtt f$ erasures, plus one, is exactly $\vtwo(3n+1)$ for the odd value
+$n$ at the first application.  The odd value at the second application is
+$\Up(n)$.
+\end{proposition}
+
+\begin{proof}
+Theorem~\ref{thm:phase} gives termination.  The commutation and left-boundary
+rules preserve the represented integer and successively remove every ternary
+digit; a terminal $\mathtt f$ divides the value by $2$.  A normal form can
+therefore contain only binary digits and must end in $\mathtt t$, unless it is
+the representation of $1$.  Uniqueness of binary expansion identifies it with
+the odd part of the original value.  The exceptional rule applies
+$n\mapsto(3n+1)/2$; removing the remaining terminal zeros performs precisely
+the other $\vtwo(3n+1)-1$ divisions by $2$.  Interleaving commutations cannot
+alter either the represented value or this count.
+\end{proof}
+
+Consequently consecutive exceptional steps of every rewrite schedule are
+labelled by the exact accelerated exponent word.  The phase rank removes
+scheduling ambiguity but does not weaken the number-theoretic problem.
+
+\section{Affine carries and terminal duality}
+
+For a word $w=(a_0,\ldots,a_{r-1})\in\N_{\ge1}^r$, put
+\[
+ A_0=0,\qquad A_k=\sum_{i<k}a_i,
+\]
+and
+\[
+ C_0=0,\qquad C_{k+1}=3C_k+2^{A_k}.                  \tag{3.1}
+\]
+Then, whenever $w$ is the exact exponent word,
+\[
+ 2^{A_r}\Up^r(n)=3^rn+C_r,\qquad
+ 2^{A_r}\Um^r(m)=3^rm-C_r.                           \tag{3.2}
+\]
+
+\begin{proposition}[Suffix locality]\label{prop:locality}
+If $X$ is the endpoint of a positive accelerated trajectory and $v$ is its
+last $r$ exponents, then
+\[
+ 3^r\mid X+1\quad\Longleftrightarrow\quad
+ 3^r\mid C(v)+2^{A(v)}.
+\]
+\end{proposition}
+
+\begin{proof}
+If $Y$ is the odd state at the beginning of the suffix, then
+\[
+ 2^{A(v)}(X+1)=3^rY+C(v)+2^{A(v)}.
+\]
+The power of $2$ is invertible modulo $3^r$.
+\end{proof}
+
+\begin{theorem}[Terminal carry duality]\label{thm:duality}
+For a word $w$ the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $3^r\mid C_r+2^{A_r}$;
+\item there are positive odd integers
+$m_0,\ldots,m_r=1$ satisfying
+\[
+ 3m_i-1=2^{a_i}m_{i+1}\qquad(0\le i<r).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For $0\le i\le r$, let $D_i$ be $C+2^A$ for the suffix
+$(a_i,\ldots,a_{r-1})$, with $D_r=1$.  Splitting off its first letter gives
+\[
+ D_i=3^{r-i-1}+2^{a_i}D_{i+1}.
+\]
+If $3^{r-i}\mid D_i$, reduction modulo $3^{r-i-1}$ gives
+$3^{r-i-1}\mid D_{i+1}$.  Thus (i) propagates to every suffix, and
+$m_i=D_i/3^{r-i}$ satisfies
+$3m_i=1+2^{a_i}m_{i+1}$.  Backward induction from $m_r=1$ shows that all
+$m_i$ are positive and odd, so the valuations are exact.  Conversely,
+iteration of the recurrence gives $3^rm_0=C_r+2^{A_r}$.
+\end{proof}
+
+The same argument works for any positive odd target $y$, replacing the
+terminal condition by $3^r\mid C_r+2^{A_r}y$.
+
+\subsection{Coalescing diamonds and a min-plus formulation}
+
+Terminal words also furnish comparison paths for the positive map.  This
+observation gives a direct bridge which does not require terminal words to be
+excluded.
+
+\begin{theorem}[Two-ended gluing]\label{thm:gluing}
+Let $w$ be an exact length-$r$ $\Um$-trajectory
+$m_0\to\cdots\to m_r=y$, with total exponent $A$.  For every positive even integer
+$s$ such that $n=2^As-m_0>0$, the same word is the exact $\Up$ exponent word
+from $n$ to
+\[
+ X=3^rs-y.                                            \tag{3.3}
+\]
+At every intermediate time,
+\[
+ n_k=2^{A_r-A_k}3^ks-m_k.                             \tag{3.4}
+\]
+\end{theorem}
+
+\begin{proof}
+The identity at $k=0$ is the definition of $n$.  The two recurrences
+$3m_k-1=2^{a_k}m_{k+1}$ and
+$3n_k+1=2^{a_k}n_{k+1}$ propagate (3.4).  Evenness of $s$ makes all $n_k$
+odd, so the displayed exponents are exact.  The case $k=r$ is (3.3).
+\end{proof}
+
+\begin{corollary}[All-ones diamond]\label{cor:diamond}
+Suppose a nontrivial word of length $r$ satisfies the barrier and is
+$1$-terminal.  Write $A=r+B$, let $m$ be its $\Um$ shadow start, and let
+$n=2^As-m$ be any positive realization from Theorem~\ref{thm:gluing}.
+Then the all-ones word gives another positive ancestor
+\[
+ z=2^rs-1<n                                             \tag{3.5}
+\]
+which reaches the same endpoint $3^rs-1$ in $r$ accelerated steps.
+Consequently no nontrivial terminal/barrier word can be a prefix of the orbit
+of a globally least Collatz counterexample.
+\end{corollary}
+
+\begin{proof}
+The all-ones word is the $\Um$ path $1\to1$ of length $r$, so gluing gives
+the ancestor $z$.  If $t_j$ is the first prefix at which the $j$th unit of
+the total excess $B$ appears, telescoping (3.1) gives
+\[
+ m-1=\sum_{j=1}^B2^{j-1}(2/3)^{t_j}.
+\]
+The barrier makes every summand smaller than $1/2$, and hence
+$0<m-1<B/2$.  Therefore
+\[
+ n-z=2^r(2^B-1)s-(m-1)>0.
+\]
+If $n$ were a least counterexample, the smaller positive integer $z$ would
+reach $1$.  Since the two paths coalesce, $n$ would reach $1$ as well.
+\end{proof}
+
+\begin{corollary}[Quantitative later-block compression]
+Let $n$ be a globally least counterexample and suppose such a block, of
+excess $B$ and shadow start $m$, begins later at $x_j\ge n$.  Its all-ones
+ancestor is
+\[
+ z=\frac{x_j+m-2^B}{2^B}.
+\]
+It lies below $n$ exactly when
+\[
+ x_j<2^B(n+1)-m.                                      \tag{3.6}
+\]
+In particular, $x_j\le2^Bn$ is sufficient.
+\end{corollary}
+
+\begin{proof}
+Eliminate $2^rs$ between $x_j=2^{r+B}s-m$ and
+$z=2^rs-1$.  The equivalence is then algebraic.  The sufficient condition
+uses $m<2^B$, which follows from $m-1<B/2<2^B-1$.
+\end{proof}
+
+There is a more general exact optimization statement.  Given an odd endpoint
+$X$, choose odd $y>0$ and even $s$ with $X+y=3^rs$.  Every length-$r$
+$\Um$ path $v$ from $m_v$ to $y$ has the integer cost
+\[
+ \mathcal C_s(v)=2^{A(v)}s-m_v.                       \tag{3.7}
+\]
+It produces an exact positive-map ancestor of $X$ if and only if this cost is
+positive, and every positive length-$r$ ancestor arises uniquely this way.
+Therefore every prefix of a globally least counterexample must minimize the
+positive costs in (3.7) over the corresponding reverse tree.  If
+$F_0(y,s)=s-y$, the formal min-plus recursion is
+\[
+ F_r(y,s)=\min_{\substack{a\ge1\\
+             m=(2^ay+1)/3\text{ positive odd}}}
+ F_{r-1}(m,2^as),                                     \tag{3.8}
+\]
+with the minimum restricted to positive terminal costs.  This reformulates
+the full problem as persistence of a minimum-cost reverse path.  It is exact,
+but not by itself a proof: unrestricted min-plus optimization can encode the
+original hitting-time problem.  The value is $+\infty$ if the positive-cost
+set is empty.
+
+The choice of target is a gauge.  Modulo $2\,3^r$ there is a unique positive
+odd residue $y$ for which $(X+y)/3^r$ is even.  Replacing
+$y$ by $y+2\,3^rt$ changes $s$ to $s+2t$ and changes every reverse shadow
+$m_v$ to $m_v+2^{A(v)+1}t$, leaving (3.7) invariant.  Nor is the Bellman
+minimum greedy: the smallest immediate reverse predecessor may be divisible
+by $3$ and have no further predecessor, while a larger predecessor can lie on
+a deeper admissible path.  The state in (3.8) must therefore retain the whole
+reverse-tree frontier.
+
+\section{A shortest terminal/barrier word}
+
+Put $\alpha=\log_2 3$ and $\beta=\alpha-1=\log_2(3/2)$.  Suppose that a
+non-all-ones word satisfies
+\[
+ 2^{A_k}<3^k\quad(1\le k\le r),\qquad
+ 3^r\mid C_r+2^{A_r},                                 \tag{4.1}
+\]
+and choose one of globally minimal length.  Let
+$m_0\to\cdots\to m_r=1$ be its dual trajectory, put
+$\Delta=m_0-1$, and let
+\[
+ h=\#\{i:a_i>1\}.
+\]
+
+\begin{lemma}[Minimum terminal carry]\label{lem:mincarry}
+For every word, $C_r+2^{A_r}\ge3^r$, with equality exactly for the
+all-ones word.
+\end{lemma}
+
+\begin{proof}
+Since $A_i\ge i$,
+\[
+ C_r+2^{A_r}=\sum_{i=0}^{r-1}3^{r-1-i}2^{A_i}+2^{A_r}
+ \ge\sum_{i=0}^{r-1}3^{r-1-i}2^i+2^r=3^r.
+\]
+Equality forces $A_i=i$ for every $i$.
+\end{proof}
+
+Put $\eta_k=A_k-\alpha k$.  The barrier is $\eta_k<0$.
+
+\begin{theorem}[Strict terminal record]\label{thm:record}
+For the shortest nontrivial word,
+\[
+ \eta_i<\eta_r<0\qquad(1\le i<r).                    \tag{4.2}
+\]
+Consequently
+\[
+ a_0=1,\qquad a_{r-1}>1,\qquad
+ A_r=\lfloor\alpha r\rfloor,
+ \qquad2^{A_r-A_i}>3^{r-i}\ (i<r).                  \tag{4.3}
+\]
+\end{theorem}
+
+\begin{proof}
+The $\eta_k$ are distinct because $\alpha$ is irrational.  If their maximum
+occurred at $j<r$, then every prefix height of the suffix beginning at $j$
+would be negative.  That suffix is terminal by
+Theorem~\ref{thm:duality}; minimality makes it all ones, whence backward
+substitution gives $m_j=1$.  The prefix ending at $m_j$ is then a shorter
+terminal/barrier word and is also all ones, a contradiction.  Thus the
+maximum occurs at $r$.  The first assertion in (4.3) follows from
+$2^{a_0}<3$.  If $a_{r-1}=1$, then $m_{r-1}=1$ and the prefix contradicts
+minimality.  Since $\eta_1=-\beta$, (4.2) gives
+$-\beta<\eta_r<0$, which is equivalent to
+$A_r=\lfloor\alpha r\rfloor$; subtracting $\eta_i$ from $\eta_r$ gives the
+last inequality.
+\end{proof}
+
+Lemma~\ref{lem:mincarry} gives $\Delta>0$.  The marked activation identity
+below strengthens this to
+\[
+ 0<\Delta<h.                                          \tag{4.4}
+\]
+The missing all-depth inequality is the reverse bound $\Delta\ge h$; the
+stronger estimate $2h\le\Delta$ is supported by computation but remains
+unproved.
+
+List the nonunit positions as
+\[
+ 1\le s_1<\cdots<s_h=r,\qquad a_{s_j-1}=1+c_j,\quad c_j\ge1,
+\]
+and put
+\[
+ s_0=0,\qquad g_j=s_j-s_{j-1},\qquad
+ B_j=c_1+\cdots+c_j,\quad B_0=0.
+\]
+
+\section{The marked carry tower}
+
+Define
+\[
+ E_j=2^{s_j+B_{j-1}}(2^{c_j}-1).                      \tag{5.1}
+\]
+The coordinate
+\[
+ L_k=C_k+2^{A_k}-3^k
+\]
+has the update
+\[
+ L_{k+1}=3L_k+(2^{a_k}-2)2^{A_k}.                    \tag{5.2}
+\]
+
+\begin{proposition}[Activation decomposition]\label{prop:activation}
+For a terminal word,
+\[
+ L_r=\sum_{j=1}^h3^{r-s_j}E_j=3^r\Delta.             \tag{5.3}
+\]
+Consequently
+\[
+ \Delta=\sum_{j=1}^h
+ 2^{B_{j-1}}(2^{c_j}-1)(2/3)^{s_j}.                  \tag{5.4}
+\]
+Every summand in (5.4) lies strictly between $0$ and $1$.
+\end{proposition}
+
+\begin{proof}
+Equation (5.3) follows by propagating the nonzero increments in (5.2) to
+time $r$.  Terminality gives $L_r=3^r(m_0-1)$.  Finally the barrier at
+$s_j$ gives $2^{B_j}(2/3)^{s_j}<1$, which bounds the $j$th term of (5.4).
+\end{proof}
+
+\begin{corollary}[Charge deficit]\label{cor:deficit}
+For the shortest word,
+\[
+ 0<\Delta<h,\qquad \vtwo(\Delta)=s_1,\qquad
+ \Delta\equiv0\pmod4.
+\]
+\end{corollary}
+
+\begin{proof}
+There are $h$ positive summands in (5.4), each smaller than $1$.  After
+multiplication by $3^r$, their dyadic valuations
+$s_j+B_{j-1}$ strictly increase with $j$, so the first is unique and
+$\vtwo(\Delta)=s_1$.  Since $a_0=1$, one has $s_1\ge2$.
+\end{proof}
+
+Set $U_{h+1}=0$ and recursively
+\[
+ U_j=\frac{E_j+U_{j+1}}{3^{g_j}}.                    \tag{5.5}
+\]
+
+\begin{theorem}[Integral marked carry tower]\label{thm:tower}
+Every $U_j$ is a positive integer, and
+\[
+ U_1=\Delta,\qquad
+ \vtwo(U_j)=s_j+B_{j-1}.                              \tag{5.6}
+\]
+More precisely,
+\[
+ U_j=2^{A_{s_{j-1}}}(m_{s_{j-1}}-1).                 \tag{5.7}
+\]
+\end{theorem}
+
+\begin{proof}
+Successively reduce (5.3) modulo
+$3^{g_h},3^{g_{h-1}},\ldots,3^{g_1}$ and divide by the established powers
+of $3$.  This proves integrality and $U_1=L_r/3^r=\Delta$.
+The valuations of the $E_j$ are strictly increasing; hence $E_j$ is the
+unique summand of least $2$-adic valuation in $E_j+U_{j+1}$.  Division by
+the odd number $3^{g_j}$ proves (5.6).  Applying the same calculation to
+the suffix beginning at $s_{j-1}$ gives (5.7).
+\end{proof}
+
+There are $n_j=h-j+1$ marks remaining at boundary $j$.  The inequalities
+\[
+ U_j\ge n_j\qquad(1\le j\le h)                       \tag{5.8}
+\]
+would inject every remaining mark into carry capacity; the top instance is
+exactly $\Delta\ge h$.
+
+\begin{theorem}[Collision-front localization]\label{thm:front}
+Assume $U_1<h$, and let $J\ge2$ be the least index with
+$U_J\ge h-J+1$.  Then
+\[
+ J\le2+\frac{\lfloor\log_2(h-1)\rfloor-s_1}{2}.      \tag{5.9}
+\]
+Writing $j=J-1$ and $V_i=s_i+B_{i-1}$, one has
+\begin{align*}
+ h-J+1&\le U_J\le3^{g_j}(h-J+1)-E_j,\\
+ U_J&\equiv-E_j\pmod{3^{g_j}},\qquad
+ \vtwo(U_J)=V_J.                                     \tag{5.10}
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Minimality gives $U_j\le h-J+1$.  On the other hand
+$2^{V_j}\le U_j$ and
+$V_j\ge s_1+2(J-2)$, proving (5.9).  The recurrence
+$E_j+U_J=3^{g_j}U_j$ gives (5.10).
+\end{proof}
+
+Thus the dangerous part of a hypothetical carry tower is confined to its
+first $O(\log h)$ marked boundaries, although the entire suffix remains
+encoded in $U_J$.
+
+\begin{proposition}[Terminal gap constraint]\label{prop:lastgap}
+For the last gap and last excess,
+\[
+ 2\,3^{g_h-1}\mid c_h,\qquad
+ 2\,3^{g_h-1}<\beta r.                                \tag{5.11}
+\]
+In particular
+\[
+ g_h<1+\log_3(\beta r/2).
+\]
+\end{proposition}
+
+\begin{proof}
+The last equation in (5.5) gives
+$3^{g_h}\mid E_h$, hence $3^{g_h}\mid2^{c_h}-1$.
+The multiplicative order of $2$ modulo $3^g$ is $2\,3^{g-1}$.
+The full barrier gives $c_h\le B_h<\beta r$.
+\end{proof}
+
+\section{The cyclic matrix and why marks are indispensable}
+
+Let $\mathcal O=\Z[Y]/(Y^r-2^{A_r})$, let $S$ be multiplication by $Y$,
+and put $M=3I-S$.  Then
+\[
+ \det M=3^r-2^{A_r},\qquad
+ M^{-1}=\frac1{3^r-2^{A_r}}
+ \sum_{k=0}^{r-1}3^{r-1-k}S^k.                       \tag{6.1}
+\]
+The inverse is positive, but this does not yield a positive-cone proof: the
+relevant right side has mixed signs.
+
+\begin{theorem}[Smith obstruction]\label{thm:smith}
+The Smith normal form of $M$ is
+\[
+ \operatorname{diag}(1,\ldots,1,3^r-2^{A_r}).        \tag{6.2}
+\]
+Thus its cokernel imposes exactly the scalar congruence
+\[
+ 3^r\Delta\equiv C_r\pmod{3^r-2^{A_r}}.              \tag{6.3}
+\]
+\end{theorem}
+
+\begin{proof}
+The determinant gives the product of the Smith factors.  The minor formed
+from the first subdiagonal has determinant $\pm1$, so the product of the
+first $r-1$ factors is $1$.  Evaluation at $Y=3$ identifies the remaining
+cokernel coordinate with (6.3).
+\end{proof}
+
+Consequently higher-dimensional unmarked determinants, positivity of
+$M^{-1}$, or ordinary matrix norms cannot prove the required capacity
+inequality.  Any successful matrix certificate must retain the increasing
+dyadic colours $s_j+B_{j-1}$ or equivalent nonlinear data.
+
+\section{Signed near returns}
+
+For an arbitrary word put $P=3^r$, $Q=2^{A_r}$ and $D=Q-P$.  If
+an even integer $\Delta>0$ satisfies
+\[
+ D\mid P\Delta-C_r,                                   \tag{7.1}
+\]
+then $y=(P\Delta-C_r)/D$ gives the exact signed trajectory
+\[
+ y+\Delta\xrightarrow{\,w\,}y.                       \tag{7.2}
+\]
+The two endpoints are nonzero and have the same sign.  For $y>0$ this is a
+positive $\Um$ descent.  For $y<0$, changing signs gives a positive $\Up$
+segment which rises by $\Delta$.  Thus the changing-determinant congruence
+simultaneously and exactly controls both maps.
+
+\begin{proposition}[Automatic signed reconstruction]\label{prop:signed}
+For a fixed word and positive even $\Delta$, divisibility (7.1) is equivalent
+to an exact same-sign signed trajectory (7.2).
+\end{proposition}
+
+\begin{proof}
+The endpoint equation is $P(y+\Delta)=C_r+Qy$.  Starting at $y$ and applying
+$m_i=(2^{a_i}m_{i+1}+1)/3$ backwards, divisibility by $3^r$ propagates to
+every suffix exactly as in Theorem~\ref{thm:duality}.  Here $C_r$ and
+$D=Q-P$ are odd, so evenness of $\Delta$ makes $y$ and $y+\Delta$ odd; the
+backward quotients remain odd, so all
+valuations are exact.  If an odd $m_{i+1}$ is positive then its predecessor is
+positive; if it is negative, $2^{a_i}m_{i+1}+1\le-1$, so its predecessor is
+negative.  The sign is therefore constant.
+\end{proof}
+
+The natural universal assertion is
+\[
+ D\nmid P\Delta-C_r
+ \quad\text{whenever}\quad
+ Q_k<P_k\ (k<r),\ a_{r-1}>1,\ 0<\Delta<h,            \tag{7.3}
+\]
+with $\Delta$ even.  This coefficient-only statement is stronger than the
+positive terminal-component inequality but, by
+Proposition~\ref{prop:signed}, is exactly the universal signed charge
+statement.  Exact enumeration finds no violation through $r=25$, but no
+all-depth proof is known.
+
+A temporary strengthening $3\Delta\ge4h$ is false.  The ordinary Collatz
+orbit beginning at $47$ has a proper-barrier segment of length $33$ ending
+at $61$, with $h=13$ and $\Delta=14$.  The desired inequality
+$\Delta\ge h$ survives with one unit of slack.  This counterexample rules
+out triple-activation packing arguments.
+
+There is a useful exact continuous normalization, but it also shows why
+integrality cannot be discarded.  Put
+\[
+ R_k=\frac{2^{A_k}}{3^k},\qquad
+ X_k=\frac{C_k+2^{A_k}-3^k}{2\,3^k}.
+\]
+
+\begin{proposition}[Normalized area identity]\label{prop:area}
+For every exponent word,
+\[
+ X_r=\frac{R_r}{2}-\frac13+\frac16\sum_{k=1}^{r-1}R_k.
+\]
+The family $(1,2)^N$, $N\ge6$, satisfies every proper barrier and admits
+positive rational same-sign endpoints of displacement $2$ although it has
+$N$ charged letters.  Hence barriers, real interval order, and the area
+identity alone
+cannot prove the charge inequality.
+\end{proposition}
+
+\begin{proof}
+The update (5.2) gives
+\[
+ X_{k+1}-X_k=\frac{R_{k+1}}2-\frac{R_k}{3};
+\]
+telescoping proves the displayed identity.  The word $(1,2)$ is the positive $\Um$ cycle
+$5\leftrightarrow7$.  For $N$ laps, $R=(8/9)^N$ and
+$X=2(1-R)$.  In the half-coordinate $z=(m-1)/2$, imposing displacement one
+gives
+\[
+ z_r=\frac{2R-1}{R-1},\qquad z_0=z_r+1.
+\]
+Both are positive for $R<1/2$, i.e. $N\ge6$, but are nonintegral.  The exact
+congruence instead requires $9^N-8^N$ to divide the displacement.
+\end{proof}
+
+Pure periodic shadows nevertheless admit a complete defect estimate.
+
+\begin{theorem}[Powered-block defect]\label{thm:powered}
+Let a block have affine data $(P,Q,C)$, with $P\ne Q$ and
+$\gcd(P,Q)=1$.  If its $N$th power maps an integer $m$ to an integer $y$
+under
+\[
+ Q^Ny=P^Nm-C\frac{P^N-Q^N}{P-Q},
+\]
+then
+\[
+ \frac{P^N-Q^N}{P-Q}\mid m-y.                        \tag{7.4}
+\]
+Thus either the repeated block is an exact cycle, or
+\[
+ |m-y|\ge\left|\frac{P^N-Q^N}{P-Q}\right|.           \tag{7.5}
+\]
+\end{theorem}
+
+\begin{proof}
+Put $S_N=(P^N-Q^N)/(P-Q)$.  Subtracting the endpoint equation from
+$Q^Nm$ gives
+\[
+ S_N\bigl((P-Q)m-C\bigr)=-Q^N(m-y).
+\]
+Since $S_N\equiv P^{N-1}\pmod Q$, one has $\gcd(S_N,Q)=1$, and (7.4)
+follows.
+\end{proof}
+
+\begin{corollary}[Proper powers are harmless]\label{cor:primitive}
+If $w=B^N$ with $N\ge2$ and the associated integral trajectory has nonzero
+displacement, then
+\[
+ |m-y|\ge h(w).
+\]
+Consequently every positive-displacement counterexample to the signed charge
+inequality must be a primitive word; exact cycle powers, whose displacement
+is zero, are the explicit exception in Theorem~\ref{thm:powered}.
+\end{corollary}
+
+\begin{proof}
+If $B$ has length $s$, then
+\[
+ \frac{P^N-Q^N}{P-Q}
+ =\sum_{j=0}^{N-1}P^{N-1-j}Q^j
+ \ge N\min(P,Q)^{N-1}.
+\]
+Since $P=3^s$, $Q=2^{A(B)}$, and $A(B)\ge s$, one has
+$\min(P,Q)\ge2^s\ge s\ge h(B)$.  Apply
+Theorem~\ref{thm:powered} and use $h(w)=Nh(B)$.
+\end{proof}
+
+Thus pure periodic shadows, at every repetition count, satisfy the desired
+surcharge unless they are exact cycles.  The unresolved case is primitive
+and genuinely aperiodic or has a moving boundary.
+
+The same determinant idea controls a fixed exit from a periodic shadow.  Let
+$v$ be the word of a positive $\Um$ cycle based at its least point $c$, with
+data $(P,Q,C)$ and $H=h(v)$; thus $C=(P-Q)c$ and $P>Q$.  Let a fixed exit word
+$u$ have data $(p,q,C_u)$ and $h_u=h(u)$.
+
+\begin{theorem}[Fixed-exit periodic shadows]\label{thm:fixedexit}
+If $v^Nu$ has an exact signed realization of positive displacement $\Delta$,
+then, with
+\[
+ M_N=|qQ^N-pP^N|,\qquad B=C_u+(q-p)c,
+\]
+one has
+\[
+ q\Delta\equiv B\pmod {M_N}.                         \tag{7.6}
+\]
+If
+\[
+ M_N>q(NH+h_u-1)+|B|,                                \tag{7.7}
+\]
+then $\Delta\ge NH+h_u$.  Hence every fixed exit is safe for all sufficiently
+large $N$.
+\end{theorem}
+
+\begin{proof}
+The composite data are
+\[
+ P_N=pP^N,\quad Q_N=qQ^N,\quad
+ C_N=p(P^N-Q^N)c+Q^NC_u.
+\]
+The near-return congruence $P_N\Delta\equiv C_N\pmod{Q_N-P_N}$,
+together with $pP^N\equiv qQ^N$, reduces after cancellation of the dyadic
+unit $Q^N$ to (7.6).  If $0<\Delta<NH+h_u$, condition (7.7) forces the
+congruence to be the equality $q\Delta=B$.  For the affine branch
+$F_u(x)=(px-C_u)/q$, this says $F_u(c)=c-\Delta$.  The branch $v^N$ fixes
+$c$, and the equation $F_{v^Nu}(x)=x-\Delta$ has a unique real solution
+because its slope is not $1$.  The assumed signed start is another solution,
+so uniqueness forces it to equal $c$.  Determinism would then
+send the least cycle point below itself, a contradiction.  Finally $M_N$
+grows exponentially because $P>Q$, whereas the right side of (7.7) is
+linear in $N$.
+\end{proof}
+
+Thus a bad shadow can follow a fixed cycle for many laps only if the exit
+word itself carries adic complexity growing with the number of laps.
+
+There is a complementary exact symbolic constraint.  If $u,v$ have the same
+length and total exponent and first differ at index $j$, then
+\[
+ \vtwo(C_u-C_v)=
+ \min(A_{j+1}^{u},A_{j+1}^{v}).                       \tag{7.8}
+\]
+Indeed the first unequal carry term has precisely that valuation and every
+later term has at least one additional factor of $2$.  Hence the carry is a
+$2$-adic prefix code.
+
+More generally, fix a reference block $B$ with data $(P,Q,C)$, $Q=2^A$, and
+replace its $j$th occurrence in an $N$-block stream by a distinct
+equal-length, equal-scale exponent word of carry $C+R_j$.  Every nonzero
+$R_j$ then satisfies $1\le\vtwo(R_j)\le A-1$ by (7.8).  The total defect is
+\[
+ \Sigma_R=\sum_{j=0}^{N-1}P^{N-1-j}Q^jR_j.            \tag{7.9}
+\]
+If $j_0$ is the first nonzero defect, (7.8) gives
+\[
+ \vtwo(\Sigma_R)=j_0A+\vtwo(R_{j_0});                \tag{7.10}
+\]
+later defects cannot cancel it.  With
+$S_N=(P^N-Q^N)/(P-Q)$ and $K_B(m)=(P-Q)m-C$, the exact
+periodicity-defect equation for an altered stream mapping $m$ to
+$m-\Delta$ is
+\[
+ S_NK_B(m)=\Sigma_R-Q^N\Delta.                       \tag{7.11}
+\]
+The remaining primitive case is therefore a hierarchy of noncancelling
+dyadic defect layers coupled to a changing odd determinant, rather than an
+unstructured word search.
+
+\section{Finite certificates}
+
+The computations below use exact integer arithmetic.  They are finite,
+reproducible certificates, not all-depth theorems.
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Exhaustive changing-determinant enumeration through $r=25$ visited
+$1{,}228{,}671{,}535$ proper-barrier leaves cumulatively and found no raw
+divisibility hit in the theorem-needed region.
+\item Every positive odd $\Um$ seed at most $99{,}999{,}999$ was followed
+until it reached $1$ or a detected non-$1$ cycle.  There were no unresolved
+or overflow cases and no violation of $2D(m)\le m-1$, where $D(m)$ counts
+nonunit exponents before the first hit of $1$.
+\item Every positive odd $\Up$ seed at most $10^9$ was checked along its
+complete proper-barrier prefix.  The run examined $1{,}746{,}349{,}321$
+accelerated steps and $373{,}172{,}880$ positive endpoints, with no overflow
+and no signed-side violation $\Delta<h$.
+\item Independent symbolic regression checked $1{,}232$ realized words,
+$1{,}411$ two-ended gluing instances, and $488{,}275$ powered-block
+identities, with no failure.  This audits implementations of the proved
+identities; it is not evidence at unbounded depth.
+\end{enumerate}
+
+\begin{corollary}[Computer-assisted scale bound]\label{cor:scale}
+Conditional on the audited source and output in (ii), a globally shortest
+nontrivial terminal/barrier word satisfies
+\[
+ h\ge100{,}000{,}001,\qquad r\ge170{,}951{,}131.       \tag{8.1}
+\]
+\end{corollary}
+
+\begin{proof}
+If $h\le10^8$, then Corollary~\ref{cor:deficit}, parity, and
+$m_0=\Delta+1$ give
+$m_0\le99{,}999{,}999$.  The finite seed certificate yields
+$2h\le m_0-1=\Delta$, contradicting
+Corollary~\ref{cor:deficit}.  Finally every activation uses
+at least one excess unit, so
+$h\le\lfloor\beta r\rfloor$ and the stated length follows.
+\end{proof}
+
+Minimality permits a much stronger bounded-length certificate.  Put
+$B=A_r-r$.  The activation identity and terminal record give
+\[
+ 0<m_0-1<B/2<\beta r/2,\qquad m_0\equiv1\pmod4.      \tag{8.2}
+\]
+Moreover $r$ is the first hitting time of $1$ for this deterministic
+$\Um$ seed.  Thus all candidates with $r\le R$ lie in a linear-size seed
+set rather than an exponential word tree.
+
+\begin{theorem}[Computer-assisted exclusion through $10^{10}$]
+Conditional on the audited source and output of the exact seed checker, the
+only terminal/barrier word of length $r\le10^{10}$ is the all-ones word.
+\end{theorem}
+
+\begin{proof}
+The checker uses the exact rational bounds
+\[
+ \beta<179/306,\qquad \alpha<485/306,
+\]
+verified at startup by the integer inequality $3^{306}<2^{485}$.  It
+enumerates every $m_0\equiv1\pmod4$ with
+$612(m_0-1)<179\cdot10^{10}$, a superset of (8.2), and follows its exact
+$\Um$ orbit.  Rejection occurs only after a certified barrier failure, a
+repetition, a hit of $1$ violating a proved necessary condition, or the
+length cap; overflow is separately fatal.  The independent run enumerated
+$731{,}209{,}150$ seeds: $731{,}209{,}148$ failed the barrier and the other
+two, $5$ and $17$, entered non-$1$ cycles.  There were no cap survivors,
+overflows, hits of $1$, or necessary-condition hits.  Hence no shortest
+nontrivial candidate exists below the stated length.
+\end{proof}
+
+The exact sources, retained outputs, reproduction commands, and individual
+hashes are collected in the companion archive
+\texttt{computational\_supplement.tar.gz}.  Its SHA--256 digest is
+\nolinkurl{4a80f6997a67f6f236bfd2cf3e3b47e6c5f865651a5e4353db2b1649fba980c3}.
+The archive's internal \texttt{SHA256SUMS} file is verified before release.
+
+\section{Synchronization rigidity}
+
+For a positive odd target $y$, call a word $y$-terminal when
+$3^r\mid C_r+2^{A_r}y$.  Positive $\Um$ cycles generate arbitrarily long
+nontrivial targeted words; for example the cycle $5\to7\to5$ has word
+$(1,2)$, so $(1,2)^N$ is barrier and $5$-terminal for every $N$.
+
+\begin{theorem}[Terminal recurrence rigidity]\label{thm:rigidity}
+Let a barrier word have a $y$-terminal prefix of length $r$ and a second
+$y$-terminal prefix of length $r+\ell$.  If
+\[
+ \frac{\ell}{3\,2^r}+\frac{y}{2^r}+\frac{y}{3^r}<1,  \tag{9.1}
+\]
+then the intervening $\ell$-word is the exact exponent word of a positive
+$\Um$ cycle from $y$ to itself.
+\end{theorem}
+
+\begin{proof}
+Writing the word as $uv$, affine composition gives
+\[
+ C_{uv}=3^\ell C_u+2^{A_u}C_v.
+\]
+The two terminal conditions imply
+\[
+ 3^{r+\ell}\mid C_v+2^{A_v}y-3^\ell y.               \tag{9.2}
+\]
+The prefix barriers give
+\[
+ C_v<\ell\,3^{\ell-1}(3/2)^r,\qquad
+ 2^{A_v}<3^\ell(3/2)^r.
+\]
+Condition (9.1) makes the absolute value in (9.2) strictly smaller than
+$3^{r+\ell}$, so it vanishes.  Target duality now gives the cycle.
+\end{proof}
+
+For fixed $y$, nonperiodic successive terminal-prefix gaps must therefore
+eventually be of order at least $2^r$.  In particular ordinary $3$-adic
+compactness or bounded-gap recurrence produces precisely the periodic
+shadows which a full proof must exclude from its synchronization output.
+
+\section{Certificate shapes and logical strength}
+
+The attacks above and several deliberately stronger relaxations can be
+summarized without conflating reductions with proofs.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.24\textwidth}p{0.66\textwidth}}
+\toprule
+Route & Exact outcome and present obstruction\\
+\midrule
+Ordinal phase rank & Orients $R_0$ below $\omega^3$; the exceptional macrostep
+is still exactly $\Up$.\\
+Unmarked cyclic matrix & Positive inverse, but Smith form leaves only one
+scalar congruence; colours are indispensable.\\
+Marked carry tower & Gives nested valuations and a logarithmic collision
+front; the component-specific capacity inequality is open.\\
+Moving determinant & Is exactly equivalent to signed charge, not a
+relaxation; verified only to finite depth.\\
+Normalized area/kneading & Exact identity, but $(1,2)^N$ supplies rational
+same-sign countermodels; integrality is essential.\\
+Periodic resultants & Proper powers and sufficiently long fixed-exit shadows
+are safe; variable exits may carry unbounded adic debt.\\
+$2$-adic prefix code & Defects occupy noncancelling layers; their coupling to
+the changing odd determinant remains open.\\
+Charged Bellman quotient & Quotients arbitrarily long exponent-one runs;
+positive cycles prevent a scalar one-step potential.\\
+Target-shadow min--plus tree & Exactly parametrizes all coalescing ancestors;
+stationary positive minima have not been excluded.\\
+All-ones diamond & Completes a contradiction once a target-$1$ block is
+synchronized in the quantitative compression cone.\\
+Terminal recurrence & Subexponential repeated terminal prefixes force a
+negative-map cycle, so ordinary compactness returns the wrong objects.\\
+Infinite weighted matrix & Gives an exact iff certificate, but only after one
+finds a finite description of its weight.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The foundational point is similarly sharp.  On odd inputs Collatz has the
+arithmetical form
+\[
+ \forall n\ \exists k\ [\Up^k(n)=1],
+\]
+naturally a $\Pi^0_2$ assertion.  In contrast, failure of the universal
+finite signed-charge lemma has a decidable finite witness, so that lemma is
+$\Pi^0_1$.  Passing from Peano arithmetic to a stronger system may make new
+well-foundedness arguments available, but it does not repair the missing
+carry inequality automatically; no independence claim is known here.
+
+The undecidability of generalized Collatz systems~\cite{KurtzSimon} is a
+uniform statement over varying programs and inputs.  It does not imply that
+this one fixed map lacks a finite certificate, just as undecidability of the
+halting problem does not prevent a ranking function, invariant, or finite
+trace from settling a particular program.  Here the single-instance
+certificate could be a carry inequality, a finitely presented weighted
+matrix, a coalescing construction, or a well-founded macro-rank.  Conversely,
+the distinction supplies no positive evidence that such a certificate exists.
+A stronger theory could in principle validate a compact well-ordering
+argument, but the required Collatz-specific well-order has not been found.
+
+Indeed, if Collatz is true and $H(n)$ is accelerated hitting time, then
+\[
+ \widehat\Psi(s)=\omega^3H(\operatorname{oddpart}(\operatorname{Val}s))
+                  +\Psi(s)<\omega^4                 \tag{10.1}
+\]
+orients all eleven rules.  Under $R_0$ the macrostate is fixed and $\Psi$
+drops; under the exceptional rule $H$ drops.  Thus a taller ordinal is not
+extensionally necessary.  The issue is a finitely describable, independently
+provable definition of $H$.
+
+There is an equivalent large-matrix formulation.  Let $\mathcal P$ act on
+column functions by $(\mathcal Pw)(n)=w(\Up(n))$ for $n>1$, with
+$(\mathcal Pw)(1)=0$.  Collatz holds if and only if there is an everywhere
+finite positive real-valued weight $w(n)\ge1$ such that
+\[
+ \mathcal Pw\le\tfrac12w.                            \tag{10.2}
+\]
+If hitting time exists, take $w=2^H$.  Conversely, iteration of (10.2) along
+an infinite nonterminal path would force $1\le w(\Up^k(n))\le2^{-k}w(n)$,
+an impossibility.  A larger finite matrix adds search capacity but no logical
+strength; the useful object would be an infinite weight with a finite exact
+presentation.
+
+\section{Conditional completion and the remaining theorem}
+
+The diamond construction gives a direct alternative to the three-part block
+route.
+
+\begin{theorem}[Prefix-diamond criterion]\label{thm:prefixcriterion}
+Assume that every $n>1$ whose positive $\Up$-orbit never falls below $n$
+has a nontrivial prefix satisfying the coefficient barrier and the target-$1$
+terminal condition.  Then the Collatz conjecture holds.
+\end{theorem}
+
+\begin{proof}
+If the conjecture were false, choose its least positive counterexample $n$.
+Every state on its orbit is at least $n$, since a smaller state reaches $1$
+by minimality.  The assumed prefix therefore exists, contradicting
+Corollary~\ref{cor:diamond}.
+\end{proof}
+
+This route absorbs positive cycles into least-counterexample minimality and
+does not require an all-depth exclusion theorem.  Its hypothesis is very
+strong: it asks for target-$1$ terminality in an initial prefix, rather than
+an arbitrarily located block.  The min-plus formulation (3.7)--(3.8) permits
+other coalescing comparison paths and is a possible way to weaken that
+requirement.
+
+\begin{theorem}[Quantitative synchronization criterion]\label{thm:conditional}
+Assume that $\Up$ has no positive periodic orbit other than $1$.  Assume also
+that the orbit of a globally least unbounded counterexample $n$ contains a
+nontrivial target-$1$ terminal/barrier block of excess $B$, beginning at
+$x_j$, with
+\[
+ x_j\le2^Bn.                                          \tag{11.1}
+\]
+Then the Collatz conjecture holds.
+\end{theorem}
+
+\begin{proof}
+A bounded counterexample would be periodic, so a least counterexample is
+unbounded.  The quantitative later-block corollary supplies a positive
+ancestor below $n$ which coalesces into its nonterminating orbit, contradicting
+minimality.
+\end{proof}
+
+There is a global min--plus criterion which absorbs both cycles and divergent
+orbits.  Define
+\[
+ M_r(n)=\min\{z>0:\Up^r(z)=\Up^r(n)\}.
+\]
+Then $M_{r+1}(n)\le M_r(n)\le n$.
+
+\begin{theorem}[Stationary-envelope criterion]\label{thm:envelope}
+The Collatz conjecture is equivalent to
+\[
+ \forall n>1\ \exists r\ge1\quad M_r(n)<n.           \tag{11.2}
+\]
+\end{theorem}
+
+\begin{proof}
+If (11.2) holds, strong induction on $n$ applies: the smaller ancestor
+converges, hence so does the common endpoint and then $n$.  Conversely, if
+$n$ reaches $1$ after $r$ accelerated steps, the fixed point $1$ is a
+length-$r$ ancestor of the same endpoint, so $M_r(n)=1<n$.
+\end{proof}
+
+Theorem~\ref{thm:envelope} is an equivalence, not an available proof.  The
+terminal/block route must either establish the component-specific carry
+inequality and a nonperiodic synchronization theorem, or establish (11.1)
+directly.  Positive cycles remain separate in the former route because their
+full words satisfy $2^A>3^r$, opposite to the barrier.
+
+The sharp target internal to the terminal component is:
+\begin{conjecture}[Marked carry capacity]\label{conj:capacity}
+Every terminal carry tower in the positive $\Um$ component rooted at $1$
+satisfies $U_1\ge h$; equivalently, no collision system
+(5.8)--(5.10) is compatible with the complete terminal suffix.
+\end{conjecture}
+
+The bare local congruences are insufficient: analogous collision states
+occur in non-$1$ recurrent components.  This is exactly where the fact that
+one fixed arithmetic system is being studied, rather than a uniform family
+of generalized Collatz maps, may matter.  A plausible certificate must be
+component-specific and retain the full nested dyadic residue, the changing
+power of $3$, and the terminal suffix.
+
+\section{Conclusion}
+
+The rewrite system now separates cleanly into a terminating representational
+phase and exact accelerated Collatz macrosteps.  On the arithmetic side, a
+hypothetical shortest terminal/barrier word is governed by a rigid marked
+carry tower whose only possible capacity failure lies in a logarithmic
+front, while exact computation pushes such a word beyond $1.7\times10^8$
+letters by the activation count and, through a separate compressed-seed
+certificate, beyond $10^{10}$ letters.  The unmarked matrix, continuous
+kneading, fixed-modulus automata, bounded-horizon contraction, and several
+attractive stronger inequalities are provably inadequate.  Proper powers and
+fixed-exit periodic shadows are controlled exactly; the unresolved arithmetic
+class is primitive or carries growing exit debt.  The remaining all-depth
+problem is a coloured, component-specific carry theorem or, alternatively, a
+finite-input min--plus envelope theorem.  Either route still needs the stated
+synchronization and cycle obligations before it becomes a proof of Collatz.
+
+\begin{thebibliography}{9}
+
+\bibitem{YAH}
+E.~Yolcu, S.~Aaronson and M.~J.~H.~Heule,
+\emph{An automated approach to the Collatz conjecture},
+J. Autom. Reason. \textbf{67} (2023), Paper No.~28.
+
+\bibitem{Lagarias}
+J.~C.~Lagarias,
+\emph{The $3x+1$ problem and its generalizations},
+Amer. Math. Monthly \textbf{92} (1985), 3--23.
+
+\bibitem{KurtzSimon}
+S.~A.~Kurtz and J.~Simon,
+\emph{The undecidability of the generalized Collatz problem},
+in Theory and Applications of Models of Computation,
+Lecture Notes in Comput. Sci. 4484, Springer, 2007, 542--553.
+
+\end{thebibliography}
+
+\end{document}

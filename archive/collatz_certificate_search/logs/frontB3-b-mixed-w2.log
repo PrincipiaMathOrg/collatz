@@ -1,0 +1,148 @@
+=== start mode=mixed worker=2/3 timeout=900 budget=3600 2026-08-16 14:03:52
+mixed pool: 146440 instances, max len 47
+families for this worker: ['mixed-d1-K2-plain-noodd', 'mixed-d1-K3-plain-odd', 'mixed-d2-K2-plain-noodd', 'mixed-d3-K1-plain-odd', 'mixed-d4-K1-plain-noodd', 'mixed-d3-K2-plain-odd', 'mixed-d4-K2-plain-noodd', 'mixed-d4-K3-plain-odd']
+--- family mixed-d1-K2-plain-noodd nvars 7
+   RESULT mixed-d1-K2-plain-noodd UNSAT rounds 1 |inst| 21 maxlen 2 W 8 0.2s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('01', 't1'), ('02', 't2'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('t1', '2f'), ('t2', '2t'), ('tf', 't')]
+--- family mixed-d1-K3-plain-odd nvars 7
+   RESULT mixed-d1-K3-plain-odd UNSAT rounds 1 |inst| 26 maxlen 2 W 11 0.0s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('t', '2'), ('01', 't1'), ('02', 't2'), ('0t', '02'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', '22'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('ft', 'f2'), ('t1', '2f'), ('t2', '2t'), ('tf', 't'), ('tt', 't2')]
+--- family mixed-d2-K2-plain-noodd nvars 24
+   round 1: |cur|=24 added [('0f2', '01f')] (1.9s)
+   round 2: |cur|=27 added [('0t1', '02f')] (4.2s)
+   round 3: |cur|=30 added [('101', 'ff01')] (8.1s)
+   round 4: |cur|=33 added [('f2f', '1ff')] (47.0s)
+   round 5: |cur|=36 added [('001', 't01')] (70.9s)
+   round 6: |cur|=39 added [('201', 'ft01')] (90.8s)
+   round 7: |cur|=42 added [('02t', 't2t')] (123.9s)
+   round 8: |cur|=45 added [('0f1', '00t')] (138.9s)
+   round 9: |cur|=48 added [('211', 'ft11')] (154.0s)
+   round 10: |cur|=51 added [('0f01', '00f1')] (206.7s)
+   round 11: |cur|=54 added [('ff2', 'f1f')] (276.0s)
+   round 12: |cur|=57 added [('0t1', 'tt1')] (334.1s)
+   SAT on pool!  exact check on n<=20000 + F-A L<=40: None
+   RESULT mixed-d2-K2-plain-noodd SAT rounds 13 |inst| 57 maxlen 4 W 15 434.6s 
+--- family mixed-d3-K1-plain-odd nvars 51
+   RESULT mixed-d3-K1-plain-odd UNSAT rounds 1 |inst| 26 maxlen 2 W 11 1.3s 
+   core: [('1', 'ff'), ('2', 'ft'), ('f', ''), ('t', '2'), ('01', 't1'), ('02', 't2'), ('0t', '02'), ('0t', 'tt'), ('11', 'ff1'), ('12', 'ff2'), ('1f', '1'), ('1f', 'fff'), ('21', 'ft1'), ('22', 'ft2'), ('2f', '2'), ('2f', 'ftf'), ('2t', '22'), ('2t', 'ftt'), ('f1', '0t'), ('f2', '1f'), ('ff', 'f'), ('ft', 'f2'), ('t1', '2f'), ('t2', '2t'), ('tf', 't'), ('tt', 't2')]
+--- family mixed-d4-K1-plain-noodd nvars 88
+   round 1: |cur|=24 added [('1ft', 'ffft')] (2.5s)
+   round 2: |cur|=27 added [('22f', 'ft2f')] (5.6s)
+   round 3: |cur|=30 added [('0f1', '00t')] (9.6s)
+   round 4: |cur|=33 added [('101', 'ff01')] (14.0s)
+   round 5: |cur|=36 added [('20t', 'ft0t')] (19.3s)
+   round 6: |cur|=39 added [('0t2', '02t')] (31.8s)
+   round 7: |cur|=42 added [('0f1', 'tf1')] (46.5s)
+   round 8: |cur|=45 added [('f11', '0t1')] (70.2s)
+   round 9: |cur|=48 added [('001', 't01')] (136.2s)
+   round 10: |cur|=51 added [('01f', 't1f')] (194.9s)
+   round 11: |cur|=54 added [('1f2', '11f')] (226.9s)
+   round 12: |cur|=57 added [('ft1', 'f2f')] (257.2s)
+   round 13: |cur|=60 added [('211', 'ft11')] (287.4s)
+   round 14: |cur|=63 added [('201', 'ft01')] (317.6s)
+   round 15: |cur|=66 added [('tt1', 't2f')] (351.4s)
+   round 16: |cur|=69 added [('t02', '1t2')] (386.5s)
+   round 17: |cur|=72 added [('12f', 'ff2f')] (441.7s)
+   round 18: |cur|=75 added [('02f', '02')] (523.0s)
+   round 19: |cur|=78 added [('02f2', '021f')] (608.6s)
+   round 20: |cur|=81 added [('tf2', 't1f')] (630.2s)
+   round 21: |cur|=84 added [('2ff', '2f')] (708.9s)
+   round 22: |cur|=87 added [('ff1', 'f0t')] (844.6s)
+   round 23: |cur|=90 added [('01t1', 't1t1')] (978.3s)
+   round 24: |cur|=93 added [('f2f', 'f2')] (1021.3s)
+   round 25: |cur|=96 added [('11f', 'ff1f')] (1045.5s)
+   round 26: |cur|=99 added [('ftf', 'ft')] (1089.0s)
+   round 27: |cur|=102 added [('01f', '01')] (1122.4s)
+   round 28: |cur|=105 added [('t11', '2f1')] (1136.7s)
+   round 29: |cur|=108 added [('2ff', 'ftff')] (1169.8s)
+   round 30: |cur|=111 added [('00f1', 't0f1')] (1201.3s)
+   round 31: |cur|=114 added [('tt2', 't2t')] (1233.7s)
+   round 32: |cur|=117 added [('00t1', '002f')] (1268.1s)
+   round 33: |cur|=120 added [('10f1', '100t')] (1349.0s)
+   round 34: |cur|=123 added [('2f21', '21f1')] (1495.0s)
+   round 35: |cur|=126 added [('t2t', '2tt')] (1653.7s)
+   round 36: |cur|=129 added [('10t2', '102t')] (2065.3s)
+   round 37: |cur|=132 added [('ff01', 'f0f1')] (2130.2s)
+   round 38: |cur|=135 added [('1t02', '11t2')] (2215.8s)
+   round 39: |cur|=138 added [('1f01', '10f1')] (2755.8s)
+   round 40: |cur|=141 added [('0ftf', 'tftf')] (2875.7s)
+   round 41: |cur|=144 added [('f0f2', 'f01f')] (2930.7s)
+   round 42: |cur|=147 added [('f1f2', 'f11f')] (2979.5s)
+=== start mode=mixed worker=2/3 timeout=900 budget=2700 2026-08-16 15:08:02
+mixed pool: 146440 instances, max len 47
+families for this worker: ['mixed-d1-K2-plain-noodd', 'mixed-d1-K3-plain-odd', 'mixed-d2-K2-plain-noodd', 'mixed-d3-K1-plain-odd', 'mixed-d4-K1-plain-noodd', 'mixed-d3-K2-plain-odd', 'mixed-d4-K2-plain-noodd', 'mixed-d4-K3-plain-odd']
+skip mixed-d1-K2-plain-noodd (done)
+skip mixed-d1-K3-plain-odd (done)
+skip mixed-d2-K2-plain-noodd (done)
+skip mixed-d3-K1-plain-odd (done)
+--- family mixed-d4-K1-plain-noodd nvars 88
+   round 1: |cur|=24 added [('0f1', '00t')] (3.8s)
+   round 2: |cur|=27 added [('221', 'ft21')] (8.8s)
+   round 3: |cur|=30 added [('0t1', '02f')] (16.4s)
+   round 4: |cur|=33 added [('0tf', 'ttf')] (24.9s)
+   round 5: |cur|=36 added [('10t', 'ff0t')] (34.8s)
+   round 6: |cur|=39 added [('01f', 't1f')] (54.4s)
+   round 7: |cur|=42 added [('2f2', 'ftf2')] (77.5s)
+   round 8: |cur|=45 added [('011', 't11')] (92.7s)
+   round 9: |cur|=48 added [('f0t', '0ft')] (109.0s)
+   round 10: |cur|=51 added [('f1f', '0tf')] (127.7s)
+   round 11: |cur|=54 added [('001', 't01')] (146.1s)
+   round 12: |cur|=57 added [('1t2', '12t')] (229.9s)
+   round 13: |cur|=60 added [('00t', 't0t')] (261.4s)
+   round 14: |cur|=63 added [('t01', '1t1')] (297.4s)
+   round 15: |cur|=66 added [('02f', '02')] (328.2s)
+   round 16: |cur|=69 added [('201', 'ft01')] (348.9s)
+   round 17: |cur|=72 added [('t11', '2f1')] (370.1s)
+   round 18: |cur|=75 added [('f01', '0f1')] (407.8s)
+   round 19: |cur|=78 added [('t21', '2t1')] (441.2s)
+   round 20: |cur|=81 added [('102', 'ff02')] (491.9s)
+   round 21: |cur|=84 added [('0f01', '00f1')] (534.9s)
+   round 22: |cur|=87 added [('t0t', '1tt')] (572.4s)
+   round 23: |cur|=90 added [('tff', 'tf')] (619.0s)
+   round 24: |cur|=93 added [('0t01', '01t1')] (685.3s)
+   round 25: |cur|=96 added [('2ff', 'ftff')] (953.2s)
+   round 26: |cur|=99 added [('01f1', '010t')] (996.4s)
+   round 27: |cur|=102 added [('f1f1', 'f10t')] (1040.5s)
+   round 28: |cur|=105 added [('12f', '12')] (1076.4s)
+   round 29: |cur|=108 added [('0t11', '02f1')] (1117.0s)
+   round 30: |cur|=111 added [('0f21', '01f1')] (1173.9s)
+   round 31: |cur|=114 added [('0t21', '02t1')] (1225.4s)
+   round 32: |cur|=117 added [('1f01', '10f1')] (1325.5s)
+   round 33: |cur|=120 added [('1f21', '11f1')] (1378.8s)
+   round 34: |cur|=123 added [('12f', 'ff2f')] (1799.8s)
+   round 35: |cur|=126 added [('ff01', 'f0f1')] (1874.9s)
+   round 36: |cur|=129 added [('00t1', '002f')] (2399.3s)
+   round 37: |cur|=132 added [('1t02', '11t2')] (2478.2s)
+   round 38: |cur|=135 added [('01f', '01')] (3018.7s)
+   RESULT mixed-d4-K1-plain-noodd UNKNOWN rounds 38 |inst| 135 maxlen 4 W None 3018.8s budget
+--- family mixed-d3-K2-plain-odd nvars 51
+   round 1: |cur|=29 added [('001', 't01')] (29.5s)
+   round 2: |cur|=32 added [('022', 't22')] (84.9s)
+   round 3: |cur|=35 added [('0f2', '01f')] (139.9s)
+   round 4: |cur|=38 added [('1f2', '11f')] (296.0s)
+   RESULT mixed-d3-K2-plain-odd UNKNOWN rounds 5 |inst| 38 maxlen 3 W 16 1214.0s timeout
+--- family mixed-d4-K2-plain-noodd nvars 88
+   round 1: |cur|=24 added [('0f2', '01f')] (47.1s)
+   round 2: |cur|=27 added [('0f1', '00t')] (114.7s)
+   round 3: |cur|=30 added [('11f', 'ff1f')] (227.9s)
+   round 4: |cur|=33 added [('1ft', 'ffft')] (352.9s)
+   round 5: |cur|=36 added [('122', 'ff22')] (513.9s)
+   round 6: |cur|=39 added [('f11', '0t1')] (705.7s)
+   round 7: |cur|=42 added [('01f', '01')] (915.5s)
+   round 8: |cur|=45 added [('011', 't11')] (1142.9s)
+   round 9: |cur|=48 added [('1t1', '12f')] (1390.0s)
+   round 10: |cur|=51 added [('20t', 'ft0t')] (1610.3s)
+   round 11: |cur|=54 added [('002', 't02')] (1897.3s)
+   round 12: |cur|=57 added [('f0t', '0ft')] (2418.6s)
+   round 13: |cur|=60 added [('2f1', '20t')] (3248.8s)
+   RESULT mixed-d4-K2-plain-noodd UNKNOWN rounds 13 |inst| 60 maxlen 3 W None 3248.8s budget
+--- family mixed-d4-K3-plain-odd nvars 88
+   round 1: |cur|=29 added [('00t', '002')] (220.3s)
+   round 2: |cur|=32 added [('01f', '01')] (480.4s)
+   round 3: |cur|=35 added [('001', 't01')] (532.1s)
+   round 4: |cur|=38 added [('0f2', '01f')] (637.5s)
+   round 5: |cur|=41 added [('011', 't11')] (996.6s)
+   round 6: |cur|=44 added [('012', 't12')] (1389.7s)
+   round 7: |cur|=47 added [('1t2', '12t')] (1744.8s)
+   RESULT mixed-d4-K3-plain-odd UNKNOWN rounds 8 |inst| 47 maxlen 3 W 21 2677.0s timeout
+=== done 2026-08-16 17:57:49

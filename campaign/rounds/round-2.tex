@@ -1,0 +1,1434 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\textwidth}{6.35in}
+\setlength{\oddsidemargin}{0.05in}
+\setlength{\evensidemargin}{0.05in}
+\setlength{\textheight}{8.75in}
+\setlength{\topmargin}{-0.25in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Rset}{\mathcal{R}}
+\newcommand{\Qset}{\mathcal{Q}}
+\newcommand{\Cset}{\mathcal{C}}
+\newcommand{\Ecal}{\mathcal{E}}
+
+\title{Round 2 on the proof front: the exact carry spectrum behind the zero-trace law}
+\author{Principia Math Collatz campaign}
+\date{August 12, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We continue the zero-trace branch opened in Round 1.  The main correction is conceptual and exact.  The scale
+\[
+3^{k-3L}
+\]
+is not the predicted number of nonzero paths in the distinguished zero-carry fibre.  It is the exact average occupancy of all \(81^L\) Chinese-remainder carry fibres.  The fibre relevant to the zero-trace conjecture is the single pinned fibre \(0\), which always contains the trivial orbit and is not a random sample from that average.
+
+We introduce the partial inverse \(G\) of the integer map \(F\), identify a path of length \(L\) in the depth-\(k\) zero-trace graph with an integer admitting \(k\) forward \(F\)-steps and \(L\) backward \(G\)-steps, and derive the exact carry spectrum.  We then prove a digital dissociation theorem for both the forward and backward cylinder sets.  Their native difference sets have exactly \(5^n\) elements, with explicitly factored multiplicities, and their additive energies are exactly \(19^n\).  This gives a rigorous form of the dependence omitted by the Poisson heuristic.  An exact second-moment identity reduces carry fluctuations to a weighted cross-correlation of the two signed digital systems.
+
+Finally, we give an explicit threefold collision in a nonzero carry fibre at \((k,L)=(4,2)\).  Thus a global carry-injectivity proof is impossible even in a range where the zero fibre itself is harmless.  The remaining target is phase-sensitive: one must prove repulsion specifically at carry \(0\), not uniform sparsity across all carries.  No proof of the zero-trace conjecture, and hence no proof of the Collatz conjecture, is claimed.
+\end{abstract}
+
+\section{Chosen front}
+
+\textbf{Chosen front: P3-ZT-CARRY-SPECTRUM, because the corrected \(3^{k-3L}\) scale can be made exact as a carry average, after which the unresolved issue is isolated as a phase-specific correlation problem rather than an independence problem.}
+
+The exact computations supplied between rounds are taken as input: in particular,
+\[
+\ell_{20}=\ell_{21}=\ell_{22}=\ell_{23}=\ell_{24}=7,
+\qquad
+\ell_{25}=8,
+\]
+with the stated direct-iteration witnesses and exhaustive upper tests.  None of the proofs below depends on those numerical values.
+
+\section{Forward and backward cylinder systems}
+
+Define the partial map \(F:\Z_{\ge0}\dashrightarrow\Z_{\ge0}\) by
+\[
+F(x)=
+\begin{cases}
+81x/64,&x\equiv0\pmod{64},\\
+(81x+1)/64,&x\equiv15\pmod{64},\\
+(81x-1)/64,&x\equiv49\pmod{64}.
+\end{cases}
+\]
+It is undefined in the other residue classes modulo \(64\).
+
+Define \(G:\Z_{\ge0}\dashrightarrow\Z_{\ge0}\) by
+\[
+G(y)=
+\begin{cases}
+64y/81,&y\equiv0\pmod{81},\\
+(64y-1)/81,&y\equiv19\pmod{81},\\
+(64y+1)/81,&y\equiv62\pmod{81}.
+\end{cases}
+\]
+It is undefined in the other residue classes modulo \(81\).
+
+\begin{lemma}[Exact partial inverse]
+\label{lem:inverse}
+The maps \(F\) and \(G\) are inverse bijections between their respective domains.  More precisely,
+\[
+G(F(x))=x
+\]
+whenever \(F(x)\) is defined, and
+\[
+F(G(y))=y
+\]
+whenever \(G(y)\) is defined.  Moreover,
+\[
+F(x)>x
+\]
+for every positive \(x\) in the domain of \(F\), while
+\[
+0\le G(y)<y
+\]
+for every positive \(y\) in the domain of \(G\).
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+e(x)=
+\begin{cases}
+0,&x\equiv0\pmod{64},\\
+1,&x\equiv15\pmod{64},\\
+-1,&x\equiv49\pmod{64}.
+\end{cases}
+\]
+Then
+\[
+64F(x)=81x+e(x).
+\]
+Since
+\[
+64^{-1}\equiv19\pmod{81},
+\]
+one has
+\[
+F(x)\equiv19e(x)\pmod{81}.
+\]
+Thus the three possible endpoint residues are
+\[
+0,\qquad 19,\qquad -19\equiv62\pmod{81}.
+\]
+The definition of \(G\) therefore uses the same error \(e(x)\), and
+\[
+G(F(x))
+=
+\frac{64F(x)-e(x)}{81}
+=
+x.
+\]
+
+Conversely, suppose \(G(y)\) is defined and let \(e\in\{-1,0,1\}\) be selected by the residue of \(y\), so that
+\[
+81G(y)=64y-e.
+\]
+Modulo \(64\), this becomes
+\[
+17G(y)\equiv-e\pmod{64}.
+\]
+Since
+\[
+17^{-1}\equiv49\pmod{64},
+\]
+the three possibilities are
+\[
+G(y)\equiv0,\ 15,\ 49\pmod{64}
+\]
+for \(e=0,1,-1\), respectively.  Hence \(F(G(y))\) is defined with error \(e\), and
+\[
+F(G(y))
+=
+\frac{81G(y)+e}{64}
+=
+y.
+\]
+
+For positive \(x\),
+\[
+F(x)-x=\frac{17x+e(x)}{64}.
+\]
+The numerator is at least \(16\), and the quotient is an integer, so it is positive.
+
+For positive \(y\), write
+\[
+G(y)-y=\frac{-17y-e}{81}.
+\]
+If \(e\in\{0,1\}\), the numerator is negative.  If \(e=-1\), then \(y\equiv62\pmod{81}\), so \(y\ge62\), and
+\[
+-17y+1<0.
+\]
+Thus \(G(y)<y\).  Nonnegativity follows directly from the three formulas defining \(G\).
+\end{proof}
+
+For a word
+\[
+e=(e_0,\ldots,e_{n-1})\in\{-1,0,1\}^n,
+\]
+put
+\[
+N_n(e)
+=
+\sum_{j=0}^{n-1}
+e_j81^{n-1-j}64^j.
+\]
+Define \(R_n(e)\in[0,64^n)\) and \(Q_n(e)\in[0,81^n)\) by
+\[
+R_n(e)
+\equiv
+-81^{-n}N_n(e)
+\pmod{64^n}
+\]
+and
+\[
+Q_n(e)
+\equiv
+64^{-n}N_n(e)
+\pmod{81^n}.
+\]
+
+Let
+\[
+\Rset_n=\{R_n(e):e\in\{-1,0,1\}^n\}
+\]
+and
+\[
+\Qset_n=\{Q_n(e):e\in\{-1,0,1\}^n\}.
+\]
+
+\begin{proposition}[Forward and backward realization classes]
+\label{prop:cylinders}
+For every \(n\ge1\), the following statements hold.
+
+\begin{enumerate}
+\item A nonnegative integer \(x\) admits \(n\) successive applications of \(F\) if and only if
+\[
+x\bmod64^n\in\Rset_n.
+\]
+The error word is unique.
+
+\item A nonnegative integer \(y\) admits \(n\) successive applications of \(G\) if and only if
+\[
+y\bmod81^n\in\Qset_n.
+\]
+The corresponding forward error word is unique.
+
+\item The maps
+\[
+e\longmapsto R_n(e),
+\qquad
+e\longmapsto Q_n(e)
+\]
+are injective.  Consequently,
+\[
+|\Rset_n|=|\Qset_n|=3^n.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose first that \(x\) follows the error word \(e\) for \(n\) steps.  Repeated substitution into
+\[
+64x_{j+1}=81x_j+e_j
+\]
+gives
+\[
+64^nF^n(x)=81^nx+N_n(e).
+\]
+Therefore
+\[
+81^nx+N_n(e)\equiv0\pmod{64^n},
+\]
+which is equivalent to
+\[
+x\equiv R_n(e)\pmod{64^n}.
+\]
+
+We prove the converse by induction on \(n\).  For \(n=1\), the congruences
+\[
+81x+e_0\equiv0\pmod{64}
+\]
+give precisely
+\[
+x\equiv0,\ 15,\ 49\pmod{64}
+\]
+for \(e_0=0,1,-1\), respectively.
+
+Now let \(n\ge2\), and assume
+\[
+81^nx+N_n(e)\equiv0\pmod{64^n}.
+\]
+Reducing modulo \(64\) gives
+\[
+81^nx+e_081^{n-1}\equiv0\pmod{64}.
+\]
+After multiplication by the inverse of \(81^{n-1}\), this becomes
+\[
+81x+e_0\equiv0\pmod{64}.
+\]
+Thus the first \(F\)-step is defined with error \(e_0\).  Put
+\[
+x_1=\frac{81x+e_0}{64}.
+\]
+If
+\[
+\widetilde e=(e_1,\ldots,e_{n-1}),
+\]
+then
+\[
+N_n(e)=e_081^{n-1}+64N_{n-1}(\widetilde e).
+\]
+Hence
+\begin{align*}
+64\left(81^{n-1}x_1+N_{n-1}(\widetilde e)\right)
+&=
+81^nx+e_081^{n-1}+64N_{n-1}(\widetilde e)\\
+&=
+81^nx+N_n(e).
+\end{align*}
+The right side is divisible by \(64^n\), so
+\[
+81^{n-1}x_1+N_{n-1}(\widetilde e)
+\equiv0\pmod{64^{n-1}}.
+\]
+The induction hypothesis supplies the remaining \(n-1\) steps.  This proves the first assertion.
+
+For the backward statement, suppose \(y=x_n\) is the endpoint of a forward segment with errors \(e_0,\ldots,e_{n-1}\).  The affine identity gives
+\[
+64^ny-81^nx_0=N_n(e),
+\]
+and therefore
+\[
+64^ny-N_n(e)\equiv0\pmod{81^n}.
+\]
+This is equivalent to
+\[
+y\equiv Q_n(e)\pmod{81^n}.
+\]
+
+Conversely, assume this congruence.  Reducing modulo \(81\), only the final term of \(N_n(e)\) remains, and one obtains
+\[
+64^ny-e_{n-1}64^{n-1}\equiv0\pmod{81}.
+\]
+Since \(64^{n-1}\) is invertible modulo \(81\),
+\[
+64y-e_{n-1}\equiv0\pmod{81}.
+\]
+Thus \(G(y)\) is defined with final error \(e_{n-1}\).  Put
+\[
+y_{n-1}=\frac{64y-e_{n-1}}{81}.
+\]
+Removing the final term from \(N_n(e)\) and dividing the congruence by \(81\) gives the corresponding congruence modulo \(81^{n-1}\) for the prefix
+\[
+(e_0,\ldots,e_{n-2}).
+\]
+Induction yields the remaining backward steps.
+
+Every point in either domain has a unique residue at each step, so its error word is unique.  Different words therefore give different realization classes.  There are \(3^n\) words, proving the cardinalities.
+\end{proof}
+
+\begin{remark}[Round 1 input]
+\label{rem:round1}
+Round 1 proved and we assume here that the depth-\(k\) zero-trace graph is isomorphic to the graph on \(\Rset_k\) in which a vertex \(x\) has an edge to \(F(x)\) precisely when \(F(x)\in\Rset_k\).  Equivalently, a positive vertex starts a path of length at least \(L\) precisely when it survives \(k+L\) applications of \(F\) and
+\[
+F^L(x)<64^k.
+\]
+\end{remark}
+
+\section{The exact carry law}
+
+Let \(N(k,L)\) denote the number of nonzero vertices of the depth-\(k\) zero-trace graph from which a directed path of length at least \(L\) begins.
+
+\begin{theorem}[Midpoint intersection formula]
+\label{thm:midpoint}
+For every \(k,L\ge1\),
+\[
+N(k,L)+1
+=
+\#\left\{
+y\in\Rset_k:
+y\bmod81^L\in\Qset_L
+\right\}.
+\]
+Equivalently, \(N(k,L)+1\) is the number of integers
+\[
+0\le y<64^k
+\]
+which admit \(k\) forward \(F\)-steps and \(L\) backward \(G\)-steps.
+\end{theorem}
+
+\begin{proof}
+Let \(x\) be the initial vertex of a path of length at least \(L\), and put
+\[
+y=F^L(x).
+\]
+By the Round 1 residence formula, every state from \(x\) through \(y\) lies below \(64^k\), and \(y\) survives a further \(k\) applications of \(F\).  Thus
+\[
+y\in\Rset_k.
+\]
+By Lemma \ref{lem:inverse},
+\[
+G^L(y)=x,
+\]
+so \(y\) admits \(L\) backward steps.  Proposition \ref{prop:cylinders} gives
+\[
+y\bmod81^L\in\Qset_L.
+\]
+
+Conversely, suppose
+\[
+y\in\Rset_k
+\]
+and \(G^L(y)\) is defined.  Put
+\[
+x=G^L(y).
+\]
+If \(y>0\), Lemma \ref{lem:inverse} gives
+\[
+0\le x<y<64^k.
+\]
+Moreover,
+\[
+F^L(x)=y,
+\]
+and \(y\) survives \(k\) further steps.  Hence \(x\) survives \(k+L\) steps.  The intermediate states
+\[
+x,F(x),\ldots,F^L(x)=y
+\]
+form a strictly increasing sequence bounded above by \(y<64^k\).  The Round 1 residence formula therefore gives a path of length at least \(L\).
+
+The case \(y=0\) corresponds to the all-zero word and the zero vertex.  Including it gives the extra \(1\) on the left side.  The two constructions are inverse because \(F\) and \(G\) are partial inverses.
+\end{proof}
+
+Put
+\[
+A=64^k,
+\qquad
+M=81^L.
+\]
+For each pair
+\[
+(r,q)\in\Rset_k\times\Qset_L,
+\]
+the Chinese remainder theorem gives a unique integer
+\[
+Y(r,q)\in[0,AM)
+\]
+such that
+\[
+Y(r,q)\equiv r\pmod A,
+\qquad
+Y(r,q)\equiv q\pmod M.
+\]
+Define its carry by
+\[
+c(r,q)=\left\lfloor\frac{Y(r,q)}{A}\right\rfloor
+\in\{0,1,\ldots,M-1\}.
+\]
+For \(0\le c<M\), put
+\[
+C_{k,L}(c)
+=
+\#\left\{
+(r,q)\in\Rset_k\times\Qset_L:
+c(r,q)=c
+\right\}.
+\]
+
+\begin{theorem}[Exact carry-spectrum law]
+\label{thm:carry-law}
+For every \(k,L\ge1\), the carry spectrum satisfies
+\[
+C_{k,L}(0)=N(k,L)+1,
+\]
+\[
+\sum_{c=0}^{81^L-1}C_{k,L}(c)=3^{k+L},
+\]
+and
+\[
+\frac{1}{81^L}
+\sum_{c=0}^{81^L-1}C_{k,L}(c)
+=
+3^{k-3L}.
+\]
+Furthermore,
+\[
+c(r,q)
+\equiv
+(q-r)64^{-k}
+\pmod{81^L}.
+\]
+\end{theorem}
+
+\begin{proof}
+If \(c(r,q)=0\), then
+\[
+0\le Y(r,q)<A.
+\]
+Since
+\[
+Y(r,q)\equiv r\pmod A
+\]
+and both \(Y(r,q)\) and \(r\) lie in \([0,A)\), one has
+\[
+Y(r,q)=r.
+\]
+The second congruence then says
+\[
+r\bmod M=q\in\Qset_L.
+\]
+Theorem \ref{thm:midpoint} proves
+\[
+C_{k,L}(0)=N(k,L)+1.
+\]
+
+Every pair \((r,q)\) has exactly one Chinese-remainder lift and hence exactly one carry.  Proposition \ref{prop:cylinders} gives
+\[
+|\Rset_k\times\Qset_L|
+=
+3^k3^L
+=
+3^{k+L}.
+\]
+Summing the carry multiplicities proves the second identity.  Division by
+\[
+M=81^L=3^{4L}
+\]
+gives
+\[
+\frac{3^{k+L}}{3^{4L}}
+=
+3^{k-3L}.
+\]
+
+Finally, write
+\[
+Y(r,q)=r+Ac(r,q).
+\]
+Reduction modulo \(M\) gives
+\[
+r+Ac(r,q)\equiv q\pmod M.
+\]
+Since \(A=64^k\) is invertible modulo \(M\),
+\[
+c(r,q)
+\equiv
+(q-r)A^{-1}
+\equiv
+(q-r)64^{-k}
+\pmod M.
+\]
+\end{proof}
+
+\begin{corollary}[The critical values are averages, not zero-fibre predictions]
+\label{cor:critical-mean}
+Let
+\[
+L_k=\left\lfloor\frac{k+1}{3}\right\rfloor+1,
+\]
+the first path length forbidden by the zero-trace conjecture.  Then the exact average carry occupancy is
+\[
+\frac1{81^{L_k}}\sum_c C_{k,L_k}(c)
+=
+\begin{cases}
+1/27,&k\equiv0\pmod3,\\
+1/9,&k\equiv1\pmod3,\\
+1/81,&k\equiv2\pmod3.
+\end{cases}
+\]
+In contrast,
+\[
+C_{k,L_k}(0)\ge1
+\]
+for every \(k\), because the pair \((0,0)\) always lies in the zero-carry fibre.
+\end{corollary}
+
+\begin{proof}
+Write \(k=3m+r\), where \(r\in\{0,1,2\}\).
+
+If \(r=0\), then \(L_k=m+1\), so
+\[
+k-3L_k=3m-3m-3=-3.
+\]
+If \(r=1\), then \(L_k=m+1\), so
+\[
+k-3L_k=3m+1-3m-3=-2.
+\]
+If \(r=2\), then \(L_k=m+2\), so
+\[
+k-3L_k=3m+2-3m-6=-4.
+\]
+The three values follow from Theorem \ref{thm:carry-law}.
+
+The all-zero forward word gives
+\[
+0\in\Rset_k,
+\]
+and the all-zero backward word gives
+\[
+0\in\Qset_{L_k}.
+\]
+Their Chinese-remainder lift is \(0\), whose carry is \(0\).  Hence
+\[
+C_{k,L_k}(0)\ge1.
+\]
+\end{proof}
+
+The numerical factor
+\[
+\frac{3}{64}\frac{64}{81}=\frac1{27}
+\]
+therefore identifies the correct scale, but its exact mathematical meaning is the average in Theorem \ref{thm:carry-law}.  It is not an independent per-step probability governing the distinguished carry \(0\).
+
+\begin{proposition}[A first-moment no-go statement]
+\label{prop:first-moment-nogo}
+Let \(M_j,n_j\) be integers satisfying
+\[
+2\le n_j<M_j
+\]
+for every \(j\).  Even if
+\[
+\sum_j\frac{n_j}{M_j}=\infty,
+\]
+knowledge only of the totals
+\[
+\sum_{c=0}^{M_j-1}D_j(c)=n_j
+\]
+cannot determine whether \(D_j(0)=1\) for every \(j\) or whether \(D_j(0)\ge2\) for infinitely many \(j\).
+
+In particular, the divergence of the sum of the critical carry averages does not imply a violation of the zero-trace conjecture.
+\end{proposition}
+
+\begin{proof}
+For every \(j\), define
+\[
+D_j(0)=1,
+\]
+\[
+D_j(c)=1
+\quad
+(1\le c\le n_j-1),
+\]
+and
+\[
+D_j(c)=0
+\quad
+(n_j\le c<M_j).
+\]
+Since \(n_j<M_j\), this is well-defined, and
+\[
+\sum_cD_j(c)=n_j.
+\]
+Nevertheless,
+\[
+D_j(0)=1
+\]
+for every \(j\).
+
+Define a second family by
+\[
+D'_j(0)=2,
+\]
+\[
+D'_j(c)=1
+\quad
+(1\le c\le n_j-2),
+\]
+and
+\[
+D'_j(c)=0
+\]
+elsewhere.  Again
+\[
+\sum_cD'_j(c)=n_j,
+\]
+but now
+\[
+D'_j(0)=2
+\]
+for every \(j\).
+
+Thus the same sequence of totals and the same divergent sequence of averages are compatible with both opposite behaviours at the distinguished fibre.  Additional phase-sensitive information is necessary.
+\end{proof}
+
+\section{Digital dissociation and exact additive energy}
+
+For
+\[
+\delta=(\delta_0,\ldots,\delta_{n-1})
+\in\{-2,-1,0,1,2\}^n,
+\]
+define
+\[
+\Delta_n^{R}(\delta)
+\equiv
+-81^{-n}
+\sum_{j=0}^{n-1}
+\delta_j81^{n-1-j}64^j
+\pmod{64^n}
+\]
+and
+\[
+\Delta_n^{Q}(\delta)
+\equiv
+64^{-n}
+\sum_{j=0}^{n-1}
+\delta_j81^{n-1-j}64^j
+\pmod{81^n}.
+\]
+
+For \(d\in\{-2,-1,0,1,2\}\), put
+\[
+w(d)=3-|d|.
+\]
+Thus
+\[
+w(-2),w(-1),w(0),w(1),w(2)
+=
+1,2,3,2,1.
+\]
+
+\begin{theorem}[Digital dissociation]
+\label{thm:dissociation}
+For every \(n\ge1\), both maps
+\[
+\delta\longmapsto\Delta_n^R(\delta)
+\]
+and
+\[
+\delta\longmapsto\Delta_n^Q(\delta)
+\]
+are injective on
+\[
+\{-2,-1,0,1,2\}^n.
+\]
+
+Moreover, if
+\[
+\nu_n^R(a)
+=
+\#\left\{
+(e,e')\in\{-1,0,1\}^{2n}:
+R_n(e)-R_n(e')\equiv a\pmod{64^n}
+\right\},
+\]
+then
+\[
+\nu_n^R\bigl(\Delta_n^R(\delta)\bigr)
+=
+\prod_{j=0}^{n-1}w(\delta_j).
+\]
+The analogous formula holds for
+\[
+\nu_n^Q(a)
+=
+\#\left\{
+(e,e')\in\{-1,0,1\}^{2n}:
+Q_n(e)-Q_n(e')\equiv a\pmod{81^n}
+\right\}.
+\]
+\end{theorem}
+
+\begin{proof}
+We first prove injectivity of \(\Delta_n^R\).  Suppose
+\[
+\Delta_n^R(\delta)=\Delta_n^R(\delta').
+\]
+Put
+\[
+\gamma_j=\delta_j-\delta'_j.
+\]
+If \(\gamma\ne0\), let \(j_0\) be the least index for which \(\gamma_{j_0}\ne0\).  Then
+\[
+\gamma_{j_0}\in\{-4,-3,-2,-1,1,2,3,4\},
+\]
+so
+\[
+\nu_2(\gamma_{j_0})\le2.
+\]
+After removing the invertible factor \(-81^{-n}\), the difference of the two encoded residues is represented by
+\[
+64^{j_0}
+\left(
+\gamma_{j_0}81^{n-1-j_0}
++
+\sum_{j=j_0+1}^{n-1}
+\gamma_j81^{n-1-j}64^{j-j_0}
+\right).
+\]
+The first term inside parentheses has \(2\)-adic valuation at most \(2\).  Every term in the sum is divisible by \(64\), hence has \(2\)-adic valuation at least \(6\).  Therefore the parenthesized integer has \(2\)-adic valuation at most \(2\), and the full difference has valuation at most
+\[
+6j_0+2<6n.
+\]
+It cannot vanish modulo
+\[
+64^n=2^{6n}.
+\]
+This contradiction proves injectivity of \(\Delta_n^R\).
+
+For \(\Delta_n^Q\), suppose again that the encodings of \(\delta\) and \(\delta'\) agree, and let \(j_1\) be the greatest index with \(\gamma_{j_1}\ne0\).  Factoring out the lowest power of \(81\) gives
+\[
+81^{n-1-j_1}
+\left(
+\gamma_{j_1}64^{j_1}
++
+\sum_{j=0}^{j_1-1}
+\gamma_j81^{j_1-j}64^j
+\right).
+\]
+The first term inside parentheses has \(3\)-adic valuation at most \(1\), because every nonzero integer between \(-4\) and \(4\) has \(3\)-adic valuation at most \(1\).  Every other term is divisible by \(81\), hence has \(3\)-adic valuation at least \(4\).  The full difference consequently has \(3\)-adic valuation at most
+\[
+4(n-1-j_1)+1<4n.
+\]
+It cannot vanish modulo
+\[
+81^n=3^{4n}.
+\]
+Thus \(\Delta_n^Q\) is injective.
+
+Now fix \(\delta\).  At a single coordinate, the number of ordered pairs
+\[
+(e_j,e'_j)\in\{-1,0,1\}^2
+\]
+satisfying
+\[
+e_j-e'_j=\delta_j
+\]
+is exactly
+\[
+3-|\delta_j|=w(\delta_j).
+\]
+Coordinates are independent, so the number of word pairs with difference word \(\delta\) is
+\[
+\prod_{j=0}^{n-1}w(\delta_j).
+\]
+The closed formulas for \(R_n\) and \(Q_n\) show that all such pairs give the residues
+\[
+\Delta_n^R(\delta)
+\]
+and
+\[
+\Delta_n^Q(\delta),
+\]
+respectively.  Injectivity shows that no other signed word contributes to those residues.
+\end{proof}
+
+For a subset \(X\) of a finite abelian group, define its additive energy by
+\[
+\Ecal(X)
+=
+\#\left\{
+(x_1,x_2,x_3,x_4)\in X^4:
+x_1-x_2=x_3-x_4
+\right\}.
+\]
+
+\begin{corollary}[Exact difference support and energy]
+\label{cor:energy}
+For every \(n\ge1\),
+\[
+|\Rset_n-\Rset_n|=|\Qset_n-\Qset_n|=5^n
+\]
+in their native groups
+\[
+\Z/64^n\Z
+\quad\text{and}\quad
+\Z/81^n\Z.
+\]
+Their additive energies are
+\[
+\Ecal(\Rset_n)=\Ecal(\Qset_n)=19^n.
+\]
+In particular,
+\[
+\frac{\Ecal(\Qset_n)}{|\Qset_n|^2}
+=
+\left(\frac{19}{9}\right)^n.
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem \ref{thm:dissociation} gives one distinct difference residue for each signed word in
+\[
+\{-2,-1,0,1,2\}^n.
+\]
+There are \(5^n\) such words.
+
+Additive energy is the sum of the squares of all ordered difference multiplicities.  Theorem \ref{thm:dissociation} therefore gives
+\begin{align*}
+\Ecal(\Qset_n)
+&=
+\sum_{\delta\in\{-2,-1,0,1,2\}^n}
+\prod_{j=0}^{n-1}w(\delta_j)^2\\
+&=
+\left(
+\sum_{d=-2}^{2}w(d)^2
+\right)^n.
+\end{align*}
+Since
+\[
+\sum_{d=-2}^{2}w(d)^2
+=
+1^2+2^2+3^2+2^2+1^2
+=
+19,
+\]
+one obtains
+\[
+\Ecal(\Qset_n)=19^n.
+\]
+The proof for \(\Rset_n\) is identical.
+
+Finally,
+\[
+|\Qset_n|^2=3^{2n}=9^n,
+\]
+which gives the ratio.
+\end{proof}
+
+The factor
+\[
+\left(\frac{19}{9}\right)^n
+\]
+is an exact quantitative dependence: the excess repeated-difference mass grows exponentially with the word length.
+
+\begin{proposition}[Comparison with an independent-residue model]
+\label{prop:bernoulli}
+Let \(M=81^n\), and let \(\mathbf B\subset\Z/M\Z\) be the Bernoulli random set in which each residue is selected independently with probability
+\[
+p=3^{-3n}.
+\]
+Then
+\[
+\mathbb E|\mathbf B|=3^n
+\]
+and
+\[
+\mathbb E\Ecal(\mathbf B)\le8\cdot9^n.
+\]
+Consequently,
+\[
+\frac{\Ecal(\Qset_n)}
+{\mathbb E\Ecal(\mathbf B)}
+\ge
+\frac18\left(\frac{19}{9}\right)^n.
+\]
+\end{proposition}
+
+\begin{proof}
+The expected cardinality is
+\[
+Mp
+=
+3^{4n}3^{-3n}
+=
+3^n.
+\]
+
+An additive quadruple satisfies
+\[
+x_1-x_2=x_3-x_4.
+\]
+There are at most \(M^3\) ordered solutions in total, because \(x_4\) is determined by \(x_1,x_2,x_3\).
+
+The contribution from quadruples with four distinct entries is at most
+\[
+M^3p^4
+=
+3^{12n}3^{-12n}
+=
+1.
+\]
+
+The all-equal quadruples contribute
+\[
+Mp=3^n.
+\]
+
+Every remaining quadruple has at least one equality between two of its four positions and has at least two distinct entries.  Choose the equal pair in at most six ways.  Once that pair and two free values are chosen, there are at most \(M^2\) possibilities.  Hence there are at most
+\[
+6M^2
+\]
+such quadruples.  Each is present with probability at most \(p^2\), so their expected contribution is at most
+\[
+6M^2p^2
+=
+6\cdot3^{8n}3^{-6n}
+=
+6\cdot9^n.
+\]
+Therefore
+\[
+\mathbb E\Ecal(\mathbf B)
+\le
+1+3^n+6\cdot9^n
+\le
+8\cdot9^n.
+\]
+Corollary \ref{cor:energy} gives the final inequality.
+\end{proof}
+
+Thus a model in which the backward admissible residues are independent uniform points has the correct one-point density but the wrong pair-correlation structure by an exponential factor.
+
+\section{The exact second moment of the carry spectrum}
+
+For \(d\in\Z/81^L\Z\), define
+\[
+\alpha_{k,L}(d)
+=
+\#\left\{
+(r,r')\in\Rset_k^2:
+r'-r\equiv d\pmod{81^L}
+\right\},
+\]
+and
+\[
+\beta_L(d)
+=
+\#\left\{
+(q,q')\in\Qset_L^2:
+q'-q\equiv d\pmod{81^L}
+\right\}.
+\]
+
+\begin{theorem}[Carry second-moment identity]
+\label{thm:second-moment}
+For every \(k,L\ge1\),
+\[
+\sum_{c=0}^{81^L-1}C_{k,L}(c)^2
+=
+\sum_{d\in\Z/81^L\Z}
+\alpha_{k,L}(d)\beta_L(d).
+\]
+Equivalently,
+\[
+\sum_{c=0}^{81^L-1}C_{k,L}(c)^2
+=
+\sum_{\delta\in\{-2,-1,0,1,2\}^L}
+\left(
+\prod_{j=0}^{L-1}w(\delta_j)
+\right)
+\alpha_{k,L}\bigl(\Delta_L^Q(\delta)\bigr).
+\]
+If
+\[
+\lambda_{k,L}=3^{k-3L},
+\]
+then
+\[
+\frac1{81^L}
+\sum_{c=0}^{81^L-1}
+\left(C_{k,L}(c)-\lambda_{k,L}\right)^2
+=
+\frac1{81^L}
+\sum_d\alpha_{k,L}(d)\beta_L(d)
+-
+\lambda_{k,L}^2.
+\]
+\end{theorem}
+
+\begin{proof}
+The left side of the first identity counts ordered pairs
+\[
+\bigl((r,q),(r',q')\bigr)
+\in
+(\Rset_k\times\Qset_L)^2
+\]
+having the same carry.  By Theorem \ref{thm:carry-law}, equality of the carries is equivalent to
+\[
+(q-r)64^{-k}
+\equiv
+(q'-r')64^{-k}
+\pmod{81^L}.
+\]
+Multiplication by \(64^k\) gives
+\[
+q-r\equiv q'-r'\pmod{81^L},
+\]
+or
+\[
+r'-r\equiv q'-q\pmod{81^L}.
+\]
+For each residue \(d\), there are
+\[
+\alpha_{k,L}(d)
+\]
+choices of the ordered pair \((r,r')\) and
+\[
+\beta_L(d)
+\]
+choices of \((q,q')\).  Summation over \(d\) proves
+\[
+\sum_cC_{k,L}(c)^2
+=
+\sum_d\alpha_{k,L}(d)\beta_L(d).
+\]
+
+Theorem \ref{thm:dissociation} gives
+\[
+\beta_L\bigl(\Delta_L^Q(\delta)\bigr)
+=
+\prod_{j=0}^{L-1}w(\delta_j)
+\]
+and shows that these are all the nonzero values of \(\beta_L\).  Substitution yields the second formula.
+
+Finally, Theorem \ref{thm:carry-law} gives
+\[
+\frac1{81^L}\sum_cC_{k,L}(c)
+=
+\lambda_{k,L}.
+\]
+Expanding the square,
+\begin{align*}
+\frac1{81^L}\sum_c(C_{k,L}(c)-\lambda_{k,L})^2
+&=
+\frac1{81^L}\sum_cC_{k,L}(c)^2\\
+&\quad
+-
+2\lambda_{k,L}
+\frac1{81^L}\sum_cC_{k,L}(c)
++
+\lambda_{k,L}^2\\
+&=
+\frac1{81^L}\sum_d\alpha_{k,L}(d)\beta_L(d)
+-
+\lambda_{k,L}^2.
+\end{align*}
+\end{proof}
+
+Theorem \ref{thm:second-moment} identifies the precise missing input in the corrected heuristic.  The first moment is forced by cardinality.  The fluctuations are governed by coincidences between the \(64\)-adic signed difference system of \(\Rset_k\) and the \(81\)-adic signed difference system of \(\Qset_L\).  No independence assertion follows from the first moment.
+
+\section{A global-injectivity route fails}
+
+A tempting strengthening would assert that the carry map
+\[
+(r,q)\longmapsto c(r,q)
+\]
+is injective whenever the number of pairs is below the number of carry values.  This is false before the first difficult depths.
+
+Write \(+\), \(0\), and \(-\) for errors \(1,0,-1\).
+
+\begin{proposition}[An explicit threefold carry collision]
+\label{prop:triple-collision}
+At
+\[
+(k,L)=(4,2),
+\]
+the carry fibre
+\[
+c=2969
+\]
+contains at least three distinct pairs.
+
+More precisely, the following right words and left words give three distinct pairs in
+\[
+\Rset_4\times\Qset_2:
+\]
+\[
+\begin{array}{c|c|c|c}
+\text{right word}&r&\text{left word}&q\\ \hline
++000&15120207&+-&6380\\
+++0+&6299407&-0&3564\\
+-+++&4300913&++&6175.
+\end{array}
+\]
+All three pairs have carry \(2969\).
+\end{proposition}
+
+\begin{proof}
+The first right word is certified by
+\[
+15120207
+\xrightarrow{+}
+19136512
+\xrightarrow{0}
+24219648
+\xrightarrow{0}
+30652992
+\xrightarrow{0}
+38795193,
+\]
+where every arrow
+\[
+a\xrightarrow{e}b
+\]
+means
+\[
+64b=81a+e.
+\]
+Thus
+\[
+15120207\in\Rset_4.
+\]
+
+The second right word is certified by
+\[
+6299407
+\xrightarrow{+}
+7972687
+\xrightarrow{+}
+10090432
+\xrightarrow{0}
+12770703
+\xrightarrow{+}
+16162921.
+\]
+The third is certified by
+\[
+4300913
+\xrightarrow{-}
+5443343
+\xrightarrow{+}
+6889231
+\xrightarrow{+}
+8719183
+\xrightarrow{+}
+11035216.
+\]
+Hence all three displayed \(r\)'s lie in \(\Rset_4\).
+
+The three left endpoints are certified by
+\[
+3983
+\xrightarrow{+}
+5041
+\xrightarrow{-}
+6380,
+\]
+\[
+2225
+\xrightarrow{-}
+2816
+\xrightarrow{0}
+3564,
+\]
+and
+\[
+3855
+\xrightarrow{+}
+4879
+\xrightarrow{+}
+6175.
+\]
+Therefore
+\[
+6380,3564,6175\in\Qset_2
+\]
+with the stated words.
+
+Now
+\[
+81^2=6561,
+\]
+and the three differences satisfy
+\[
+6380-15120207
+=
+-2304\cdot6561+2717,
+\]
+\[
+3564-6299407
+=
+-960\cdot6561+2717,
+\]
+and
+\[
+6175-4300913
+=
+-655\cdot6561+2717.
+\]
+Thus
+\[
+q-r\equiv2717\pmod{6561}
+\]
+for all three pairs.
+
+Also,
+\[
+64^4
+=
+2557\cdot6561+739,
+\]
+and
+\[
+739\cdot2969
+=
+334\cdot6561+2717.
+\]
+Consequently,
+\[
+64^4\cdot2969\equiv2717\pmod{6561}.
+\]
+The carry formula in Theorem \ref{thm:carry-law} therefore gives
+\[
+c(r,q)=2969
+\]
+for each pair.
+\end{proof}
+
+\begin{corollary}[Death of global carry injectivity]
+\label{cor:global-injectivity-dead}
+No proof of the zero-trace conjecture can proceed by establishing that every carry fibre has cardinality at most one.  That assertion already fails at \((k,L)=(4,2)\).
+\end{corollary}
+
+\begin{proof}
+Proposition \ref{prop:triple-collision} exhibits a carry fibre containing three distinct pairs.  Therefore the universal bound
+\[
+C_{k,L}(c)\le1
+\]
+is false.
+\end{proof}
+
+The surviving target is strictly narrower:
+\[
+C_{k,L}(0)=1
+\qquad
+\text{whenever }
+k\le3L-2.
+\]
+This is equivalent to the zero-trace conjecture, but it is a statement about one arithmetically distinguished phase.  The average law, the global energy, and global carry injectivity do not settle it.
+
+\section{Assessment}
+
+The correction proposed between rounds is partly right and partly wrong.
+
+The right part is the scale.  The factor
+\[
+\frac1{27}
+\]
+per additional path step is exact at the level of average carry occupancy.  It can be derived without fitting and without an equidistribution assumption.
+
+The wrong part is the probabilistic interpretation.  The identity
+\[
+3^{k-3L}
+\]
+does not give \(N(k,L)\), and it does not give the expected number of nonzero points in the actual zero fibre.  It is the mean of
+\[
+C_{k,L}(c)
+\]
+over all \(81^L\) carry phases.  The phase used by the zero-trace problem is fixed at \(c=0\), and this fibre is pinned by the trivial pair \((0,0)\).  At every first-forbidden length its occupancy is already at least \(1\), even though the all-phase mean is \(1/27\), \(1/9\), or \(1/81\).
+
+The statement that a divergent sum of these means predicts infinitely many violations is therefore unsupported.  Proposition \ref{prop:first-moment-nogo} records the exact logical failure: divergent first moments alone allow both perpetual absence and perpetual presence in the distinguished fibre.
+
+The dependence is not merely philosophical.  The backward cylinder set has exact additive energy
+\[
+19^L,
+\]
+rather than a quantity of order \(9^L\).  The signed difference words are digitally dissociated, but their multiplicities factor as
+\[
+1,2,3,2,1
+\]
+at every coordinate, producing exponentially many repeated differences.  Theorem \ref{thm:second-moment} shows that carry fluctuations are controlled by a cross-correlation of this structured \(81\)-adic difference system with the \(64\)-adic start system.
+
+This round does not prove
+\[
+\ell_k\le\left\lfloor\frac{k+1}{3}\right\rfloor.
+\]
+It also does not prove that the conjecture fails.  The exact computations through \(k=25\) remain compatible with both possibilities.  What has changed is the mathematical target: the branch is no longer an equidistribution problem and no longer a global injectivity problem.  It is a pinned carry-repulsion problem.
+
+Even a proof of the pinned statement would settle only the recurrent \(81/64\) subsystem.  The global synchronization theorem connecting every hypothetical least Collatz counterexample to this subsystem remains absent.
+
+\section{Next-round directive}
+
+Continue on branch \texttt{P3-ZT-RESIDENCE}, but rename the active subproblem \texttt{P3-ZT-PINNED-CARRY}.  Use the notation and results of this round: \(G\) is the partial inverse of \(F\), \(C_{k,L}(c)\) is the CRT carry spectrum, and
+\[
+C_{k,L}(0)=N(k,L)+1.
+\]
+Do not use \(3^{k-3L}\) as a prediction for the zero fibre.  It is only the exact all-carry average.
+
+First, modify \texttt{compute/zt\_mitm\_deep.py} into a count-all program.  At each head leaf, replace the existence test by
+\[
+\texttt{bisect\_right(gam,b)-bisect\_left(gam,a)}
+\]
+on each non-wrapping interval, sum all completions, and subtract the unique all-zero completion only when it is actually included.  Retain a slow witness-recovery mode for cells whose total count is at most \(1000\).  Cross-check every count against the complete traversal for all \(k\le14\) and every \(L\le\ell_k+1\).
+
+Then compute exact values of \(N(k,L)\), not merely existence, for
+\[
+\begin{aligned}
+&(20,7),(20,8),\\
+&(21,7),(21,8),\\
+&(22,7),(22,8),\\
+&(23,7),(23,8),\\
+&(24,7),(24,8),\\
+&(25,8),(25,9).
+\end{aligned}
+\]
+For every run record the count, one witness when the count is positive, the split \(h\), source SHA-256, output SHA-256, Python version, peak resident memory, and elapsed wall-clock time.
+
+Next, implement \texttt{compute/zt\_carry\_small.py}.  For
+\[
+(k,L)\in
+\{(4,2),(5,2),(6,2),(7,3),(8,3),(9,3),(10,3)\},
+\]
+enumerate the complete carry spectrum and record
+\[
+\sum_cC_{k,L}(c),
+\quad
+C_{k,L}(0),
+\quad
+\max_cC_{k,L}(c),
+\quad
+\#\{c:C_{k,L}(c)>0\},
+\]
+\[
+\sum_cC_{k,L}(c)^2,
+\qquad
+\sum_cC_{k,L}(c)\bigl(C_{k,L}(c)-1\bigr).
+\]
+Independently construct \(\Qset_L-\Qset_L\), verify that its support has size \(5^L\), verify the multiplicity formula
+\[
+\prod_j(3-|\delta_j|),
+\]
+and verify its energy \(19^L\).  Verify the second-moment identity of Theorem 5.1 exactly on every listed pair.
+
+The theoretical target is now the phase-sensitive statement
+\[
+C_{k,L}(0)=1
+\qquad
+(k\le3L-2).
+\]
+Seek a recursion for the pinned value \(C_{k,L}(0)\), or for a finite neighbourhood of carries around \(0\), under the critical renormalization
+\[
+(k,L)\longmapsto(k+3,L+1).
+\]
+Track the actual carry phase throughout the four-symbol block.  Do not replace it by an averaged or translation-invariant statistic.  The explicit threefold collision at \((4,2)\) proves that a theorem bounding every carry fibre by \(1\) is false and must not be pursued.
+
+After the count-all validation is complete, spend the available deep-search budget on
+\[
+(k,L)=(28,10),
+\]
+the next \(k\equiv1\pmod3\) stress test.  On the present node use the existing streaming split
+\[
+h=22
+\]
+and run
+\[
+\texttt{python zt\_mitm\_deep.py 28 --L 10 --h 22}.
+\]
+Also run \(L=9\) to produce a matching lower-bound witness if one is not already available.  Treat the \(k=28\) result as a finite test only, not as evidence from a divergent Poisson sum.
+
+Edit \texttt{COLLATZ\_MAP.md} as follows.  Record the exact inverse map \(G\), the midpoint intersection formula, the carry-spectrum law, the exact difference support \(5^n\), the exact energy \(19^n\), and the second-moment identity as proved in Round 2.  Replace the statement that the corrected law predicts Conjecture 3.12 is false by the precise statement that \(3^{k-3L}\) is the exact average over carry phases and gives no conclusion about the pinned phase \(0\).  Record global carry injectivity as dead, with the explicit threefold fibre at \((4,2)\).  Record the live target as pinned carry repulsion:
+\[
+C_{k,L}(0)=1
+\quad
+\text{for }
+k\le3L-2.
+\]
+
+\end{document}

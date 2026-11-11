@@ -1,0 +1,15 @@
+{
+ "mode": "mixed",
+ "family": "mixed-d4-K3-plain-noodd",
+ "level": "mixed",
+ "dim": 4,
+ "K": 3,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "UNKNOWN",
+ "time_s": 3112.6,
+ "rounds": 10,
+ "bitwidth": 25,
+ "reason": "timeout",
+ "odd_rule_included": false
+}

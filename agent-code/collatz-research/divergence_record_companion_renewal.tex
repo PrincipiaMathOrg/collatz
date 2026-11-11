@@ -1,0 +1,260 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{The synchronized companion on an interior record-renewal tail}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  x_{t+1}=\frac{3x_t+1}{2^{a_t}},
+  \qquad
+  A_t:=\sum_{h<t}a_h,
+  \qquad
+  q_t:=\frac{3^t}{2^{A_t}}
+  \tag{1}
+\]
+be a normalized infinite accelerated orbit, with $q_t\to\infty$.  Its
+fixed synchronized companion is the positive real sequence satisfying
+\[
+  2^{a_t}e_{t+1}=3e_t-1,
+  \qquad
+  e_t>1,
+  \qquad
+  \frac{e_t}{q_t}\longrightarrow0.
+  \tag{2}
+\]
+Equivalently,
+\[
+  e_t=\frac{q_t}{3}\sum_{h=t}^{\infty}\frac1{q_h}.
+  \tag{3}
+\]
+
+Let $j_0<j_1<\cdots$ be consecutive coefficient tail records.  Put
+\[
+  Q_i:=q_{j_i},
+  \qquad
+  r_i:=j_{i+1}-j_i,
+  \qquad
+  \mu_i:=\frac{Q_{i+1}}{Q_i}.
+  \tag{4}
+\]
+For a gap word $w=(c_0,\ldots,c_{r-1})$, write
+\[
+  B_0(w):=0,
+  \qquad
+  B_h(w):=\sum_{u<h}c_u,
+  \qquad
+  C(w):=\sum_{h=0}^{r-1}3^{r-1-h}2^{B_h(w)}.
+  \tag{5}
+\]
+
+\begin{theorem}[record-renewal equation]
+For every consecutive tail-record gap,
+\[
+  \boxed{
+  e_{j_i}
+  =\frac{C(w_i)+2^{B_{r_i}(w_i)}e_{j_{i+1}}}{3^{r_i}}.}
+  \tag{6}
+\]
+Equivalently, if
+\[
+  \mathcal R_i
+  :=\sum_{h=0}^{r_i-1}\frac{Q_i}{q_{j_i+h}},
+  \tag{7}
+\]
+then
+\[
+  \boxed{
+  \mathcal R_i=\frac{C(w_i)}{3^{r_i-1}},
+  \qquad
+  e_{j_i}=\frac{\mathcal R_i}{3}
+             +\frac{e_{j_{i+1}}}{\mu_i}.}
+  \tag{8}
+\]
+\end{theorem}
+
+\begin{proof}
+Split the series in (3) at $j_{i+1}$.  The part inside the gap gives
+$\mathcal R_i/3$, while the remaining tail is
+\[
+  \frac{Q_i}{3}\sum_{h=j_{i+1}}^\infty\frac1{q_h}
+  =\frac{Q_i}{Q_{i+1}}e_{j_{i+1}}
+  =\frac{e_{j_{i+1}}}{\mu_i}.
+\]
+Moreover,
+\[
+  \mathcal R_i
+  =\sum_{h=0}^{r_i-1}\frac{2^{B_h(w_i)}}{3^h}
+  =\frac{C(w_i)}{3^{r_i-1}}.
+\]
+This proves (8).  Since
+$\mu_i=3^{r_i}/2^{B_{r_i}(w_i)}$, equation (6) follows.
+\end{proof}
+
+\begin{theorem}[four-map companion confinement]
+Suppose that, from some record onward, every gap lies inside its
+deficit-four horizon.  Relabel that tail so that this holds for every
+$i\geq0$.  Then every gap word belongs to
+\[
+  \mathcal A_4:=\{1,12,1113,1122\}.
+  \tag{9}
+\]
+At record times, the companion obeys the backward iterated system
+\[
+  e_{j_i}=F_{w_i}(e_{j_{i+1}}),
+  \tag{10}
+\]
+where
+\[
+\begin{array}{c|c|c|c}
+  w&C(w)&\mu(w)&F_w(u)\\ \hline
+  1&1&3/2&(2u+1)/3\\[1mm]
+  12&5&9/8&(8u+5)/9\\[1mm]
+  1113&65&81/64&(64u+65)/81\\[1mm]
+  1122&73&81/64&(64u+73)/81.
+\end{array}
+\tag{11}
+\]
+Consequently,
+\[
+  \boxed{1<e_{j_i}\leq5\qquad(i\geq0).}
+  \tag{12}
+\]
+At every state of the corresponding raw accelerated tail,
+\[
+  \boxed{1<e_t\leq\frac{41}{3},
+  \qquad 2\leq \lceil e_t\rceil\leq14.}
+  \tag{13}
+\]
+\end{theorem}
+
+\begin{proof}
+The interior record-renewal theorem gives (9).  Substitution of the four
+words into (5)--(6) gives the table (11).  Each map in (11) sends the
+closed interval $[1,5]$ into itself.  Its slope is $1/\mu(w)$, and
+\[
+  \frac1{\mu(w)}\leq\frac89
+  \qquad(w\in\mathcal A_4).
+  \tag{14}
+\]
+
+Fix $i<N$ and put
+\[
+  \Phi_{i,N}:=F_{w_i}\circ F_{w_{i+1}}\circ\cdots
+                    \circ F_{w_{N-1}}.
+\]
+Equation (10) gives
+\[
+  e_{j_i}=\Phi_{i,N}(e_{j_N}).
+  \tag{15}
+\]
+The slope of $\Phi_{i,N}$ is exactly $Q_i/Q_N$.  Hence
+\[
+  \left|e_{j_i}-\Phi_{i,N}(1)\right|
+  =\frac{Q_i}{Q_N}|e_{j_N}-1|
+  \longrightarrow0,
+  \tag{16}
+\]
+because $e_{j_N}/Q_N\to0$ and $Q_N\to\infty$.  On the other hand,
+$\Phi_{i,N}(1)\in[1,5]$ for every $N$.  Letting $N\to\infty$ proves
+$e_{j_i}\in[1,5]$.  The strict companion floor gives $e_{j_i}>1$, which
+proves (12).
+
+It remains to bound the states inside one atom.  Starting with an endpoint
+bound $e_{j_{i+1}}\leq5$ and applying
+\[
+  e_t=\frac{1+2^{a_t}e_{t+1}}3
+  \tag{17}
+\]
+backward through each word gives these upper bounds at successive positions:
+\[
+\begin{array}{c|c}
+  w& (e_{j_i},e_{j_i+1},\ldots,e_{j_{i+1}})\\ \hline
+  1&(11/3,5)\\[1mm]
+  12&(5,7,5)\\[1mm]
+  1113&(385/81,179/27,85/9,41/3,5)\\[1mm]
+  1122&(131/27,61/9,29/3,7,5).
+\end{array}
+\tag{18}
+\]
+The largest entry is $41/3$.  Together with the strict companion floor,
+this proves (13).
+\end{proof}
+
+Put
+\[
+  m_t:=\lceil e_t\rceil,
+  \qquad
+  \mathcal L_t:=\log\frac{q_t}{m_t}.
+  \tag{19}
+\]
+
+\begin{corollary}[linear clock drift on an interior-renewal tail]
+Under the hypotheses of Theorem~2,
+\[
+  \boxed{
+  \mathcal L_{j_i}-\mathcal L_{j_0}
+  \geq i\log\frac98-\log\frac52.}
+  \tag{20}
+\]
+In particular, the global logarithmic separation clock has positive lower
+drift per coefficient record:
+\[
+  \liminf_{i\to\infty}
+  \frac{\mathcal L_{j_i}}{i}
+  \geq\log\frac98.
+  \tag{21}
+\]
+The ceiling defects on this tail belong to the finite set
+\[
+  d_t:=2^{a_t}m_{t+1}-3m_t+1
+  \in\{-2,-1,0,1,2,3,4,5,6,7\}.
+  \tag{22}
+\]
+\end{corollary}
+
+\begin{proof}
+Every multiplier in (11) is at least $9/8$, so
+\[
+  \frac{Q_i}{Q_0}\geq\left(\frac98\right)^i.
+\]
+At record times, (12) gives $2\leq m_{j_i}\leq5$.  Therefore
+\[
+\begin{aligned}
+  \mathcal L_{j_i}-\mathcal L_{j_0}
+  &=\log\frac{Q_i}{Q_0}-\log\frac{m_{j_i}}{m_{j_0}}\\
+  &\geq i\log\frac98-\log\frac52,
+\end{aligned}
+\]
+which proves (20)--(21).  The words in (9) use only exponents
+$a_t\leq3$.  The general ceiling-defect bound
+$-2\leq d_t\leq2^{a_t}-1$ then gives (22).
+\end{proof}
+
+\begin{corollary}[horizon-exit versus bounded-companion dichotomy]
+Every normalized hypothetical divergent orbit satisfies at least one of
+the following alternatives.
+\begin{enumerate}
+  \item It has infinitely many deficit-four horizon exits at consecutive
+  coefficient records.
+  \item On a tail, its synchronized companion satisfies (12)--(13), its
+  ceiling and defect alphabets are finite as in (13) and (22), and its
+  logarithmic clock satisfies the linear drift (20).
+
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+If horizon exits are finite, every sufficiently late consecutive record
+gap lies inside its current horizon.  Apply Theorem~2 and Corollary~3 after
+discarding the finite prefix.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,79 @@
+{
+ "mode": "lfail",
+ "family": "R-d3-K1-c12",
+ "level": "R",
+ "dim": 3,
+ "K": 1,
+ "lab": "c12",
+ "Rcap": 3,
+ "status": "UNSAT",
+ "time_s": 6.1,
+ "rounds": 3,
+ "bitwidth": 13,
+ "reason": null,
+ "refuting_instances": [
+  [
+   "0",
+   "2"
+  ],
+  [
+   "2",
+   "1"
+  ],
+  [
+   "01",
+   "2"
+  ],
+  [
+   "02",
+   "22"
+  ],
+  [
+   "11",
+   "01"
+  ],
+  [
+   "20",
+   "022"
+  ],
+  [
+   "22",
+   "11"
+  ],
+  [
+   "011",
+   "202"
+  ],
+  [
+   "022",
+   "222"
+  ],
+  [
+   "0101",
+   "2002"
+  ],
+  [
+   "202",
+   "0222"
+  ],
+  [
+   "0102",
+   "201"
+  ],
+  [
+   "0211",
+   "2202"
+  ]
+ ],
+ "n_instances": 13,
+ "max_len": 4,
+ "claim": "no rank rho(w) = alpha^T M_{l1}...M_{lq} beta of this class (dimension 3, coefficients 0..1, letters c12) satisfies rho(w) > rho(w') on all listed instances",
+ "L_fail": 5,
+ "history": {
+  "2": "SAT",
+  "3": "SAT",
+  "4": "SAT",
+  "5": "UNSAT"
+ },
+ "L_reached": 5
+}

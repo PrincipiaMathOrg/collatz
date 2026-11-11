@@ -1,0 +1,198 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{A terminal-tower reduction for high Collatz decoder depth}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  2^{a_i}x_{i+1}=3x_i+1,
+  \qquad
+  a_i=v_2(3x_i+1),
+  \tag{1}
+\]
+where the $x_i$ are positive odd integers.  Put
+\[
+  A_k:=\sum_{i=0}^{k-1}a_i,
+  \qquad
+  b_i:=v_3(x_i+1),
+  \qquad
+  x_i+1=3^{b_i}u_i,
+  \qquad
+  3\nmid u_i.
+  \tag{2}
+\]
+We call the exponent block $(a_0,\ldots,a_{r-1})$ a strict barrier block if
+\[
+  2^{A_k}<3^k
+  \qquad(1\leq k\leq r).
+  \tag{3}
+\]
+Set $\alpha:=\log_2 3$.  For $a\geq1$, define
+\[
+  q(a):=v_3(2^a-2),
+  \qquad q(1):=\infty.
+  \tag{4}
+\]
+
+\begin{lemma}[one-step source dichotomy]
+Fix one step, and write $a:=a_i$, $b:=b_i$, and $b':=b_{i+1}$.  If
+$q(a)\neq b+1$, then
+\[
+  b'=\min\{q(a),b+1\}.
+  \tag{5}
+\]
+If $q(a)=b+1<\infty$, put
+\[
+  \rho_a:=\frac{2^a-2}{3^{q(a)}}.
+  \tag{6}
+\]
+Then
+\[
+  b'=b+1+v_3(u_i+\rho_a).
+  \tag{7}
+\]
+Moreover,
+\[
+  q(a)=
+  \begin{cases}
+    0,&a\text{ is even},\\
+    1+v_3((a-1)/2),&a>1\text{ is odd}.
+  \end{cases}
+  \tag{8}
+\]
+\end{lemma}
+
+\begin{proof}
+Adding $2^a-1$ to (1) gives
+\[
+  2^a(x_{i+1}+1)=3(x_i+1)+2^a-2.
+  \tag{9}
+\]
+The two terms on the right have valuations $b+1$ and $q(a)$.  Distinct
+valuations give (5), while equal finite valuations give (7) after division
+by $3^{b+1}$.
+
+If $a$ is even, then $2^a-2\not\equiv0\pmod3$.  If $a=2n+1>1$, then
+\[
+  2^a-2=2(4^n-1).
+\]
+Writing $n=3^s m$ with $3\nmid m$, the congruence
+$(1+3)^m-1\equiv3m\pmod9$ gives $v_3(4^m-1)=1$.  The factorization
+$X^3-1=(X-1)(X^2+X+1)$, with
+$X^2+X+1\equiv3\pmod9$ for $X\equiv1\pmod3$, raises the valuation by one
+whenever the exponent is multiplied by $3$.  This proves (8).
+\end{proof}
+
+\begin{theorem}[terminal tower or terminal collision]
+Let $(a_0,\ldots,a_{r-1})$ be a strict barrier block, and define
+\[
+  K(r):=\left\lceil\log_3\left(\frac{\alpha r}{2}\right)\right\rceil.
+  \tag{10}
+\]
+Let $\ell$ be the length of its terminal run of exponent-one letters.  If
+$\ell=r$, then
+\[
+  b_r=b_0+r.
+  \tag{11}
+\]
+If $\ell<r$, put $s:=r-\ell-1$, so $a_s>1$, and define
+\[
+  g_s:=
+  \begin{cases}
+    v_3(u_s+\rho_{a_s}),&q(a_s)=b_s+1,\\
+    0,&q(a_s)\neq b_s+1.
+  \end{cases}
+  \tag{12}
+\]
+Then
+\[
+\boxed{
+  b_r\leq K(r)+\ell+g_s.}
+\tag{13}
+\]
+Thus every decoder depth above the logarithmic scale $K(r)$ comes from the
+terminal exponent-one tower, from the final non-one collision, or from both.
+\end{theorem}
+
+\begin{proof}
+Condition (3) gives
+\[
+  a_i\leq A_{i+1}<\alpha(i+1)\leq\alpha r.
+  \tag{14}
+\]
+For every odd $a_i>1$, equation (8) gives
+\[
+  3^{q(a_i)-1}
+  \leq\frac{a_i-1}{2}
+  <\frac{\alpha r}{2}
+  \leq3^{K(r)}.
+\]
+Hence $q(a_i)\leq K(r)$.  The same bound holds for even $a_i$, since then
+$q(a_i)=0$.
+
+Suppose $\ell<r$.  If the step at $s$ is not a collision, (5) gives
+\[
+  b_{s+1}\leq q(a_s)\leq K(r).
+  \tag{15}
+\]
+If it is a collision, (7) and $q(a_s)=b_s+1$ give
+\[
+  b_{s+1}=q(a_s)+g_s\leq K(r)+g_s.
+  \tag{16}
+\]
+Every one of the remaining $\ell$ exponent-one steps raises the decoder
+depth by exactly one.  Equations (15) and (16) therefore prove (13).  The
+same one-step law proves (11).
+\end{proof}
+
+\begin{corollary}[deficit-three rate reduction]
+Under the hypotheses of Theorem~2, suppose that the terminal decoder has
+deficit at most three:
+\[
+  b_r\geq r-3.
+  \tag{17}
+\]
+If the block is not all ones, then
+\[
+\boxed{
+  \ell+g_s
+  \geq r-3-K(r).}
+\tag{18}
+\]
+In particular, for every $0\leq\eta<1$,
+\[
+  \ell\leq\eta r
+  \quad\Longrightarrow\quad
+  g_s\geq(1-\eta)r-3-K(r).
+  \tag{19}
+\]
+Whenever the right side of (19) is positive, the last non-one step obeys the
+explicit collision conditions
+\[
+  q(a_s)=b_s+1,
+  \qquad
+  u_s\equiv-\rho_{a_s}\pmod {3^{g_s}}.
+  \tag{20}
+\]
+Consequently, along any family of strict barrier blocks satisfying (17), a
+sublinear terminal exponent-one tower forces a collision of depth
+$r-o(r)$ at the last non-one step.
+\end{corollary}
+
+\begin{proof}
+Equation (18) is (13) rearranged under (17), and (19) follows immediately.
+If its right side is positive, then $g_s>0$.  Definition (12) gives both
+claims in (20).  Since $K(r)=O(\log r)$, the final assertion follows from
+(19).
+\end{proof}
+
+\end{document}

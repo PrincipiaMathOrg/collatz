@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+35. Dependent percolation domination
+
+**Hybrid · P**
+
+At each depth, call a branch "open" if it remains growth-compatible and integrally realizable.
+Prove that the resulting highly dependent tree is dominated by a subcritical percolation process,
+perhaps after grouping levels into blocks.
+
+Take as long as you need.

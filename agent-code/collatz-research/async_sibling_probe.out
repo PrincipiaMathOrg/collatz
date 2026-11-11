@@ -1,0 +1,14 @@
+known_orbits
+{"seed":"27","status":"hit_1","steps":41,"firstDrop":{"depth":37,"value":"23"},"firstBarrierFailure":37,"firstSiblingBelow":{"j":36,"x":"61","a":3,"m":1,"y":"15","endpoint":"23"},"firstSiblingEqual":null,"maxDecoder":5}
+{"seed":"1126015","status":"hit_1","steps":196,"firstDrop":{"depth":141,"value":"98137"},"firstBarrierFailure":141,"firstSiblingBelow":{"j":140,"x":"33497429","a":10,"m":3,"y":"523397","endpoint":"98137"},"firstSiblingEqual":null,"maxDecoder":11}
+{"seed":"150015","status":"hit_1","steps":136,"firstDrop":{"depth":57,"value":"23783"},"firstBarrierFailure":57,"firstSiblingBelow":{"j":46,"x":"2252405","a":5,"m":2,"y":"140775","endpoint":"211163"},"firstSiblingEqual":null,"maxDecoder":8}
+q5_regression
+{"cycleMinimum":"187","violatingSibling":"123","basinMinimum":"123","equalityEndpoint":"187","equalitySource":"1993","equalityExponent":5}
+finite_countermodels
+{"K":2,"seed":"123","length":4,"word":"(1,2)^K","heightUpperBound":"128","heightRatioUpper":"128/123","reciprocalMassUpper":"5/123","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+{"K":4,"seed":"8187","length":8,"word":"(1,2)^K","heightUpperBound":"8192","heightRatioUpper":"8192/8187","reciprocalMassUpper":"9/8187","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+{"K":8,"seed":"33554427","length":16,"word":"(1,2)^K","heightUpperBound":"33554432","heightRatioUpper":"33554432/33554427","reciprocalMassUpper":"17/33554427","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+{"K":16,"seed":"562949953421307","length":32,"word":"(1,2)^K","heightUpperBound":"562949953421312","heightRatioUpper":"562949953421312/562949953421307","reciprocalMassUpper":"33/562949953421307","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+{"K":32,"seed":"158456325028528675187087900667","length":64,"word":"(1,2)^K","heightUpperBound":"158456325028528675187087900672","heightRatioUpper":"158456325028528675187087900672/158456325028528675187087900667","reciprocalMassUpper":"65/158456325028528675187087900667","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+{"K":64,"seed":"12554203470773361527671578846415332832204710888928069025787","length":128,"word":"(1,2)^K","heightUpperBound":"12554203470773361527671578846415332832204710888928069025792","heightRatioUpper":"12554203470773361527671578846415332832204710888928069025792/12554203470773361527671578846415332832204710888928069025787","reciprocalMassUpper":"129/12554203470773361527671578846415332832204710888928069025787","afterFirstResetDecoderMax":1,"minimalInverseChainStopsAtSeed":true}
+certificate_passed=true

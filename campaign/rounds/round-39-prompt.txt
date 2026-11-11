@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+34. Directed-polymer free energy
+
+**Speculative · P**
+
+Treat critical valuation words as polymers in a deterministic arithmetic environment. Establish a
+strictly negative quenched free energy after incorporating exact residue constraints — not merely
+the negative annealed drift seen by random words.
+
+Take as long as you need.

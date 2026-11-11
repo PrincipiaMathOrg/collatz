@@ -1,0 +1,18 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+5. Prove simplicity or irreducibility of the Collatz C*-algebra
+
+**Established/Hybrid · P**
+
+Mori's operator-algebraic encoding says that Collatz is equivalent to the absence of nontrivial
+reducing subspaces for a natural algebra. Attack this through:
+
+* a gauge action and KMS-state uniqueness;
+* direct computation of the commutant;
+* Cuntz-Pimsner simplicity criteria;
+* groupoid minimality plus topological principality.
+
+The essential requirement is that the operator-algebra theorem be established from local
+algebraic relations, not by silently restating orbit connectivity.
+
+Take as long as you need.

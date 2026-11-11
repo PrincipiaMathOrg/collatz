@@ -1,0 +1,1014 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\textwidth}{6.35in}
+\setlength{\oddsidemargin}{0.05in}
+\setlength{\evensidemargin}{0.05in}
+\setlength{\textheight}{8.75in}
+\setlength{\topmargin}{-0.25in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\Tq}{\mathfrak{T}}
+\newcommand{\rk}{R}
+\newcommand{\qk}{Q}
+
+\title{Round 1 on the proof front: an integer model for the zero-trace obstruction}
+\author{Principia Math Collatz campaign}
+\date{August 12, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This round chooses the transfer-operator and arithmetic-rigidity front, but restricts attention to the zero-trace graph in the rational-base compression subsystem. The main result is an exact conjugacy between that graph and a partial increasing map on nonnegative integers. This removes the iterated quotient transform from the finite obstruction, gives a scalar residence-time formulation of the zero-trace conjecture, and yields a constant-memory exact enumeration. The enumeration extends the repository computation from depth $12$ through depth $19$ and verifies the conjectured bound throughout that range. The audit also finds and corrects a false group-ring assertion in \texttt{arithmetic\_rigidity\_transfer\_operators.tex}. None of these results proves the Collatz conjecture, and the all-depth zero-trace estimate remains open.
+\end{abstract}
+
+\section{Chosen front}
+
+\textbf{Chosen front: P3, the transfer-operator and arithmetic-rigidity line, because its zero-trace bottleneck admits an exact conversion from an opaque carry graph to a transparent partial integer dynamical system.}
+
+The repository was reachable. I read \path{COLLATZ_MAP.md}, \path{STATE.md}, \path{PROMPT_COUNT.md}, the material in \path{rounds/}, both TeX writeups, and the integrity scripts. The connector exposed \path{collatz_accumulation_points.pdf} only as a binary PDF. Its section outline was recoverable, but its page text was not, so no claim from that artifact is used below.
+
+\section{Audit corrections}
+
+\begin{proposition}[Two corrections to the brief]
+\label{prop:brief-corrections}
+The following corrections are necessary.
+
+\begin{enumerate}
+\item The figure $2^{68}$ for exhaustive convergence verification is outdated. Barina's 2025 computation verifies every starting value below $2^{71}$.
+\item The Bernstein--Lagarias conjugacy is a conjugacy on $\Z_2$ between the binary shift and the halved parity map
+\[
+C(x)=
+\begin{cases}
+x/2,&x\equiv 0\pmod 2,\\
+(3x+1)/2,&x\equiv 1\pmod 2.
+\end{cases}
+\]
+It is not stated directly as a conjugacy for the accelerated odd map
+\[
+U(x)=\frac{3x+1}{2^{\nu_2(3x+1)}}.
+\]
+On odd integers, $U$ is the first-return map induced by $C$ on the odd part of the state space.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first assertion is the principal computational result reported by Barina in \cite{Barina2025}. The paper states that all starting values below $2^{71}$ were verified.
+
+For the second assertion, Bernstein and Lagarias define the map $C$ displayed above and a homeomorphism of $\Z_2$ conjugating $C$ to the binary shift; this is the statement of \cite{BernsteinLagarias}. If $x$ is odd and $a=\nu_2(3x+1)$, then the first application of $C$ gives $(3x+1)/2$, and the next $a-1$ applications divide by $2$. Therefore
+\[
+C^a(x)=\frac{3x+1}{2^a}=U(x),
+\]
+and $C^j(x)$ is even for $1\le j<a$. Thus $U$ is exactly the first return of $C$ to the odd integers.
+\end{proof}
+
+\begin{proposition}[Correction of the group-ring claim]
+\label{prop:resultant-correction}
+For positive integers $K,m$, put
+\[
+A_{K,m}=\Z[X]/(X^m-2,X^K-3)
+\]
+and let $d=\gcd(K,m)$. Then $A_{K,m}$ is finite and
+\[
+\#A_{K,m}=\left|2^{K/d}-3^{m/d}\right|^d.
+\]
+In particular, the assertion in \texttt{arithmetic\_rigidity\_transfer\_operators.tex} that for $d>1$ this quotient remains cyclic of order $2^K-3^m$ is false. For $(K,m)=(6,2)$ one has
+\[
+A_{6,2}\cong (\Z/5\Z)[X]/(X^2-2),
+\]
+whose additive group is $(\Z/5\Z)^2$, whereas $2^6-3^2=55$.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+B=\Z[X]/(X^m-2).
+\]
+Because $X^m-2$ is monic, $B$ is a free abelian group with basis
+\[
+1,X,\ldots,X^{m-1}.
+\]
+The quotient $A_{K,m}$ is the cokernel of multiplication by $X^K-3$ on $B$. The determinant of that multiplication map is the resultant
+\[
+\operatorname{Res}(X^m-2,X^K-3).
+\]
+An integer matrix with nonzero determinant has finite cokernel whose cardinality is the absolute value of its determinant. It remains to calculate the resultant.
+
+Write
+\[
+m=dm_0,\qquad K=dK_0,
+\]
+with $\gcd(m_0,K_0)=1$. Choose a complex number $\alpha_0$ with $\alpha_0^m=2$. The roots of $X^m-2$ are $\alpha_0\zeta$, where $\zeta^m=1$. Hence
+\begin{align*}
+\operatorname{Res}(X^m-2,X^K-3)
+&=\prod_{\zeta^m=1}\left(\alpha_0^K\zeta^K-3\right).
+\end{align*}
+The map $\zeta\mapsto\zeta^K$ from the $m$-th roots of unity onto the $m_0$-th roots of unity has fibres of cardinality $d$. If $\beta=\alpha_0^K$, then
+\[
+\beta^{m_0}=\alpha_0^{Km_0}=2^{K/d}.
+\]
+Consequently,
+\begin{align*}
+\left|\operatorname{Res}(X^m-2,X^K-3)\right|
+&=\left|\prod_{\eta^{m_0}=1}(\beta\eta-3)\right|^d\\
+&=\left|\beta^{m_0}-3^{m_0}\right|^d\\
+&=\left|2^{K/d}-3^{m/d}\right|^d.
+\end{align*}
+The two powers cannot be equal, since one has only the prime factor $2$ and the other has only the prime factor $3$. The determinant is therefore nonzero, proving the cardinality formula.
+
+For $(K,m)=(6,2)$, reduction modulo $X^2-2$ gives
+\[
+X^6-3=(X^2)^3-3\equiv 8-3=5.
+\]
+Thus
+\[
+(X^2-2,X^6-3)=(X^2-2,5),
+\]
+which proves
+\[
+A_{6,2}\cong (\Z/5\Z)[X]/(X^2-2).
+\]
+The nonzero squares modulo $5$ are $1$ and $4$, so $X^2-2$ is irreducible over $\Z/5\Z$. The quotient is the field with $25$ elements. Its additive group is a two-dimensional vector space over $\Z/5\Z$, hence is $(\Z/5\Z)^2$ and is not cyclic. Its order $25$ is also different from $55$.
+\end{proof}
+
+\section{The zero-trace graph as an integer dynamical system}
+
+Let
+\[
+\E=\{-63,-62,\ldots,80\}.
+\]
+For $e\in\E$, let $\rho(e)$ be the unique integer in $[0,63]$ such that
+\[
+81\rho(e)+e\equiv 0\pmod{64},
+\]
+and put
+\[
+q(e)=\frac{81\rho(e)+e}{64}.
+\]
+Define
+\[
+\Tq(e,f)=q(e)-\rho(f).
+\]
+For a row $(e_0,\ldots,e_r)$, define its first transformed row by
+\[
+\Tq(e_0,\ldots,e_r)
+=
+\bigl(\Tq(e_0,e_1),\ldots,\Tq(e_{r-1},e_r)\bigr),
+\]
+and define $\Tq^j$ by iteration of this row operation.
+
+For $k\ge 1$, the zero-trace graph $\mathcal Z_k$ has vertex set
+\[
+\{-1,0,1\}^k.
+\]
+There is an edge
+\[
+(e_0,\ldots,e_{k-1})
+\longrightarrow
+(e_1,\ldots,e_{k-1},e_k)
+\]
+when
+\[
+\Tq^k(e_0,\ldots,e_k)=0.
+\]
+Let $\ell_k$ be the largest number of edges in a directed path all of whose vertices are nonzero.
+
+Define a partial map $F$ on $\Z_{\ge 0}$ by
+\[
+F(x)=
+\begin{cases}
+81x/64,&x\equiv 0\pmod{64},\\
+(81x+1)/64,&x\equiv 15\pmod{64},\\
+(81x-1)/64,&x\equiv 49\pmod{64},
+\end{cases}
+\]
+and leave $F(x)$ undefined in the other residue classes.
+
+\begin{lemma}[Closure of the quotient transform]
+\label{lem:closure}
+For every $e,f\in\E$, one has
+\[
+q(e)\in\{0,1,\ldots,80\}
+\]
+and
+\[
+\Tq(e,f)\in\E.
+\]
+\end{lemma}
+
+\begin{proof}
+The integer $\rho(e)$ lies in $[0,63]$. If $\rho(e)=0$, divisibility by $64$ and the bounds $-63\le e\le 80$ force $e\in\{0,64\}$, so $81\rho(e)+e\ge 0$. If $\rho(e)\ge 1$, then
+\[
+81\rho(e)+e\ge 81-63=18.
+\]
+Also
+\[
+81\rho(e)+e\le 81\cdot 63+80=5183<81\cdot 64.
+\]
+Since the numerator is divisible by $64$, it follows that
+\[
+0\le q(e)\le 80.
+\]
+As $0\le\rho(f)\le63$, one obtains
+\[
+-63\le q(e)-\rho(f)\le80,
+\]
+which is the desired closure.
+\end{proof}
+
+\begin{lemma}[Residue dictionary and monotonicity]
+\label{lem:residue-dictionary}
+For $x\in\Z_{\ge0}$ and $e\in\{-1,0,1\}$, the divisibility condition
+\[
+64\mid 81x+e
+\]
+holds precisely in the following three cases:
+\[
+(e,x\bmod64)=(-1,49),(0,0),(1,15).
+\]
+If $0\le x<y$ and both $F(x)$ and $F(y)$ are defined, then
+\[
+F(x)<F(y).
+\]
+If $x>0$ and $F(x)$ is defined, then
+\[
+F(x)>x.
+\]
+\end{lemma}
+
+\begin{proof}
+Modulo $64$ one has $81\equiv17$, and
+\[
+17\cdot49=833\equiv1\pmod{64}.
+\]
+Thus $17^{-1}\equiv49\pmod{64}$. Solving
+\[
+17x\equiv-e\pmod{64}
+\]
+gives $x\equiv49$ for $e=-1$, $x\equiv0$ for $e=0$, and
+\[
+x\equiv-49\equiv15\pmod{64}
+\]
+for $e=1$.
+
+Suppose $0\le x<y$ and both values are defined, with corresponding errors $e_x,e_y\in\{-1,0,1\}$. Then
+\[
+F(y)-F(x)=\frac{81(y-x)+e_y-e_x}{64}.
+\]
+The numerator is at least $81-2=79$, and the quotient is an integer, so it is positive. This proves $F(x)<F(y)$.
+
+When $x>0$ and $F(x)$ is defined, its corresponding error $e$ belongs to $\{-1,0,1\}$ and
+\[
+F(x)-x=\frac{17x+e}{64}.
+\]
+The numerator is at least $16$ and the quotient is an integer. It is therefore a positive integer, proving $F(x)>x$.
+\end{proof}
+
+For a word $w=(e_0,\ldots,e_{k-1})\in\E^k$, set
+\[
+N_k(w)=\sum_{j=0}^{k-1}e_j81^{k-1-j}64^j.
+\]
+Let $R_k(w)$ be the unique integer in $[0,64^k)$ satisfying
+\[
+81^kR_k(w)+N_k(w)\equiv0\pmod{64^k},
+\]
+and define
+\[
+Q_k(w)=\frac{81^kR_k(w)+N_k(w)}{64^k}.
+\]
+
+\begin{lemma}[Canonical realization]
+\label{lem:canonical-realization}
+For every $w=(e_0,\ldots,e_{k-1})\in\E^k$, the recurrence
+\[
+64x_{j+1}=81x_j+e_j,
+\qquad 0\le j<k,
+\]
+started at $x_0=R_k(w)$ produces nonnegative integers and ends at
+\[
+x_k=Q_k(w).
+\]
+For ternary words $w\in\{-1,0,1\}^k$, the map
+\[
+w\longmapsto R_k(w)
+\]
+is a bijection onto
+\[
+\mathcal S_k=
+\left\{x\in[0,64^k)\cap\Z:
+\text{the first $k$ applications of $F$ to $x$ are defined}
+\right\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Existence and uniqueness of $R_k(w)$ follow from
+\[
+\gcd(81^k,64^k)=1.
+\]
+For $1\le r\le k$, write
+\[
+N_r(e_0,\ldots,e_{r-1})
+=\sum_{j=0}^{r-1}e_j81^{r-1-j}64^j.
+\]
+Reducing the defining congruence for $R_k(w)$ modulo $64^r$ gives
+\[
+81^{k-r}
+\left(
+81^rR_k(w)+N_r(e_0,\ldots,e_{r-1})
+\right)
+\equiv0\pmod{64^r}.
+\]
+The factor $81^{k-r}$ is invertible modulo $64^r$, so
+\[
+81^rR_k(w)+N_r(e_0,\ldots,e_{r-1})
+\equiv0\pmod{64^r}.
+\]
+This is exactly the divisibility needed for each of the first $r$ recurrence steps to be integral. Unfolding the recurrence gives
+\[
+64^rx_r=81^rR_k(w)+N_r(e_0,\ldots,e_{r-1}),
+\]
+and at $r=k$ this yields $x_k=Q_k(w)$.
+
+The states are nonnegative. Indeed, if $x_j\ge1$, then
+\[
+81x_j+e_j\ge81-63=18.
+\]
+If $x_j=0$, integrality requires $64\mid e_j$. Within $\E$, this gives $e_j\in\{0,64\}$, and the next state is respectively $0$ or $1$.
+
+Now restrict to ternary words. Lemma \ref{lem:residue-dictionary} shows that the integral recurrence is precisely iteration of $F$, with $e_j$ recording the applicable residue class. Hence every ternary word maps into $\mathcal S_k$.
+
+To prove injectivity, suppose distinct ternary words $u$ and $v$ have the same canonical start, and let $h$ be their first differing coordinate. Subtracting their defining congruences gives
+\[
+\sum_{j=h}^{k-1}(u_j-v_j)81^{k-1-j}64^j
+\equiv0\pmod{64^k}.
+\]
+After factoring out $64^h$, the remaining integer is
+\[
+(u_h-v_h)81^{k-1-h}+64M
+\]
+for some $M\in\Z$. The number $u_h-v_h$ belongs to $\{-2,-1,1,2\}$. If it is odd, the displayed integer is odd. If it is $2$ or $-2$, the displayed integer is twice an odd integer. Its $2$-adic valuation is therefore at most $1$, whereas divisibility by $64^{k-h}$ would require valuation at least $6(k-h)\ge6$. This contradiction proves injectivity.
+
+Finally, take $x\in\mathcal S_k$ and record the unique error $e_j\in\{-1,0,1\}$ at each of its first $k$ steps. Unfolding the recurrence shows that $x$ satisfies the defining congruence for that word. Since $0\le x<64^k$, uniqueness gives $x=R_k(w)$. This proves surjectivity.
+\end{proof}
+
+\begin{lemma}[Trace equals displacement of canonical starts]
+\label{lem:trace-displacement}
+For $k\ge1$ and $(e_0,\ldots,e_k)\in\E^{k+1}$, let
+\[
+u=(e_0,\ldots,e_{k-1}),
+\qquad
+v=(e_1,\ldots,e_k),
+\]
+and put
+\[
+D_1(u)=\frac{81R_k(u)+e_0}{64}.
+\]
+Then
+\[
+D_1(u)-R_k(v)
+=64^{k-1}\Tq^k(e_0,\ldots,e_k).
+\]
+\end{lemma}
+
+\begin{proof}
+For $k=1$, one has
+\[
+R_1(e_0)=\rho(e_0),
+\qquad
+D_1(e_0)=q(e_0),
+\qquad
+R_1(e_1)=\rho(e_1),
+\]
+so the identity is the definition of $\Tq(e_0,e_1)$.
+
+Assume the result holds for rows of length $k$, and consider a row of length $k+1$. Put
+\[
+e'_j=\Tq(e_j,e_{j+1}),
+\qquad 0\le j<k.
+\]
+Write
+\[
+R_k(u)=64X+\rho(e_0),
+\qquad
+R_k(v)=64Y+\rho(e_1).
+\]
+Apply the recurrence of Lemma \ref{lem:canonical-realization} to the canonical trajectory for $u$, and write each state in the form
+\[
+x_j=64z_j+\rho(e_j).
+\]
+Substitution into
+\[
+64x_{j+1}=81x_j+e_j
+\]
+gives
+\begin{align*}
+64z_{j+1}
+&=81z_j+q(e_j)-\rho(e_{j+1})\\
+&=81z_j+e'_j.
+\end{align*}
+Thus $X=z_0$ is the canonical start for the transformed word
+\[
+(e'_0,\ldots,e'_{k-2}),
+\]
+because $0\le X<64^{k-1}$. The same argument applied to $v$ shows that $Y$ is the canonical start for
+\[
+(e'_1,\ldots,e'_{k-1}).
+\]
+
+Using $e'_0=q(e_0)-\rho(e_1)$, one obtains
+\begin{align*}
+D_1(u)-R_k(v)
+&=81X+q(e_0)-64Y-\rho(e_1)\\
+&=64\left(
+\frac{81X+e'_0}{64}-Y
+\right).
+\end{align*}
+The induction hypothesis applied to the transformed row gives
+\[
+\frac{81X+e'_0}{64}-Y
+=64^{k-2}\Tq^{k-1}(e'_0,\ldots,e'_{k-1}).
+\]
+By the recursive definition of row transformation,
+\[
+\Tq^{k-1}(e'_0,\ldots,e'_{k-1})
+=\Tq^k(e_0,\ldots,e_k).
+\]
+Multiplying by $64$ proves the result at depth $k$.
+\end{proof}
+
+\begin{theorem}[Integer conjugacy for the zero-trace graph]
+\label{thm:integer-conjugacy}
+For every $k\ge1$, the bijection
+\[
+\Psi_k:\{-1,0,1\}^k\longrightarrow\mathcal S_k,
+\qquad
+\Psi_k(w)=R_k(w),
+\]
+is a directed-graph isomorphism from $\mathcal Z_k$ to the graph with vertex set $\mathcal S_k$ and edges
+\[
+x\longrightarrow F(x)
+\]
+whenever $F(x)\in\mathcal S_k$.
+\end{theorem}
+
+\begin{proof}
+The map $\Psi_k$ is a bijection by Lemma \ref{lem:canonical-realization}. Let
+\[
+u=(e_0,\ldots,e_{k-1}),
+\qquad
+v=(e_1,\ldots,e_{k-1},e_k).
+\]
+Since $u$ is ternary, Lemma \ref{lem:residue-dictionary} gives
+\[
+F(R_k(u))=\frac{81R_k(u)+e_0}{64}=D_1(u).
+\]
+Lemma \ref{lem:trace-displacement} gives
+\[
+F(R_k(u))-R_k(v)
+=64^{k-1}\Tq^k(e_0,\ldots,e_k).
+\]
+Therefore
+\[
+\Tq^k(e_0,\ldots,e_k)=0
+\]
+if and only if
+\[
+F(R_k(u))=R_k(v).
+\]
+The left side is the edge condition in $\mathcal Z_k$, and the right side is the edge condition in the integer graph. Thus $\Psi_k$ preserves and reflects every edge.
+\end{proof}
+
+\begin{corollary}[Exact structure of the zero-trace graph]
+\label{cor:graph-structure}
+Every vertex of $\mathcal Z_k$ has in-degree at most one and out-degree at most one. The zero vertex has a loop and no edge joining it to a nonzero vertex. The nonzero part of $\mathcal Z_k$ is a disjoint union of finite directed paths.
+\end{corollary}
+
+\begin{proof}
+Theorem \ref{thm:integer-conjugacy} identifies outgoing edges with applications of the partial function $F$, so out-degree is at most one. If $F(x)=F(y)$, write the associated errors as $e_x,e_y\in\{-1,0,1\}$. Then
+\[
+81x+e_x=81y+e_y,
+\]
+so
+\[
+81(x-y)=e_y-e_x.
+\]
+The right side has absolute value at most $2$, hence $x=y$ and then $e_x=e_y$. Thus $F$ is injective on its domain and in-degree is at most one.
+
+One has $F(0)=0$. Injectivity shows that no nonzero state maps to $0$, and the function property shows that $0$ has no nonzero image. Finally, Lemma \ref{lem:residue-dictionary} gives $F(x)>x$ for every positive state in the domain. A directed cycle of positive states is therefore impossible. Since the graph is finite and all in-degrees and out-degrees are at most one, each nonzero component is a finite directed path.
+\end{proof}
+
+For $n\ge0$, say that a positive integer $x$ \emph{survives $n$ steps} if the iterates
+\[
+F(x),F^2(x),\ldots,F^n(x)
+\]
+are all defined.
+
+\begin{proposition}[Residence-time formula]
+\label{prop:residence}
+For every $k\ge1$,
+\[
+\ell_k
+=
+\max\left\{
+L\ge0:
+\begin{array}{l}
+\text{there exists $x\ge1$ surviving $k+L$ steps, and}\\
+F^L(x)<64^k
+\end{array}
+\right\}.
+\]
+Equivalently, if
+\[
+\mu_{k,L}
+=
+\min\left\{
+F^L(x):x\ge1\text{ survives $k+L$ steps}
+\right\},
+\]
+then
+\[
+\ell_k\ge L
+\quad\Longleftrightarrow\quad
+\mu_{k,L}<64^k.
+\]
+\end{proposition}
+
+\begin{proof}
+By Theorem \ref{thm:integer-conjugacy}, a directed path of length $L$ in the nonzero part of $\mathcal Z_k$ corresponds to states
+\[
+x,F(x),\ldots,F^L(x)
+\]
+that all belong to $\mathcal S_k$ and are positive. Membership of all these states in $\mathcal S_k$ is equivalent to the existence of the first $k+L$ applications of $F$ to $x$: the window beginning at $F^j(x)$ requires the applications numbered $j+1$ through $j+k$, and the union of these requirements for $0\le j\le L$ is exactly the first $k+L$ applications.
+
+Every positive application of $F$ increases the state by Lemma \ref{lem:residue-dictionary}. Consequently,
+\[
+x,F(x),\ldots,F^L(x)<64^k
+\]
+is equivalent to the single terminal inequality
+\[
+F^L(x)<64^k.
+\]
+This proves the maximum formula. The set defining $\mu_{k,L}$ is nonempty, because any ternary word of length $k+L$ other than the zero word has a positive canonical realization. The well-ordering of the positive integers gives the minimum. The maximum formula now gives
+\[
+\ell_k\ge L
+\]
+precisely when at least one admissible terminal value is below $64^k$, which is equivalent to
+\[
+\mu_{k,L}<64^k.
+\]
+\end{proof}
+
+\begin{corollary}[Scalar form of the zero-trace conjecture]
+\label{cor:scalar-ZT}
+Put
+\[
+b_k=\left\lfloor\frac{k+1}{3}\right\rfloor.
+\]
+The conjectural bound
+\[
+\ell_k\le b_k
+\]
+for every $k\ge1$ is equivalent to the family of scalar inequalities
+\[
+\mu_{k,b_k+1}\ge64^k
+\]
+for every $k\ge1$.
+\end{corollary}
+
+\begin{proof}
+By Proposition \ref{prop:residence}, the inequality $\ell_k\le b_k$ holds if and only if there is no path of length $b_k+1$, which holds if and only if
+\[
+\mu_{k,b_k+1}\not<64^k.
+\]
+Both quantities are integers, so this is equivalent to
+\[
+\mu_{k,b_k+1}\ge64^k.
+\]
+\end{proof}
+
+\begin{conjecture}[Zero-trace residence bound; unproved]
+\label{conj:ZT}
+For every $k\ge1$,
+\[
+\mu_{k,\lfloor(k+1)/3\rfloor+1}\ge64^k.
+\]
+Equivalently,
+\[
+\ell_k\le\left\lfloor\frac{k+1}{3}\right\rfloor.
+\]
+This round proves neither assertion for arbitrary $k$.
+\end{conjecture}
+
+\section{An exact lifting algorithm}
+
+Set
+\[
+R_0=Q_0=0.
+\]
+For a ternary word $w$ of length $n$, write $R_n(w)$ and $Q_n(w)$ for its canonical start and endpoint.
+
+\begin{lemma}[One-digit lifting]
+\label{lem:lifting}
+Let $w\in\{-1,0,1\}^n$ and let $a\in\{-1,0,1\}$. There is a unique $t\in\{0,1,\ldots,63\}$ satisfying
+\[
+81\left(Q_n(w)+t81^n\right)+a\equiv0\pmod{64}.
+\]
+For that $t$,
+\[
+R_{n+1}(w,a)=R_n(w)+t64^n
+\]
+and
+\[
+Q_{n+1}(w,a)
+=
+\frac{81\left(Q_n(w)+t81^n\right)+a}{64}.
+\]
+\end{lemma}
+
+\begin{proof}
+Every integer in $[0,64^{n+1})$ congruent to $R_n(w)$ modulo $64^n$ has a unique expression
+\[
+R_n(w)+t64^n,
+\qquad 0\le t<64.
+\]
+Changing the initial state by $t64^n$ changes the state after the first $n$ recurrence steps by
+\[
+\frac{81^n}{64^n}t64^n=t81^n.
+\]
+Thus the endpoint after reading $w$ becomes
+\[
+Q_n(w)+t81^n.
+\]
+The appended error $a$ is admissible exactly when
+\[
+81\left(Q_n(w)+t81^n\right)+a
+\]
+is divisible by $64$. The coefficient of $t$ in this congruence is $81^{n+1}$, which is odd and hence invertible modulo $64$. There is therefore a unique residue $t$ modulo $64$, represented uniquely in $\{0,\ldots,63\}$. The displayed formulas then give the canonical start in $[0,64^{n+1})$ and its endpoint after the appended step.
+\end{proof}
+
+\begin{proposition}[Correctness of the constant-memory enumeration]
+\label{prop:algorithm}
+The following exact procedure computes the number of edges of $\mathcal Z_k$ and the value of $\ell_k$.
+
+\begin{enumerate}
+\item Starting from $(R_0,Q_0)=(0,0)$, recursively apply Lemma \ref{lem:lifting} for each appended symbol $a\in\{-1,0,1\}$. At depth $k$ this visits every pair $(R_k(w),Q_k(w))$ exactly once.
+\item For each nonzero pair, initialize
+\[
+x=R_k(w),\qquad y=Q_k(w).
+\]
+While $F(y)$ is defined and $F(x)<64^k$, replace
+\[
+(x,y)\longleftarrow(F(x),F(y))
+\]
+and increase a counter by one. The largest counter is $\ell_k$. A vertex has an outgoing edge precisely when the loop executes at least once. The zero loop is then added separately.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lem:lifting} gives three distinct children for every ternary word and gives the canonical pair for each child. Induction on the depth shows that the recursion visits all $3^k$ ternary words exactly once and associates the correct pair to each.
+
+For a leaf pair, Lemma \ref{lem:canonical-realization} gives
+\[
+y=F^k(x).
+\]
+The state $F(x)$ survives $k$ steps if and only if the original orbit admits one further step beyond $y$, which is equivalent to $F(y)$ being defined. Its endpoint after those $k$ steps is then $F(y)$. Theorem \ref{thm:integer-conjugacy} shows that the corresponding graph edge exists exactly when, in addition,
+\[
+F(x)<64^k.
+\]
+After the simultaneous replacement $(x,y)\mapsto(F(x),F(y))$, the same reasoning applies to the next shifted window. Therefore the loop counter is exactly the length of the directed path beginning at the selected vertex. Taking the maximum over all nonzero vertices gives $\ell_k$, and counting the vertices for which the first iteration succeeds gives all nonzero outgoing edges. The vertex $0$ contributes its single loop.
+\end{proof}
+
+\begin{theorem}[Exact computation through depth nineteen]
+\label{thm:computation}
+The exact integer enumeration of Proposition \ref{prop:algorithm}, implemented by the GNU C++17 verifier in Appendix \ref{app:code}, gives the following values. The edge count includes the zero loop.
+
+\begin{center}
+\begin{tabular}{r|r|r|r}
+$k$ & $3^k$ vertices & edges & $\ell_k$\\ \hline
+1 & 3 & 1 & 0\\
+2 & 9 & 1 & 0\\
+3 & 27 & 1 & 0\\
+4 & 81 & 5 & 1\\
+5 & 243 & 13 & 2\\
+6 & 729 & 35 & 1\\
+7 & 2187 & 89 & 2\\
+8 & 6561 & 241 & 2\\
+9 & 19683 & 811 & 3\\
+10 & 59049 & 2239 & 3
+\end{tabular}
+\qquad
+\begin{tabular}{r|r|r|r}
+$k$ & $3^k$ vertices & edges & $\ell_k$\\ \hline
+11 & 177147 & 6587 & 4\\
+12 & 531441 & 19640 & 3\\
+13 & 1594323 & 59315 & 4\\
+14 & 4782969 & 177145 & 4\\
+15 & 14348907 & 531731 & 5\\
+16 & 43046721 & 1594441 & 5\\
+17 & 129140163 & 4783076 & 6\\
+18 & 387420489 & 14349300 & 6\\
+19 & 1162261467 & 43046372 & 6
+\end{tabular}
+\end{center}
+
+Consequently, the unproved bound in Conjecture \ref{conj:ZT} holds for every
+\[
+1\le k\le19.
+\]
+The values for $13\le k\le19$ are new relative to the repository record, which ended at $k=12$.
+\end{theorem}
+
+\begin{proof}
+The verifier is a literal implementation of Lemma \ref{lem:lifting} and Proposition \ref{prop:algorithm}. It uses no floating-point operations. The recorded run used \texttt{g++ 14.2.0} with the flags \texttt{-O3 -std=c++17}. At depth $k$ its recursion has exactly $3^k$ leaves, as confirmed by the vertex column. For $k\le19$, the canonical starts satisfy
+\[
+0\le R_k<64^k=2^{6k}\le2^{114},
+\]
+and all arithmetic in the lifting recursion and residence loop remains below the range of the unsigned $128$-bit type used by the program. In the lifting recursion, the largest signed intermediate occurs while producing depth $19$ and is bounded by
+\[
+65\cdot81^{19}<2^{127}.
+\]
+In the residence loop, if $x<64^k$ and $y=F^k(x)$, then the recurrence with errors at most $1$ gives
+\[
+y+\frac1{17}
+\le
+\left(\frac{81}{64}\right)^k
+\left(x+\frac1{17}\right)
+<81^k.
+\]
+For $k\le19$ this yields
+\[
+81y+1<81^{20}+1<2^{127}.
+\]
+Thus every product and signed conversion in the stated machine type agrees with the corresponding integer operation in $\Z$ throughout this computation.
+
+The SHA-256 digest of the verifier source used for the table is
+\[
+\texttt{8c44c8872d10d0d691d04621a2835d12d9d258480504594d4356099a37e06d17},
+\]
+and the digest of its complete depth-$19$ output is
+\[
+\texttt{d93792b555cc90f2e7a1b5c4a5a01cc64aa5570b939f1b706258cd1c5f5f917f}.
+\]
+The source prints, in addition to the four table columns, a maximizing canonical start, its endpoint, and its initial ternary word at every depth.
+
+For transparent lower-bound witnesses at the new depths, write \texttt{+} for $1$, \texttt{-} for $-1$, and \texttt{0} for $0$. The following words have length $k+\ell_k$; their first $k$ symbols define the initial vertex and their final $\ell_k$ symbols extend its path:
+\begin{center}
+\begin{tabular}{r|r|l}
+$k$ & $\ell_k$ & extended error word\\ \hline
+13 & 4 & \texttt{--000+-++++++--++}\\
+14 & 4 & \texttt{---++-0+++00-0+++0}\\
+15 & 5 & \texttt{+-0-++0+0+0++00-00--}\\
+16 & 5 & \texttt{-0-0000+-00-0+-00-00-}\\
+17 & 6 & \texttt{0+-+++0+0+--00--++0+0--}\\
+18 & 6 & \texttt{-+0+-00-0++00+--++++----}\\
+19 & 6 & \texttt{--0+-0-+-+0--++0000--+0-+}
+\end{tabular}
+\end{center}
+Applying Lemma \ref{lem:lifting} to any row in this witness table gives a positive canonical start and confirms that its first $\ell_k$ shifted starts remain below $64^k$. This proves the lower bounds in the last seven rows. The exhaustive traversal of all $3^k$ leaves, whose correctness is Proposition \ref{prop:algorithm}, proves the corresponding upper bounds and the edge counts.
+
+Finally, comparison with
+\[
+\left\lfloor\frac{k+1}{3}\right\rfloor
+\]
+after each row gives the claimed verification of Conjecture \ref{conj:ZT} through depth $19$. The repository table lists $\ell_k$ only for $1\le k\le12$, so direct comparison proves the final assertion concerning the seven new campaign rows.
+\end{proof}
+
+\section{What the new formulation isolates}
+
+\begin{proposition}[Exact finite target at each depth]
+\label{prop:finite-target}
+For fixed $k$, proving the zero-trace bound at that depth requires no analysis of the quotient alphabet $\E$. It is enough to prove that every positive integer surviving
+\[
+k+\left\lfloor\frac{k+1}{3}\right\rfloor+1
+\]
+steps under $F$ satisfies
+\[
+F^{\lfloor(k+1)/3\rfloor+1}(x)\ge64^k.
+\]
+Conversely, a single integer violating this inequality gives a path in $\mathcal Z_k$ longer than the conjectured limit.
+\end{proposition}
+
+\begin{proof}
+This is Corollary \ref{cor:scalar-ZT} with the definition of $\mu_{k,L}$ expanded. If every surviving integer satisfies the displayed inequality, then the minimum defining $\mu_{k,L}$ is at least $64^k$, so the bound follows. If one integer violates it, then the minimum is below $64^k$, and Proposition \ref{prop:residence} produces a path of the forbidden length.
+\end{proof}
+
+\begin{remark}
+Theorem \ref{thm:integer-conjugacy} is a structural simplification, not an all-depth estimate. The difficult content of Conjecture \ref{conj:ZT} has moved into an arithmetic assertion about unusually long residence below a power of $64$. The transformation is useful because the state variable is now a single positive integer and the map is strictly increasing; it does not by itself force the conjectured factor of one step per three base-$64$ digits.
+\end{remark}
+
+\section{Assessment}
+
+This round produced two genuine campaign-level advances. First, it replaced the zero-trace carry graph by the exact partial map $F$ and proved a scalar threshold criterion. Second, it extended the exact computation from depth $12$ to depth $19$ with a reproducible verifier and complete edge counts. I have not established that the graph conjugacy is absent from the broader Collatz literature, so the novelty claim here is limited to the repository and this campaign.
+
+The round also found a definite mathematical error: the claimed cyclic quotient of order $2^K-3^m$ for $\gcd(K,m)>1$ is false. Proposition \ref{prop:resultant-correction} gives the corrected order and an explicit noncyclic counterexample.
+
+This is not a proof of convergence. Conjecture \ref{conj:ZT} remains unproved for arbitrary $k$. A direct overflow-safe single-process traversal at depth $20$ was started but did not finish in the present execution environment, so no depth-$20$ datum is claimed. Even a proof of Conjecture \ref{conj:ZT} would settle only the recurrent $81/64$ compression branch described in the repository. The separate global synchronization step connecting every hypothetical least counterexample to that branch remains missing. The honest status is therefore: a clean finite obstruction and a stronger exact verification range, but no theorem excluding a nontrivial Collatz cycle or a divergent Collatz trajectory.
+
+\begin{thebibliography}{9}
+
+\bibitem{Barina2025}
+D. Barina,
+\emph{Improved verification limit for the convergence of the Collatz conjecture},
+Journal of Supercomputing \textbf{81} (2025), article 810.
+\href{https://doi.org/10.1007/s11227-025-07337-0}{doi:10.1007/s11227-025-07337-0}.
+
+\bibitem{BernsteinLagarias}
+D. J. Bernstein and J. C. Lagarias,
+\emph{The $3x+1$ conjugacy map},
+Canadian Journal of Mathematics \textbf{48} (1996), 1154--1169.
+\href{https://doi.org/10.4153/CJM-1996-060-x}{doi:10.4153/CJM-1996-060-x}.
+
+\end{thebibliography}
+
+\appendix
+\section{Exact verifier}
+\label{app:code}
+
+The following is the complete source whose digest is recorded in Theorem \ref{thm:computation}. A conforming command is
+\[
+\texttt{g++ -O3 -std=c++17 zt\_round1.cpp -o zt\_round1}
+\]
+followed by
+\[
+\texttt{./zt\_round1 19}.
+\]
+
+\scriptsize
+\begin{verbatim}
+#include <algorithm>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using u128 = unsigned __int128;
+using i128 = __int128;
+
+struct Stats {
+int ell = -1;
+unsigned long long vertices = 0;
+unsigned long long edges = 0;
+u128 R = 0;
+u128 Q = 0;
+unsigned long long word = 0;
+};
+
+int K;
+std::vector<u128> p64, p81;
+std::vector<Stats> stats;
+
+std::string decimal(u128 x) {
+if (x == 0) return "0";
+std::string s;
+while (x != 0) {
+s.push_back(char('0' + x % 10));
+x /= 10;
+}
+std::reverse(s.begin(), s.end());
+return s;
+}
+
+bool step(u128 x, u128& y) {
+unsigned r = unsigned(x & 63);
+if (r == 0) { y = 81 * x / 64; return true; }
+if (r == 15) { y = (81 * x + 1) / 64; return true; }
+if (r == 49) { y = (81 * x - 1) / 64; return true; }
+return false;
+}
+
+void evaluate(int n, u128 R, u128 Q, unsigned long long word) {
+Stats& s = stats[n];
+++s.vertices;
+if (R == 0) {
+++s.edges; // the zero loop
+return;
+}
+u128 x = R, y = Q, nx, ny;
+int length = 0;
+bool first = true;
+for (;;) {
+if (!step(y, ny)) break;
+if (!step(x, nx)) std::exit(2);
+if (nx >= p64[n]) break;
+if (first) { ++s.edges; first = false; }
+++length;
+x = nx;
+y = ny;
+}
+if (length > s.ell) {
+s.ell = length;
+s.R = R;
+s.Q = Q;
+s.word = word;
+}
+}
+
+void dfs(int n, u128 R, u128 Q, unsigned long long word) {
+if (n != 0) evaluate(n, R, Q, word);
+if (n == K) return;
+for (int digit = 0; digit < 3; ++digit) {
+int e = digit - 1;
+unsigned a = (unsigned((81 * Q) & 63) + unsigned(e + 64)) & 63;
+unsigned c = unsigned(p81[n + 1] & 63);
+unsigned inv = 0;
+for (unsigned z = 1; z < 64; z += 2) {
+if ((c * z) % 64 == 1) { inv = z; break; }
+}
+unsigned t = (((64 - a) & 63) * inv) & 63;
+u128 middle = Q + u128(t) * p81[n];
+i128 numerator = i128(81 * middle) + e;
+if (numerator < 0 || (numerator & 63) != 0) std::exit(3);
+u128 nextR = R + u128(t) * p64[n];
+u128 nextQ = u128(numerator / 64);
+dfs(n + 1, nextR, nextQ,
+word | (static_cast<unsigned long long>(digit) << (2 * n)));
+}
+}
+
+int main(int argc, char** argv) {
+K = argc == 2 ? std::atoi(argv[1]) : 19;
+if (K < 1 || K > 19) return 1;
+p64.assign(K + 1, 1);
+p81.assign(K + 2, 1);
+for (int n = 1; n <= K; ++n) p64[n] = 64 * p64[n - 1];
+for (int n = 1; n <= K + 1; ++n) p81[n] = 81 * p81[n - 1];
+stats.resize(K + 1);
+dfs(0, 0, 0, 0);
+for (int n = 1; n <= K; ++n) {
+const Stats& s = stats[n];
+std::cout << n << " " << std::max(0, s.ell)
+<< " " << s.vertices << " " << s.edges
+<< " R=" << decimal(s.R) << " Q=" << decimal(s.Q)
+<< " word=";
+for (int j = 0; j < n; ++j) {
+int digit = int((s.word >> (2 * j)) & 3);
+std::cout << digit - 1 << (j + 1 == n ? '\n' : ',');
+}
+}
+}
+\end{verbatim}
+\normalsize
+
+\subsection*{Recorded output}
+The columns are $k$, $\ell_k$, $3^k$, the edge count, a maximizing canonical start, its endpoint, and its initial error word. The following is the complete output whose SHA-256 digest is recorded in Theorem \ref{thm:computation}.
+
+\begin{list}{}{\setlength{\leftmargin}{-0.27in}\setlength{\rightmargin}{-0.27in}}
+\item[]
+\tiny
+\begin{verbatim}
+1 0 3 1 R=49 Q=62 word=-1
+2 0 9 1 R=241 Q=386 word=-1,-1
+3 0 27 1 R=61681 Q=125045 word=-1,-1,-1
+4 1 81 5 R=6969521 Q=17882289 word=-1,0,-1,0
+5 2 243 13 R=55382016 Q=179843185 word=0,0,-1,1,1
+6 1 729 35 R=37328318705 Q=153415308879 word=-1,-1,-1,-1,-1,0
+7 2 2187 89 R=535153336561 Q=2783643097265 word=-1,-1,0,-1,-1,0,-1
+8 2 6561 241 R=142798743820465 Q=940079854821376 word=-1,0,-1,1,0,-1,-1,1
+9 3 19683 811 R=3458407417163889 Q=28815194674106127 word=-1,1,0,0,1,0,0,0,0
+10 3 59049 2239 R=363067544997662479 Q=3828581333147998385 word=1,1,1,1,-1,0,-1,-1,1,-1
+11 4 177147 6587 R=17180978178766081807 Q=229299643800202850063 word=1,1,1,-1,-1,0,1,1,1,1,-1
+12 3 531441 19640 R=720210015987627258097 Q=12165212389183455842191 word=-1,-1,-1,0,0,0,0,0,1,-1,-1,1
+13 4 1594323 59315 R=80504324156681942196465 Q=1721015540817809220489457 word=-1,-1,0,0,0,1,-1,1,1,1,1,1,1
+14 4 4782969 177145 R=4536130146951776227094769 Q=122731526254233882826313487 word=-1,-1,-1,1,1,-1,0,1,1,1,0,0,-1,0
+15 5 14348907 531731 R=374891364809353650846388111 Q=12837519328334410427035109553 word=1,-1,0,-1,1,1,0,1,0,1,0,1,1,0,0
+16 5 43046721 1594441 R=6719585807138737560599812273 Q=291221357820653819088276199488 word=-1,0,-1,0,0,0,0,1,-1,0,0,-1,0,1,-1,0
+17 6 129140163 4783076 R=811973870609807034104630900672 Q=44537703224849253077354840172367 word=0,1,-1,1,1,1,0,1,0,1,-1,-1,0,0,-1,-1,1
+18 6 387420489 14349300 R=20329376646834833979451506864241 Q=1411285470233878679037001221091087 word=-1,1,0,1,-1,0,0,-1,0,1,1,0,0,1,-1,-1,1,1
+19 6 1162261467 43046372 R=4639061950225051873712446643888369 Q=407592350843974217189706829029626097 word=-1,-1,0,1,-1,0,-1,1,-1,1,0,-1,-1,1,1,0,0,0,0
+\end{verbatim}
+\normalsize
+\end{list}
+
+\section{Next-round directive}
+
+Continue on branch P3-ZT-RESIDENCE, using Theorem \ref{thm:integer-conjugacy} rather than the iterated quotient alphabet. First, run two independent exact implementations. Replace the fixed-width lifting arithmetic by overflow-safe exact arithmetic, parallelize by fixed prefixes, and run the depth-first verifier at $k=20$ and, if resources permit, at $k=21$. In parallel, implement a branch-pruned search for a forbidden path of length
+\[
+L_k=\left\lfloor\frac{k+1}{3}\right\rfloor+1
+\]
+for every $20\le k\le30$: enumerate canonical words of length $k+L_k$, retain only those with initial state below $64^k$, compute the state after $L_k$ steps, and reject the word unless that state is also below $64^k$. Record for every completed depth the exact value of $\ell_k$ when available, the total edge count, the number of maximizers, one full witness word, source and output SHA-256 digests, compiler version, and compiler flags. Cross-check both implementations on all depths $k\le19$ before accepting any new row.
+
+After the computation, attack the all-depth inequality in Corollary \ref{cor:scalar-ZT}. Seek a rigorous recurrence or block inequality for
+\[
+\mu_{k,L}
+\]
+that forces three additional residence steps to consume at least one additional base-$64$ digit. A useful target is an inequality strong enough to induct from $k$ to $k+3$ at $L=\lfloor(k+1)/3\rfloor+1$. If that target is false, return the smallest exact counterexample together with its full $F$-orbit and base-$64$ digits, and replace it with the strongest true inequality supported by the counterexample.
+
+Edit \texttt{COLLATZ\_MAP.md} by adding a branch named \texttt{P3-ZT-RESIDENCE}. Record as proved: the graph conjugacy of Theorem \ref{thm:integer-conjugacy}, the residence formula of Proposition \ref{prop:residence}, and the scalar equivalence of Corollary \ref{cor:scalar-ZT}. Record as exactly computed: the table through $k=19$ and the two SHA-256 digests in Theorem \ref{thm:computation}. Record as open: Conjecture \ref{conj:ZT} and the global synchronization step needed to connect this subsystem to every hypothetical least Collatz counterexample. Also correct the $d>1$ group-ring sentence using Proposition \ref{prop:resultant-correction}, and update the computational-verification figure from $2^{68}$ to Barina's published $2^{71}$ result.
+
+\end{document}

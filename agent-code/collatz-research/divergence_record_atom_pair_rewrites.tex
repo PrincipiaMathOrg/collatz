@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\Up}{U_+}
+
+\title{Uniform shorter rewrites for record-atom pairs containing $1113$}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+For a positive odd integer $x$, let
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+We use the four record atoms
+\[
+ A:=1,
+ \qquad B:=12,
+ \qquad C:=1113,
+ \qquad D:=1122.
+ \tag{2}
+\]
+If a positive exponent word $w=(a_1,\ldots,a_L)$ has mass
+\[
+ M(w):=a_1+\cdots+a_L,
+ \tag{3}
+\]
+then its shifted affine equation has the form
+\[
+ 2^{M(w)}Y=3^LX+D(w),
+ \qquad X:=x+1,
+ \qquad Y:=\Up^L(x)+1.
+ \tag{4}
+\]
+
+\begin{lemma}[cylinder transport]
+Suppose that the word $w$ has length $L$, mass $M$, least positive
+ordinary representative $x_0$, and endpoint $y_0$.  Every positive
+start with exact word $w$ is
+\[
+ x_k=x_0+2^{M+1}k,
+ \qquad k\geq0,
+ \tag{5}
+\]
+and its endpoint is
+\[
+ y_k=y_0+2\,3^Lk.
+ \tag{6}
+\]
+
+Suppose that a word $v$ of length $m\leq L$ and mass $N$ is exact from
+$z_0$ to $y_0$.  Then the same word is exact from
+\[
+ z_k=z_0+2^{N+1}3^{L-m}k
+ \tag{7}
+\]
+to $y_k$.  In particular, if
+\[
+ z_0<x_0,
+ \qquad
+ 2^{N+1}3^{L-m}<2^{M+1},
+ \tag{8}
+\]
+then $z_k<x_k$ for every $k\geq0$.
+\end{lemma}
+
+\begin{proof}
+The exact valuation cylinder of $w$ is one odd residue class modulo
+$2^{M+1}$, which proves (5).  Substitution in (4) proves (6).
+The cylinder modulus for $v$ is $2^{N+1}$.  Increasing its start by the
+quantity in (7) increases its endpoint by
+\[
+ \frac{3^m}{2^N}
+ 2^{N+1}3^{L-m}k
+ =2\,3^Lk.
+\]
+Thus (7) reaches the endpoint in (6) with the same exact word.  The final
+assertion follows by subtracting (7) from (5).
+\end{proof}
+
+\begin{theorem}[complete two-atom $C$ rewrite table]
+Let $P$ be a two-atom word over $\{A,B,C,D\}$ which contains the atom
+$C$.  Let $x$ be any positive odd start having exact word $P$, and let
+$y$ be its endpoint.  Then there is a positive odd integer $z<x$ which
+reaches $y$ by the shorter word displayed below.
+\[
+\begin{array}{c|c|c|c|c|c}
+P&\text{raw source}&\text{alternative}&x_0&y_0&z_0\\ \hline
+AC&11113&1121&223&425&167\\
+BC&121113&1&411&587&391\\
+CA&11131&11&207&395&175\\
+CB&111312&112&463&661&391\\
+CC&11131113&121&4815&7715&4571\\
+CD&11131122&11122&4303&6895&3631\\
+DC&11221113&121&3399&5447&3227
+\end{array}\qquad
+\tag{9}
+\]
+The corresponding shifted-start identities $Z=\lambda X+\eta$ are
+\[
+\begin{array}{c|c|c}
+P&\lambda&\eta\\ \hline
+AC&3/4&0\\
+BC&243/256&59/64\\
+CA&27/32&1/2\\
+CB&27/32&1/2\\
+CC&243/256&9/16\\
+CD&27/32&1/2\\
+DC&243/256&21/32.
+\end{array}
+\tag{10}
+\]
+In every row the descent holds on the complete source cylinder, not only
+at its least representative.
+\end{theorem}
+
+\begin{proof}
+Direct iteration of (1) verifies every source and alternative word at
+the three integers in the corresponding row of (9).  It also gives the
+identities in (10).
+
+It remains to extend each identity from the least representative to the
+complete cylinder.  The source and alternative lift increments from
+Lemma~1 are
+\[
+\begin{array}{c|r|r}
+P&\text{source increment}&\text{alternative increment}\\ \hline
+AC&256&192\\
+BC&1024&972\\
+CA&256&216\\
+CB&1024&864\\
+CC&8192&7776\\
+CD&8192&6912\\
+DC&8192&7776.
+\end{array}\qquad
+\tag{11}
+\]
+The alternative increment is strictly smaller in every row, and (9)
+gives $z_0<x_0$.  Lemma~1 proves the result.
+\end{proof}
+
+\begin{corollary}[arbitrary common suffix]
+Let $U$ be any positive exponent word.  If $PU$ is exact from $x$ to
+$q$, where $P$ is one of the seven source words in (9), replace $P$ by
+its displayed alternative word and retain the suffix $U$.  The resulting
+word is exact from a positive odd start $z<x$ to the same endpoint $q$.
+\end{corollary}
+
+\begin{proof}
+The source and alternative prefixes reach the same intermediate odd
+state by Theorem~2.  Appending the common exact suffix $U$ proves the
+claim.
+\end{proof}
+
+\paragraph{Scope.}
+If a globally least unbounded seed begins its interior record-atom coding
+at the normalized origin, the first two atoms cannot contain $C$.  At a
+later record state the theorem gives a smaller coalescing start relative
+to that record state, but it does not by itself place the new start below
+the original least seed.  Propagating the contraction through an arbitrary
+earlier atom prefix remains the global arithmetic problem.
+
+The accompanying exact certificate is
+\begin{center}
+ \texttt{agent-code/collatz-research/}\\
+ \texttt{verify\_divergence\_record\_atom\_pair\_rewrites.py}.
+\end{center}
+
+\end{document}

@@ -1,0 +1,67 @@
+{
+ "family": "mod2",
+ "K_states": 2,
+ "s": "3/2",
+ "N_hi": 5,
+ "N_fail": 5,
+ "eps_at_Nfail": -0.0,
+ "eps_at_Nfail_minus_1": 1.0,
+ "exact_feasible_below": true,
+ "table_below": {
+  "0": [
+   1,
+   1
+  ],
+  "1": [
+   1,
+   1
+  ]
+ },
+ "farkas": {
+  "ok": true,
+  "ok_lo": true,
+  "ok_true_rows": true,
+  "source": "vertex",
+  "support": [
+   4,
+   5
+  ],
+  "n_rows": 2,
+  "max_row": 5,
+  "t_interior": 0.5,
+  "y": {
+   "5": [
+    1,
+    1
+   ],
+   "4": [
+    "5131088862720981630697754656145",
+    "13111494918879044514349563192902"
+   ]
+  },
+  "components_sign": {
+   "0": 1,
+   "1": 1
+  }
+ },
+ "time": 0.08852219581604004,
+ "analytic_single_row": {
+  "m": 5,
+  "exact_ok": true,
+  "components": {
+   "0": [
+    "5131088862720981630697754656145",
+    "162259276829213363391578010288128"
+   ],
+   "1": [
+    "4178475366620919005632796107127",
+    "40564819207303340847894502572032"
+   ]
+  }
+ },
+ "battery": {
+  "skipped": "non-integer s (battery needs exact comparable values)"
+ },
+ "M": 2,
+ "analytic_row": 5
+}

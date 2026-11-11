@@ -1,0 +1,1280 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\N}{\mathbb N}
+
+\title{Rigidity and finite-window failure for synchronized rounding defects}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  2^{a_j}x_{j+1}=3x_j+1,
+  \qquad
+  2^{a_j}e_{j+1}=3e_j-1,
+  \qquad a_j\in\N,
+  \tag{1}
+\]
+where every $x_j$ is a positive integer and every $e_j$ is a real number
+greater than $1$.  Put
+\[
+  q_j:=\frac{3^j}{2^{A_j}},
+  \qquad A_j:=\sum_{i<j}a_i,
+  \qquad
+  m_j:=\lceil e_j\rceil,
+  \qquad
+  \theta_j:=m_j-e_j,
+  \tag{2}
+\]
+and define
+\[
+  N_j:=x_j+m_j,
+  \qquad
+  d_j:=2^{a_j}m_{j+1}-3m_j+1.
+  \tag{3}
+\]
+Then
+\[
+  d_j=2^{a_j}\theta_{j+1}-3\theta_j,
+  \qquad -2\leq d_j\leq 2^{a_j}-1.
+  \tag{4}
+\]
+In the normalized divergent-orbit application we also have
+\[
+  q_j\longrightarrow\infty,
+  \qquad
+  \sum_{j=0}^{\infty}\frac1{x_j}<\infty,
+  \qquad
+  \sum_{j=0}^{\infty}\frac1{e_j}=\infty,
+  \qquad
+  \sum_{\substack{j\geq0\\d_j\leq0}}\frac1{m_j}=\infty.
+  \tag{5}
+\]
+
+\begin{lemma}[block defect cocycle]
+Fix $s\geq0$ and $r\geq1$.  Write
+\[
+  B_0:=0,
+  \qquad
+  B_i:=\sum_{h=0}^{i-1}a_{s+h},
+  \qquad
+  M:=2^{B_r},
+  \qquad
+  P:=3^r,
+  \tag{6}
+\]
+and put
+\[
+  C:=\sum_{i=0}^{r-1}3^{r-1-i}2^{B_i},
+  \qquad
+  R:=-\sum_{i=0}^{r-1}3^{r-1-i}2^{B_i}d_{s+i}.
+  \tag{7}
+\]
+Then
+\[
+\begin{aligned}
+  Mx_{s+r}&=Px_s+C,\\
+  Mm_{s+r}&=Pm_s-C-R,\\
+  MN_{s+r}&=PN_s-R,\\
+  M\theta_{s+r}&=P\theta_s-R.
+\end{aligned}
+\tag{8}
+\]
+If $d_{s+i}\leq0$ for every $0\leq i<r$, then $R\geq0$ and
+\[
+  R\leq P\theta_s<R+M.
+  \tag{9}
+\]
+Moreover, if $D:=C+M$, then
+\[
+  D
+  =Pm_s-\bigl(R+M(m_{s+r}-1)\bigr),
+  \tag{9a}
+\]
+and, for every $0\leq t\leq r$,
+\[
+\boxed{
+  3^t\mid D
+  \quad\Longleftrightarrow\quad
+  3^t\mid R+M(m_{s+r}-1).}
+  \tag{9b}
+\]
+The integer on the right also has the exact companion form
+\[
+  R+M(m_{s+r}-1)
+  =P\theta_s+M(e_{s+r}-1)>0.
+  \tag{9c}
+\]
+\end{lemma}
+
+\begin{proof}
+The first identity in (8) is the usual affine iteration of the first
+recurrence in (1).  From (3) we have
+\[
+  2^{a_j}m_{j+1}=3m_j-1+d_j.
+\]
+Iterating this recurrence gives
+\[
+  Mm_{s+r}
+  =Pm_s-C+\sum_{i=0}^{r-1}3^{r-1-i}2^{B_i}d_{s+i}
+  =Pm_s-C-R.
+\]
+Adding the first two identities proves the identity for $N$.  Iteration of
+(4) proves the identity for $\theta$.  If every displayed defect is
+nonpositive, then $R\geq0$.  The inequalities $0\leq\theta_{s+r}<1$ in the
+last identity of (8) give (9).
+
+Rearranging the identity for $m$ in (8) gives (9a).  Since $P=3^r$,
+reduction modulo $3^t$ proves (9b).  Finally, the last identity in (8) and
+$m_{s+r}-1-\theta_{s+r}=e_{s+r}-1$ give (9c).  Its strict positivity follows
+from $e_{s+r}>1$.
+\end{proof}
+
+For a nonzero integer $z$, we write $\nu_2(z):=v_2(|z|)$.
+
+\begin{theorem}[defect-switch valuation conservation]
+Assume (1)--(5), and put
+\[
+  c_j:=1-d_j,
+  \qquad
+  Z_j(c):=cx_j+m_j.
+  \tag{10}
+\]
+There is an index $J$ such that $Z_j(c)\neq0$ for every integer $c$ and
+every $j\geq J$.  For every $j\geq J$ we have
+\[
+\boxed{
+  2^{a_j}Z_{j+1}(c_j)=3Z_j(c_j).}
+  \tag{11}
+\]
+
+Partition the tail into its maximal constant-defect runs.  Let the $k$-th
+run begin at $s_k$, end at $s_{k+1}$, have color $c_k$, and have total
+exponent
+\[
+  B_k:=\sum_{j=s_k}^{s_{k+1}-1}a_j.
+  \tag{12}
+\]
+Define
+\[
+\begin{aligned}
+  u_k&:=\nu_2\bigl(Z_{s_k}(c_k)\bigr),\\
+  v_k&:=\nu_2\bigl(Z_{s_{k+1}}(c_k)\bigr),\\
+  g_k&:=\nu_2\bigl(Z_{s_{k+1}}(c_{k+1})\bigr)
+       -\nu_2\bigl(Z_{s_{k+1}}(c_k)\bigr).
+\end{aligned}
+\tag{13}
+\]
+Then every run is finite,
+\[
+\boxed{B_k=u_k-v_k,}
+\tag{14}
+\]
+and, for every $K\geq0$,
+\[
+\boxed{
+  \sum_{k=0}^{K}B_k
+  =u_0-v_K+\sum_{k=0}^{K-1}g_k.}
+\tag{15}
+\]
+In particular,
+\[
+  \sum_{k=0}^{K-1}g_k\longrightarrow\infty.
+  \tag{16}
+\]
+
+At a switch, put $c:=c_k$, $c':=c_{k+1}$,
+$x:=x_{s_{k+1}}$, $m:=m_{s_{k+1}}$, and
+$h:=\nu_2(c'-c)$.  If
+\[
+  v:=\nu_2(cx+m),
+\]
+then
+\[
+  g_k=
+  \begin{cases}
+    0,&v<h,\\
+    h-v,&v>h,\\
+    \nu_2\!\left(\dfrac{cx+m}{2^h}
+      +\dfrac{c'-c}{2^h}x\right),&v=h.
+  \end{cases}
+  \tag{17}
+\]
+Consequently, a switch has positive gain if and only if
+\[
+  \nu_2(cx+m)=\nu_2(c'-c).
+  \tag{18}
+\]
+\end{theorem}
+
+\begin{proof}
+Put $X_j:=x_j+1$ and $E_j:=e_j-1$.  If
+$\gamma_j:=2^{a_j}-2$, then (1) gives
+\[
+  2^{a_j}X_{j+1}=3X_j+\gamma_j,
+  \qquad
+  2^{a_j}E_{j+1}=3E_j-\gamma_j.
+\]
+Therefore,
+\[
+  \frac{E_j}{X_j}-\frac{E_{j+1}}{X_{j+1}}
+  =\frac{\gamma_j(E_j+X_j)}{X_j(3X_j+\gamma_j)}
+  \geq0.
+\]
+The ratio $E_j/X_j$ has a limit.  If this limit were positive, then
+$e_j\gg x_j$ on a tail, which would make $\sum_j1/e_j$ converge by (5).
+Thus $E_j/X_j\to0$.  Since $x_j\to\infty$ and $m_j<e_j+1$, we obtain
+\[
+  \frac{m_j}{x_j}\longrightarrow0.
+  \tag{19}
+\]
+Choose $J$ so that $m_j<x_j$ for every $j\geq J$.  If $c\geq0$, then
+$Z_j(c)>0$.  If $c\leq-1$, then $Z_j(c)<0$.  Hence these linear forms do
+not vanish on the chosen tail.
+
+By the definition of $c_j$, equation (3) becomes
+\[
+  2^{a_j}m_{j+1}=3m_j-c_j.
+\]
+Multiplying the positive recurrence in (1) by $c_j$ and adding gives
+\[
+\begin{aligned}
+  2^{a_j}Z_{j+1}(c_j)
+  &=c_j(3x_j+1)+3m_j-c_j\\
+  &=3Z_j(c_j),
+\end{aligned}
+\]
+which proves (11).
+
+Iteration through one constant-color run gives
+\[
+  2^{B_k}Z_{s_{k+1}}(c_k)
+  =3^{s_{k+1}-s_k}Z_{s_k}(c_k).
+  \tag{20}
+\]
+Taking $2$-adic valuations proves (14).  In particular, no constant-color
+tail is possible, since its accumulated exponent would eventually exceed
+the fixed valuation at its initial state.  Thus every maximal run is
+finite.
+
+By definition, $g_k=u_{k+1}-v_k$.  Summing (14) and inserting these
+differences gives (15).  Since every $B_k\geq1$ and $v_K\geq0$, equation
+(15) gives (16).
+
+Finally,
+\[
+  c'x+m=(cx+m)+(c'-c)x.
+  \tag{21}
+\]
+The integer $x$ is odd, so the second term on the right has valuation $h$.
+If $v\neq h$, the valuation of the sum is $\min\{v,h\}$.  If $v=h$,
+division by $2^h$ leaves a sum of two odd integers.  This proves (17) and
+(18).
+\end{proof}
+
+\begin{corollary}[eventually constant defects are impossible]
+Assume (1)--(5).  There do not exist $J\geq0$ and
+$\delta\in\mathbf Z$ such that
+\[
+  d_j=\delta\qquad(j\geq J).
+  \tag{22}
+\]
+In particular, none of the three nonpositive defects $-2,-1,0$ can be
+eventually constant.
+\end{corollary}
+
+\begin{proof}
+This is the constant-color tail excluded in the proof of the theorem.
+\end{proof}
+
+\begin{corollary}[constant-defect terminal decoder]
+We use the convention $v_3(0):=\infty$.
+Let $[s,s+r)$ be a constant-defect run with
+\[
+  d_j=1-c,
+  \qquad c\in\{1,2,3\},
+  \qquad s\leq j<s+r.
+\]
+Then
+\[
+\boxed{3^r\mid cx_{s+r}+m_{s+r}.}
+\tag{D1}
+\]
+If $c\in\{1,2\}$, then
+\[
+\boxed{
+  \min\{v_3(x_{s+r}+1),r\}
+  =\min\{v_3(m_{s+r}-c),r\}.}
+\tag{D2}
+\]
+For $c=3$, we have
+\[
+\boxed{
+  \min\{v_3(x_{s+r}+1)+1,r\}
+  =\min\{v_3(m_{s+r}-3),r\}.}
+\tag{D3}
+\]
+In particular, a constant $d=-1$ run ending at $m_{s+r}=2$ satisfies
+$3^r\mid x_{s+r}+1$.
+\end{corollary}
+
+\begin{proof}
+Iteration of (11) through the run gives
+\[
+  2^{B_r}\bigl(cx_{s+r}+m_{s+r}\bigr)
+  =3^r(cx_s+m_s).
+\]
+Since $2^{B_r}$ is coprime to $3$, this proves (D1).  Reducing (D1) after
+writing
+\[
+  cx_{s+r}+m_{s+r}
+  =c(x_{s+r}+1)+(m_{s+r}-c)
+\]
+proves (D2).  When $c=3$, the same congruence compares
+$3(x_{s+r}+1)$ with $m_{s+r}-3$, which proves (D3).
+\end{proof}
+
+\begin{theorem}[switch-carry terminal decoder]
+Fix a block of length $r\geq1$.  For $0\leq i\leq r$, put
+\[
+  x_i:=x_{s+i},
+  \qquad m_i:=m_{s+i},
+  \qquad c_i:=1-d_{s+i},
+\]
+and put
+\[
+  B_0:=0,
+  \qquad B_i:=\sum_{h=0}^{i-1}a_{s+h},
+  \qquad M:=2^{B_r}.
+\]
+Define the synchronized switch carry by
+\[
+  \mathscr S_{s,r}
+  :=\sum_{i=1}^{r}
+  3^{r-i}2^{B_i}(c_i-c_{i-1})x_i.
+  \tag{S1}
+\]
+Then
+\[
+\boxed{
+  M(c_rx_r+m_r)
+  =3^r(c_0x_0+m_0)+\mathscr S_{s,r}.}
+  \tag{S2}
+\]
+Consequently,
+\[
+\boxed{
+  Mc_r(x_r+1)
+  \equiv
+  \mathscr S_{s,r}-M(m_r-c_r)
+  \pmod {3^r}.}
+  \tag{S3}
+\]
+If $c_r\neq0$, then
+\[
+\boxed{
+  \min\{v_3(x_r+1)+v_3(c_r),r\}
+  =\min\{v_3(\mathscr S_{s,r}-M(m_r-c_r)),r\}.}
+  \tag{S4}
+\]
+
+Suppose that the block contains at least one color switch, and let
+\[
+  \ell:=\max\{1\leq i\leq r:c_i\neq c_{i-1}\}.
+\]
+If
+\[
+  3\nmid(c_\ell-c_{\ell-1})x_\ell,
+  \tag{S5}
+\]
+then
+\[
+\boxed{v_3(\mathscr S_{s,r})=r-\ell.}
+\tag{S6}
+\]
+\end{theorem}
+
+\begin{proof}
+Equation (11), followed by the change from color $c_i$ to color $c_{i+1}$,
+gives
+\[
+\begin{aligned}
+  2^{a_{s+i}}Z_{i+1}(c_{i+1})
+  &=2^{a_{s+i}}Z_{i+1}(c_i)
+    +2^{a_{s+i}}(c_{i+1}-c_i)x_{i+1}\\
+  &=3Z_i(c_i)
+    +2^{a_{s+i}}(c_{i+1}-c_i)x_{i+1}.
+\end{aligned}
+\]
+Iteration proves (S2).  Writing
+\[
+  c_rx_r+m_r=c_r(x_r+1)+(m_r-c_r)
+\]
+and reducing (S2) modulo $3^r$ proves (S3).  Since $M$ is a unit modulo
+$3^r$, comparison of truncated valuations proves (S4).
+
+By the definition of the last switch,
+\[
+  \mathscr S_{s,r}
+  =3^{r-\ell}
+  \left(
+    2^{B_\ell}(c_\ell-c_{\ell-1})x_\ell+3H
+  \right)
+\]
+for some integer $H$.  Under (S5), the expression in parentheses is a
+unit modulo $3$.  This proves (S6).
+\end{proof}
+
+\begin{corollary}[last-switch matched-shell law]
+Use the notation and hypotheses of the switch-carry terminal decoder.  Assume
+that $c_r\neq0$, that the block contains a color switch, and that its last
+switch $\ell$ satisfies (S5).  Put
+\[
+  t:=r-\ell,
+  \qquad
+  h:=v_3(m_r-c_r),
+  \qquad
+  \delta:=\min\{v_3(x_r+1)+v_3(c_r),r\},
+  \tag{L1}
+\]
+where $v_3(0):=\infty$.  If $h\neq t$, then
+\[
+\boxed{\delta=\min\{h,t\}.}
+\tag{L2}
+\]
+If $h=t$, then $\delta\geq t$, and for every $1\leq q\leq r-t$ we have
+\[
+\boxed{
+  \delta\geq t+q
+  \quad\Longleftrightarrow\quad
+  \frac{\mathscr S_{s,r}}{3^t}
+  \equiv
+  \frac{M(m_r-c_r)}{3^t}
+  \pmod {3^q}.}
+\tag{L3}
+\]
+In particular,
+\[
+\boxed{
+  \delta>t
+  \quad\Longleftrightarrow\quad
+  \begin{cases}
+    v_3(m_r-c_r)=t,\\[2mm]
+    2^{B_\ell}(c_\ell-c_{\ell-1})x_\ell
+    \equiv
+    \displaystyle\frac{M(m_r-c_r)}{3^t}\pmod 3.
+  \end{cases}}
+\tag{L4}
+\]
+If $3\nmid c_r$, then $\delta=\min\{v_3(x_r+1),r\}$, so (L2)--(L4)
+decode the terminal factor $x_r+1$ itself.
+\end{corollary}
+
+\begin{proof}
+By (S6),
+\[
+  v_3(\mathscr S_{s,r})=t.
+  \tag{L5}
+\]
+Since $M$ is a power of $2$, we also have
+\[
+  v_3\bigl(M(m_r-c_r)\bigr)=h.
+  \tag{L6}
+\]
+If $h\neq t$, the two terms in the right side of (S3) have distinct
+$3$-adic valuations.  Hence
+\[
+  v_3\bigl(\mathscr S_{s,r}-M(m_r-c_r)\bigr)=\min\{h,t\}<r,
+\]
+and (S4) proves (L2).
+
+Now suppose that $h=t$.  Both terms in the same difference are divisible
+by $3^t$, so (S4) gives $\delta\geq t$.  For $1\leq q\leq r-t$, the same
+identity gives
+\[
+\begin{aligned}
+  \delta\geq t+q
+  &\quad\Longleftrightarrow\quad
+  3^{t+q}\mid
+  \mathscr S_{s,r}-M(m_r-c_r)\\
+  &\quad\Longleftrightarrow\quad
+  \frac{\mathscr S_{s,r}}{3^t}
+  \equiv
+  \frac{M(m_r-c_r)}{3^t}
+  \pmod {3^q}.
+\end{aligned}
+\]
+This proves (L3).  Finally, the factorization used in the proof of (S6)
+gives
+\[
+  \frac{\mathscr S_{s,r}}{3^t}
+  \equiv
+  2^{B_\ell}(c_\ell-c_{\ell-1})x_\ell
+  \pmod3.
+\]
+Taking $q=1$ in (L3), and combining the result with (L2), proves (L4).
+The last assertion follows directly from $3\nmid c_r$.
+\end{proof}
+
+\begin{corollary}[nonpositive-block reciprocal shell]
+Use the notation of the switch-carry terminal decoder, and suppose that
+\[
+  c_i\in\{1,2,3\}
+  \qquad(0\leq i\leq r).
+  \tag{N1}
+\]
+If the block contains a color switch, then its last switch $\ell$
+automatically satisfies (S5).  Put
+\[
+  t:=r-\ell,
+  \qquad
+  \delta:=\min\{v_3(x_r+1)+v_3(c_r),r\}.
+  \tag{N2}
+\]
+If $t\geq1$ and $\delta>t$, then
+\[
+\boxed{
+  v_3(m_r-c_r)=t,
+  \qquad
+  m_r\geq3^t+c_r,
+  \qquad
+  \frac1{m_r}<3^{-t}.}
+\tag{N3}
+\]
+Consequently, let a constant-color run inside the block begin at a switch
+$u\geq1$ and end at $v\leq r$.  For $u\leq j\leq v$, put
+\[
+  t_j:=j-u,
+  \qquad
+  \delta_j:=\min\{v_3(x_{s+j}+1)+v_3(c_j),j\}.
+\]
+Then
+\[
+\boxed{
+  \sum_{\substack{u\leq j\leq v\\t_j\geq T,\ \delta_j>t_j}}
+  \frac1{m_{s+j}}
+  <\sum_{t=T}^{\infty}3^{-t}
+  =\frac{3^{1-T}}2
+  \qquad(T\geq1).}
+\tag{N4}
+\]
+\end{corollary}
+
+\begin{proof}
+For every $j\geq1$, the first recurrence in (1) gives
+\[
+  2^{a_{j-1}}x_j=3x_{j-1}+1\equiv1\pmod3.
+\]
+Thus $3\nmid x_j$.  At a color switch inside a block satisfying (N1), the
+nonzero difference $c_i-c_{i-1}$ belongs to
+$\{-2,-1,1,2\}$.  It is also a unit modulo $3$.  Since the global index
+$s+\ell$ is positive, (S5) follows.
+
+If $\delta>t$, equation (L4) gives $v_3(m_r-c_r)=t$.  When $t\geq1$, the
+nonzero integer $m_r-c_r$ is a multiple of $3^t$.  Since $m_r\geq2$ and
+$1\leq c_r\leq3$, it cannot be a negative multiple of $3^t$.  Hence
+$m_r-c_r\geq3^t$, which proves (N3).
+
+Apply (N3) to each block prefix ending at $s+j$.  After the switch at $u$,
+the run age $t_j$ takes each nonnegative integer at most once.  Summing the
+resulting bounds over the selected endpoints and then enlarging to the full
+geometric tail proves (N4).
+\end{proof}
+
+\begin{corollary}[global late-shell reduction]
+Assume (1)--(5).  Partition the set
+\[
+  \{j\geq0:d_j\leq0\}
+\]
+into its maximal consecutive blocks $I_b=[\alpha_b,\beta_b]$, allowing an
+infinite right endpoint.  Partition each $I_b$ into maximal constant-color
+runs
+\[
+  I_{b,k}=[u_{b,k},v_{b,k}]
+  \qquad(0\leq k\leq K_b),
+\]
+listed in increasing order, where $K_b\in\{0,1,2,\ldots\}\cup\{\infty\}$.
+For $k\geq1$ and $j\in I_{b,k}$, put
+\[
+  t_j:=j-u_{b,k},
+  \qquad
+  \delta_{b,j}:=
+  \min\{v_3(x_j+1)+v_3(c_j),j-\alpha_b\}.
+  \tag{G1}
+\]
+Choose integers $T_{b,k}\geq1$ for $k\geq1$ such that
+\[
+  \sum_b\sum_{k=1}^{K_b}3^{-T_{b,k}}<\infty.
+  \tag{G2}
+\]
+Then
+\[
+\boxed{
+  \sum_b\sum_{k=1}^{K_b}
+  \sum_{\substack{j\in I_{b,k}\\
+                   t_j\geq T_{b,k},\ \delta_{b,j}>t_j}}
+  \frac1{m_j}<\infty.}
+\tag{G3}
+\]
+Consequently, at least one of the following three sets has divergent
+reciprocal mass:
+\[
+\begin{aligned}
+  \mathcal E
+  &:=\bigcup_b I_{b,0},\\
+  \mathcal S
+  &:=\bigcup_b\bigcup_{k=1}^{K_b}
+    \{j\in I_{b,k}:t_j<T_{b,k}\},\\
+  \mathcal L
+  &:=\bigcup_b\bigcup_{k=1}^{K_b}
+    \{j\in I_{b,k}:t_j\geq T_{b,k},\ \delta_{b,j}\leq t_j\}.
+\end{aligned}
+\tag{G4}
+\]
+That is,
+\[
+\boxed{
+  \sum_{j\in\mathcal E}\frac1{m_j}=\infty,
+  \quad\text{or}\quad
+  \sum_{j\in\mathcal S}\frac1{m_j}=\infty,
+  \quad\text{or}\quad
+  \sum_{j\in\mathcal L}\frac1{m_j}=\infty.}
+\tag{G5}
+\]
+\end{corollary}
+
+\begin{proof}
+For $k\geq1$, the run $I_{b,k}$ begins at a color switch contained in the
+nonpositive block $I_b$.  Apply (N4) with $s=\alpha_b$, $u=u_{b,k}-\alpha_b$,
+$v=v_{b,k}-\alpha_b$, and $T=T_{b,k}$.  We obtain
+\[
+  \sum_{\substack{j\in I_{b,k}\\
+                   t_j\geq T_{b,k},\ \delta_{b,j}>t_j}}
+  \frac1{m_j}
+  <\frac{3^{1-T_{b,k}}}{2}.
+\]
+Summing this inequality and using (G2) proves (G3).
+
+The four sets consisting of the summation set in (G3) and the three sets
+in (G4) partition all nonpositive-defect indices.  Their total reciprocal
+mass diverges by (5), whereas the first set has finite mass by (G3).
+Therefore the union of the three sets in (G4) has divergent mass.  A finite
+union of convergent nonnegative series is convergent, so at least one of
+the three displayed series in (G5) diverges.
+\end{proof}
+
+\begin{proposition}[unbounded entrance mass in finite windows]
+For every $k\geq1$, let $\lambda_k$ be the unique odd integer in
+$\{1,3,5,\ldots,17\}$ such that
+\[
+  \lambda_k2^{k+4}\equiv13\pmod9.
+  \tag{E1}
+\]
+Equivalently, according to the residue of $k$ modulo $6$, we have
+\[
+  \lambda_k=7,17,13,11,1,5.
+  \tag{E2}
+\]
+The strict-barrier word
+\[
+  w_k:=(1,2,1^k)
+  \tag{E3}
+\]
+has a positive odd integer realization and a synchronized real companion
+such that
+\[
+  1<e_j<2,
+  \qquad
+  m_j=2
+  \qquad(0\leq j\leq k+2),
+  \tag{E4}
+\]
+and
+\[
+  (d_0,d_1,d_2,\ldots,d_{k+1})=(-1,3,-1^k).
+  \tag{E5}
+\]
+Thus the second maximal nonpositive-defect block is one entrance run of
+length $k$, and
+\[
+\boxed{
+  \sum_{j=2}^{k+1}\frac1{m_j}=\frac{k}{2}.}
+\tag{E6}
+\]
+In particular, entrance-run reciprocal mass has no uniform finite-window
+bound, even for strict-barrier words with a positive ordinary realization.
+No one nonnegative ordinary seed realizes all of the nested words $w_k$.
+\end{proposition}
+
+\begin{proof}
+Since $2$ is a unit modulo $9$, equation (E1) determines one residue class
+modulo $9$.  Exactly one of its representatives in $\{1,2,\ldots,17\}$ is
+odd.  This proves existence and uniqueness, and direct reduction gives
+(E2).
+
+Define
+\[
+\begin{aligned}
+  x_0&:=\frac{\lambda_k2^{k+4}-13}{9},\\
+  x_1&:=\frac{\lambda_k2^{k+3}-5}{3},\\
+  x_{2+i}&:=\lambda_k2^{k+1-i}3^i-1
+  \qquad(0\leq i\leq k).
+\end{aligned}
+\tag{E7}
+\]
+Equation (E1) makes $x_0$ an integer.  Reducing (E1) modulo $3$ also
+shows that $x_1$ is an integer.  All the integers in (E7) are positive and
+odd.  Direct substitution gives
+\[
+  2x_1=3x_0+1,
+  \qquad
+  4x_2=3x_1+1,
+  \qquad
+  2x_{3+i}=3x_{2+i}+1
+  \quad(0\leq i<k).
+  \tag{E8}
+\]
+Since every state on the right side of a division in (E8) is odd, the
+displayed powers of $2$ are exact.  Hence (E7) realizes $w_k$.
+
+For a prefix of length $n$, the accumulated exponent is $1$ when $n=1$
+and $n+1$ when $2\leq n\leq k+2$.  We have $2<3$, and
+\[
+  2^{n+1}<3^n
+  \qquad(n\geq2),
+\]
+because the inequality holds at $n=2$ and its left-to-right ratio is
+multiplied by $2/3$ when $n$ increases.  Thus every nonempty prefix is a
+strict barrier.
+
+We now define the real companion by
+\[
+\begin{aligned}
+  e_{2+i}&:=1+\frac18\left(\frac23\right)^{k-i}
+  &&(0\leq i\leq k),\\
+  e_1&:=\frac53+\frac16\left(\frac23\right)^k,\\
+  e_0&:=\frac{13}{9}+\frac19\left(\frac23\right)^k.
+\end{aligned}
+\tag{E9}
+\]
+One can check directly that
+\[
+  2^{a_j}e_{j+1}=3e_j-1
+  \qquad(0\leq j\leq k+1).
+\]
+Moreover,
+\[
+  e_{2+i}\leq\frac98,
+  \qquad
+  e_1\leq\frac{11}{6},
+  \qquad
+  e_0\leq\frac{14}{9},
+\]
+and every number in (E9) is greater than $1$.  This proves (E4).
+
+Since $m_j=2$, equation (3) becomes
+\[
+  d_j=2^{a_j+1}-5.
+\]
+The exponents in (E3) therefore give (E5), and (E6) follows.  Finally,
+suppose that one nonnegative integer realized every $w_k$.  After the
+first two steps, repeated use of the exponent-one recurrence would give
+\[
+  x_{2+i}+1=\frac{3^i}{2^i}(x_2+1)
+  \qquad(i\geq0).
+\]
+Thus $2^i\mid x_2+1$ for every $i$, which forces $x_2=-1$.  This
+contradicts nonnegativity.
+\end{proof}
+
+\begin{corollary}[run-mass valuation budget]
+Let $[s,u]$ be a constant-color run with
+\[
+  c_j=c\in\{1,2,3\}
+  \qquad(s\leq j\leq u).
+\]
+Put
+\[
+  B:=\sum_{j=s}^{u}a_j,
+  \qquad
+  U:=\nu_2(cx_s+m_s),
+  \qquad
+  V:=\nu_2(cx_{u+1}+m_{u+1}),
+  \tag{V1}
+\]
+and define
+\[
+  \kappa_1:=\kappa_3:=\frac13,
+  \qquad
+  \kappa_2:=\frac12.
+  \tag{V2}
+\]
+Then
+\[
+\boxed{
+  B=U-V,
+  \qquad
+  \sum_{j=s}^{u}\frac1{m_j}
+  \leq\kappa_cB
+  =\kappa_c(U-V)
+  \leq\kappa_cU.}
+\tag{V3}
+\]
+
+Suppose in addition that $s\geq1$, $c_{s-1}\leq0$, and put
+\[
+  c^-:=c_{s-1},
+  \qquad
+  H:=\nu_2(c-c^-),
+  \qquad
+  G:=\max\{0,U-\nu_2(c^-x_s+m_s)\}.
+  \tag{V4}
+\]
+Thus $[s,u]$ is an entrance run and $G$ is the positive part of its
+switch gain.  We then have
+\[
+\boxed{
+  U\leq H+G,
+  \qquad
+  H\leq a_{s-1},
+  \qquad
+  \sum_{j=s}^{u}\frac1{m_j}
+  \leq\kappa_c(a_{s-1}+G).}
+\tag{V5}
+\]
+Consequently, divergent reciprocal mass on entrance runs forces divergence
+of the sum of the preceding exponents or of the positive entrance-switch
+gains.
+
+For the family in (E3), the second nonpositive block satisfies
+\[
+  c=2,
+  \qquad
+  B=k,
+  \qquad
+  U=k+2,
+  \qquad
+  V=2,
+  \qquad
+  H=2,
+  \qquad
+  G=k.
+  \tag{V6}
+\]
+Hence equality holds in the reciprocal-mass estimate in (V3).
+\end{corollary}
+
+\begin{proof}
+Iteration of (11) through the run gives
+\[
+  2^B(cx_{u+1}+m_{u+1})
+  =3^{u-s+1}(cx_s+m_s).
+\]
+Taking $2$-adic valuations proves $B=U-V$.  Since every $a_j\geq1$, the
+run length is at most $B$.  If $c\in\{1,3\}$, parity in
+\[
+  2^{a_j}m_{j+1}=3m_j-c
+\]
+shows that $m_j$ is odd.  Since $m_j\geq2$, we have $m_j\geq3$.  If
+$c=2$, the same identity shows that $m_j$ is even, so $m_j\geq2$.
+Summing these pointwise bounds proves (V3).
+
+At the entrance switch,
+\[
+  cx_s+m_s=(c^-x_s+m_s)+(c-c^-)x_s.
+  \tag{V7}
+\]
+Since $x_s$ is odd, the second term on the right has valuation $H$.  If
+the two terms in (V7) have distinct valuations, then $U$ is their minimum
+and hence $U\leq H$.  If they have the same valuation, then this common
+valuation is $H$ and $G=U-H$.  In both cases, $U\leq H+G$.
+
+Write $d_{s-1}=1-c^-\geq1$.  Equation (4) gives
+\[
+  d_{s-1}\leq2^{a_{s-1}}-1.
+\]
+Therefore,
+\[
+  1\leq c-c^-=c+d_{s-1}-1\leq2^{a_{s-1}}+1<2^{a_{s-1}+1}.
+\]
+It follows that $H\leq a_{s-1}$.  Combining this with (V3) proves (V5).
+After summing (V5), a divergent left side forces at least one of the two
+nonnegative sums on the right to diverge.
+
+Finally, equations (E7) and (E4) give
+\[
+  \nu_2(2x_2+m_2)=k+2,
+  \qquad
+  \nu_2(2x_{k+2}+m_{k+2})=2.
+\]
+At the entrance, $c^-=-2$, so (V4) gives $H=2$ and $G=k$.  The remaining
+claims in (V6) follow from (E3), and (E6) gives equality in (V3).
+\end{proof}
+
+\begin{corollary}[negative shadows of defect runs]
+Let $[s,u]$ be a constant-color run with
+\[
+  c_j=c\in\{1,2,3\}
+  \qquad(s\leq j\leq u).
+  \tag{Y1}
+\]
+The following nonempty sequences consist of positive odd integers and are
+accelerated $3y-1$ paths:
+\[
+\begin{array}{c|c|c}
+  c&\text{shadow states}&\text{discarded ceiling index}\\ \hline
+  1&y_j:=m_j\quad(s\leq j\leq u)&\varnothing\\
+  2&y_j:=m_j/2\quad(s\leq j<u)&u\\
+  3&y_j:=m_j/3\quad(s<j\leq u)&s.
+\end{array}
+\tag{Y2}
+\]
+Thus every consecutive pair of displayed shadow states satisfies
+\[
+\boxed{
+  2^{a_j}y_{j+1}=3y_j-1,
+  \qquad
+  a_j=v_2(3y_j-1).}
+\tag{Y3}
+\]
+
+Let $H:=10.789$, the certified reciprocal-mass bound for every finite
+positive simple accelerated $3y-1$ path.  If the corresponding nonempty
+shadow in (Y2) is simple, then
+\[
+\boxed{
+  \sum_{j=s}^{u}\frac1{m_j}
+  <
+  \begin{cases}
+    H,&c=1,\\[1mm]
+    H/2+1/2,&c=2,\\[1mm]
+    H/3+1/3,&c=3.
+  \end{cases}}
+\tag{Y4}
+\]
+The same bounds hold when the indicated shadow is empty.  Consequently,
+if a run violates its corresponding bound in (Y4), its shadow contains a
+repeated state and hence a positive cycle of the accelerated $3y-1$ map.
+\end{corollary}
+
+\begin{proof}
+On the run, the ceiling recurrence is
+\[
+  2^{a_j}m_{j+1}=3m_j-c.
+  \tag{Y5}
+\]
+If $c=1$, parity in (Y5) shows that every $m_j$ in the run is odd, and
+(Y3) follows directly with $y_j=m_j$.
+
+Suppose that $c=2$.  Parity in (Y5) shows that $m_j$ is even at every
+index of the run.  For $j<u$, put $m_j=2y_j$.  Whenever $j+1<u$, division
+of (Y5) by $2$ gives
+\[
+  2^{a_j}y_{j+1}=3y_j-1.
+\]
+The same identity with the next ceiling state still even shows that each
+displayed $y_j$ is odd.  Hence the powers $2^{a_j}$ are exact.
+
+Finally, suppose that $c=3$.  Parity in (Y5) shows that every $m_j$ in the
+run is odd.  For $s<j\leq u$, the preceding instance of (Y5) gives
+\[
+  2^{a_{j-1}}m_j=3(m_{j-1}-1),
+\]
+so $3\mid m_j$.  Therefore $y_j=m_j/3$ is a positive odd integer, and
+division of (Y5) by $3$ proves (Y3).  This establishes (Y2)--(Y3).
+
+If $c=1$, the identity $m_j=y_j$ and the certified simple-path bound give
+the first line of (Y4).  If $c=2$, the shadow contributes less than $H/2$
+to the ceiling reciprocal mass, while the discarded endpoint satisfies
+$m_u\geq2$.  If $c=3$, the shadow contributes less than $H/3$, while
+$m_s$ is an odd integer at least $3$.  These observations prove (Y4),
+including the empty-shadow cases.
+
+If a run violates (Y4), the corresponding shadow cannot be simple.  It
+therefore contains two equal positive odd states.  The accelerated map
+\[
+  y\longmapsto\frac{3y-1}{2^{v_2(3y-1)}}
+\]
+is deterministic, so the segment between those equal states is a positive
+cycle.
+\end{proof}
+
+\begin{proposition}[bounded aperiodic all-nonpositive countermodel]
+There is an aperiodic infinite strict-barrier valuation word with the
+following properties.
+
+\begin{enumerate}
+  \item Its coefficient $q_j$ tends to infinity.
+  \item It has one fixed real companion satisfying
+  \[
+    4<e_j\leq14,
+    \qquad d_j\in\{-1,0\}\qquad(j\geq0).
+    \tag{C1}
+  \]
+  In particular, $\sum_j1/e_j=\infty$.
+  \item Every finite prefix has a positive ordinary integer realization.
+  \item The least positive dyadic cylinder representatives of its prefixes
+  tend to infinity.  Hence the complete word is not realized by one
+  nonnegative ordinary integer.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We use the following three length-$16$ words:
+\[
+\begin{aligned}
+  w_U&:=1113(12)^6,\\
+  w_V&:=11221122(12)^4,\\
+  w_W&:=1122121122(12)^3.
+\end{aligned}
+\tag{C2}
+\]
+Every word in (C2) has total exponent $24$.  Their exponent-prefix vectors
+are
+\[
+\begin{aligned}
+ &(1,2,3,6,7,9,10,12,13,15,16,18,19,21,22,24),\\
+ &(1,2,4,6,7,8,10,12,13,15,16,18,19,21,22,24),\\
+ &(1,2,4,6,7,9,10,11,13,15,16,18,19,21,22,24).
+\end{aligned}
+\tag{C3}
+\]
+Coordinatewise, these vectors are at most
+\[
+  (1,3,4,6,7,9,11,12,14,15,17,19,20,22,23,25)
+  =\bigl(\lfloor k\log_2 3\rfloor\bigr)_{k=1}^{16}.
+  \tag{C4}
+\]
+Thus every nonempty prefix of each word is a strict barrier.  Also
+\[
+  P:=3^{16}=43046721>16777216=2^{24}=:M.
+  \tag{C5}
+\]
+
+Each word returns the companion ceiling to $m=5$.  The complete ceiling
+state sequences are
+\[
+\begin{aligned}
+  U:&\quad(5,7,10,14,5,(7,5)^6),\\
+  V:&\quad(5,7,10,7,5,7,10,7,5,(7,5)^4),\\
+  W:&\quad(5,7,10,7,5,7,5,7,10,7,5,(7,5)^3).
+\end{aligned}
+\tag{C6}
+\]
+The corresponding defect words are
+\[
+\begin{aligned}
+  \delta_U&:=(0,0,-1,-1,0^{12}),\\
+  \delta_V&:=(0,0,-1,0,0,0,-1,0^9),\\
+  \delta_W&:=(0,0,-1,0^5,-1,0^7).
+\end{aligned}
+\tag{C7}
+\]
+Indeed, direct substitution in
+\[
+  2^{a_j}m_{j+1}=3m_j-1+d_j
+\]
+verifies (C6) and (C7).
+
+Let $\theta$ be the ceiling error at a block boundary.  Iterating
+$2^{a_j}\theta_{j+1}=3\theta_j+d_j$ gives a forward affine map on each
+block.  The admissible starting interval, the resulting image interval,
+and the inverse map are as follows:
+\[
+\begin{array}{c|c|c|c}
+ &\text{domain}&\text{image}&\phi_i(t)\\ \hline
+ U&[20/81,4/9)&[0,531441/1048576)&(Mt+10628820)/P\\
+ V&[580/2187,4/9)&[0,964467/2097152)&(Mt+11416140)/P\\
+ W&[4964/19683,4/9)&[0,1034451/2097152)&(Mt+10856268)/P.
+\end{array}
+\tag{C8}
+\]
+For completeness, these intervals follow from the prefix identity
+\[
+  2^{B_i}\theta_i=3^i\theta_0-R_i.
+  \tag{C9}
+\]
+At every prefix we impose $0\leq\theta_i<1$, take the maximum of the lower
+bounds $R_i/3^i$, and take the minimum of the upper bounds
+$(R_i+2^{B_i})/3^i$.  This gives (C8) by rational arithmetic.
+
+Put
+\[
+\begin{aligned}
+  p_U&:=\frac{2125764}{5253901},\\
+  p_V&:=\frac{78732}{181169},\\
+  p_W&:=\frac{638604}{1545265},
+\end{aligned}
+\qquad
+  I:=[p_U,p_V].
+\tag{C10}
+\]
+These are the respective fixed points of the three inverse maps in (C8),
+and
+\[
+  p_U<p_W<p_V.
+\]
+Direct cross multiplication in (C8) shows that $I$ lies in all three
+domains and all three image intervals.  Each $\phi_i$ is increasing, has
+contraction ratio $M/P<1$, and has its fixed point in $I$.  Therefore
+\[
+  \phi_i(I)\subseteq I
+  \qquad(i\in\{U,V,W\}).
+  \tag{C11}
+\]
+
+Let $\omega=(\omega_0,\omega_1,\ldots)$ be any infinite word over
+$\{U,V,W\}$.  For every $k$, the limit
+\[
+  \theta_k
+  :=\lim_{L\to\infty}
+  \phi_{\omega_k}\circ\phi_{\omega_{k+1}}\circ\cdots
+  \circ\phi_{\omega_L}(p_U)
+  \tag{C12}
+\]
+exists in $I$, since all three maps have the same contraction ratio less
+than $1$.  It satisfies
+\[
+  \theta_k=\phi_{\omega_k}(\theta_{k+1}).
+\]
+Thus concatenating the blocks selected by $\omega$ gives one fixed real
+companion with the ceiling states and defects in (C6) and (C7).  This proves
+(C1).  Every block is a strict barrier and multiplies the coefficient by
+$P/M>1$, so the complete concatenation is a strict barrier and $q_j\to
+\infty$.
+
+It remains to choose the driver so that it is aperiodic and has no ordinary
+integer seed.  Enumerate all eventually periodic ternary words as
+$\eta^{(0)},\eta^{(1)},\ldots$.  Suppose a finite driver has been chosen,
+with valuation prefix $v$ and least positive cylinder representative
+$n(v)$.  The three extensions $vw_U,vw_V,vw_W$ have the same length and
+total exponent, and their exact cylinders are pairwise disjoint.  Hence
+$n(v)$ realizes at most one of them.  At least two choices have a new least
+representative different from $n(v)$.  At stage $k$, choose one of those
+two symbols which is also different from the $k$-th symbol of
+$\eta^{(k)}$.
+
+The resulting driver differs from every eventually periodic ternary word,
+so it is aperiodic.  Since the three codewords are distinct and have the
+same length, eventual periodicity of their concatenation would force the
+aligned codeword sequence to be eventually periodic.  Hence the valuation
+word is also aperiodic.  Cylinder compatibility gives
+\[
+  n(vw_i)=n(v)+h\,2^{A(v)+1}
+  \qquad(h\geq1)
+  \tag{C13}
+\]
+at every stage.  Therefore the least representatives tend to infinity.
+Every finite prefix is nevertheless realized by its own least positive
+representative.  Finally, $e_j\leq14$ gives
+$\sum_j1/e_j=\infty$.
+\end{proof}
+
+\begin{proposition}[arbitrarily long zero-defect finite windows]
+For every $k\geq1$, the strict-barrier word
+\[
+  w_k:=(1,2)^k
+  \tag{23}
+\]
+is realized by a positive integer orbit segment and by a synchronized real
+companion for which
+\[
+  e_{2i}=5,
+  \qquad e_{2i+1}=7,
+  \qquad d_j=0
+  \quad(0\leq j<2k).
+  \tag{24}
+\]
+Nevertheless, if $D(w):=C(w)+2^{A(w)}$, then
+\[
+  v_3(D(w_k))=0.
+  \tag{25}
+\]
+Thus the terminal $3$-adic deficit of this block is its full length $2k$.
+\end{proposition}
+
+\begin{proof}
+For $0\leq i\leq k$, define
+\[
+  x_{2i}:=2\cdot9^i8^{k-i}-5,
+  \tag{26}
+\]
+and, for $0\leq i<k$, define
+\[
+  x_{2i+1}:=3\cdot9^i8^{k-i}-7.
+  \tag{27}
+\]
+Every displayed integer is positive.  If
+$N_i:=2\cdot9^i8^{k-i}$, then
+\[
+  3x_{2i}+1=3N_i-14\equiv2\pmod4,
+\]
+so the valuation at $x_{2i}$ is exactly $1$.  Moreover
+\[
+  3x_{2i+1}+1=9^{i+1}8^{k-i}-20\equiv4\pmod8,
+\]
+so the valuation at $x_{2i+1}$ is exactly $2$.  Division gives (26) and
+(27) at the following states.  Hence the segment realizes $w_k$ exactly.
+
+The companion values in (24) satisfy
+\[
+  \frac{3\cdot5-1}{2}=7,
+  \qquad
+  \frac{3\cdot7-1}{4}=5.
+\]
+They are integers, so $m_j=e_j$, $\theta_j=0$, and (3) gives $d_j=0$.
+Adding the two paired recurrences also gives
+\[
+  x_j+e_j=q_j(x_0+5)
+\]
+throughout the segment.
+
+For every even prefix of length $2i$ we have
+$2^{A}=8^i<9^i=3^{2i}$.  For every odd prefix of length $2i+1$ we have
+\[
+  2^{A}=2\cdot8^i<3\cdot9^i=3^{2i+1}.
+\]
+Thus every prefix is a strict barrier.
+
+For the block $(1,2)$, the coefficient pair and carry are
+\[
+  P=9,
+  \qquad M=8,
+  \qquad C=5.
+\]
+The concatenation formula therefore gives
+\[
+  C(w_k)=5\frac{9^k-8^k}{9-8}=5(9^k-8^k).
+\]
+It follows that
+\[
+  D(w_k)=5\cdot9^k-4\cdot8^k
+  \equiv-4(-1)^k\not\equiv0\pmod3.
+\]
+This proves (25).
+\end{proof}
+
+\begin{corollary}[no finite-window bridge to deficit two or three]
+For every $L\geq1$, there is a paired strict-barrier block of length at
+least $L$ whose rounding defects are all nonpositive, but whose terminal
+$3$-adic deficit is greater than $3$.  Therefore the hypotheses of a valid
+bridge from nonpositive rounding-defect mass to a deficit-two or
+deficit-three terminal congruence must use one fixed ordinary orbit at
+unboundedly many depths.  No implication from the corresponding properties
+of one finite block can supply that bridge.
+\end{corollary}
+
+\begin{proof}
+Choose $k\geq2$ with $2k\geq L$ and apply the proposition.  Its terminal
+deficit is $2k\geq4$.
+\end{proof}
+
+\end{document}

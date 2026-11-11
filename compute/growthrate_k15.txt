@@ -1,0 +1,121 @@
+EXACT COUNTS.  N(k,L) = # nonzero vertices of Z_k with path length >= L.
+  k   L        N(k,L)     N/3^k        ratio to (3/64)^L
+  4   1             4   4.938e-02      1.053
+      depth 4: longest path 1,  bound floor((k+1)/3) = 1
+  5   1            12   4.938e-02      1.053
+  5   2             1   4.115e-03      1.873
+      depth 5: longest path 2,  bound floor((k+1)/3) = 2
+  6   1            34   4.664e-02      0.995
+      depth 6: longest path 1,  bound floor((k+1)/3) = 2
+  7   1            88   4.024e-02      0.858
+  7   2             4   1.829e-03      0.832
+      depth 7: longest path 2,  bound floor((k+1)/3) = 2
+  8   1           240   3.658e-02      0.780
+  8   2             6   9.145e-04      0.416
+      depth 8: longest path 2,  bound floor((k+1)/3) = 3
+  9   1           810   4.115e-02      0.878
+  9   2            33   1.677e-03      0.763
+  9   3             2   1.016e-04      0.987
+      depth 9: longest path 3,  bound floor((k+1)/3) = 3
+ 10   1          2238   3.790e-02      0.809
+ 10   2            74   1.253e-03      0.570
+ 10   3             1   1.694e-05      0.164
+      depth 10: longest path 3,  bound floor((k+1)/3) = 3
+ 11   1          6586   3.718e-02      0.793
+ 11   2           227   1.281e-03      0.583
+ 11   3             9   5.081e-05      0.493
+ 11   4             1   5.645e-06      1.169
+      depth 11: longest path 4,  bound floor((k+1)/3) = 4
+ 12   1         19639   3.695e-02      0.788
+ 12   2           765   1.439e-03      0.655
+ 12   3            29   5.457e-05      0.530
+      depth 12: longest path 3,  bound floor((k+1)/3) = 4
+ 13   1         59314   3.720e-02      0.794
+ 13   2          2255   1.414e-03      0.644
+ 13   3            76   4.767e-05      0.463
+ 13   4             4   2.509e-06      0.520
+      depth 13: longest path 4,  bound floor((k+1)/3) = 4
+ 14   1        177144   3.704e-02      0.790
+ 14   2          6509   1.361e-03      0.619
+ 14   3           221   4.621e-05      0.449
+ 14   4             7   1.464e-06      0.303
+      depth 14: longest path 4,  bound floor((k+1)/3) = 5
+ 15   1        531730   3.706e-02      0.791
+ 15   2         19854   1.384e-03      0.630
+ 15   3           781   5.443e-05      0.528
+ 15   4            33   2.300e-06      0.476
+ 15   5             1   6.969e-08      0.308
+      depth 15: longest path 5,  bound floor((k+1)/3) = 5
+
+HEURISTIC FIT (not a proof; see module docstring).
+  cells used (N >= 30): 21
+  model N(k,L) = C * 3^k * beta^L
+  C    = 1.0283
+  beta = 0.037119      (theoretical 3/64 = 0.046875)
+  ln beta = -3.29363 +/- 0.02344 (1 s.e.)
+  rms residual in ln N: 0.0886
+
+THE CLEAN LAW:  N(k,L) vs 3^(k-3L)   [beta = (3/64)*(64/81) = 1/27 exactly]
+  measured correction to (3/64)^L, per step:  64/81 = 0.790123
+  k   L        N(k,L)      3^(k-3L)     N / 3^(k-3L)
+  4   1             4        3.0000         1.3333
+  5   1            12        9.0000         1.3333
+  5   2             1        0.3333         3.0000
+  6   1            34       27.0000         1.2593
+  7   1            88       81.0000         1.0864
+  7   2             4        3.0000         1.3333
+  8   1           240      243.0000         0.9877
+  8   2             6        9.0000         0.6667
+  9   1           810      729.0000         1.1111
+  9   2            33       27.0000         1.2222
+  9   3             2        1.0000         2.0000
+ 10   1          2238     2187.0000         1.0233
+ 10   2            74       81.0000         0.9136
+ 10   3             1        3.0000         0.3333
+ 11   1          6586     6561.0000         1.0038
+ 11   2           227      243.0000         0.9342
+ 11   3             9        9.0000         1.0000
+ 11   4             1        0.3333         3.0000
+ 12   1         19639    19683.0000         0.9978
+ 12   2           765      729.0000         1.0494
+ 12   3            29       27.0000         1.0741
+ 13   1         59314    59049.0000         1.0045
+ 13   2          2255     2187.0000         1.0311
+ 13   3            76       81.0000         0.9383
+ 13   4             4        3.0000         1.3333
+ 14   1        177144   177147.0000         1.0000
+ 14   2          6509     6561.0000         0.9921
+ 14   3           221      243.0000         0.9095
+ 14   4             7        9.0000         0.7778
+ 15   1        531730   531441.0000         1.0005
+ 15   2         19854    19683.0000         1.0087
+ 15   3           781      729.0000         1.0713
+ 15   4            33       27.0000         1.2222
+ 15   5             1        1.0000         1.0000
+  worst |ln ratio| over cells with N >= 30: 0.2305  (a factor of 1.259)
+
+  implied asymptotic rate  l_k / k -> ln3 / ln(1/beta) = 0.33356
+  1 s.e. band: [0.33120, 0.33595]
+  compare 1/3 = 0.33333   (the rate Conjecture 3.12 asserts)
+  compare ln3/ln(64/3) = 0.35899   (rate if beta were exactly 3/64)
+  VERDICT: STRADDLES 1/3: the data cannot call the direction; the conjecture sits at the critical rate
+
+WHAT THE CORRECTED LAW SAYS ABOUT CONJECTURE 3.12
+  A violation at depth k needs l_k >= floor((k+1)/3)+1; expected count 3^(k-3L):
+    k = 3m+0  ->  3^(-3) = 0.03704
+    k = 3m+1  ->  3^(-2) = 0.11111   <-- best hunting ground
+    k = 3m+2  ->  3^(-4) = 0.01235
+  sum per three depths: 0.16049, so the expected number of violations up to K grows
+  linearly (~0.0535 per depth) and DIVERGES -- the model predicts the conjecture is
+  false, but only sparsely.
+  expected violations over the decided range k <= 23: 1.247; observed: 0.
+  P(none) under a Poisson model with that mean: 0.287 -- unremarkable, so the data is
+  consistent with the model rather than refuting it.
+  ACTIONABLE: hunt violations at k = 1 mod 3 (k = 25, 28, 31, ...), where the expected
+  count is 1/9 -- three times any other residue. Reaching k=25 means deciding L=9 at
+  m = k+L = 34, which needs a tail larger than this node's memory allows; a chunked or
+  disk-backed tail is the enabling step.
+
+  If the model held exactly, the expected count at L = floor((k+1)/3) + 1
+  (the first value the conjecture forbids) would pass 1 at:
+    never, for k < 200 -- the model does not predict a violation in reach

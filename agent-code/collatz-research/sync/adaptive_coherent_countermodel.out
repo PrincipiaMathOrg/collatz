@@ -1,0 +1,12 @@
+{"stage":1,"r":2,"totalSteps":2,"A":3,"seed":"11","modulus":"16","compatible":true,"changed":true,"allBad":true}
+{"stage":2,"r":3,"totalSteps":5,"A":7,"seed":"91","modulus":"256","compatible":true,"changed":true,"allBad":true}
+{"stage":3,"r":5,"totalSteps":10,"A":13,"seed":"10331","modulus":"16384","compatible":true,"changed":true,"allBad":true}
+{"stage":4,"r":6,"totalSteps":16,"A":20,"seed":"665691","modulus":"2097152","compatible":true,"changed":true,"allBad":true}
+{"stage":5,"r":7,"totalSteps":23,"A":28,"seed":"533342299","modulus":"536870912","compatible":true,"changed":true,"allBad":true}
+{"stage":6,"r":8,"totalSteps":31,"A":37,"seed":"54757304411","modulus":"274877906944","compatible":true,"changed":true,"allBad":true}
+{"stage":7,"r":9,"totalSteps":40,"A":47,"seed":"66575210784859","modulus":"281474976710656","compatible":true,"changed":true,"allBad":true}
+{"stage":8,"r":10,"totalSteps":50,"A":58,"seed":"307155774802110555","modulus":"576460752303423488","compatible":true,"changed":true,"allBad":true}
+{"stage":9,"r":11,"totalSteps":61,"A":70,"seed":"1032748363150233577563","modulus":"2361183241434822606848","compatible":true,"changed":true,"allBad":true}
+{"stage":10,"r":12,"totalSteps":73,"A":83,"seed":"5601759397046549457021019","modulus":"19342813113834066795298816","compatible":true,"changed":true,"allBad":true}
+{"stage":11,"r":13,"totalSteps":86,"A":97,"seed":"215233083277028707780746946651","modulus":"316912650057057350374175801344","compatible":true,"changed":true,"allBad":true}
+{"stage":12,"r":14,"totalSteps":100,"A":112,"seed":"4535552168049824769912610639980635","modulus":"10384593717069655257060992658440192","compatible":true,"changed":true,"allBad":true}

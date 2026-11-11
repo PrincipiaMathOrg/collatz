@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+\newcommand{\mass}{\operatorname{B}}
+\newcommand{\car}{\operatorname{C}}
+\newcommand{\sh}{\operatorname{D}}
+
+\title{Exact carry-position identities for deep inverse prefixes}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+For a positive odd integer \(x\), put
+\[
+ \Up(x):=\frac{3x+1}{2^{v_2(3x+1)}}.
+ \tag{1}
+\]
+For a positive exponent word \(E=(e_1,\ldots,e_h)\), define
+\[
+ \mass(E):=\sum_{i=1}^h e_i,
+ \qquad
+ \car(E):=\sum_{i=1}^h
+ 3^{h-i}2^{e_1+\cdots+e_{i-1}},
+ \tag{2}
+\]
+and
+\[
+ \sh(E):=\car(E)+2^{\mass(E)}-3^h.
+ \tag{3}
+\]
+An exact path from \(z\) to \(r\) with word \(E\) satisfies
+\[
+ 2^{\mass(E)}(r+1)=3^h(z+1)+\sh(E).
+ \tag{4}
+\]
+
+Write
+\[
+ e_i=1+c_i,
+ \qquad
+ c_i\geq0,
+ \qquad
+ t:=\sum_{i=1}^h c_i,
+ \tag{5}
+\]
+and define the cumulative excess
+\[
+ p_k:=\sum_{i=1}^k c_i
+ \qquad(0\leq k\leq h).
+ \tag{6}
+\]
+Thus \(p_0=0\) and \(p_h=t\).
+
+\section{The two exact slack identities}
+
+For fixed \(h\) and \(t\), the shifted-carry extrema are
+\[
+ \sh_{\min}=2^h(2^t-1),
+ \qquad
+ \sh_{\max}=2\,3^{h-1}(2^t-1).
+ \tag{7}
+\]
+
+\begin{theorem}[carry-position decomposition]
+Every positive exponent word of length \(h\) and excess \(t\) satisfies
+\[
+ \boxed{
+ \frac{\sh(E)-\sh_{\min}}{3^h}
+ =
+ \frac13\sum_{k=1}^{h-1}
+ \left(\frac23\right)^k(2^{p_k}-1),}
+ \tag{8}
+\]
+and
+\[
+ \boxed{
+ \frac{\sh_{\max}-\sh(E)}{3^h}
+ =
+ \frac13\sum_{k=1}^{h-1}
+ \left(\frac23\right)^k(2^t-2^{p_k}).}
+ \tag{9}
+\]
+\end{theorem}
+
+\begin{proof}
+Equation (2) becomes
+\[
+ \car(E)=
+ \sum_{i=1}^h3^{h-i}2^{i-1+p_{i-1}}.
+ \tag{10}
+\]
+When all excess is in the final letter, every \(p_{i-1}\) in (10)
+is zero.  Subtracting this minimum carry from (10), and putting
+\(k=i-1\), gives
+\[
+ \sh(E)-\sh_{\min}
+ =
+ \sum_{k=1}^{h-1}
+ 3^{h-k-1}2^k(2^{p_k}-1).
+ \tag{11}
+\]
+Division by \(3^h\) proves (8).
+
+When all excess is in the first letter, every \(p_k\), \(k\geq1\), is
+\(t\).  Subtracting (10) from this maximum carry gives
+\[
+ \sh_{\max}-\sh(E)
+ =
+ \sum_{k=1}^{h-1}
+ 3^{h-k-1}2^k(2^t-2^{p_k}).
+ \tag{12}
+\]
+This proves (9).
+\end{proof}
+
+\section{The cumulative-excess squeeze}
+
+Put
+\[
+ \mathcal A_h(r):=\left(\frac23\right)^h(r+1),
+ \tag{13}
+\]
+and define the two sharp endpoints
+\[
+ L_{h,t}(r)
+ :=2^t\left(\mathcal A_h(r)-\frac23\right)-\frac13,
+ \tag{14}
+\]
+\[
+ U_{h,t}(r)
+ :=\left(\frac23\right)^h(2^t r+1)-1.
+ \tag{15}
+\]
+
+\begin{corollary}[exact endpoint slack]
+If \(E\) is an exact path from \(z\) to \(r\), then
+\[
+ \boxed{
+ U_{h,t}(r)-z
+ =
+ \frac13\sum_{k=1}^{h-1}
+ \left(\frac23\right)^k(2^{p_k}-1),}
+ \tag{16}
+\]
+\[
+ \boxed{
+ z-L_{h,t}(r)
+ =
+ \frac13\sum_{k=1}^{h-1}
+ \left(\frac23\right)^k(2^t-2^{p_k}).}
+ \tag{17}
+\]
+\end{corollary}
+
+\begin{proof}
+Equation (4) gives
+\[
+ z+1=2^t\mathcal A_h(r)-\frac{\sh(E)}{3^h}.
+ \]
+Subtract the identities obtained by replacing \(\sh(E)\) with the two
+extrema in (7), and apply Theorem~1.
+\end{proof}
+
+\begin{corollary}[two-sided position squeeze]
+For every \(1\leq k<h\),
+\[
+ \boxed{
+ \frac23\left(1-\left(\frac23\right)^k\right)
+ (2^t-2^{p_k})
+ \leq z-L_{h,t}(r),}
+ \tag{18}
+\]
+\[
+ \boxed{
+ \left(\frac23\right)^k
+ \left(1-\left(\frac23\right)^{h-k}\right)
+ (2^{p_k}-1)
+ \leq U_{h,t}(r)-z.}
+ \tag{19}
+\]
+\end{corollary}
+
+\begin{proof}
+The sequence \(p_i\) is nondecreasing.  In (17), retain the terms
+\(1\leq i\leq k\) and use
+\[
+ 2^t-2^{p_i}\geq2^t-2^{p_k}.
+ \]
+The resulting geometric sum is (18).  In (16), retain the terms
+\(k\leq i<h\) and use
+\[
+ 2^{p_i}-1\geq2^{p_k}-1.
+ \]
+This gives (19).
+\end{proof}
+
+\begin{corollary}[finite screen for a bounded start]
+Suppose that \(1\leq z<N\).  For every \(1\leq k<h\), put
+\[
+ \alpha_k:=\frac23\left(1-\left(\frac23\right)^k\right),
+ \qquad
+ \beta_k:=\left(\frac23\right)^k
+ \left(1-\left(\frac23\right)^{h-k}\right).
+ \tag{20}
+\]
+Then the integer \(p_k\) must satisfy
+\[
+ \boxed{
+ 2^{p_k}>
+ 2^t-\frac{N-L_{h,t}(r)}{\alpha_k},}
+ \tag{21}
+\]
+\[
+ \boxed{
+ 2^{p_k}\leq
+ 1+\frac{U_{h,t}(r)-1}{\beta_k}.}
+ \tag{22}
+\]
+If these two bounds contain no power of two with exponent in
+\(\{0,1,\ldots,t\}\), then no such prefix exists.
+\end{corollary}
+
+\begin{proof}
+Use \(z<N\) in (18) and \(z\geq1\) in (19), and solve for
+\(2^{p_k}\).  Since \(p_k\) is an integer between zero and \(t\), the
+last assertion follows.
+\end{proof}
+
+The sharp all-excess interval uses only \(t\).  Equations (16)--(22)
+retain where that excess occurs.  They give an exact finite obstruction
+at every proposed triple \((h,t,r)\), but they do not yet exclude all
+deep triples simultaneously.
+
+\end{document}

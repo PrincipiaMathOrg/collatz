@@ -1,0 +1,104 @@
+{
+ "mode": "mixed",
+ "family": "mixed-d2-K1-plain-noodd",
+ "level": "mixed",
+ "dim": 2,
+ "K": 1,
+ "lab": "plain",
+ "Rcap": 3,
+ "status": "UNSAT",
+ "time_s": 0.5,
+ "rounds": 1,
+ "bitwidth": 8,
+ "reason": null,
+ "odd_rule_included": false,
+ "refuting_instances": [
+  [
+   "1",
+   "ff"
+  ],
+  [
+   "2",
+   "ft"
+  ],
+  [
+   "f",
+   ""
+  ],
+  [
+   "01",
+   "t1"
+  ],
+  [
+   "02",
+   "t2"
+  ],
+  [
+   "0t",
+   "tt"
+  ],
+  [
+   "11",
+   "ff1"
+  ],
+  [
+   "12",
+   "ff2"
+  ],
+  [
+   "1f",
+   "1"
+  ],
+  [
+   "1f",
+   "fff"
+  ],
+  [
+   "21",
+   "ft1"
+  ],
+  [
+   "22",
+   "ft2"
+  ],
+  [
+   "2f",
+   "2"
+  ],
+  [
+   "2f",
+   "ftf"
+  ],
+  [
+   "2t",
+   "ftt"
+  ],
+  [
+   "f1",
+   "0t"
+  ],
+  [
+   "f2",
+   "1f"
+  ],
+  [
+   "ff",
+   "f"
+  ],
+  [
+   "t1",
+   "2f"
+  ],
+  [
+   "t2",
+   "2t"
+  ],
+  [
+   "tf",
+   "t"
+  ]
+ ],
+ "n_instances": 21,
+ "max_len": 2,
+ "claim": "no rank rho(w) = alpha^T M_{l1}...M_{lq} beta of this class (dimension 2, coefficients 0..1, letters plain) satisfies rho(w) > rho(w') on all listed instances"
+}

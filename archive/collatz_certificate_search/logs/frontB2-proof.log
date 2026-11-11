@@ -1,0 +1,129 @@
+FRONT B2 (r67 Thm 9.1 explicit pi) -- hand proof of the general no-go for finitely presented pi
+==========================================================================================
+Agent: FRONT-B2.  Date: 2026-08-16.  Every inequality below is explicit; every step is
+re-checked numerically/exactly by source/frontB2_proofcheck.py (output at the end of this file).
+
+Setting (r67 eq 9.2/9.3).  X = N \ {1,2}.  For m >= 3
+    (P pi)(m) = pi(2m) + [m = 2 mod 3] pi((2m-1)/3),          pi = 0 on {1,2}.
+Target: pi > 0 on X, pi in l^1, P pi <= pi on X.  Both predecessors of m lie in X for m >= 3
+(2m >= 6; (2m-1)/3 = 1 only for m = 2), so for m >= 3 every summand of (P pi)(m) is a genuine
+positive term.
+
+Lemma 0 (edge monotonicity, r67 eq 9.4).  If P pi <= pi and n >= 3, T(n) >= 3, then
+    pi(n) <= (P pi)(T n) <= pi(T n).                                                     (0.1)
+Moreover the inequality is STRICT whenever n is odd: T n = m has BOTH predecessors n = (2m-1)/3
+and 2m in X, so  pi(n) + pi(2m) <= pi(m)  and pi(2m) > 0 gives  pi(n) < pi(m).          (0.2)
+(For n even, n = 2m, the inequality pi(2m) <= pi(m) may be an equality only if m != 2 mod 3.)
+
+------------------------------------------------------------------------------------------
+THEOREM A (finite-state pi are impossible; covers families (i), (ii), (iii)-capped).
+Let s >= 0, let sigma: X -> S be ANY map into a finite set with |S| = K, and let
+h: S -> (0, oo) be any table.  Then pi(n) = n^{-s} h(sigma(n)) violates P pi <= pi at some
+m <= 3^K - 1.  Explicitly, with n_0 = 2^K - 1 and n_j = T^j(n_0) = 3^j 2^{K-j} - 1 (0 <= j <= K),
+some pair 0 <= j < k <= K has sigma(n_j) = sigma(n_k), and the K rows m = n_{j+1}, ..., n_k with
+multipliers y = 1 form an exact Farkas certificate.
+
+Proof.  n_0, ..., n_{K-1} are odd (n_j = 3^j 2^{K-j} - 1 with K - j >= 1), and n_j >= 3 for
+K >= 2 (n_0 = 2^K - 1 >= 3).  By (0.2) applied at each odd step,
+    pi(n_0) < pi(n_1) < ... < pi(n_K).                                                    (A.1)
+The K+1 values sigma(n_0), ..., sigma(n_K) lie in a set of size K, so sigma(n_j) = sigma(n_k)
+for some j < k; write h* = h(sigma(n_j)) = h(sigma(n_k)) > 0.  Then (A.1) gives
+    n_j^{-s} h*  <  n_k^{-s} h*,   i.e.   n_k^{s} < n_j^{s},
+contradicting n_k > n_j and s >= 0 (for s = 0 it reads h* < h*).  QED.
+Farkas form.  Row m = n_i (1 <= i <= K), unnormalized:
+    (2 n_i)^{-s} h(sigma(2 n_i)) + n_{i-1}^{-s} h(sigma(n_{i-1})) - n_i^{-s} h(sigma(n_i)) <= 0
+(the odd predecessor of n_i is n_{i-1}; note n_i = 2 mod 3 automatically since n_{i-1} is odd and
+T n_{i-1} = n_i).  Summing rows i = j+1..k with y_i = 1 telescopes the middle terms:
+    sum_{i=j+1}^{k} (2 n_i)^{-s} h(sigma(2 n_i))  +  (n_j^{-s} - n_k^{-s}) h*  <=  0,
+every coefficient on the left is > 0 (n_j < n_k, s >= 0 gives n_j^{-s} - n_k^{-s} >= 0, and for
+s = 0 the (2n_i)^{-s} = 1 terms carry the strictness), so the combination has all components
+>= 0 and at least one > 0: a Gordan certificate for "no h > 0".  All rows have m <= n_K = 3^K - 1.
+
+Corollary A1 (family (i), sharp single row).  sigma(n) = n mod M.  Take n = 2M - 1 (odd),
+m = T n = 3M - 1 = 2 mod 3, (2m-1)/3 = 2M-1 = -1 = m mod M.  Row m = 3M - 1:
+    (6M-2)^{-s} h(M-2)  +  (2M-1)^{-s} h(M-1)  -  (3M-1)^{-s} h(M-1)  <=  0.
+Since (2M-1)^{-s} >= (3M-1)^{-s} (s >= 0) and (6M-2)^{-s} h(M-2) > 0, the single row is a
+certificate: N_fail(M, s) <= 3M - 1 for every M >= 1, s >= 0.  Verified exactly for every M in the
+sweep and every s in {0, 3/4, 1, 3/2, 2, 3} (field "analytic_single_row" in certificates/pi_farkas_modM_s*.json).
+
+Corollary A2 (family (ii)).  sigma(n) = (parity_word(n, L), n mod 3^b).  Take
+n = 3^b 2^{L+1} - 1 (odd, word 1^{L+1}: n = -1 mod 2^{L+1}), m = T n = 3^{b+1} 2^L - 1.
+Then parity_word(m, L) = 1^L = parity_word(n, L), and m = n = -1 mod 3^b, so sigma(m) = sigma(n),
+n < m: the single row m = 3^{b+1} 2^L - 1 is a certificate.  N_fail(L, b, s) <= 3^{b+1} 2^L - 1.
+
+Corollary A3 (family (iii), capped valuations).  sigma(n) = (min(v2(n+1), K1), min(v2(3n+1), K2)).
+Take n = 2^{K1+2} - 1, m = T n = 3 2^{K1+1} - 1: v2(n+1) = K1+2, v2(m+1) = K1+1, both capped to K1;
+v2(3n+1) = v2(3 2^{K1+2} - 2) = 1 = v2(3m+1) = v2(9 2^{K1+1} - 2) (K1 >= 1).  Single row
+m = 3 2^{K1+1} - 1.  (For the one-valuation automaton min(v2(n+1),K1) the row m = 3 2^{K1} - 1 already
+works; with the second coordinate and K1 = 1 one needs the next shadow, since v2(3*5+1) = 4 != v2(3*3+1) = 1.)
+
+------------------------------------------------------------------------------------------
+THEOREM B (family (iii), UNBOUNDED valuation weight; r64 s6 cascade made exact).
+Let s >= 0 and pi(n) = n^{-s} g(v2(n+1)) with g: N -> (0, oo) ARBITRARY (not finite-state).
+Then P pi <= pi fails.  Proof.  Fix L >= 2 with L odd or even (both work), n_0 = 2^L - 1, n_j as
+above; v2(n_j + 1) = v2(3^j 2^{L-j}) = L - j for j < L, and v2(n_L + 1) = v2(3^L) = 0.
+ (B.1) Chain (A.1):  (2^L-1)^{-s} g(L)  <  (3^L-1)^{-s} g(0),   i.e.  g(L) < ((2^L-1)/(3^L-1))^s g(0).
+ (B.2) Row m = 2^L - 1 (its even predecessor N_L = 2^{L+1} - 2 is r64's cascade seed):
+       pi(2^{L+1}-2) <= pi(2^L-1):  (2^{L+1}-2)^{-s} g(v2(2^{L+1}-1)) = 2^{-s} (2^L-1)^{-s} g(0)
+       <= (2^L-1)^{-s} g(L),  i.e.  g(L) >= 2^{-s} g(0).
+ (B.1)+(B.2):  2^{-s} < ((2^L-1)/(3^L-1))^s, i.e. (s > 0)  3^L - 1 < 2(2^L - 1) = 2^{L+1} - 2,
+ false for L >= 2 (9-1 = 8 > 6).  For s = 0: g(L) < g(0) <= g(L).  Contradiction.  QED.
+ Farkas form: rows n_1, ..., n_L (y = 1 each) plus row n_0 = 2^L - 1 (y = 1): the h(L)-coefficients
+ cancel exactly (-n_0^{-s} + n_0^{-s}); the h(0)-coefficient is (2n_0)^{-s} + sum_{i>=1}(2n_i)^{-s} - n_L^{-s}
+ which is > 0 as soon as (2 n_0)^{-s} > n_L^{-s} - (2 n_L)^{-s}, true for L = 2 (6^{-s} > (1-2^{-s}) 8^{-s});
+ the intermediate even predecessors 2 n_i have v2(2n_i + 1) = 0, so all their terms sit on g(0) too.
+ So the explicit family pi = n^{-s} q^{v2(n+1)} dies at m = 2^L - 1 with L = the least L such that
+ q^L < 2^{-s} (single row (B.2) suffices there since g(L) = q^L is explicit) -- this is exactly the
+ r64 s6 statement "penalising the -1 shadow moves the obstruction upstream to N_m = 2^{m+1} - 2".
+ The general form of Theorem B (rows (B.1)+(B.2)) needs no knowledge of g at all.
+
+THEOREM B' (two-valuation automata, unbounded).  pi(n) = n^{-s} g(v2(n+1), v2(3n+1)), g arbitrary.
+Along n_j: state (L-j, 1) for j < L and (0, 0) at n_L; the even predecessors 2 n_i (i >= 0) all have
+state (0, 0) [v2(2n_i+1) = 0, v2(6 n_i + 1) = 0].  Rows n_0..n_L with y = 1 give
+   sum_{i=0}^{L} (2 n_i)^{-s} g(0,0)  +  (n_0^{-s} - n_0^{-s}) g(L,1)  -  n_L^{-s} g(0,0)  <=  0
+   plus positive terms; coefficient of g(0,0) is > 0 for L = 2 as in Theorem B.  QED (L = 2, rows 3, 5, 8).
+
+------------------------------------------------------------------------------------------
+THEOREM C (what any admissible pi must do -- the obstruction in one line).
+If P pi <= pi and pi > 0 then along every all-odd segment n, T n, ..., T^L n (n = -1 mod 2^L,
+e.g. n = 2^L - 1 or n = M 2^L - 1) pi is STRICTLY increasing:  pi(T^j n) < pi(T^{j+1} n), while
+T^{j+1} n / T^j n -> 3/2.  Hence  pi(n) n^{s}  cannot be a function of any finite-state summary
+sigma(n) (Theorem A), cannot be a function of v2(n+1) alone or of (v2(n+1), v2(3n+1)) (Theorems B, B'),
+and more generally  g(n) := pi(n) n^{s} must satisfy  g(3^L - 1) > ((3^L-1)/(2^L-1))^{s} g(2^L - 1)
+for every L, i.e. g grows at least like n^{s} along the -1 shadow: g is NOT bounded on the shadow
+family for s > 0.  Since pi in l^1 needs pi -> 0, g must simultaneously be o(n^{s}) on average
+and >> n^{s} along shadows.  This is C1/C5 in exact form.  The finite-N sweep below measures how
+soon a finite table dies (N_fail), which is a different, sharper quantity than the analytic bound
+3M - 1: the LP finds combination certificates at N_fail ~ M (s >= 3/4) and ~ M/2 (s = 0).
+
+Status: Theorems A, B, B', C are complete (no missing lemma).  The hand bounds N_fail <= 3M-1
+(A1), <= 3^{b+1} 2^L - 1 (A2), <= 3 2^{K1+1} - 1 (A3), <= 8 (B, B') are all exact.  What is NOT
+proved by hand is the measured law N_fail(M, s) ~ c(s) M for the minimal N; see the sweep.
+
+------------------------------------------------------------------------------------------
+THEOREM D (rigorous lower bound for the measured N_fail of family (i)).
+For every M >= 2 and every s >= 0:  N_fail(M, s) >= floor(M/2) + 1.
+Proof.  Let N <= floor(M/2).  Every number k occurring in a row m in [3, N] satisfies k <= 2N <= M,
+and k = M occurs only as k = 2m with m = M/2 (residue 0, used by no other k in [3, M-1]).  Hence
+n -> n mod M is injective on the set of occurring numbers, and the finite system on [3, N] is a
+subsystem of the unrestricted system {pi(2m) + [m=2(3)] pi((2m-1)/3) <= pi(m)}, m in [3,N], on the
+integers <= 2N.  The table h(n) := n^{s} 3^{-tau(n)} (tau = hitting time of {1,2}, finite for every
+n <= 2N <= M -- a FINITE check, not C13) satisfies every row: the two predecessors of m each carry
+3^{-tau(m)-1}, and 2 * 3^{-tau(m)-1} < 3^{-tau(m)}.  So the LP is feasible on [3, floor(M/2)].  QED.
+Measured (sweep): N_fail(M, 0) = M/2 + 2 for M = 64, 96, 128, 144, 256, 864, 1296, 1728, 2048
+(the first wrap edge 2m = M + 4 -> residue 4 at m = M/2 + 2, closed by the T-orbit of M/2 + 2 when
+that orbit stays below M/2 + 2), and M/2 + O(1)..O(30) otherwise; N_fail(M, 3/4) ~ 0.9 M,
+N_fail(M, s) ~ (1.0 .. 1.1) M for s in {1, 3/2, 2, 3}, nondecreasing in s (table in logs/frontB2-summary.log).
+Sharp statement left open: prove N_fail(M, s) <= (1 + o(1)) M for s >= 1 (the analytic bound is 3M - 1).
+
+---- frontB2_proofcheck.py output ----
+Lemma 0 / chain identities verified for K = 2..40 (n_j = 3^j 2^{K-j} - 1, odd for j<K, n_{j+1} = 2 mod 3 with odd predecessor n_j).
+Theorem A telescoping certificate (rows n_{j+1}..n_k, y=1) exact for sigma = n mod M, M in 2..64 and the sweep list, all s in ['0', '3/4', '1', '3/2', '2', '3']: OK
+Corollary A1 single row m = 3M-1: exact Gordan certificate for all M in 1..2048 (M>=2) and all s: OK
+Corollary A2 single row m = 3^(b+1) 2^L - 1: exact for L in 1..16, b in 0..4, all s: OK
+Corollary A3 single row m = 3 2^(K1+1) - 1: exact for K1 in 1..20, K2 in {none,1..7}, all s: OK
+Theorem B (pi = n^-s g(v2(n+1)), g arbitrary): rows n_0..n_L, y=1, exact certificate for L=2..30, all s: OK
+Theorem B minimal certificate rows {3,5,8} (y=1,1,1) exact for all s.
+Theorem B' (g(v2(n+1), v2(3n+1)) arbitrary): rows n_0..n_L exact for L=2..30, all s: OK
+Theorem C sanity: oracle pi=(1/3)^tau is strictly increasing along the shadow chain for L=2..20: OK
+ALL PROOF CHECKS PASSED

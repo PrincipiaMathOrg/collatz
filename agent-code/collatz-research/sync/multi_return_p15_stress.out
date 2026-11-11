@@ -1,0 +1,16 @@
+suffix=2,1,3,2,1,4,2,1,2
+suffix_total_exponent=18 p15_r=189045 seed_bits=189045
+marker=2,1 marker_A=3
+marker_rho=9 marker_endpoint=11 start_modulus=16 endpoint_modulus=18
+occurrence=0 lift_bits=299625 lift_mod_1000000007=313737518 start_bits=299629 endpoint_bits=299629
+occurrence=3 lift_bits=299623 lift_mod_1000000007=116733015 start_bits=299627 endpoint_bits=299628
+occurrence=6 lift_bits=299621 lift_mod_1000000007=321498372 start_bits=299625 endpoint_bits=299625
+lift_difference_0_1_bits=299624 lift_difference_mod_1000000007=-197004503 v2=2 v3=0
+lift_difference_1_2_bits=299623 lift_difference_mod_1000000007=-795234650 v2=1 v3=0
+gap_0=2,1,3 d=3 E=6 h=-19
+gap_1=2,1,4 d=3 E=7 h=-55
+determinant=0
+gap_recurrences=true combined_recurrence=true
+terminal_v3=0
+distinct_gap_blocks=true
+certificate_passed=true

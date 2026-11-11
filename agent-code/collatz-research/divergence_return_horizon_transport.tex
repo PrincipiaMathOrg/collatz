@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+
+\title{Transport of the deficit-four horizon along fixed-seed returns}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  x_{t+1}=\Up(x_t):=\frac{3x_t+1}{2^{a_t}},
+  \qquad
+  a_t:=v_2(3x_t+1),
+  \qquad
+  A_t:=\sum_{i=0}^{t-1}a_i,
+  \tag{1}
+\]
+where every $x_t$ is a positive odd integer.  We assume that every prefix
+from $x_0$ is a strict barrier:
+\[
+  2^{A_t}<3^t
+  \qquad(t\geq1).
+  \tag{2}
+\]
+
+\begin{lemma}[exact return lift and extension law]
+Suppose that the length-$L$ exponent prefix occurs again at position $d>0$:
+\[
+  (a_d,\ldots,a_{d+L-1})=(a_0,\ldots,a_{L-1}).
+  \tag{3}
+\]
+Then there is an integer $t_L\geq1$ such that
+\[
+\boxed{
+  x_d=x_0+t_L2^{A_L+1},
+  \qquad
+  x_{d+L}=x_L+2t_L3^L.}
+\tag{4}
+\]
+For $h\geq0$, put
+\[
+  B_h:=A_{L+h}-A_L.
+  \tag{5}
+\]
+The occurrence in (3) extends through the next $h$ exponent letters if and
+only if
+\[
+\boxed{2^{B_h}\mid t_L.}
+\tag{6}
+\]
+Whenever (6) holds,
+\[
+\boxed{
+  x_{d+L+h}=x_{L+h}
+  +2\frac{t_L}{2^{B_h}}3^{L+h}.}
+\tag{7}
+\]
+In particular,
+\[
+  \min\{v_3(x_{d+L+h}+1),L+h\}
+  =\min\{v_3(x_{L+h}+1),L+h\}.
+  \tag{8}
+\]
+\end{lemma}
+
+\begin{proof}
+A positive exponent word of total exponent $A$ determines one odd seed class
+modulo $2^{A+1}$.  We include the standard induction.  Suppose a prefix of
+length $k$ and total exponent $A$ has representative $\rho$.  Replacing its
+initial value by $\rho+\ell2^{A+1}$ replaces its endpoint by
+\[
+  x_k(\rho)+2\ell3^k.
+\]
+Appending an exponent $a$ requires
+\[
+  3x_k(\rho)+1+6\ell3^k\equiv2^a\pmod {2^{a+1}}.
+\]
+After division by $2$, the coefficient of $\ell$ is odd, so this congruence
+selects one class $\ell\pmod {2^a}$.  This proves the cylinder assertion.
+
+The two starting states in (3) therefore agree modulo $2^{A_L+1}$, which
+gives the first identity in (4).  Condition (2) and the positive affine carry
+give $x_d>x_0$, so $t_L\geq1$.  Applying the common length-$L$ affine map to
+the starting-state difference gives the second identity.
+
+The occurrence extends through $h$ further letters exactly when $x_d$ and
+$x_0$ lie in the same length-$(L+h)$ cylinder.  By the first identity in
+(4), this is equivalent to
+\[
+  2^{A_{L+h}+1}\mid t_L2^{A_L+1},
+\]
+which is (6).  Applying the common length-$(L+h)$ affine map proves (7), and
+reduction of (7) modulo $3^{L+h}$ proves (8).
+\end{proof}
+
+Let
+\[
+  \mathcal S_4:=
+  \{\varnothing,12,112,1112,1113,1122,1212,11113\}
+  \tag{9}
+\]
+be the proved deficit-four stem set.  A stem $s$ matches $x_0$ if it is the
+initial exponent word of $x_0$.  For a matching stem of length $h$, put
+\[
+  \nu_s:=v_2(x_h+1).
+  \tag{10}
+\]
+The proved fixed-start horizon is
+\[
+  R_4(x_0):=
+  \max_{\substack{s\in\mathcal S_4\\s\text{ matches }x_0}}
+  (|s|+\nu_s-1).
+  \tag{11}
+\]
+Define also the finite transport threshold
+\[
+  \Gamma_4(x_0):=
+  \max_{\substack{s\in\mathcal S_4\\s\text{ matches }x_0}}
+  (A_{|s|}+\nu_s).
+  \tag{12}
+\]
+
+\begin{theorem}[fixed-seed horizon transport]
+Assume (3), $L\geq5$, and
+\[
+  A_L+1>\Gamma_4(x_0).
+  \tag{13}
+\]
+Then
+\[
+\boxed{R_4(x_d)=R_4(x_0).}
+\tag{14}
+\]
+Since $A_L\geq L$, condition (13) holds for every sufficiently long returned
+prefix of the fixed seed $x_0$.
+\end{theorem}
+
+\begin{proof}
+Every stem in $\mathcal S_4$ has length at most $5$.  Thus (3) and $L\geq5$
+show that exactly the same stems match $x_d$ and $x_0$.  Fix one such stem
+$s$ and put $h:=|s|$.  Applying its common affine map to the first identity
+in (4) gives
+\[
+  x_{d+h}-x_h=t_L3^h2^{A_L+1-A_h}.
+  \tag{15}
+\]
+By (12) and (13),
+\[
+  A_L+1-A_h>\nu_s=v_2(x_h+1).
+\]
+Equation (15) therefore implies
+\[
+  v_2(x_{d+h}+1)=v_2(x_h+1)=\nu_s.
+  \tag{16}
+\]
+Every term in the maximum defining $R_4$ is the same at the two starts, so
+(14) follows.
+\end{proof}
+
+\begin{corollary}[returned-start exclusion]
+Under the hypotheses of Theorem~2, suppose also that
+\[
+  L>R_4(x_0).
+  \tag{17}
+\]
+Let $r\geq L$.  If the length-$r$ exponent block beginning at $x_d$ is a
+strict barrier block, then
+\[
+\boxed{
+  v_3(x_{d+r}+1)\leq r-5.}
+\tag{18}
+\]
+In particular, if $x_d$ begins an infinite strict-barrier ray, then no
+length $r\geq L$ from this returned start can be a deficit-four
+synchronization hit.  Any such hit obtained from the return construction
+must change the block start.
+\end{corollary}
+
+\begin{proof}
+Theorem~2 gives $R_4(x_d)=R_4(x_0)<L\leq r$.  The fixed-start deficit-four
+horizon theorem at $x_d$ now gives (18).  The remaining assertions follow
+immediately.
+\end{proof}
+
+\begin{theorem}[first-branch exponent law]
+Assume the hypotheses of Theorem~2.  Let $h$ be a finite maximal common extension
+of the returned prefix, and put
+\[
+  N:=L+h,
+  \qquad
+  B:=A_N-A_L,
+  \qquad
+  T:=\frac{t_L}{2^B}.
+  \tag{19}
+\]
+Let
+\[
+  y:=x_N,
+  \qquad
+  y':=x_{d+N}=y+2T3^N,
+  \tag{20}
+\]
+and denote their distinct next exponents by
+\[
+  a:=v_2(3y+1),
+  \qquad
+  a':=v_2(3y'+1).
+  \tag{21}
+\]
+Put $c:=v_2(T)$ and $z:=(3y+1)/2^a$.  Then $c<a$, and the first branch is
+governed exactly by
+\[
+\boxed{
+  \begin{aligned}
+  c+1<a&\quad\Longrightarrow\quad a'=c+1,\\
+  c+1=a&\quad\Longrightarrow\quad
+  a'=a+v_2\left(z+\frac{T}{2^{a-1}}3^{N+1}\right)>a.
+  \end{aligned}}
+\tag{22}
+\]
+\end{theorem}
+
+\begin{proof}
+Maximality of $h$ and the extension law (6) give
+\[
+  2^B\mid t_L,
+  \qquad
+  2^{B+a}\nmid t_L,
+\]
+so $c<a$.  Equation (20) gives
+\[
+  3y'+1=2^az+2T3^{N+1}.
+  \tag{23}
+\]
+The two terms on the right have $2$-adic valuations $a$ and $c+1$.  If they
+are distinct, their sum has the smaller valuation.  If they are equal,
+factoring out $2^a$ gives the second line of (22); the two remaining
+summands are odd, so the displayed valuation is positive.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,796 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+
+\title{Tail-record renewal at the deficit-four horizon}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+Let
+\[
+  x_{t+1}=\Up(x_t):=\frac{3x_t+1}{2^{a_t}},
+  \qquad
+  a_t:=v_2(3x_t+1),
+  \qquad
+  A_t:=\sum_{h=0}^{t-1}a_h,
+  \tag{1}
+\]
+be an infinite accelerated orbit of positive odd integers.  Define its
+coefficient sequence and decoder depth by
+\[
+  Q_t:=\frac{3^t}{2^{A_t}},
+  \qquad
+  b_t:=v_3(x_t+1).
+  \tag{2}
+\]
+Assume throughout that $Q_t\to\infty$.  A time $j$ is a tail record if
+\[
+  Q_j<Q_t\qquad(t>j).
+  \tag{3}
+\]
+The tail-record times form an infinite sequence
+\[
+  j_0<j_1<j_2<\cdots.
+  \tag{4}
+\]
+
+For a positive word $w=(c_0,\ldots,c_{r-1})$, put
+\[
+\begin{aligned}
+  A_0(w)&:=0,
+  &A_h(w)&:=\sum_{t=0}^{h-1}c_t,\\
+  C_0(w)&:=0,
+  &C_{h+1}(w)&:=3C_h(w)+2^{A_h(w)}.
+\end{aligned}
+\tag{5}
+\]
+and
+\[
+  D(w):=C_r(w)+2^{A_r(w)}.
+  \tag{6}
+\]
+The affine identity is
+\[
+  2^{A_r(w)}(x_{j+r}+1)=3^r x_j+D(w)
+  \tag{7}
+\]
+whenever $w=(a_j,\ldots,a_{j+r-1})$.
+
+\begin{lemma}[geometry of consecutive tail records]
+Put $r_i:=j_{i+1}-j_i$ and
+\[
+  B_h:=A_{j_i+h}-A_{j_i},
+  \qquad
+  q_h:=\frac{Q_{j_i+h}}{Q_{j_i}}
+       =\frac{3^h}{2^{B_h}}.
+  \tag{8}
+\]
+Then
+\[
+  1<q_{r_i}<q_h
+  \qquad(1\leq h<r_i),
+  \qquad
+  a_{j_i}=a_{j_{i+1}}=1.
+  \tag{9}
+\]
+If $r_i>1$, then $a_{j_{i+1}-1}\geq2$.
+
+The consecutive-record gaps of length less than six are exactly
+\[
+  \begin{array}{c|c}
+    r_i& (a_{j_i},\ldots,a_{j_{i+1}-1})\\ \hline
+    1&1\\
+    2&12\\
+    4&1113\text{ or }1122.
+  \end{array}
+  \tag{10}
+\]
+There are no consecutive-record gaps of length $3$ or $5$.
+\end{lemma}
+
+\begin{proof}
+The values $Q_t$ are pairwise distinct, since an equality $Q_u=Q_v$ with
+$u<v$ would give a positive power of $3$ equal to a power of $2$.
+Because $Q_t\to\infty$, every suffix has a unique minimum.  The next tail
+record after $j_i$ is the unique minimum of $\{Q_t:t>j_i\}$.  This proves
+the first two inequalities in (9).  At every tail record $j$, one has
+\[
+  \frac{Q_{j+1}}{Q_j}=\frac3{2^{a_j}}>1,
+\]
+so $a_j=1$.  If $r_i>1$, then $j_{i+1}-1$ is not a tail record, and (9)
+gives
+\[
+  \frac{Q_{j_{i+1}}}{Q_{j_{i+1}-1}}
+  =\frac3{2^{a_{j_{i+1}-1}}}<1.
+\]
+Hence the last exponent is at least two.
+
+It remains to prove (10).  The endpoint condition $q_r<q_1=3/2$ and the
+strict barrier $q_r>1$ give
+\[
+  1<\frac{3^r}{2^{B_r}}<\frac32.
+  \tag{11}
+\]
+For $r=2$, this forces $B_2=3$, hence the word is $12$.  For $r=3$,
+(11) forces $B_3\geq5$, while $q_3>1$ forces $B_3\leq4$; hence no word
+exists.  For $r=4$, equation (11) forces $B_4=6$.  The prefix barriers
+leave only
+\[
+  1113,\qquad1122,\qquad1212.
+\]
+The last word is impossible because its second coefficient is $9/8$, less
+than its endpoint coefficient $81/64$.  The first two words satisfy (9).
+For $r=5$, equation (11) forces $B_5\geq8$, whereas $q_5>1$ forces
+$B_5\leq7$.  The case $r=1$ was already proved.  This establishes the
+table.
+\end{proof}
+
+Let
+\[
+  \mathcal S_4=
+  \{\varnothing,12,112,1112,1113,1122,1212,11113\}.
+  \tag{12}
+\]
+A stem $s\in\mathcal S_4$ matches a positive odd integer $x$ if it is the
+initial accelerated exponent word of $x$.  Define
+\[
+  R_4(x):=
+  \max_{\substack{s\in\mathcal S_4\\s\text{ matches }x}}
+  \left(
+    |s|+v_2\bigl(\Up^{|s|}(x)+1\bigr)-1
+  \right).
+  \tag{13}
+\]
+The empty stem makes the maximum well defined.
+
+\begin{lemma}[exact exponent-one tower]
+For every positive odd $y$, the exact initial run of exponent-one steps
+has length
+\[
+  v_2(y+1)-1.
+  \tag{14}
+\]
+Consequently, if a matching stem $s$ contributes the value $R$ to the
+maximum in (13), then the exponent prefix of length $R$ is
+\[
+  s1^{R-|s|}.
+  \tag{15}
+\]
+\end{lemma}
+
+\begin{proof}
+Put $\nu=v_2(y+1)$.  If $\nu\geq2$, then $y\equiv-1\pmod4$, so
+$v_2(3y+1)=1$, and
+\[
+  \Up(y)+1=\frac{3(y+1)}2.
+  \tag{16}
+\]
+Thus one exponent-one step lowers $\nu$ by exactly one.  When $\nu=1$,
+one has $y\equiv1\pmod4$, so the next exponent is at least two.  This
+proves both assertions.
+\end{proof}
+
+\begin{theorem}[deficit-four record-renewal dichotomy]
+For each $i$, put
+\[
+  r_i:=j_{i+1}-j_i,
+  \qquad
+  R_i:=R_4(x_{j_i}).
+  \tag{17}
+\]
+Exactly one of the following alternatives holds.
+
+\begin{enumerate}
+  \item If $r_i>R_i$, then
+  \[
+    r_i\geq6,
+    \qquad
+    b_{j_{i+1}}\leq r_i-5.
+    \tag{18}
+  \]
+
+  \item If $r_i\leq R_i$, then the record-gap word $p_i$ belongs to
+  \[
+    \mathcal A_4:=\{1,12,1113,1122\},
+    \tag{19}
+  \]
+  and
+  \[
+    R_{i+1}\geq R_i-r_i.
+    \tag{20}
+  \]
+  Its decoder transport is exact:
+  \[
+    \begin{array}{c|c|c|c}
+      p_i&r_i&A_{r_i}(p_i)&b_{j_{i+1}}\\ \hline
+      1&1&1&b_{j_i}+1\\
+      12&2&3&0\\
+      1113&4&6&1\\
+      1122&4&6&0.
+    \end{array}
+    \tag{21}
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Fix $i$ and suppose first that $r_i\leq R_i$.  Choose a stem $s$ that
+attains the maximum $R_i$ in (13).  By Lemma~2, the prefix through time
+$R_i$ is $s$ followed by exponent-one steps.  Since $j_{i+1}$ is the
+unique minimum of the coefficient sequence after $j_i$, its relative
+coefficient is smaller than that at every other positive time through
+$R_i$.
+
+The required finite comparison is
+\[
+  \begin{array}{c|c|c}
+    s& p_i&\text{stem remaining after }p_i\\ \hline
+    \varnothing&1&\varnothing\\
+    12&12&\varnothing\\
+    112&1&12\\
+    1112&1&112\\
+    1113&1113&\varnothing\\
+    1122&1122&\varnothing\\
+    1212&12&12\\
+    11113&1&1113.
+  \end{array}
+  \tag{22}
+\]
+Indeed, the relative coefficient vectors through the nonempty stems are
+\[
+\begin{aligned}
+12&:\quad (3/2,9/8),\\
+112&:\quad (3/2,9/4,27/16),\\
+1112&:\quad (3/2,9/4,27/8,81/32),\\
+1113&:\quad (3/2,9/4,27/8,81/64),\\
+1122&:\quad (3/2,9/4,27/16,81/64),\\
+1212&:\quad (3/2,9/8,27/16,81/64),\\
+11113&:\quad (3/2,9/4,27/8,81/16,243/128).
+\end{aligned}
+\tag{23}
+\]
+The unique minimum in each row occurs at the boundary displayed in (22).
+Every appended exponent-one step multiplies the coefficient by $3/2$, so
+it creates no new minimum.  This proves (19).  The remaining word through
+time $R_i$ is again a stem from $\mathcal S_4$ followed by its exact
+exponent-one tower.  Applied at $x_{j_{i+1}}$, definition (13) therefore
+gives (20).
+
+Direct use of (5)--(6) gives
+\[
+  \begin{array}{c|rrrr}
+    p&1&12&1113&1122\\ \hline
+    D(p)&3&13&129&137\\
+    v_3(D(p))&1&0&1&0.
+  \end{array}
+  \tag{24}
+\]
+For $p=1$, equation (7) reduces to
+\[
+  2(x_{j_i+1}+1)=3(x_{j_i}+1),
+\]
+which gives the first decoder rule in (21).  For the other three words,
+$v_3(D(p))<|p|$, while the first term on the right of (7) has valuation at
+least $|p|$.  Hence the valuation of the sum is $v_3(D(p))$, proving the
+remaining rules.
+
+Now suppose that $r_i>R_i$.  Lemma~1 and the definition (13) show that none
+of the gaps in (10) can occur: each of their words is a matching stem and
+therefore gives $R_i\geq r_i$.  Thus $r_i\geq6$.  The block from
+$x_{j_i}$ is a strict barrier because $j_i$ is a tail record.  The proved
+fixed-start deficit-four horizon theorem, applied with $r_i\geq4$ and
+$r_i>R_i$, gives the second assertion in (18).
+\end{proof}
+
+\begin{corollary}[record-renewal trichotomy]
+Every orbit satisfying the hypotheses has at least one of the following
+three properties.
+
+\begin{enumerate}
+  \item Infinitely many consecutive tail-record transitions satisfy
+  $r_i>R_i$.
+
+  \item From some tail record onward every transition lies inside its
+  current horizon, and the resulting word over $\mathcal A_4$ contains
+  arbitrarily long consecutive runs of the one-letter atom $1$.
+
+  \item From some tail record onward every transition lies inside its
+  current horizon, and the decoder depth $b_t$ is bounded on that tail.
+\end{enumerate}
+In the third alternative, if every run of the atom $1$ has length at most
+$M$, then one may take
+\[
+  b_t\leq M+4
+  \tag{25}
+\]
+throughout a sufficiently late tail.
+\end{corollary}
+
+\begin{proof}
+If the first alternative fails, Theorem~3 shows that all sufficiently late
+record gaps belong to $\mathcal A_4$.  The three nontrivial atoms occur
+infinitely often.  Otherwise the accelerated exponent word would
+eventually be all ones, contradicting the finite exact run length in
+Lemma~2.
+
+If the intervening runs of the atom $1$ are unbounded, the second
+alternative holds.  Otherwise let $M$ bound their lengths.  Equation (21)
+shows that each nontrivial atom resets the decoder depth to zero or one,
+whereas each atom $1$ raises it by one.  Inside a nontrivial atom there are
+at most three initial exponent-one steps before the displayed reset.
+Consequently $b_t\leq M+4$ on the resulting tail, proving the third
+alternative and (25).
+\end{proof}
+
+\begin{theorem}[record carry and explicit coalescing ancestor]
+Fix consecutive tail records $j_i<j_{i+1}$, put
+\[
+  r:=j_{i+1}-j_i>1,
+  \qquad
+  x:=x_{j_i},
+  \qquad
+  y:=x_{j_{i+1}},
+  \qquad
+  B:=A_{j_{i+1}}-A_{j_i},
+  \tag{26}
+\]
+and let $w=(a_{j_i},\ldots,a_{j_{i+1}-1})$.  With
+$\alpha:=\log_2 3$ and $\{u\}:=u-\lfloor u\rfloor$, one has
+\[
+  B=\lfloor r\alpha\rfloor,
+  \qquad
+  0<\{r\alpha\}<\alpha-1,
+  \qquad
+  \frac{3^r}{2^B}=2^{\{r\alpha\}}\in(1,3/2).
+  \tag{27}
+\]
+Moreover,
+\[
+  \frac{C(w)}{2^B}
+  =\frac13\sum_{h=0}^{r-1}\frac{q_r}{q_h}
+  <\frac{r+1/2}{3},
+  \tag{28}
+\]
+where the $q_h$ are defined in (8), and consequently
+\[
+  \frac{3^r}{2^B}x
+  <y
+  <\frac{3^r}{2^B}x+\frac{r+1/2}{3}
+  <\frac32x+\frac{r+1/2}{3}.
+  \tag{29}
+\]
+
+Put $b:=v_3(y+1)$.  Then
+\[
+  b\geq1
+  \quad\Longleftrightarrow\quad
+  a_{j_{i+1}-1}\text{ is odd}.
+  \tag{30}
+\]
+If these equivalent conditions hold, the positive odd integer
+\[
+  z:=2^b\frac{y+1}{3^b}-1
+  \tag{31}
+\]
+satisfies
+\[
+  \Up^b(z)=y,
+  \tag{32}
+\]
+and all $b$ exponents on this coalescing path are one.  It is smaller than
+the record start $x$ exactly when
+\[
+  \left(\frac23\right)^b(y+1)<x+1.
+  \tag{33}
+\]
+In particular, either of the following explicit inequalities is sufficient:
+\[
+  \left(\frac23\right)^b
+  \left(
+    \frac32x+\frac{r+1/2}{3}+1
+  \right)<x+1,
+  \tag{34}
+\]
+or
+\[
+  b\geq2
+  \quad\text{and}\quad
+  4r<9x+13.
+  \tag{35}
+\]
+\end{theorem}
+
+\begin{proof}
+Lemma~1 gives
+\[
+  1<\frac{3^r}{2^B}<\frac32.
+\]
+Taking base-two logarithms gives
+\[
+  0<r\alpha-B<\alpha-1<1.
+\]
+Since $B$ is an integer, this proves (27).
+
+Expansion of the carry recurrence in (5) gives
+\[
+  C(w)=\sum_{h=0}^{r-1}3^{r-1-h}2^{B_h}.
+\]
+After division by $2^B$, each summand becomes
+\[
+  \frac13\frac{3^{r-h}}{2^{B-B_h}}
+  =\frac13\frac{q_r}{q_h}.
+\]
+For $h=0$, Lemma~1 gives $q_r/q_0=q_r<3/2$.  For
+$1\leq h<r$, it gives $q_r/q_h<1$.  Summation proves (28).
+The affine orbit identity
+\[
+  y=\frac{3^r}{2^B}x+\frac{C(w)}{2^B}
+\]
+then proves (29).
+
+Write $a:=a_{j_{i+1}-1}$.  The final orbit step gives
+\[
+  2^a y\equiv1\pmod3.
+\]
+Thus $y\equiv(-1)^a\pmod3$.  Hence $3\mid y+1$ exactly when $a$ is odd,
+which proves (30).
+
+Suppose $b\geq1$.  Formula (31) defines a positive odd integer.  For
+$0\leq h\leq b$, put
+\[
+  z_h+1:=2^{b-h}\frac{y+1}{3^{b-h}}.
+  \tag{36}
+\]
+Every $z_h$ is a positive odd integer, $z_0=z$, and $z_b=y$.  Moreover,
+\[
+  z_{h+1}+1=\frac{3(z_h+1)}2.
+  \tag{37}
+\]
+Since $j_{i+1}$ is a tail record, Lemma~1 gives
+$a_{j_{i+1}}=1$, and therefore $v_2(y+1)\geq2$.  It follows from (36)
+that $v_2(z_h+1)\geq2$ for $h<b$.  Lemma~2 and (37) now show that each
+step from $z_h$ to $z_{h+1}$ has exact exponent one.  This proves (32).
+
+Equation (31) gives
+\[
+  z+1=\left(\frac23\right)^b(y+1),
+\]
+which proves (33).  Combining this identity with (29) proves (34).  If
+$b\geq2$, the left side of (34) is at most
+\[
+  \frac49
+  \left(
+    \frac32x+\frac{r+1/2}{3}+1
+  \right)
+  =
+  \frac23x+\frac{4r+14}{27}.
+\]
+This is less than $x+1$ whenever $4r<9x+13$, proving (35).
+\end{proof}
+
+\begin{theorem}[weighted monotonicity of decoder ancestors]
+Suppose that the transition from $j_i$ to $j_{i+1}$ lies inside the
+current deficit-four horizon.  Put
+\[
+  \mathcal W_i:=
+  2^{b_{j_i}}\frac{x_{j_i}+1}{3^{b_{j_i}}},
+  \qquad
+  \kappa(b):=
+  \begin{cases}
+    1,&b=0,\\
+    32/27,&b\geq1.
+  \end{cases}
+  \tag{38}
+\]
+Then $\mathcal W_i-1$ is a positive all-one coalescing ancestor of
+$x_{j_i}$, and the four interior record atoms act by
+\[
+\begin{array}{c|c|c}
+  p_i&b_{j_{i+1}}&\mathcal W_{i+1}\\ \hline
+  1&b_{j_i}+1&\mathcal W_i\\[2pt]
+  12&0&
+  \displaystyle
+  \frac98\left(\frac32\right)^{b_{j_i}}\mathcal W_i+\frac12\\[7pt]
+  1113&1&
+  \displaystyle
+  \frac{27}{32}\left(\frac32\right)^{b_{j_i}}\mathcal W_i+\frac12\\[7pt]
+  1122&0&
+  \displaystyle
+  \frac{81}{64}\left(\frac32\right)^{b_{j_i}}\mathcal W_i+\frac78.
+\end{array}
+\tag{39}
+\]
+In every case,
+\[
+  \boxed{
+  \kappa(b_{j_{i+1}})\mathcal W_{i+1}
+  \geq
+  \kappa(b_{j_i})\mathcal W_i.}
+  \tag{40}
+\]
+Consequently, along any finite or infinite chain of interior record
+renewals,
+\[
+  \mathcal W_k\geq\frac{27}{32}\mathcal W_i
+  \qquad(k\geq i).
+  \tag{41}
+\]
+In particular, every run of the one-letter atom $1$ leaves the canonical
+coalescing ancestor exactly unchanged; unbounded exponent-one towers do not
+produce cumulative ancestor descent.
+\end{theorem}
+
+\begin{proof}
+For any positive odd state $v$, let
+\[
+  b:=v_3(v+1),
+  \qquad
+  \mathcal W(v):=2^b\frac{v+1}{3^b}.
+\]
+The construction in the proof of Theorem~5 shows that
+$\mathcal W(v)-1$ reaches $v$ through exactly $b$ exponent-one steps.
+This proves the first assertion.
+
+Write $Y:=x_{j_i}+1$, $Y':=x_{j_{i+1}}+1$, and
+$b:=b_{j_i}$.  Equations (7) and (24) give, for the four atoms,
+\[
+\begin{array}{c|c}
+  p_i&\text{block equation}\\ \hline
+  1&2Y'=3Y\\
+  12&8Y'=9Y+4\\
+  1113&64Y'=81Y+48\\
+  1122&64Y'=81Y+56.
+\end{array}
+\tag{42}
+\]
+Since
+\[
+  Y=\left(\frac32\right)^b\mathcal W_i,
+  \tag{43}
+\]
+substitution into (42), together with the decoder endpoints in (21),
+proves every formula in (39).  In particular, the factor $3/2$ in the
+one-letter block raises the decoder depth at the same time as it changes
+$Y$, so $\mathcal W_{i+1}=\mathcal W_i$.
+
+It remains to verify (40).  For the atom $1$, the weight $\kappa$ increases
+from $1$ to $32/27$ when $b=0$ and is otherwise unchanged.  For the atom
+$12$, the leading multiplier in (39) is at least $9/8$ when $b=0$ and at
+least $27/16>32/27$ when $b\geq1$.  For the atom $1113$, multiplication
+by the terminal weight gives the leading factor
+\[
+  \frac{32}{27}\frac{27}{32}
+  \left(\frac32\right)^b
+  =
+  \left(\frac32\right)^b.
+\]
+This equals the initial weight when $b=0$ and exceeds $32/27$ when
+$b\geq1$.  Finally, the leading multiplier for $1122$ is at least
+$81/64>1$ when $b=0$ and at least
+$243/128>32/27$ when $b\geq1$.  All additive terms in (39) are positive,
+so (40) follows.  Iteration and
+$1\leq\kappa(b)\leq32/27$ give (41).
+\end{proof}
+
+\begin{theorem}[escape of canonical decoder ancestors]
+Let $(x_t)_{t\geq0}$ be an injective infinite accelerated orbit.  For every
+$t$, put
+\[
+  b_t:=v_3(x_t+1),
+  \qquad
+  \mathcal W_t:=2^{b_t}\frac{x_t+1}{3^{b_t}}.
+  \tag{44}
+\]
+Then
+\[
+  \boxed{\mathcal W_t\longrightarrow\infty.}
+  \tag{45}
+\]
+More precisely, for every positive integer $M$,
+\[
+  \#\{t\geq0:\mathcal W_t=M\}
+  \leq v_2(M).
+  \tag{46}
+\]
+The left side is zero when $M$ is odd.
+
+Suppose additionally that $x_0=n$ is the least positive odd seed with an
+unbounded accelerated orbit.  Then
+\[
+  \mathcal W_t\geq n+1
+  \qquad(t\geq0),
+  \tag{47}
+\]
+with equality only during the exact initial exponent-one tower of $n$.
+In particular, after that finite tower every canonical decoder ancestor is
+strictly larger than $n$.
+\end{theorem}
+
+\begin{proof}
+Every $\mathcal W_t$ is even.  Indeed, if $b_t=0$, then
+$\mathcal W_t=x_t+1$ is even, while the assertion is immediate when
+$b_t\geq1$.
+
+Fix an even integer $M$ and put $z:=M-1$.  If $\mathcal W_t=M$, the
+construction in Theorem~5 gives
+\[
+  \Up^{b_t}(z)=x_t,
+  \tag{48}
+\]
+and all $b_t$ exponents on this path are one.  Lemma~2 therefore gives
+\[
+  0\leq b_t\leq v_2(M)-1.
+  \tag{49}
+\]
+For a fixed value of $b_t$, equation (48) determines $x_t$.  Injectivity of
+the orbit makes the values $x_t$ pairwise distinct, so each integer in the
+range (49) occurs for at most one $t$.  This proves (46).
+
+For any fixed $H$, only finitely many even integers $M\leq H$ exist, and
+each occurs only finitely often by (46).  Hence $\mathcal W_t>H$ for all
+sufficiently large $t$.  Since $H$ is arbitrary, (45) follows.
+
+Finally, the orbit of $\mathcal W_t-1$ reaches the unbounded state $x_t$.
+It is therefore unbounded, so global leastness of $n$ gives (47).  If
+we take $t=0$ in (47), the defining formula (44) first shows that
+$b_0=0$ and $\mathcal W_0=n+1$.  If equality holds at any $t$, then (48)
+becomes
+\[
+  \Up^{b_t}(n)=x_t=\Up^t(n).
+\]
+Injectivity gives $b_t=t$.  The coalescing path in (48) then shows that the
+first $t$ exponents of $n$ are all one.  Conversely, every state in the
+exact initial exponent-one tower has canonical ancestor $n$.  Lemma~2
+shows that this tower is finite, completing the proof.
+\end{proof}
+
+\begin{theorem}[two-prime stationary budget at coefficient records]
+Assume in addition that the normalized height has a finite limit
+\[
+  \mathcal K:=\lim_{t\to\infty}\frac{x_t}{Q_t}<\infty.
+  \tag{50}
+\]
+Put
+\[
+  \nu_t:=v_2(x_t+1),
+  \qquad
+  G_t:=\frac{x_t+1}{Q_t},
+  \qquad
+  \gamma:=\log_3\frac32.
+  \tag{51}
+\]
+Then, for every $t$,
+\[
+  \boxed{
+  2^{\nu_t}3^{b_t}
+  \leq x_t+1
+  =Q_tG_t
+  \leq \mathcal KQ_t.}
+  \tag{52}
+\]
+Consequently,
+\[
+  \boxed{
+  \mathcal W_t
+  \geq
+  G_0\left(\frac2{\mathcal K}\right)^\gamma
+  Q_t^{\log_3 2}.}
+  \tag{53}
+\]
+In particular, $Q_t\to\infty$ quantitatively forces
+$\mathcal W_t\to\infty$ and
+\[
+  \frac{Q_t}{(3/2)^{b_t}}\longrightarrow\infty.
+  \tag{54}
+\]
+
+Let
+\[
+  \alpha:=\log_2 3,
+  \qquad
+  \ell_i:=\nu_{j_i}-1.
+  \tag{55}
+\]
+Thus $\ell_i$ is the exact initial exponent-one run at the $i$th tail
+record.  Then
+\[
+  \boxed{
+  \ell_i+1+\alpha b_{j_i}
+  \leq
+  (\alpha-1)i+\log_2(\mathcal KQ_{j_0}).}
+  \tag{56}
+\]
+Since $\ell_i\geq1$, this gives the explicit record-index ceiling
+\[
+  \boxed{
+  b_{j_i}
+  \leq
+  \frac{\alpha-1}{\alpha},i
+  +\frac{\log_2(\mathcal KQ_{j_0})-2}{\alpha}.}
+  \tag{57}
+\]
+Hence $i-b_{j_i}\to\infty$.
+
+Finally, let $L_i$ be the number of consecutive one-letter record atoms
+beginning at $j_i$.  This number is finite and
+\[
+  \boxed{
+  L_i+2+\alpha b_{j_i}
+  \leq
+  (\alpha-1)i+\log_2(\mathcal KQ_{j_0}).}
+  \tag{58}
+\]
+Thus the two interior mechanisms consume the same stationary budget:
+decoder depth has asymptotic record-index slope at most
+$(\alpha-1)/\alpha$, while an exponent-one record tower has slope at most
+$\alpha-1$.
+\end{theorem}
+
+\begin{proof}
+The coprime powers $2^{\nu_t}$ and $3^{b_t}$ both divide $x_t+1$, so
+\[
+  2^{\nu_t}3^{b_t}\mid x_t+1.
+  \tag{59}
+\]
+To prove the upper bound in (52), first note that
+\[
+  G_{t+1}-G_t
+  =\frac{2^{a_t}-2}{3Q_t}\geq0.
+  \tag{60}
+\]
+Moreover, $G_t=x_t/Q_t+1/Q_t\to\mathcal K$.  Hence
+$G_t\leq\mathcal K$, and (52) follows from (59).
+
+Since $\nu_t\geq1$, equation (52) gives
+\[
+  3^{b_t}\leq\frac{\mathcal KQ_t}{2}.
+  \tag{61}
+\]
+Raising (61) to the power
+$\gamma=\log_3(3/2)$ yields
+\[
+  \left(\frac32\right)^{b_t}
+  \leq
+  \left(\frac{\mathcal KQ_t}{2}\right)^\gamma.
+  \tag{62}
+\]
+On the other hand, (44) and (51) give
+\[
+  \mathcal W_t
+  =\frac{Q_tG_t}{(3/2)^{b_t}}.
+  \tag{63}
+\]
+The monotonicity in (60) gives $G_t\geq G_0$.  Substitution of (62) into
+(63), together with $1-\gamma=\log_3 2$, proves (53).  Equations (53) and
+(63) prove (54).
+
+By Lemma~1,
+\[
+  \frac{Q_{j_{i+1}}}{Q_{j_i}}\leq\frac32,
+\]
+and therefore
+\[
+  Q_{j_i}\leq Q_{j_0}\left(\frac32\right)^i.
+  \tag{64}
+\]
+Apply (52) at $j_i$ and take binary logarithms.  Since
+$\nu_{j_i}=\ell_i+1$, equation (64) gives (56).  Every tail record begins
+with an exponent-one step, so $\ell_i\geq1$; this proves (57), and its
+linear coefficient is strictly less than one.
+
+It remains to prove (58).  An infinite sequence of consecutive one-letter
+atoms would give an infinite exponent-one run, contrary to Lemma~2.  Thus
+$L_i$ is finite.  The $L_i$ one-letter gaps are followed by another record
+gap, whose first exponent is again one by Lemma~1.  Hence
+$\ell_i\geq L_i+1$.  Substitution in (56) proves (58).
+\end{proof}
+
+\end{document}

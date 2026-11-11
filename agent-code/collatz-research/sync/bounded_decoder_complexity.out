@@ -1,0 +1,12 @@
+debruijn_order=10 driver_length=1033
+driver_factor_count=1024
+code_length=12 code_total_exponent=19 code_surplus_numerator=7153
+buffer_length=6 buffer_total_exponent=9
+encoded_length=12396 encoded_total_exponent=19627
+accelerated_test_length=120 accelerated_factor_count=12277
+shortcut_length=19627
+shortcut_test_length=190 shortcut_factor_count=19438
+maximum_decoder_depth_after_reset=1
+p15_suffix_length=12404 p15_suffix_exponent=19640
+p15_rho_bits=19638
+universal_core_barrier=true p15_applicable=true certificate_passed=true

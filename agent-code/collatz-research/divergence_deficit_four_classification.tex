@@ -1,0 +1,254 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\Up}{U_+}
+\newcommand{\Um}{U_-}
+
+\title{The complete deficit-four terminal classification}
+\author{}
+\date{27 August 2026}
+
+\begin{document}
+\maketitle
+
+For a positive exponent word $w=(a_0,\ldots,a_{r-1})$, put
+\[
+  A_0:=0,
+  \qquad
+  A_k:=\sum_{i=0}^{k-1}a_i,
+  \qquad
+  C_0:=0,
+  \qquad
+  C_{k+1}:=3C_k+2^{A_k},
+  \tag{1}
+\]
+and define
+\[
+  D(w):=C_r+2^{A_r}.
+  \tag{2}
+\]
+The word is a strict barrier word if
+\[
+  2^{A_k}<3^k
+  \qquad(1\leq k\leq r).
+  \tag{3}
+\]
+We use the accelerated maps
+\[
+  \Up(n):=\frac{3n+1}{2^{v_2(3n+1)}},
+  \qquad
+  \Um(m):=\frac{3m-1}{2^{v_2(3m-1)}}
+  \tag{4}
+\]
+on positive odd integers.
+
+\begin{lemma}[terminal reconstruction and finite seed bound]
+Write a strict barrier word as $w=uv$, where $|u|=d$ and $|v|=\ell$.
+If
+\[
+  3^\ell\mid D(w),
+  \tag{5}
+\]
+then $v$ is the exact exponent word of a positive $\Um$-trajectory from
+\[
+  m_0:=\frac{D(v)}{3^\ell}
+  \tag{6}
+\]
+to $1$.  Until its first hit of $1$, this trajectory obeys
+\[
+  \frac{3^k}{2^{A_k(v)}}>
+  c_u:=\frac{2^{A(u)}}{3^d}.
+  \tag{7}
+\]
+Consequently,
+\[
+\boxed{
+  m_0<c_u^{-1}e^{10.789}
+  <\frac{3^{d+11}}{2^{A(u)}}.}
+\tag{8}
+\]
+\end{lemma}
+
+\begin{proof}
+The concatenation identity is
+\[
+  D(uv)=3^\ell C(u)+2^{A(u)}D(v).
+  \tag{9}
+\]
+Since $2$ is a unit modulo $3$, condition (5) implies
+$3^\ell\mid D(v)$.  We verify the terminal reconstruction directly.  For
+$0\leq k\leq\ell$, let $v_{\geq k}$ be the suffix beginning at $k$ and put
+\[
+  m_k:=\frac{D(v_{\geq k})}{3^{\ell-k}}.
+  \tag{10}
+\]
+Equation (9), applied at the cut after the first $k$ letters, shows
+inductively that every $m_k$ is an integer.  Each $D(v_{\geq k})$ is odd,
+so every $m_k$ is odd.  Since $D(\varnothing)=1$, we have $m_\ell=1$.
+The one-letter form of (9) gives
+\[
+  3m_k-1=2^{a_k}m_{k+1}.
+  \tag{11}
+\]
+Thus the powers of $2$ are exact and the asserted $\Um$-trajectory exists.
+
+For every prefix of $v$, the barrier inequality for the corresponding
+prefix of $uv$ gives (7).  Truncate the negative trajectory at its first hit
+of $1$.  It is simple before that hit.  The proved universal reciprocal-mass
+bound for finite simple negative shortcut trajectories is
+\[
+  \sum_i\frac1{3m_i-1}<10.789.
+  \tag{12}
+\]
+The exact product formula and (7) therefore give
+\[
+  \log m_0
+  <-\log c_u+\sum_i\frac1{3m_i-1}
+  <-\log c_u+10.789.
+\]
+Finally, $e^{10.789}<3^{11}$, which proves (8).
+\end{proof}
+
+\begin{theorem}[complete deficit-four classification]
+Let $w$ be a strict barrier word of length $r\geq4$.  Define the stem set
+\[
+  \mathcal S_4:=
+  \{\varnothing,12,112,1112,1113,1122,1212,11113\}.
+  \tag{13}
+\]
+Then
+\[
+\boxed{
+  3^{r-4}\mid D(w)
+  \quad\Longleftrightarrow\quad
+  w=s1^{r-|s|}
+  \text{ for some }s\in\mathcal S_4\text{ with }|s|\leq r.}
+\tag{14}
+\]
+\end{theorem}
+
+\begin{proof}
+The length-four strict barrier prefixes are exactly
+\[
+  1111,\quad1112,\quad1113,\quad1121,\quad1122,\quad1211,\quad1212.
+  \tag{15}
+\]
+Indeed, (3) first forces $a_0=1$.  At lengths two, three, and four it forces
+$A_2\leq3$, $A_3\leq4$, and $A_4\leq6$, respectively, which gives (15) by
+immediate enumeration.  Grouped by total exponent, the prefixes are
+\[
+\begin{array}{c|c|c}
+ A(u)&c_u&u\\ \hline
+ 4&16/81&1111\\
+ 5&32/81&1112,1121,1211\\
+ 6&64/81&1113,1122,1212.
+\end{array}
+\tag{16}
+\]
+
+Lemma~1 bounds the possible negative-shadow seeds by
+\[
+\begin{array}{c|c}
+ A(u)&m_0<3^{15}/2^{A(u)}\\ \hline
+ 4&896806.6875\\
+ 5&448403.34375\\
+ 6&224201.671875.
+\end{array}
+\tag{17}
+\]
+Two independent exact scans classify every odd seed below these three
+bounds.  The accelerated scan extracts $v_2(3m-1)$ directly.  The shortcut
+scan applies one division by $2$ at a time and never extracts a valuation.
+Both scans stop only at $1$, at a repeated state, or when (7) fails.  Their
+common partitions are
+\[
+\begin{array}{c|r|r|r|c}
+ c_u&\text{hit }1&\text{floor failure}&\text{cycle}&
+ \text{first-hit seeds and words}\\ \hline
+ 16/81&2&448381&20&(1,\varnothing),(3,(3))\\
+ 32/81&1&224188&13&(1,\varnothing)\\
+ 64/81&1&112097&3&(1,\varnothing).
+\end{array}
+\tag{18}
+\]
+No step cap is reached.  The longest accelerated resolutions have lengths
+$139$, $128$, and $93$; the independent shortcut resolutions have lengths
+$224$, $207$, and $149$.  These computations are checked by the exact
+certificates
+\begin{center}
+\texttt{sync/deficit\_four\_scan.js},\qquad
+\texttt{sync/deficit\_four\_shortcut\_scan.js}.
+\end{center}
+
+After a negative trajectory reaches $1$, determinism gives only exponent-one
+steps.  Combining (15), (16), and (18) therefore gives precisely the stem
+list (13): the seed $3$ after the prefix $1111$ contributes the additional
+stem $11113$, and every other accepted suffix is all ones.
+
+For the reverse implication, $D(v1)=3D(v)$, and direct calculation gives
+\[
+\begin{array}{c|rrrrrrrr}
+ s&\varnothing&12&112&1112&1113&1122&1212&11113\\ \hline
+ D(s)&1&13&35&97&129&137&149&339\\
+ v_3(D(s))&0&0&0&0&1&0&0&1.
+\end{array}
+\tag{19}
+\]
+Thus $v_3(D(s))\geq |s|-4$ for every stem in (13), and appending
+$r-|s|$ ones proves $3^{r-4}\mid D(w)$.
+\end{proof}
+
+\begin{corollary}[fixed-start deficit-four horizon]
+Fix a positive odd block start $x$.  For a stem $s\in\mathcal S_4$, say
+that $s$ matches $x$ if the first $|s|$ accelerated exponents of $x$ equal
+$s$.  Define
+\[
+  R_4(x):=
+  \max_{\substack{s\in\mathcal S_4\\s\text{ matches }x}}
+  \left(|s|+v_2\bigl(\Up^{|s|}(x)+1\bigr)-1\right).
+  \tag{20}
+\]
+The empty stem always matches, so this maximum is defined.  If $r\geq4$,
+the first $r$ exponents from $x$ form a strict barrier word, and
+$r>R_4(x)$, then
+\[
+\boxed{
+  v_3\bigl(\Up^r(x)+1\bigr)\leq r-5.}
+\tag{21}
+\]
+Consequently, to exclude a normalized divergent orbit it is sufficient to
+find a tail-record start $x_j$ and a length $r$ such that
+\[
+  r\geq4,
+  \qquad
+  r>R_4(x_j),
+  \qquad
+  v_3(x_{j+r}+1)\geq r-4.
+  \tag{22}
+\]
+\end{corollary}
+
+\begin{proof}
+Suppose that the left side of (21) were at least $r-4$.  The positive affine
+identity gives
+\[
+  2^{A_r}\bigl(\Up^r(x)+1\bigr)=3^rx+D(w),
+  \tag{23}
+\]
+so $3^{r-4}\mid D(w)$.  Theorem~2 gives
+$w=s1^{r-|s|}$ for one matching stem $s$.  A run of $L$ exponent-one steps
+from a positive odd value $y$ has length at most $v_2(y+1)-1$.  Hence
+\[
+  r-|s|\leq v_2\bigl(\Up^{|s|}(x)+1\bigr)-1,
+\]
+which says $r\leq R_4(x)$, a contradiction.  This proves (21).
+
+At a tail-record start every finite future block is a strict barrier block.
+Thus (22) contradicts (21), which proves the final assertion.
+\end{proof}
+
+\end{document}

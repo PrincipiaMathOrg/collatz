@@ -1,0 +1,91 @@
+{
+ "mode": "lfail",
+ "family": "R-d2-K2-c1",
+ "level": "R",
+ "dim": 2,
+ "K": 2,
+ "lab": "c1",
+ "Rcap": 3,
+ "status": "UNSAT",
+ "time_s": 19.1,
+ "rounds": 3,
+ "bitwidth": 15,
+ "reason": null,
+ "refuting_instances": [
+  [
+   "0",
+   "2"
+  ],
+  [
+   "2",
+   "1"
+  ],
+  [
+   "01",
+   "2"
+  ],
+  [
+   "02",
+   "22"
+  ],
+  [
+   "11",
+   "01"
+  ],
+  [
+   "20",
+   "022"
+  ],
+  [
+   "22",
+   "11"
+  ],
+  [
+   "011",
+   "202"
+  ],
+  [
+   "111",
+   "01"
+  ],
+  [
+   "202",
+   "0222"
+  ],
+  [
+   "022",
+   "222"
+  ],
+  [
+   "0101",
+   "2002"
+  ],
+  [
+   "0102",
+   "201"
+  ]
+ ],
+ "n_instances": 13,
+ "max_len": 4,
+ "claim": "no rank rho(w) = alpha^T M_{l1}...M_{lq} beta of this class (dimension 2, coefficients 0..2, letters c1) satisfies rho(w) > rho(w') on all listed instances",
+ "L_fail": 5,
+ "history": {
+  "2": "SAT",
+  "3": "SAT",
+  "4": "SAT",
+  "5": "UNSAT"
+ },
+ "L_reached": 5,
+ "exhaustive_check": "PASS",
+ "surviving_configs": 0,
+ "letters_used": [
+  "('0', 1)",
+  "('2', 1)",
+  "('1', 1)",
+  "('1', 0)",
+  "('0', 0)",
+  "('2', 0)"
+ ],
+ "unused_letters_free": [],
+ "class_size": 22876792454961
+}

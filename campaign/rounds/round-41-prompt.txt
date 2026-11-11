@@ -1,0 +1,11 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+36. An algorithmic Lovasz local lemma
+
+**Speculative · P**
+
+Construct local "death events" that cover every infinite critical word. A dependency-graph
+argument or resampling certificate could show that no assignment avoids all death events, even
+though each individual condition is local.
+
+Take as long as you need.

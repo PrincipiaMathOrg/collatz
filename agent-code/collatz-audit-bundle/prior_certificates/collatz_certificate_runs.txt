@@ -1,0 +1,9 @@
+$ g++ -O3 -std=c++20 barrier_order_certificate.cpp -o barrier_order_certificate
+$ ./barrier_order_certificate 21
+depth=21 barrier_words=39993895 endpoint_residues=32652632 collided_words=7341263 same_A_collisions=0 order_violations=0 minimum_positive_margin=32 generation_seconds=2.68764 sorting_seconds=4.54671 checking_seconds=0.207028
+
+$ g++ -O3 -std=c++20 compressed_excursion_certificate.cpp -o compressed_excursion_certificate
+$ ./compressed_excursion_certificate 1000000000 10000
+no first descent within cap: q=2
+no first descent within cap: q=8
+limit=1000000000 checked_3_free_inputs=666666667 no_first_descent_within_cap=2 violations=0 worst_ratio=1.5 worst_q=28 worst_length=3 worst_endpoint=26 largest_value_seen=182250595882543331 elapsed_seconds=22.5757

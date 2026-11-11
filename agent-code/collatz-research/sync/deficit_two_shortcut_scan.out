@@ -1,0 +1,10 @@
+case=prefix_1_1 floor=4/9 cap=398581 shortcut_cap=200000
+counts={"hit_1":1,"coefficient_floor_failure":199279,"cycle":10}
+hits=[[1,0,0]]
+longest={"shortcutSteps":202,"acceleratedSteps":125,"seed":304901,"status":"coefficient_floor_failure"}
+certificate_passed=true
+case=prefix_1_2 floor=8/9 cap=199291 shortcut_cap=200000
+counts={"hit_1":1,"coefficient_floor_failure":99642,"cycle":2}
+hits=[[1,0,0]]
+longest={"shortcutSteps":132,"acceleratedSteps":83,"seed":149345,"status":"coefficient_floor_failure"}
+certificate_passed=true

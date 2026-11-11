@@ -1,0 +1,12 @@
+Complete a full proof of the Collatz conjecture using the following approach:
+
+30. Base-6 carry particles
+
+**Speculative · B**
+
+Because 6 simultaneously contains the primes 2 and 3, represent the orbit in base 6 and model
+carries as interacting particles. Classify all persistent particle configurations. A nontrivial
+glider would be a counterexample mechanism; extinction of every finite configuration would prove
+convergence.
+
+Take as long as you need.
